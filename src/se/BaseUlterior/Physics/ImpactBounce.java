@@ -5,19 +5,20 @@ import se.BaseUlterior.Geom.Vector2;
 
 public class ImpactBounce extends Impact {
 
-	public ImpactBounce(GameObject origin) {
+	protected float[] normalRecieved;
+
+	public ImpactBounce(GameObject origin, float[] normal) {
 		super(origin);
-		// TODO Auto-generated constructor stub
+		this.normalRecieved = normal;
 	}
 
-	public ImpactBounce(GameObject origin, float effect) {
+	public ImpactBounce(GameObject origin, float effect, float[] normal) {
 		super(origin, effect);
+		this.normalRecieved = normal;
 	}
 
 	@Override
 	public void calculateEffect(Vector2 affectedPiece) {
-
-		float[][] closestPoints = origin.getClosestPoints();
 
 		// using the algorithm
 		// V´ = V - (2*(V . N)) * N
@@ -26,12 +27,13 @@ public class ImpactBounce extends Impact {
 		// V is the moving particle ('affectedPiece'),
 		// V´ is the resulting vector
 
-		// you might need to redefine this like so:
-		// affectedPiece = V.sub(V.dot(N)*2.0f).mul(N);
+		Vector2 N = new Vector2(normalRecieved);
 
-		Vector2 N = new Vector2(origin.getSurfaceNormal(closestPoints[0], closestPoints[1]));
+		float dot = affectedPiece.dot(N) * effect;
 
-		affectedPiece = affectedPiece.sub(affectedPiece.dot(N) * effect).scale(N.length());
+		N.scale(dot);
+
+		affectedPiece.sub(N);
 
 	}
 }

@@ -7,9 +7,6 @@ import org.newdawn.slick.SlickException;
 
 public abstract class PieceWorldBuilder extends GameObject {
 
-	// not really thought triugh
-	protected boolean underHit;
-
 	// dummy, just for testing...
 	Color color = null;
 
@@ -21,9 +18,6 @@ public abstract class PieceWorldBuilder extends GameObject {
 
 	@Override
 	public void update(GameContainer container, int arg) throws SlickException {
-		// if (underHit) {
-		// this.animateHit();
-		// }
 	}
 
 	@Override

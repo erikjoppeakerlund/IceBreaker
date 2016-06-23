@@ -51,8 +51,8 @@ public class AgileObject extends GameObject {
 		if (underImpact) {
 			runImpact();
 		}
-		this.setX(this.getX() + this.movement.getX());
-		this.setY(this.getY() + this.movement.getY());
+		setCenterX(getCenterX() + this.movement.getX());
+		setCenterY(getCenterY() + this.movement.getY());
 	}
 
 	private void runImpact() {
@@ -81,17 +81,19 @@ public class AgileObject extends GameObject {
 	private void checkImpact() {
 		for (GameObject p : Game.all) {
 			if (p == this || p == currentForce.getOrigin()) {
-				return;
+				continue;
 			}
 			float x1 = p.getCenterX();
-			float x2 = this.x;
+			float x2 = getCenterX();
 
 			float y1 = p.getCenterY();
-			float y2 = this.y;
+			float y2 = getCenterY();
 
 			float dist = (float) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
-			if (p.getBoundingCircleRadius() < dist) {
-				if (this.intersects(p)) {
+			dist -= getBoundingCircleRadius();
+
+			if (p.getBoundingCircleRadius() > dist) {
+				if (p.intersects(this)) {
 					Impact i = p.getImpact(this);
 
 					if (i instanceof ImpactForce) {

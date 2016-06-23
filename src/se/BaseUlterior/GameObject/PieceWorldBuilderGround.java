@@ -1,5 +1,7 @@
 package se.BaseUlterior.GameObject;
 
+import org.newdawn.slick.Color;
+
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactBounce;
 
@@ -7,15 +9,14 @@ public class PieceWorldBuilderGround extends PieceWorldBuilder {
 
 	public PieceWorldBuilderGround(float[] nodes) {
 		super(nodes);
-		// TODO Auto-generated constructor stub
+		this.color = Color.black;
 	}
 
 	private float bounceEffect = 2.0f;
 
 	@Override
 	public Impact getImpact(AgileObject piece) {
-
-		return new ImpactBounce(this, bounceEffect);
+		return new ImpactBounce(this, bounceEffect, latestNormal);
 	}
 
 	@Override
