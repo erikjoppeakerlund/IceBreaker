@@ -5,17 +5,17 @@ import se.BaseUlterior.Geom.Vector2;
 
 public class ImpactForce extends Impact {
 
-	public ImpactForce(GameObject origin) {
-		super(origin);
-	}
+	protected float gravityY;
+	protected float gravityX;
+	protected Vector2 motion;
 
-	public ImpactForce(GameObject origin, float effect) {
-		super(origin, effect);
+	public ImpactForce(GameObject origin, float gravityX, float gravityY) {
+		super(origin);
+		this.motion = new Vector2(gravityX, gravityY);
 	}
 
 	@Override
 	public void calculateEffect(Vector2 affectedPiece) {
-		// affectedPiece.scale(origin.getForceValue());
-		affectedPiece.scale(effect);
+		affectedPiece.add(motion);
 	}
 }

@@ -31,7 +31,7 @@ public class ImpactBounce extends Impact {
 
 		Vector2 N = new Vector2(origin.getSurfaceNormal(closestPoints[0], closestPoints[1]));
 
-		affectedPiece = affectedPiece.sub(affectedPiece.dot(N) * effect).mul(N);
+		affectedPiece = affectedPiece.sub(affectedPiece.dot(N) * effect).scale(N.length());
 
 	}
 }

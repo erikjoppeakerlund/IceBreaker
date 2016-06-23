@@ -187,20 +187,6 @@ public strictfp class Vector2 implements Serializable {
 	}
 
 	/**
-	 * Multiplies this vector with another
-	 * 
-	 * @param other
-	 *            The vector to add
-	 * @return This vector - useful for chaining operations
-	 * 
-	 */
-	public Vector2 mul(Vector2 other) {
-		setTheta(getTheta() * other.getTheta());
-
-		return this;
-	}
-
-	/**
 	 * Set the values in this vector
 	 * 
 	 * @param x

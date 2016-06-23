@@ -21,9 +21,9 @@ public abstract class PieceWorldBuilder extends GameObject {
 
 	@Override
 	public void update(GameContainer container, int arg) throws SlickException {
-		if (underHit) {
-			this.animateHit();
-		}
+		// if (underHit) {
+		// this.animateHit();
+		// }
 	}
 
 	@Override
