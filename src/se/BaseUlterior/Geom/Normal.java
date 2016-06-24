@@ -19,9 +19,33 @@ public class Normal {
 	}
 
 	@Override
+	public String toString() {
+		return "Normal [val1=" + val1 + ", val2=" + val2 + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Float.floatToIntBits(val1);
+		result = prime * result + Float.floatToIntBits(val2);
+		return result;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
-		Normal otherMyClass = (Normal) obj;
-		return (otherMyClass.getVal1() == val1 && otherMyClass.getVal2() == val2);
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Normal other = (Normal) obj;
+		if (Float.floatToIntBits(val1) != Float.floatToIntBits(other.val1))
+			return false;
+		if (Float.floatToIntBits(val2) != Float.floatToIntBits(other.val2))
+			return false;
+		return true;
 	}
 
 }

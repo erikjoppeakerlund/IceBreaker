@@ -1,5 +1,9 @@
 package se.BaseUlterior.Physics;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectAgile;
 import se.BaseUlterior.Geom.Normal;
@@ -7,20 +11,36 @@ import se.BaseUlterior.Geom.Vector2;
 
 public class ImpactBounce extends Impact {
 
-	protected Normal normal = null;
+	protected Set<Normal> normals = null;
 
 	// We don't need the normal parameter here!
-	public ImpactBounce(GameObject origin, float effect, Normal normal, GameObjectAgile go) {
+	public ImpactBounce(GameObject origin, float effect, GameObjectAgile go) {
 		super(origin, effect, go);
-		this.normal = normal;
+		normals = new HashSet<Normal>();
 	}
 
 	@Override
 	public void calculateEffect(Vector2 affectedPiece) {
 
-		// other.intersectsGameObject(origin);
+		normals = origin.provideMyNormalAfterHitBy(other);
 
-		origin.provideMyNormalAfterHitBy(other);
+		Iterator<Normal> ni = normals.iterator();
+		Vector2 N = null;
+		int i = 0;
+		float lenght = 1.0f;
+		while (ni.hasNext()) {
+			Normal no = ni.next();
+			if (i < 1) {
+				N = new Vector2(no.getVal1(), no.getVal2());
+				lenght = N.length();
+			} else {
+				N.add(new Vector2(no.getVal1(), no.getVal2()));
+			}
+			i++;
+		}
+
+		N.normalise();
+		N.scale(lenght);
 
 		/*
 		 * using the algorithm: V´ = V - (2*(V . N)) * N
@@ -29,9 +49,7 @@ public class ImpactBounce extends Impact {
 		 * ('affectedPiece'), V´ is the resulting vector
 		 */
 
-		Normal normal = getCorrectNormal(affectedPiece);
-
-		Vector2 N = new Vector2(normal.getVal1(), normal.getVal2());
+		// Vector2 N = new Vector2(normals.getVal1(), normal.getVal2());
 
 		float dot = affectedPiece.dot(N) * effect;
 
@@ -41,13 +59,4 @@ public class ImpactBounce extends Impact {
 
 	}
 
-	private Normal getCorrectNormal(Vector2 motion) {
-
-		// if (motion.getY() > 0.0f && motion.getX() > 0.0f) {
-		// return
-		// }
-
-		return origin.getInternalNormal();
-
-	}
 }

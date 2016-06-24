@@ -122,7 +122,7 @@ public class GameObjectAgile extends GameObject {
 	}
 
 	public Impact getImpactGameObject(GameObject other) {
-		return new ImpactBounce(other, 2.0f, normal, this);
+		return new ImpactBounce(other, 2.0f, this);
 	}
 
 	@Override

@@ -13,7 +13,6 @@ import org.newdawn.slick.geom.Circle;
 
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.GameObjectAgile;
 import se.BaseUlterior.GameObject.GameObjectSprite;
 import se.BaseUlterior.GameObject.WorldBuiderForce;
 import se.BaseUlterior.GameObject.WorldBuilderGround;
@@ -30,8 +29,9 @@ public class BreakingPoint extends BasicGame {
 		super(title);
 	}
 
-	private List<GameObjectAgile> agiles = null;
 	public static List<GameObject> all = null;
+
+	public static List<GameObject> objsToAdd = null;
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
@@ -42,8 +42,8 @@ public class BreakingPoint extends BasicGame {
 
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
-		this.agiles = new ArrayList<>();
 		BreakingPoint.all = new ArrayList<>();
+		BreakingPoint.objsToAdd = new ArrayList<>();
 
 		float[] wholeScene = new float[] { 0.0f, 0.0f, 0.0f, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH,
 				Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0.0f };
@@ -80,6 +80,10 @@ public class BreakingPoint extends BasicGame {
 
 		for (GameObject go : BreakingPoint.all) {
 			go.update(container, arg);
+		}
+		if (!objsToAdd.isEmpty()) {
+			all.addAll(objsToAdd);
+			objsToAdd.clear();
 		}
 	}
 

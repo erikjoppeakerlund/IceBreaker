@@ -1,7 +1,9 @@
 package se.BaseUlterior.GameObject;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -74,7 +76,10 @@ public abstract class GameObject extends Polygon {
 	 *            The shape to check if it intersects with this one.
 	 * @return True if the shapes do intersect, false otherwise.
 	 */
-	public boolean provideMyNormalAfterHitBy(GameObject shape) {
+	public Set<Normal> provideMyNormalAfterHitBy(
+			GameObject shape/* , Normal normal */) {
+
+		Set<Normal> normals = new HashSet<>();
 		/*
 		 * Intersection formula used: (x4 - x3)(y1 - y3) - (y4 - y3)(x1 - x3) UA
 		 * = --------------------------------------- (y4 - y3)(x2 - x1) - (x4 -
@@ -140,21 +145,14 @@ public abstract class GameObject extends Polygon {
 					if (points.length > i + 3) {
 
 						float[] norm;
-
-						if (shape.contains(points[i], points[i + 1])) {
-							System.out.println("hej");
-							norm = getNormal(i / 2);
-						} else if (shape.contains(points[i + 2], points[i + 3])) {
-							System.out.println("hej");
-							norm = getNormal(i / 2 + 1);
-						} else {
-							norm = getSurfaceNormal(new float[] { points[i], points[i + 1] },
-									new float[] { points[i + 2], points[i + 3] });
-						}
+						norm = getSurfaceNormal(new float[] { points[i], points[i + 1] },
+								new float[] { points[i + 2], points[i + 3] });
 						Normal n = new Normal(norm[0], norm[1]);
 
-						// normals.add(n);
-						normal = n;
+						// if (!n.equals(normal)) {
+						normals.add(n);
+						// }
+
 					}
 					// break;
 				}
@@ -163,8 +161,8 @@ public abstract class GameObject extends Polygon {
 				// break;
 			}
 		}
-
-		return result;
+		return normals;
+		// return result;
 	}
 
 }

@@ -20,7 +20,7 @@ public class WorldBuilderGround extends WorldBuilder {
 
 	@Override
 	public Impact getImpact(GameObjectAgile piece) {
-		return new ImpactBounce(this, bounceEffect, normal, piece);
+		return new ImpactBounce(this, bounceEffect, piece);
 	}
 
 	@Override
