@@ -34,13 +34,13 @@ public class ImpactBounce extends Impact {
 				N = new Vector2(no.getVal1(), no.getVal2());
 				lenght = N.length();
 			} else {
-				N.add(new Vector2(no.getVal1(), no.getVal2()));
+				N.add(no.getVal1(), no.getVal2());
 			}
 			i++;
 		}
 
 		N.normalise();
-		N.scale(lenght);
+//		N.scale();
 
 		/*
 		 * using the algorithm: V´ = V - (2*(V . N)) * N

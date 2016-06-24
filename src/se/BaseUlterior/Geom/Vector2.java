@@ -258,6 +258,20 @@ public strictfp class Vector2 implements Serializable {
 	}
 
 	/**
+	 * Add a vector to this vector
+	 * 
+	 * @param v
+	 *            The vector to add
+	 * @return This vector - useful for chaning operations
+	 */
+	public Vector2 add(float otherX, float otherY) {
+		x += otherX;
+		y += otherY;
+
+		return this;
+	}
+
+	/**
 	 * Subtract a vector from this vector
 	 * 
 	 * @param v
