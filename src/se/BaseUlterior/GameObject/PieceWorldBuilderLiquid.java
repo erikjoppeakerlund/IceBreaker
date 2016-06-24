@@ -1,19 +1,45 @@
 package se.BaseUlterior.GameObject;
 
+import org.newdawn.slick.Color;
+
 import se.BaseUlterior.Physics.Impact;
+import se.BaseUlterior.Physics.ImpactFriction;
 
 public class PieceWorldBuilderLiquid extends PieceWorldBuilder {
 
-	public PieceWorldBuilderLiquid(float[] nodes) {
+	Density density;
+
+	protected float frictionAmount;
+
+	public PieceWorldBuilderLiquid(float[] nodes, Density density) {
 		super(nodes);
-		// TODO Auto-generated constructor stub
+		this.density = density;
+		init();
 	}
 
-	private int prio;
+	protected void init() {
+		switch (density) {
+		case SOIL:
+			this.color = Color.darkGray;
+			this.frictionAmount = 0.89f;
+			break;
+		case MUDD:
+			this.color = Color.green;
+			this.frictionAmount = 0.91f;
+			break;
+		case GREECE:
+			this.color = Color.magenta;
+			this.frictionAmount = 0.96f;
+			break;
+		case WATER:
+			this.color = Color.blue;
+			this.frictionAmount = 0.98f;
+		}
+	}
 
 	@Override
 	public Impact getImpact(AgileObject piece) {
-		return null;
+		return new ImpactFriction(this, frictionAmount);
 	}
 
 	@Override

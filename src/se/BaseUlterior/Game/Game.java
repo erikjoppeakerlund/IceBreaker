@@ -13,9 +13,11 @@ import org.newdawn.slick.geom.Circle;
 
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.GameObject.AgileObject;
+import se.BaseUlterior.GameObject.Density;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.PieceWorldBuiderForce;
 import se.BaseUlterior.GameObject.PieceWorldBuilderGround;
+import se.BaseUlterior.GameObject.PieceWorldBuilderLiquid;
 
 public class Game extends BasicGame {
 
@@ -45,24 +47,30 @@ public class Game extends BasicGame {
 		float[] wholeScene = new float[] { 0.0f, 0.0f, 0.0f, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH,
 				Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0.0f };
 
-		generalGravity = new PieceWorldBuiderForce(wholeScene, 0.04f, 0.0f, Color.darkGray);
+		generalGravity = new PieceWorldBuiderForce(wholeScene, 0.04f, 0.0f, Color.white);
 
-		all.add(generalGravity);
+		Game.all.add(generalGravity);
 
 		GameObject otherGravity = new PieceWorldBuiderForce(
-				new float[] { 400.0f, 10.0f, 400.0f, 580.0f, 900.0f, 580.0f, 900.0f, 10.0f }, -0.00f, -0.11f,
+				new float[] { 400.0f, 10.0f, 400.0f, 580.0f, 900.0f, 580.0f, 900.0f, 10.0f }, -0.00f, -0.19f,
 				Color.gray);
 
-		all.add(otherGravity);
+		Game.all.add(otherGravity);
+
+		GameObject randomWater = new PieceWorldBuilderLiquid(
+
+				new float[] { 130.0f, 100.0f, 700.0f, 190.0f, 620.0f, 310.0f }, Density.WATER);
+		Game.all.add(randomWater);
 
 		GameObject worldPiece1 = new PieceWorldBuilderGround(
-				new float[] { 5.0f, 200.0f, 250.0f, 420.0f, 495f, 400.0f, 495.0f, 495.0f, 5.0f, 495.0f }, 2.0f);
+				new float[] { 5.0f, 400.0f, 250.0f, 620.0f, 495f, 600.0f, 495.0f, 695.0f, 5.0f, 695.0f }, 2.0f,
+				Color.black);
 
-		all.add(worldPiece1);
+		Game.all.add(worldPiece1);
 
-		GameObject sprite = new AgileObject(new Circle(150, 20, 90).getPoints());
+		GameObject sprite = new AgileObject(new Circle(130, 20, 75).getPoints());
 
-		all.add(sprite);
+		Game.all.add(sprite);
 
 	}
 

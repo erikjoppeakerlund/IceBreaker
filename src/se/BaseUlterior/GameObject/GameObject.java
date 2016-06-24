@@ -116,9 +116,10 @@ public abstract class GameObject extends Polygon {
 
 				if (unknownA >= 0 && unknownA <= 1 && unknownB >= 0 && unknownB <= 1) {
 
-					this.latestNormal = getSurfaceNormal(new float[] { points[i], points[i + 1] },
-							new float[] { points[i + 2], points[i + 3] });
-					// System.out.println(Arrays.toString(latestNormal));
+					if (points.length > i + 3) {
+						this.latestNormal = getSurfaceNormal(new float[] { points[i], points[i + 1] },
+								new float[] { points[i + 2], points[i + 3] });
+					}
 
 					result = true;
 					break;
