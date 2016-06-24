@@ -5,8 +5,8 @@ import se.BaseUlterior.Geom.Vector2;
 
 public class ImpactFriction extends Impact {
 
-	public ImpactFriction(GameObject origin, float effect) {
-		super(origin);
+	public ImpactFriction(GameObject origin, GameObject other, float effect) {
+		super(origin, other);
 		this.effect = effect;
 	}
 

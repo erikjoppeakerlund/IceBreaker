@@ -9,8 +9,8 @@ public class ImpactForce extends Impact {
 	protected float gravityX;
 	protected Vector2 motion;
 
-	public ImpactForce(GameObject origin, float gravityX, float gravityY) {
-		super(origin);
+	public ImpactForce(GameObject origin, GameObject other, float gravityX, float gravityY) {
+		super(origin, other);
 		this.motion = new Vector2(gravityX, gravityY);
 	}
 

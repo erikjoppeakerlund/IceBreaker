@@ -1,8 +1,5 @@
 package se.BaseUlterior.GameObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -11,14 +8,15 @@ import org.newdawn.slick.SlickException;
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Physics.Impact;
+import se.BaseUlterior.Physics.ImpactBounce;
 import se.BaseUlterior.Physics.ImpactForce;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
 //will most likely be turned into an abstract class...
 public class GameObjectAgile extends GameObject {
-	private List<Impact> currentImpacts = null;
+	// private List<Impact> currentImpacts = null;
 	private boolean underImpact = false;
-	private Vector2 movement = null;
+	protected Vector2 movement = null;
 
 	private Impact currentForce = null;
 	private boolean isOriginalForce = true;
@@ -28,14 +26,13 @@ public class GameObjectAgile extends GameObject {
 	public GameObjectAgile(float[] nodes) {
 		super(nodes);
 		movement = new Vector2();
-		currentImpacts = new ArrayList<>();
+		// currentImpacts = new ArrayList<>();
 		currentForce = BreakingPoint.generalGravity.getImpact(this);
 	}
 
 	public GameObjectAgile(Vector2 startMovement, float[] nodes) {
 		super(nodes);
 		movement = startMovement;
-		currentImpacts = new ArrayList<>();
 		currentForce = BreakingPoint.generalGravity.getImpact(this);
 	}
 
@@ -52,14 +49,7 @@ public class GameObjectAgile extends GameObject {
 				isOriginalForce = true;
 			}
 		}
-		// if (!(currentForce.getOrigin().contains(this) ||
-		// currentForce.getOrigin().intersects(this))
-		// && !currentImpacts.contains(currentForce)) {
-		// currentForce = Game.generalGravity.getImpact(this);
-		// }
-		// if (currentForce != null) {
-		currentForce.calculateEffect(this.movement);
-		// }
+		currentForce.calculateEffect(movement);
 
 		checkImpact();
 		if (underImpact) {
@@ -75,6 +65,13 @@ public class GameObjectAgile extends GameObject {
 		int i = 0;
 
 		for (Impact im : currentImpacts) {
+
+			/*
+			 * NOTE: critical! can contain itself!
+			 */
+			// if(im.getOrigin() == this) {
+			// im.calculateEffect(im.getOrigin());
+			// }
 			im.calculateEffect(movement);
 			if (!im.getOrigin().contains(this)) {
 				removeIndexes[i] = 1;
@@ -125,9 +122,8 @@ public class GameObjectAgile extends GameObject {
 	}
 
 	@Override
-	public Impact getImpact(GameObjectAgile piece) {
-		// TODO Auto-generated method stub
-		return null;
+	public Impact getImpact(GameObject piece) {
+		return new ImpactBounce(this, 2.0f, normal, piece);
 	}
 
 	@Override

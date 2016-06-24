@@ -8,6 +8,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 
 import se.BaseUlterior.Aim.Aim;
+import se.BaseUlterior.Geom.Vector2;
 
 public class GameObjectSprite extends GameObjectAgile {
 
@@ -38,6 +39,9 @@ public class GameObjectSprite extends GameObjectAgile {
 		if (Mouse.getDWheel() > 0) {
 			int i = aims.indexOf(aim);
 			aim = i == aims.size() - 1 ? aims.get(0) : aims.get(i + 1);
+		}
+		if (in.isKeyDown(in.KEY_LEFT)) {
+			movement.add(new Vector2(0.0f, -0.19f));
 		}
 
 		super.update(container, arg);

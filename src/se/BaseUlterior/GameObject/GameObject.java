@@ -1,5 +1,8 @@
 package se.BaseUlterior.GameObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -7,11 +10,14 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Polygon;
 
 import se.BaseUlterior.Config.Constants;
+import se.BaseUlterior.Geom.Normal;
 import se.BaseUlterior.Physics.Impact;
 
 public abstract class GameObject extends Polygon {
 
-	public abstract Impact getImpact(GameObjectAgile agileObject);
+	protected List<Impact> currentImpacts = null;
+
+	public abstract Impact getImpact(GameObject agileObject);
 
 	protected Color color = Color.darkGray;
 
@@ -19,14 +25,29 @@ public abstract class GameObject extends Polygon {
 
 	public abstract void render(GameContainer container, Graphics graphics) throws SlickException;
 
-	protected float[] latestNormal;
+	// protected List<Normal> normals = null;
 
-	public float[] getLatestNormal() {
-		return this.latestNormal;
+	// TOTO: set back to null if it is not needed (or somethin)
+	// to
+	protected Normal normal = null;
+
+	// TODO: rethink!
+	/*
+	 * public float[] getLatestNormal() { return this.latestNormal; }
+	 */
+
+	// public List<Normal> getNormals() {
+	// return normals;
+	// }
+
+	public Normal getInternalNormal() {
+		return this.normal;
 	}
 
 	public GameObject(float[] nodes) {
 		super(nodes);
+		currentImpacts = new ArrayList<>();
+		// normals = new ArrayList<>();
 	}
 
 	/**
@@ -116,21 +137,29 @@ public abstract class GameObject extends Polygon {
 
 				if (unknownA >= 0 && unknownA <= 1 && unknownB >= 0 && unknownB <= 1) {
 
-					if (points.length > i + 3) {
-						this.latestNormal = getSurfaceNormal(new float[] { points[i], points[i + 1] },
-								new float[] { points[i + 2], points[i + 3] });
-					}
-
 					result = true;
-					break;
+					if (points.length > i + 3) {
+						float[] norm = getSurfaceNormal(new float[] { points[i], points[i + 1] },
+								new float[] { points[i + 2], points[i + 3] });
+
+						Normal n = new Normal(norm[0], norm[1]);
+
+						// normals.add(n);
+						normal = n;
+					}
+					// break;
 				}
 			}
 			if (result) {
-				break;
+				// break;
 			}
 		}
 
 		return result;
+	}
+
+	public void addImpact(Impact im) {
+		this.currentImpacts.add(im);
 	}
 
 	public float[][] getClosestPoints(float x, float y) {

@@ -39,8 +39,8 @@ public class WorldBuilderLiquid extends WorldBuilder {
 	}
 
 	@Override
-	public Impact getImpact(GameObjectAgile piece) {
-		return new ImpactFriction(this, frictionAmount);
+	public Impact getImpact(GameObject piece) {
+		return new ImpactFriction(this, piece, frictionAmount);
 	}
 
 	@Override

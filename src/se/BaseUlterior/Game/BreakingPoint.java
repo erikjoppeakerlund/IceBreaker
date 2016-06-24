@@ -14,6 +14,7 @@ import org.newdawn.slick.geom.Circle;
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectAgile;
+import se.BaseUlterior.GameObject.GameObjectSprite;
 import se.BaseUlterior.GameObject.WorldBuiderForce;
 import se.BaseUlterior.GameObject.WorldBuilderGround;
 import se.BaseUlterior.GameObject.WorldBuilderLiquid;
@@ -59,7 +60,7 @@ public class BreakingPoint extends BasicGame {
 
 		GameObject randomWater = new WorldBuilderLiquid(
 
-				new float[] { 130.0f, 100.0f, 700.0f, 190.0f, 620.0f, 310.0f }, Density.WATER);
+				new float[] { 170.0f, 100.0f, 700.0f, 190.0f, 620.0f, 310.0f }, Density.WATER);
 		BreakingPoint.all.add(randomWater);
 
 		GameObject worldPiece1 = new WorldBuilderGround(
@@ -68,7 +69,7 @@ public class BreakingPoint extends BasicGame {
 
 		BreakingPoint.all.add(worldPiece1);
 
-		GameObject sprite = new GameObjectAgile(new Circle(130, 20, 75).getPoints());
+		GameObject sprite = new GameObjectSprite(new Circle(310, 20, 75).getPoints());
 
 		BreakingPoint.all.add(sprite);
 

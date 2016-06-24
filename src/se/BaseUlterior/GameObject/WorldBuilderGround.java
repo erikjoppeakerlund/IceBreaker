@@ -19,8 +19,8 @@ public class WorldBuilderGround extends WorldBuilder {
 	private float bounceEffect;
 
 	@Override
-	public Impact getImpact(GameObjectAgile piece) {
-		return new ImpactBounce(this, bounceEffect, latestNormal);
+	public Impact getImpact(GameObject piece) {
+		return new ImpactBounce(this, bounceEffect, normal, piece);
 	}
 
 	@Override
@@ -31,18 +31,17 @@ public class WorldBuilderGround extends WorldBuilder {
 
 	@Override
 	public void update(GameContainer container, int arg) throws SlickException {
-		super.update(container, arg);
-		return;
+		// super.update(container, arg);
 		// for (GameObject go : BreakingPoint.all) {
 		// if (go != this) {
-		// if (go instanceof GameObjectAgile) {
+		// // if (go instanceof GameObjectAgile) {
 		// if (UlteriorUtils.isWithinRange(go, this)) {
 		// if (go.intersects(this)) {
-		// (GameObjectAgile)((GameObjectAgile)
-		// go).addImpact(this.getImpact(this));
+		//
+		// go.addImpact(go.getImpact(this));
 		// }
 		// }
-		// }
+		// // }
 		// }
 		// }
 	}
