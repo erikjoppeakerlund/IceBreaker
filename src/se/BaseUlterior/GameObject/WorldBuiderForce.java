@@ -21,7 +21,7 @@ public class WorldBuiderForce extends WorldBuilder {
 	}
 
 	@Override
-	public Impact getImpact(GameObject piece) {
+	public Impact getImpact(GameObjectAgile piece) {
 		return new ImpactForce(this, piece, gravityY, gravityX);
 	}
 

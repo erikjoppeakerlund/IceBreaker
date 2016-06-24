@@ -16,7 +16,7 @@ import se.BaseUlterior.Utils.UlteriorUtils;
 public class GameObjectAgile extends GameObject {
 	// private List<Impact> currentImpacts = null;
 	private boolean underImpact = false;
-	protected Vector2 movement = null;
+	protected Vector2 motion = null;
 
 	private Impact currentForce = null;
 	private boolean isOriginalForce = true;
@@ -25,14 +25,14 @@ public class GameObjectAgile extends GameObject {
 
 	public GameObjectAgile(float[] nodes) {
 		super(nodes);
-		movement = new Vector2();
+		motion = new Vector2();
 		// currentImpacts = new ArrayList<>();
 		currentForce = BreakingPoint.generalGravity.getImpact(this);
 	}
 
 	public GameObjectAgile(Vector2 startMovement, float[] nodes) {
 		super(nodes);
-		movement = startMovement;
+		motion = startMovement;
 		currentForce = BreakingPoint.generalGravity.getImpact(this);
 	}
 
@@ -49,14 +49,14 @@ public class GameObjectAgile extends GameObject {
 				isOriginalForce = true;
 			}
 		}
-		currentForce.calculateEffect(movement);
+		currentForce.calculateEffect(motion);
 
 		checkImpact();
 		if (underImpact) {
 			runImpact();
 		}
-		setCenterX(getCenterX() + this.movement.getX());
-		setCenterY(getCenterY() + this.movement.getY());
+		setCenterX(getCenterX() + this.motion.getX());
+		setCenterY(getCenterY() + this.motion.getY());
 	}
 
 	private void runImpact() {
@@ -66,13 +66,8 @@ public class GameObjectAgile extends GameObject {
 
 		for (Impact im : currentImpacts) {
 
-			/*
-			 * NOTE: critical! can contain itself!
-			 */
-			// if(im.getOrigin() == this) {
-			// im.calculateEffect(im.getOrigin());
-			// }
-			im.calculateEffect(movement);
+			im.calculateEffect(motion);
+
 			if (!im.getOrigin().contains(this)) {
 				removeIndexes[i] = 1;
 			} else {
@@ -113,17 +108,21 @@ public class GameObjectAgile extends GameObject {
 		}
 	}
 
-	public Vector2 getMovement() {
-		return movement;
+	public Vector2 getMotion() {
+		return motion;
 	}
 
 	public void setMovement(Vector2 movement) {
-		this.movement = movement;
+		this.motion = movement;
 	}
 
 	@Override
-	public Impact getImpact(GameObject piece) {
-		return new ImpactBounce(this, 2.0f, normal, piece);
+	public Impact getImpact(GameObjectAgile other) {
+		return null;
+	}
+
+	public Impact getImpactGameObject(GameObject other) {
+		return new ImpactBounce(other, 2.0f, normal, this);
 	}
 
 	@Override

@@ -9,7 +9,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Polygon;
 
-import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Geom.Normal;
 import se.BaseUlterior.Physics.Impact;
 
@@ -17,7 +16,7 @@ public abstract class GameObject extends Polygon {
 
 	protected List<Impact> currentImpacts = null;
 
-	public abstract Impact getImpact(GameObject agileObject);
+	public abstract Impact getImpact(GameObjectAgile agileObject);
 
 	protected Color color = Color.darkGray;
 
@@ -75,7 +74,7 @@ public abstract class GameObject extends Polygon {
 	 *            The shape to check if it intersects with this one.
 	 * @return True if the shapes do intersect, false otherwise.
 	 */
-	public boolean intersects(GameObject shape) {
+	public boolean provideMyNormalAfterHitBy(GameObject shape) {
 		/*
 		 * Intersection formula used: (x4 - x3)(y1 - y3) - (y4 - y3)(x1 - x3) UA
 		 * = --------------------------------------- (y4 - y3)(x2 - x1) - (x4 -
@@ -139,9 +138,19 @@ public abstract class GameObject extends Polygon {
 
 					result = true;
 					if (points.length > i + 3) {
-						float[] norm = getSurfaceNormal(new float[] { points[i], points[i + 1] },
-								new float[] { points[i + 2], points[i + 3] });
 
+						float[] norm;
+
+						if (shape.contains(points[i], points[i + 1])) {
+							System.out.println("hej");
+							norm = getNormal(i / 2);
+						} else if (shape.contains(points[i + 2], points[i + 3])) {
+							System.out.println("hej");
+							norm = getNormal(i / 2 + 1);
+						} else {
+							norm = getSurfaceNormal(new float[] { points[i], points[i + 1] },
+									new float[] { points[i + 2], points[i + 3] });
+						}
 						Normal n = new Normal(norm[0], norm[1]);
 
 						// normals.add(n);
@@ -156,32 +165,6 @@ public abstract class GameObject extends Polygon {
 		}
 
 		return result;
-	}
-
-	public void addImpact(Impact im) {
-		this.currentImpacts.add(im);
-	}
-
-	public float[][] getClosestPoints(float x, float y) {
-		float closest1 = Constants.CANVAS_WIDTH;
-		float closest2 = Constants.CANVAS_WIDTH;
-		int closeIndex1 = 0;
-		int closeIndex2 = 0;
-		float[] points = getPoints();
-
-		for (int i = 0; i < points.length; i += 2) {
-
-			float x1 = points[i];
-			float x2 = points[i + 2];
-
-			float y1 = points[i + 1];
-			float y2 = points[i + 3];
-
-			float dist = (float) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
-			closeIndex1 = closest1 < dist && i != closeIndex2 ? i : closeIndex1;
-			closeIndex2 = closest2 < dist && i != closeIndex1 ? i : closeIndex2;
-		}
-		return new float[][] { getPoint(closeIndex1), getPoint(closeIndex2) };
 	}
 
 }

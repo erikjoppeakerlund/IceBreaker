@@ -41,7 +41,7 @@ public class GameObjectSprite extends GameObjectAgile {
 			aim = i == aims.size() - 1 ? aims.get(0) : aims.get(i + 1);
 		}
 		if (in.isKeyDown(in.KEY_LEFT)) {
-			movement.add(new Vector2(0.0f, -0.19f));
+			motion.add(new Vector2(0.0f, -0.19f));
 		}
 
 		super.update(container, arg);
