@@ -1,4 +1,4 @@
-package se.BaseUlterior.GameObject;
+package se.BaseUlterior.Physics;
 
 public enum Density {
 	SOIL, MUDD, GREECE, WATER

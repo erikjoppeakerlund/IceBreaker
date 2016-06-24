@@ -5,12 +5,12 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-public abstract class PieceWorldBuilder extends GameObject {
+public abstract class WorldBuilder extends GameObject {
 
 	// dummy, just for testing...
 	Color color = null;
 
-	public PieceWorldBuilder(float[] nodes) {
+	public WorldBuilder(float[] nodes) {
 		super(nodes);
 	}
 

@@ -8,12 +8,12 @@ import org.newdawn.slick.SlickException;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactForce;
 
-public class PieceWorldBuiderForce extends PieceWorldBuilder {
+public class WorldBuiderForce extends WorldBuilder {
 
 	protected float gravityY;
 	protected float gravityX;
 
-	public PieceWorldBuiderForce(float[] nodes, float gravityX, float gravityY, Color color) {
+	public WorldBuiderForce(float[] nodes, float gravityX, float gravityY, Color color) {
 		super(nodes);
 		this.color = color;
 		this.gravityX = gravityX;
@@ -21,7 +21,7 @@ public class PieceWorldBuiderForce extends PieceWorldBuilder {
 	}
 
 	@Override
-	public Impact getImpact(AgileObject piece) {
+	public Impact getImpact(GameObjectAgile piece) {
 		return new ImpactForce(this, gravityY, gravityX);
 	}
 

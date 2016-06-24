@@ -11,7 +11,7 @@ import se.BaseUlterior.Physics.Impact;
 
 public abstract class GameObject extends Polygon {
 
-	public abstract Impact getImpact(AgileObject agileObject);
+	public abstract Impact getImpact(GameObjectAgile agileObject);
 
 	protected Color color = Color.darkGray;
 

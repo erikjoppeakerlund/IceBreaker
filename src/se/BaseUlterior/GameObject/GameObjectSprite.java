@@ -9,12 +9,12 @@ import org.newdawn.slick.Input;
 
 import se.BaseUlterior.Aim.Aim;
 
-public class Sprite extends AgileObject {
+public class GameObjectSprite extends GameObjectAgile {
 
 	protected Aim aim = null;
 	protected List<Aim> aims = null;
 
-	public Sprite(float[] nodes) {
+	public GameObjectSprite(float[] nodes) {
 		super(nodes);
 	}
 

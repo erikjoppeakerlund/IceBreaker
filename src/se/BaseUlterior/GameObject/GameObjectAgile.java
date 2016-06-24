@@ -8,13 +8,14 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import se.BaseUlterior.Game.Game;
+import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactForce;
+import se.BaseUlterior.Utils.UlteriorUtils;
 
 //will most likely be turned into an abstract class...
-public class AgileObject extends GameObject {
+public class GameObjectAgile extends GameObject {
 	private List<Impact> currentImpacts = null;
 	private boolean underImpact = false;
 	private Vector2 movement = null;
@@ -24,18 +25,18 @@ public class AgileObject extends GameObject {
 
 	private Color color = Color.lightGray;
 
-	public AgileObject(float[] nodes) {
+	public GameObjectAgile(float[] nodes) {
 		super(nodes);
 		movement = new Vector2();
 		currentImpacts = new ArrayList<>();
-		currentForce = Game.generalGravity.getImpact(this);
+		currentForce = BreakingPoint.generalGravity.getImpact(this);
 	}
 
-	public AgileObject(Vector2 startMovement, float[] nodes) {
+	public GameObjectAgile(Vector2 startMovement, float[] nodes) {
 		super(nodes);
 		movement = startMovement;
 		currentImpacts = new ArrayList<>();
-		currentForce = Game.generalGravity.getImpact(this);
+		currentForce = BreakingPoint.generalGravity.getImpact(this);
 	}
 
 	public void getAffected() {
@@ -47,7 +48,7 @@ public class AgileObject extends GameObject {
 
 		if (!isOriginalForce) {
 			if (!(currentForce.getOrigin().intersects(this) || currentForce.getOrigin().contains(this))) {
-				currentForce = Game.generalGravity.getImpact(this);
+				currentForce = BreakingPoint.generalGravity.getImpact(this);
 				isOriginalForce = true;
 			}
 		}
@@ -93,20 +94,12 @@ public class AgileObject extends GameObject {
 	}
 
 	private void checkImpact() {
-		for (GameObject p : Game.all) {
+		for (GameObject p : BreakingPoint.all) {
 			if (p == this || p == currentForce.getOrigin()) {
 				continue;
 			}
-			float x1 = p.getCenterX();
-			float x2 = getCenterX();
 
-			float y1 = p.getCenterY();
-			float y2 = getCenterY();
-
-			float dist = (float) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
-			dist -= getBoundingCircleRadius();
-
-			if (p.getBoundingCircleRadius() > dist) {
+			if (UlteriorUtils.isWithinRange(p, this)) {
 				if (p.intersects(this)) {
 					Impact i = p.getImpact(this);
 
@@ -132,7 +125,7 @@ public class AgileObject extends GameObject {
 	}
 
 	@Override
-	public Impact getImpact(AgileObject piece) {
+	public Impact getImpact(GameObjectAgile piece) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -141,7 +134,11 @@ public class AgileObject extends GameObject {
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		graphics.setColor(this.color);
 		graphics.fill(this);
-		this.checkPoints();
+		// this.checkPoints();
+	}
+
+	public void addImpact(Impact im) {
+		currentImpacts.add(im);
 	}
 
 }

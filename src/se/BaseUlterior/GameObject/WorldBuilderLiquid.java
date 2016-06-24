@@ -2,16 +2,17 @@ package se.BaseUlterior.GameObject;
 
 import org.newdawn.slick.Color;
 
+import se.BaseUlterior.Physics.Density;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactFriction;
 
-public class PieceWorldBuilderLiquid extends PieceWorldBuilder {
+public class WorldBuilderLiquid extends WorldBuilder {
 
 	Density density;
 
 	protected float frictionAmount;
 
-	public PieceWorldBuilderLiquid(float[] nodes, Density density) {
+	public WorldBuilderLiquid(float[] nodes, Density density) {
 		super(nodes);
 		this.density = density;
 		init();
@@ -38,7 +39,7 @@ public class PieceWorldBuilderLiquid extends PieceWorldBuilder {
 	}
 
 	@Override
-	public Impact getImpact(AgileObject piece) {
+	public Impact getImpact(GameObjectAgile piece) {
 		return new ImpactFriction(this, frictionAmount);
 	}
 
