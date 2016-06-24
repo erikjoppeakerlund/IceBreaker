@@ -7,12 +7,13 @@ import se.BaseUlterior.Physics.ImpactBounce;
 
 public class PieceWorldBuilderGround extends PieceWorldBuilder {
 
-	public PieceWorldBuilderGround(float[] nodes) {
+	public PieceWorldBuilderGround(float[] nodes, float bounceEffect) {
 		super(nodes);
 		this.color = Color.black;
+		this.bounceEffect = bounceEffect;
 	}
 
-	private float bounceEffect = 2.0f;
+	private float bounceEffect;
 
 	@Override
 	public Impact getImpact(AgileObject piece) {

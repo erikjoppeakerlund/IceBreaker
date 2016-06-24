@@ -20,8 +20,9 @@ public class AgileObject extends GameObject {
 	private Vector2 movement = null;
 
 	private Impact currentForce = null;
+	private boolean isOriginalForce = true;
 
-	private Color color = Color.red;
+	private Color color = Color.lightGray;
 
 	public AgileObject(float[] nodes) {
 		super(nodes);
@@ -43,9 +44,21 @@ public class AgileObject extends GameObject {
 
 	@Override
 	public void update(GameContainer container, int arg) {
-		if (currentForce != null) {
-			currentForce.calculateEffect(this.movement);
+
+		if (!isOriginalForce) {
+			if (!(currentForce.getOrigin().intersects(this) || currentForce.getOrigin().contains(this))) {
+				currentForce = Game.generalGravity.getImpact(this);
+				isOriginalForce = true;
+			}
 		}
+		// if (!(currentForce.getOrigin().contains(this) ||
+		// currentForce.getOrigin().intersects(this))
+		// && !currentImpacts.contains(currentForce)) {
+		// currentForce = Game.generalGravity.getImpact(this);
+		// }
+		// if (currentForce != null) {
+		currentForce.calculateEffect(this.movement);
+		// }
 
 		checkImpact();
 		if (underImpact) {
@@ -64,8 +77,9 @@ public class AgileObject extends GameObject {
 			im.calculateEffect(movement);
 			if (!im.getOrigin().contains(this)) {
 				removeIndexes[i] = 1;
+			} else {
+				i++;
 			}
-			i++;
 		}
 		for (int j = 0; j < removeIndexes.length; j++) {
 			if (removeIndexes[j] == 1) {
@@ -98,6 +112,7 @@ public class AgileObject extends GameObject {
 
 					if (i instanceof ImpactForce) {
 						currentForce = i;
+						isOriginalForce = false;
 					} else {
 						this.currentImpacts.add(p.getImpact(this));
 					}

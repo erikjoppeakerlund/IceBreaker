@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -44,12 +45,18 @@ public class Game extends BasicGame {
 		float[] wholeScene = new float[] { 0.0f, 0.0f, 0.0f, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH,
 				Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0.0f };
 
-		generalGravity = new PieceWorldBuiderForce(wholeScene, 0.04f, 0.0f);
+		generalGravity = new PieceWorldBuiderForce(wholeScene, 0.04f, 0.0f, Color.darkGray);
 
 		all.add(generalGravity);
 
+		GameObject otherGravity = new PieceWorldBuiderForce(
+				new float[] { 400.0f, 10.0f, 400.0f, 580.0f, 900.0f, 580.0f, 900.0f, 10.0f }, -0.00f, -0.11f,
+				Color.gray);
+
+		all.add(otherGravity);
+
 		GameObject worldPiece1 = new PieceWorldBuilderGround(
-				new float[] { 5.0f, 200.0f, 250.0f, 420.0f, 495f, 400.0f, 495.0f, 495.0f, 5.0f, 495.0f });
+				new float[] { 5.0f, 200.0f, 250.0f, 420.0f, 495f, 400.0f, 495.0f, 495.0f, 5.0f, 495.0f }, 2.0f);
 
 		all.add(worldPiece1);
 
