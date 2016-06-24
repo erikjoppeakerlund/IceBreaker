@@ -27,12 +27,10 @@ public class ImpactBounce extends Impact {
 		Iterator<Normal> ni = normals.iterator();
 		Vector2 N = null;
 		int i = 0;
-		float lenght = 1.0f;
 		while (ni.hasNext()) {
 			Normal no = ni.next();
 			if (i < 1) {
 				N = new Vector2(no.getVal1(), no.getVal2());
-				lenght = N.length();
 			} else {
 				N.add(no.getVal1(), no.getVal2());
 			}
@@ -40,7 +38,6 @@ public class ImpactBounce extends Impact {
 		}
 
 		N.normalise();
-//		N.scale();
 
 		/*
 		 * using the algorithm: V´ = V - (2*(V . N)) * N
@@ -54,9 +51,6 @@ public class ImpactBounce extends Impact {
 		float dot = affectedPiece.dot(N) * effect;
 
 		N.scale(dot);
-
 		affectedPiece.sub(N);
-
 	}
-
 }

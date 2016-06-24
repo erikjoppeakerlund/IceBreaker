@@ -8,15 +8,23 @@ public class ImpactForce extends Impact {
 
 	protected float gravityY;
 	protected float gravityX;
-	protected Vector2 motion;
+
+	public float getGravityY() {
+		return gravityY;
+	}
+
+	public float getGravityX() {
+		return gravityX;
+	}
 
 	public ImpactForce(GameObject origin, GameObjectAgile other, float gravityX, float gravityY) {
 		super(origin, other);
-		this.motion = new Vector2(gravityX, gravityY);
+		this.gravityX = gravityX;
+		this.gravityY = gravityY;
 	}
 
 	@Override
 	public void calculateEffect(Vector2 affectedPiece) {
-		affectedPiece.add(motion);
+		affectedPiece.add(gravityX, gravityY);
 	}
 }

@@ -48,7 +48,7 @@ public class BreakingPoint extends BasicGame {
 		float[] wholeScene = new float[] { 0.0f, 0.0f, 0.0f, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH,
 				Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0.0f };
 
-		generalGravity = new WorldBuiderForce(wholeScene, 0.06f, 0.0f, Color.white);
+		generalGravity = new WorldBuiderForce(wholeScene, 0.07f, 0.0f, Color.white);
 
 		BreakingPoint.all.add(generalGravity);
 
@@ -60,11 +60,11 @@ public class BreakingPoint extends BasicGame {
 
 		GameObject randomWater = new WorldBuilderLiquid(
 
-				new float[] { 170.0f, 100.0f, 700.0f, 190.0f, 620.0f, 310.0f }, Density.WATER);
+				new float[] { 170.0f, 100.0f, 700.0f, 190.0f, 620.0f, 310.0f }, Density.SOIL);
 		BreakingPoint.all.add(randomWater);
 
 		GameObject worldPiece1 = new WorldBuilderGround(
-				new float[] { 5.0f, 400.0f, 250.0f, 620.0f, 495f, 600.0f, 495.0f, 695.0f, 5.0f, 695.0f }, 1.3f,
+				new float[] { 5.0f, 400.0f, 250.0f, 620.0f, 495f, 600.0f, 495.0f, 695.0f, 5.0f, 695.0f }, 2.0f,
 				Color.black);
 
 		BreakingPoint.all.add(worldPiece1);

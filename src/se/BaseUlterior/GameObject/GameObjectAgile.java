@@ -18,8 +18,13 @@ public class GameObjectAgile extends GameObject {
 	private boolean underImpact = false;
 	protected Vector2 motion = null;
 
-	private Impact currentForce = null;
+	protected Impact currentForce = null;
 	private boolean isOriginalForce = true;
+	protected boolean forceException = false;
+
+	public Impact getCurrentForce() {
+		return this.currentForce;
+	}
 
 	private Color color = Color.lightGray;
 
@@ -27,13 +32,13 @@ public class GameObjectAgile extends GameObject {
 		super(nodes);
 		motion = new Vector2();
 		// currentImpacts = new ArrayList<>();
-		currentForce = BreakingPoint.generalGravity.getImpact(this);
+		currentForce = (ImpactForce) BreakingPoint.generalGravity.getImpact(this);
 	}
 
 	public GameObjectAgile(Vector2 startMovement, float[] nodes) {
 		super(nodes);
 		motion = startMovement;
-		currentForce = BreakingPoint.generalGravity.getImpact(this);
+		currentForce = (ImpactForce) BreakingPoint.generalGravity.getImpact(this);
 	}
 
 	public void getAffected() {
@@ -45,7 +50,7 @@ public class GameObjectAgile extends GameObject {
 
 		if (!isOriginalForce) {
 			if (!(currentForce.getOrigin().intersects(this) || currentForce.getOrigin().contains(this))) {
-				currentForce = BreakingPoint.generalGravity.getImpact(this);
+				currentForce = (ImpactForce) BreakingPoint.generalGravity.getImpact(this);
 				isOriginalForce = true;
 			}
 		}
@@ -96,7 +101,7 @@ public class GameObjectAgile extends GameObject {
 					Impact i = p.getImpact(this);
 
 					if (i instanceof ImpactForce) {
-						currentForce = i;
+						currentForce = (ImpactForce) i;
 						isOriginalForce = false;
 					} else {
 						this.currentImpacts.add(p.getImpact(this));

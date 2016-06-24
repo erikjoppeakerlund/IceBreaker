@@ -149,9 +149,7 @@ public abstract class GameObject extends Polygon {
 								new float[] { points[i + 2], points[i + 3] });
 						Normal n = new Normal(norm[0], norm[1]);
 
-						// if (!n.equals(normal)) {
 						normals.add(n);
-						// }
 
 					}
 					// break;

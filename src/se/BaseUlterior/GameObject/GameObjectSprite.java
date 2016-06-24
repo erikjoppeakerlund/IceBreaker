@@ -14,6 +14,8 @@ public class GameObjectSprite extends GameObjectAgile {
 
 	protected Aim aim = null;
 	protected List<Aim> aims = null;
+	protected float speed = 0.19f;
+	private final float JUMP_EFFECT = 6.0f;
 
 	public GameObjectSprite(float[] nodes) {
 		super(nodes);
@@ -41,7 +43,12 @@ public class GameObjectSprite extends GameObjectAgile {
 			aim = i == aims.size() - 1 ? aims.get(0) : aims.get(i + 1);
 		}
 		if (in.isKeyDown(in.KEY_LEFT)) {
-			motion.add(new Vector2(0.0f, -0.19f));
+			motion.add(-speed, 0.0f);
+		} else if (in.isKeyDown(in.KEY_RIGHT)) {
+			motion.add(speed, 0.0f);
+		}
+		if (in.isKeyDown(in.KEY_SPACE)) {
+			motion.set(new Vector2(motion.getX(), -4.0f));
 		}
 
 		super.update(container, arg);
