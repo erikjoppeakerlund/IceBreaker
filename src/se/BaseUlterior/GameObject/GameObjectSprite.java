@@ -40,13 +40,6 @@ public class GameObjectSprite extends GameObjectAgile {
 		float mouseX = in.getMouseX();
 		float mouseY = in.getMouseY();
 
-		if (in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-			aim.primaryPushed();
-		}
-		if (in.isMouseButtonDown(Input.MOUSE_RIGHT_BUTTON)) {
-			aim.secondaryPushed();
-		}
-
 		if (Mouse.getDWheel() > 0) {
 			int i = aims.indexOf(aim);
 			aim = i == aims.size() - 1 ? aims.get(0) : aims.get(i + 1);
@@ -64,12 +57,13 @@ public class GameObjectSprite extends GameObjectAgile {
 			motion.set(new Vector2(motion.getX(), -4.0f));
 		}
 		if (in.isMousePressed(in.MOUSE_LEFT_BUTTON)) {
-			mouseButtonPirmaryDown = true;
-
 			aim.primaryPushed();
-		} else if (mouseButtonPirmaryDown = true) {
-			aim.primaryReleased();
+			if (!mouseButtonPirmaryDown) {
+				mouseButtonPirmaryDown = true;
+			}
+		} else if (!in.isMouseButtonDown(in.MOUSE_LEFT_BUTTON) && mouseButtonPirmaryDown) {
 			mouseButtonPirmaryDown = false;
+			aim.primaryReleased();
 		}
 
 		float angleToPoint = UlteriorUtils.angleToPoint(getCenterX(), getCenterY(), mouseX, mouseY);
@@ -78,11 +72,6 @@ public class GameObjectSprite extends GameObjectAgile {
 
 		aim.setAngleToMouse(angleToPoint);
 
-		// aim.setPosition(getCenterX() + (float) Math.cos(angleToPoint) *
-		// getBoundingCircleRadius() * 1.5f,
-		// getCenterY() + (float) Math.sin(angleToPoint) *
-		// getBoundingCircleRadius() * 1.5f);
-		//
 		aim.update();
 
 		super.update(container, arg);

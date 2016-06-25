@@ -99,6 +99,9 @@ public class GameObjectAgile extends GameObject {
 
 			if (UlteriorUtils.isWithinRange(p, this)) {
 				if (p.intersectsGameobject(this) || p.containsGameObject(this)) {
+					if (currentForce.getOrigin() == p) {
+						System.out.println("OKOKOKOK");
+					}
 					Impact i = p.getImpact(this);
 
 					if (i instanceof ImpactForce) {
