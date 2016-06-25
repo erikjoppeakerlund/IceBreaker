@@ -30,7 +30,6 @@ public abstract class Impact {
 		return other;
 	}
 
-	public abstract void calculateEffect(
-			Vector2 affectedPiece/* Vector2 affectedPiece */);
+	public abstract void calculateEffect(Vector2 affectedPiece);
 
 }

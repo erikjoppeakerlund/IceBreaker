@@ -64,14 +64,18 @@ public class BreakingPoint extends BasicGame {
 		BreakingPoint.all.add(randomWater);
 
 		GameObject worldPiece1 = new WorldBuilderGround(
-				new float[] { 5.0f, 400.0f, 250.0f, 620.0f, 495f, 600.0f, 495.0f, 695.0f, 5.0f, 695.0f }, 2.0f,
-				Color.black);
+				new float[] { 5.0f, 400.0f, 250.0f, 620.0f, 495f, 600.0f, 495.0f, 695.0f, 5.0f, 695.0f }, Color.black);
 
 		BreakingPoint.all.add(worldPiece1);
 
-		GameObject sprite = new GameObjectSprite(new Circle(310, 20, 75).getPoints());
+		GameObject sprite = new GameObjectSprite(new Circle(310, 20, 75).getPoints(), 0.0f);
 
 		BreakingPoint.all.add(sprite);
+
+		// GameObject randomBouncyObject = new GameObjectAgile(new Circle(120,
+		// 20, 42).getPoints(), 1.0f);
+		//
+		// BreakingPoint.all.add(randomBouncyObject);
 
 	}
 

@@ -8,7 +8,6 @@ import org.newdawn.slick.SlickException;
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Physics.Impact;
-import se.BaseUlterior.Physics.ImpactBounce;
 import se.BaseUlterior.Physics.ImpactForce;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
@@ -16,11 +15,13 @@ import se.BaseUlterior.Utils.UlteriorUtils;
 public class GameObjectAgile extends GameObject {
 	// private List<Impact> currentImpacts = null;
 	private boolean underImpact = false;
-	protected Vector2 motion = null;
+	// protected Vector2 motion = null;
 
 	protected Impact currentForce = null;
 	private boolean isOriginalForce = true;
 	protected boolean forceException = false;
+
+	public float bouncyness;
 
 	public Impact getCurrentForce() {
 		return this.currentForce;
@@ -28,9 +29,10 @@ public class GameObjectAgile extends GameObject {
 
 	private Color color = Color.lightGray;
 
-	public GameObjectAgile(float[] nodes) {
+	public GameObjectAgile(float[] nodes, float bouncyness) {
 		super(nodes);
-		motion = new Vector2();
+		this.bouncyness = bouncyness;
+		// motion = new Vector2();
 		// currentImpacts = new ArrayList<>();
 		currentForce = (ImpactForce) BreakingPoint.generalGravity.getImpact(this);
 	}
@@ -41,8 +43,8 @@ public class GameObjectAgile extends GameObject {
 		currentForce = (ImpactForce) BreakingPoint.generalGravity.getImpact(this);
 	}
 
-	public void getAffected() {
-		underImpact = true;
+	public float getBouncyness() {
+		return this.bouncyness;
 	}
 
 	@Override
@@ -97,7 +99,7 @@ public class GameObjectAgile extends GameObject {
 			}
 
 			if (UlteriorUtils.isWithinRange(p, this)) {
-				if (p.intersects(this)) {
+				if (p.intersectsGameobject(this)) {
 					Impact i = p.getImpact(this);
 
 					if (i instanceof ImpactForce) {
@@ -117,17 +119,9 @@ public class GameObjectAgile extends GameObject {
 		return motion;
 	}
 
-	public void setMovement(Vector2 movement) {
-		this.motion = movement;
-	}
-
 	@Override
 	public Impact getImpact(GameObjectAgile other) {
 		return null;
-	}
-
-	public Impact getImpactGameObject(GameObject other) {
-		return new ImpactBounce(other, 2.0f, this);
 	}
 
 	@Override

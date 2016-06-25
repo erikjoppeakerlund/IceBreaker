@@ -14,8 +14,8 @@ public class ImpactBounce extends Impact {
 	protected Set<Normal> normals = null;
 
 	// We don't need the normal parameter here!
-	public ImpactBounce(GameObject origin, float effect, GameObjectAgile go) {
-		super(origin, effect, go);
+	public ImpactBounce(GameObject origin, GameObjectAgile go) {
+		super(origin, /* effect, */go);
 		normals = new HashSet<Normal>();
 	}
 
@@ -48,7 +48,7 @@ public class ImpactBounce extends Impact {
 
 		// Vector2 N = new Vector2(normals.getVal1(), normal.getVal2());
 
-		float dot = affectedPiece.dot(N) * effect;
+		float dot = affectedPiece.dot(N) * (1.0f + other.getBouncyness());
 
 		N.scale(dot);
 		affectedPiece.sub(N);
