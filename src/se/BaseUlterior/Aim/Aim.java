@@ -11,15 +11,21 @@ public abstract class Aim {
 
 	protected float x;
 	protected float y;
+	protected float spriteX;
+	protected float spriteY;
 
 	protected float angle;
 
 	public void setPosition(float x, float y) {
-		this.x = x;
-		this.y = y;
+		this.spriteX = x;
+		this.spriteY = y;
 	}
 
 	// might want to add game container here at leas...
 	public abstract void update();
+
+	public void setAngleToMouse(float angleToPoint) {
+		this.angle = angleToPoint;
+	}
 
 }

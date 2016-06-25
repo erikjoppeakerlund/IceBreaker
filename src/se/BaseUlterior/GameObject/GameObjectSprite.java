@@ -20,6 +20,7 @@ public class GameObjectSprite extends GameObjectAgile {
 	protected float speed = 0.5f;
 	private final float JUMP_EFFECT = 7.2f;
 	protected final float MAX_SPEED = 8.0f;
+	protected boolean mouseButtonPirmaryDown = false;
 
 	public GameObjectSprite(float[] nodes, float bouncyness, Color color) {
 		super(nodes, bouncyness, color);
@@ -62,12 +63,26 @@ public class GameObjectSprite extends GameObjectAgile {
 		if (in.isKeyDown(in.KEY_W)) {
 			motion.set(new Vector2(motion.getX(), -4.0f));
 		}
+		if (in.isMousePressed(in.MOUSE_LEFT_BUTTON)) {
+			mouseButtonPirmaryDown = true;
 
-		float angleToPoint = UlteriorUtils.angleToPoint(x, y, mouseX, mouseY);
+			aim.primaryPushed();
+		} else if (mouseButtonPirmaryDown = true) {
+			aim.primaryReleased();
+			mouseButtonPirmaryDown = false;
+		}
 
-		aim.setPosition(getCenterX() + (float) Math.cos(angleToPoint) * getBoundingCircleRadius() * 1.5f,
-				getCenterY() + (float) Math.sin(angleToPoint) * getBoundingCircleRadius() * 1.5f);
+		float angleToPoint = UlteriorUtils.angleToPoint(getCenterX(), getCenterY(), mouseX, mouseY);
 
+		aim.setPosition(getCenterX(), getCenterY());
+
+		aim.setAngleToMouse(angleToPoint);
+
+		// aim.setPosition(getCenterX() + (float) Math.cos(angleToPoint) *
+		// getBoundingCircleRadius() * 1.5f,
+		// getCenterY() + (float) Math.sin(angleToPoint) *
+		// getBoundingCircleRadius() * 1.5f);
+		//
 		aim.update();
 
 		super.update(container, arg);
