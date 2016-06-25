@@ -22,8 +22,11 @@ public class GameObjectSprite extends GameObjectAgile {
 	protected final float MAX_SPEED = 8.0f;
 	protected boolean mouseButtonPirmaryDown = false;
 
-	public GameObjectSprite(float[] nodes, float bouncyness, Color color) {
-		super(nodes, bouncyness, color);
+	protected boolean right = true;
+
+	public GameObjectSprite(float[] nodes, float bouncyness) {
+		super(nodes, bouncyness);
+		color = Color.black;
 		initAims();
 	}
 

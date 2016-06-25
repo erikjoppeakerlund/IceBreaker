@@ -13,7 +13,8 @@ import se.BaseUlterior.Physics.ImpactForce;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
 //will most likely be turned into an abstract class...
-public class GameObjectAgile extends GameObject {
+//next thins: enable the user only to use the keyboard!
+public abstract class GameObjectAgile extends GameObject {
 	private boolean underImpact = false;
 	protected Impact currentForce = null;
 	protected boolean forceException = false;
@@ -27,19 +28,18 @@ public class GameObjectAgile extends GameObject {
 		forceException = startForceException;
 	}
 
-	public float bouncyness;
+	protected float bouncyness;
 
 	public Impact getCurrentForce() {
 		return this.currentForce;
 	}
 
-	private Color color;
+	protected Color color;
 
-	public GameObjectAgile(float[] nodes, float bouncyness, Color color) {
+	public GameObjectAgile(float[] nodes, float bouncyness) {
 		super(nodes);
 		this.bouncyness = bouncyness;
 		currentForce = (ImpactForce) BreakingPoint.generalGravity.getImpact(this);
-		this.color = color;
 		resetForceException();
 	}
 
@@ -48,7 +48,6 @@ public class GameObjectAgile extends GameObject {
 		motion = startMovement;
 		currentForce = (ImpactForce) BreakingPoint.generalGravity.getImpact(this);
 		this.bouncyness = bouncyness;
-		this.color = color;
 		resetForceException();
 	}
 

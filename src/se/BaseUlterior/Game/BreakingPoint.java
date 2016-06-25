@@ -59,7 +59,7 @@ public class BreakingPoint extends BasicGame {
 		float[] wholeScene = new float[] { 0.0f, 0.0f, 0.0f, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH,
 				Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0.0f };
 
-		generalGravity = new WorldBuiderForce(wholeScene, 0.07f, 0.0f, Color.white);
+		generalGravity = new WorldBuiderForce(wholeScene, Constants.GENERAL_GRAVITY, 0.0f, Color.white);
 
 		BreakingPoint.all.add(generalGravity);
 
@@ -79,8 +79,7 @@ public class BreakingPoint extends BasicGame {
 
 		BreakingPoint.all.add(worldPiece1);
 
-		GameObject sprite = new GameObjectSprite(new Circle(310, 190, Constants.SPRITE_RADIUS).getPoints(), 0.0f,
-				Color.blue);
+		GameObject sprite = new GameObjectSprite(new Circle(310, 190, Constants.SPRITE_RADIUS).getPoints(), 0.0f);
 
 		BreakingPoint.all.add(sprite);
 

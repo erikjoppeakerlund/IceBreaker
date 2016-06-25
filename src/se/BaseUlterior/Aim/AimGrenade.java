@@ -3,7 +3,6 @@ package se.BaseUlterior.Aim;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.geom.Circle;
 
 import se.BaseUlterior.Config.Constants;
@@ -35,7 +34,7 @@ public class AimGrenade extends Aim {
 
 	public AimGrenade() {
 		grenades = new ArrayList<>();
-		Grenade startGrenade = new Grenade(new Circle(x, y, Grenade.GRENADE_SIZE).getPoints(), 1.0f, Color.green);
+		Grenade startGrenade = new Grenade(new Circle(x, y, Grenade.GRENADE_SIZE).getPoints());
 		grenades.add(startGrenade);
 		BreakingPoint.objsToAdd.add(startGrenade);
 		current = startGrenade;
@@ -51,7 +50,7 @@ public class AimGrenade extends Aim {
 		}
 		if (canMakeNew) {
 			if (System.currentTimeMillis() - currentTime > TIME_BETWEEN) {
-				Grenade newCurrent = new Grenade(new Circle(x, y, Grenade.GRENADE_SIZE).getPoints(), 1.0f, Color.green);
+				Grenade newCurrent = new Grenade(new Circle(x, y, Grenade.GRENADE_SIZE).getPoints());
 				grenades.add(newCurrent);
 				current = newCurrent;
 				BreakingPoint.objsToAdd.add(newCurrent);

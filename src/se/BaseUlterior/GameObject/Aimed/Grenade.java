@@ -1,7 +1,5 @@
 package se.BaseUlterior.GameObject.Aimed;
 
-import org.newdawn.slick.Color;
-
 import se.BaseUlterior.GameObject.GameObjectAgile;
 import se.BaseUlterior.Geom.Vector2;
 
@@ -10,8 +8,11 @@ public class Grenade extends GameObjectAgile {
 	public static final float GRENADE_SIZE = 27.0f;
 	private boolean isReleased = false;
 
-	public Grenade(float[] nodes, float bouncyness, Color color) {
-		super(nodes, bouncyness, color);
+	private static float BOUNCYNESS = 0.9f;
+
+	public Grenade(float[] nodes) {
+		super(nodes, BOUNCYNESS);
+		color = color.black;
 		startForceException = true;
 	}
 
