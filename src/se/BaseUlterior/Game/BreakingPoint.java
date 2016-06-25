@@ -33,6 +33,8 @@ public class BreakingPoint extends BasicGame {
 
 	public static List<GameObject> objsToAdd = null;
 
+	public static List<GameObject> objsToRemove = null;
+
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		for (GameObject go : BreakingPoint.all) {
@@ -44,6 +46,7 @@ public class BreakingPoint extends BasicGame {
 	public void init(GameContainer arg0) throws SlickException {
 		BreakingPoint.all = new ArrayList<>();
 		BreakingPoint.objsToAdd = new ArrayList<>();
+		objsToRemove = new ArrayList<>();
 
 		float fat = 50.0f;
 
@@ -99,6 +102,10 @@ public class BreakingPoint extends BasicGame {
 		if (!objsToAdd.isEmpty()) {
 			all.addAll(objsToAdd);
 			objsToAdd.clear();
+		}
+		if (!objsToRemove.isEmpty()) {
+			all.removeAll(objsToRemove);
+			objsToRemove.clear();
 		}
 	}
 

@@ -4,6 +4,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Shape;
 
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.Geom.Vector2;
@@ -87,14 +88,12 @@ public abstract class GameObjectAgile extends GameObject {
 		for (int j = 0; j < removeIndexes.length; j++) {
 			if (removeIndexes[j] == 1) {
 				currentImpacts.get(j).getGameObjectAgile().resetForceException();
-				;
 				currentImpacts.remove(j);
 			}
 		}
 		if (currentImpacts.isEmpty()) {
 			underImpact = false;
 		}
-
 	}
 
 	private void checkImpact() {
@@ -146,6 +145,11 @@ public abstract class GameObjectAgile extends GameObject {
 	public void addForceException() {
 		forceException = true;
 
+	}
+
+	@Override
+	public Shape[] subtract(Shape other) {
+		return null;
 	}
 
 }

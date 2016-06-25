@@ -23,6 +23,10 @@ public abstract class GameObject extends Polygon {
 
 	protected Color color = Color.darkGray;
 
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
 	protected Vector2 motion = null;
 
 	public abstract void update(GameContainer container, int arg) throws SlickException;
@@ -294,6 +298,10 @@ public abstract class GameObject extends Polygon {
 		}
 
 		return true;
+	}
+
+	public void setPoints(float[] points) {
+		this.points = points;
 	}
 
 }
