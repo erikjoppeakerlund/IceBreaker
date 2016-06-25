@@ -9,6 +9,7 @@ import org.newdawn.slick.geom.Circle;
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.Aimed.Grenade;
+import se.BaseUlterior.Geom.Vector2;
 
 public class AimGrenade extends Aim {
 
@@ -76,7 +77,8 @@ public class AimGrenade extends Aim {
 		float dX = (float) Math.cos(angle) * force / TIMES_LESS_ACTUAL_FORCE;
 		float dY = (float) Math.sin(angle) * force / TIMES_LESS_ACTUAL_FORCE;
 
-		current.getMotion().set(dX, dY);
+		// current.getMotion().set(dX, dY);
+		current.initMotion(new Vector2(dX, dY));
 		currentTime = System.currentTimeMillis();
 		canMakeNew = true;
 		current = null;

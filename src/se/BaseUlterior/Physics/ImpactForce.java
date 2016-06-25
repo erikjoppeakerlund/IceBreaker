@@ -25,6 +25,8 @@ public class ImpactForce extends Impact {
 
 	@Override
 	public void calculateEffect(Vector2 affectedPiece) {
-		affectedPiece.add(gravityX, gravityY);
+		if (!other.isForceException()) {
+			affectedPiece.add(gravityX, gravityY);
+		}
 	}
 }

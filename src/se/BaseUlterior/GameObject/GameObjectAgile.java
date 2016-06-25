@@ -16,8 +16,11 @@ import se.BaseUlterior.Utils.UlteriorUtils;
 public class GameObjectAgile extends GameObject {
 	private boolean underImpact = false;
 	protected Impact currentForce = null;
-	private boolean isOriginalForce = true;
 	protected boolean forceException = false;
+
+	public boolean isForceException() {
+		return this.forceException;
+	}
 
 	public float bouncyness;
 
