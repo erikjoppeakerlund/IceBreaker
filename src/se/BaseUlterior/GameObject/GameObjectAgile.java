@@ -17,9 +17,14 @@ public class GameObjectAgile extends GameObject {
 	private boolean underImpact = false;
 	protected Impact currentForce = null;
 	protected boolean forceException = false;
+	protected boolean startForceException = false;
 
 	public boolean isForceException() {
-		return this.forceException;
+		return forceException;
+	}
+
+	public void resetForceException() {
+		forceException = startForceException;
 	}
 
 	public float bouncyness;
@@ -35,6 +40,7 @@ public class GameObjectAgile extends GameObject {
 		this.bouncyness = bouncyness;
 		currentForce = (ImpactForce) BreakingPoint.generalGravity.getImpact(this);
 		this.color = color;
+		resetForceException();
 	}
 
 	public GameObjectAgile(float[] nodes, float bouncyness, Color color, Vector2 startMovement) {
@@ -43,6 +49,7 @@ public class GameObjectAgile extends GameObject {
 		currentForce = (ImpactForce) BreakingPoint.generalGravity.getImpact(this);
 		this.bouncyness = bouncyness;
 		this.color = color;
+		resetForceException();
 	}
 
 	public float getBouncyness() {
@@ -80,6 +87,8 @@ public class GameObjectAgile extends GameObject {
 		}
 		for (int j = 0; j < removeIndexes.length; j++) {
 			if (removeIndexes[j] == 1) {
+				currentImpacts.get(j).getGameObjectAgile().resetForceException();
+				;
 				currentImpacts.remove(j);
 			}
 		}
@@ -133,6 +142,11 @@ public class GameObjectAgile extends GameObject {
 
 	public void addImpact(Impact im) {
 		currentImpacts.add(im);
+	}
+
+	public void addForceException() {
+		forceException = true;
+
 	}
 
 }

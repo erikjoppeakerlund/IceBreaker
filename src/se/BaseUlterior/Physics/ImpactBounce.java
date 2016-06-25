@@ -22,6 +22,8 @@ public class ImpactBounce extends Impact {
 	@Override
 	public void calculateEffect(Vector2 affectedPiece) {
 
+		other.addForceException();
+
 		normals = origin.provideMyNormalAfterHitBy(other);
 
 		if (normals.isEmpty()) {

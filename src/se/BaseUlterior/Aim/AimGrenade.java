@@ -73,11 +73,8 @@ public class AimGrenade extends Aim {
 
 	@Override
 	public void primaryReleased() {
-		System.out.println(force);
 		float dX = (float) Math.cos(angle) * force / TIMES_LESS_ACTUAL_FORCE;
 		float dY = (float) Math.sin(angle) * force / TIMES_LESS_ACTUAL_FORCE;
-
-		// current.getMotion().set(dX, dY);
 		current.initMotion(new Vector2(dX, dY));
 		currentTime = System.currentTimeMillis();
 		canMakeNew = true;

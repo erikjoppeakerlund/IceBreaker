@@ -45,6 +45,17 @@ public class BreakingPoint extends BasicGame {
 		BreakingPoint.all = new ArrayList<>();
 		BreakingPoint.objsToAdd = new ArrayList<>();
 
+		float fat = 50.0f;
+
+		float[] wallScene = new float[] { 0.0f - fat, 0.0f - fat, Constants.CANVAS_WIDTH + fat, 0.0f - fat,
+				Constants.CANVAS_WIDTH + fat, Constants.CANVAS_HEIGHT + fat, 0.0f - fat, Constants.CANVAS_HEIGHT + fat,
+				0.0f - fat, 0.0f - fat, 0.0f, 0.0f, Constants.CANVAS_WIDTH, 0.0f, Constants.CANVAS_WIDTH,
+				Constants.CANVAS_HEIGHT, 0.0f, Constants.CANVAS_HEIGHT, 0.0f, 0.0f };
+
+		GameObject wall = new WorldBuilderGround(wallScene, Color.black);
+
+		BreakingPoint.all.add(wall);
+
 		float[] wholeScene = new float[] { 0.0f, 0.0f, 0.0f, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH,
 				Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0.0f };
 
@@ -68,7 +79,7 @@ public class BreakingPoint extends BasicGame {
 
 		BreakingPoint.all.add(worldPiece1);
 
-		GameObject sprite = new GameObjectSprite(new Circle(310, 20, Constants.SPRITE_RADIUS).getPoints(), 0.0f,
+		GameObject sprite = new GameObjectSprite(new Circle(310, 190, Constants.SPRITE_RADIUS).getPoints(), 0.0f,
 				Color.blue);
 
 		BreakingPoint.all.add(sprite);
