@@ -49,14 +49,6 @@ public class GameObjectAgile extends GameObject {
 	@Override
 	public void update(GameContainer container, int arg) {
 
-		if (!isOriginalForce) {
-			if (!(currentForce.getOrigin().intersects(this) || currentForce.getOrigin().contains(this))) {
-				currentForce = (ImpactForce) BreakingPoint.generalGravity.getImpact(this);
-				isOriginalForce = true;
-			}
-		}
-		currentForce.calculateEffect(motion);
-
 		checkImpact();
 		if (underImpact) {
 			runImpact();
@@ -66,6 +58,9 @@ public class GameObjectAgile extends GameObject {
 	}
 
 	private void runImpact() {
+		for (Impact im : currentImpacts) {
+			im.calculateEffect(motion);
+		}
 
 		int[] removeIndexes = new int[currentImpacts.size()];
 		int i = 0;
@@ -92,28 +87,28 @@ public class GameObjectAgile extends GameObject {
 	}
 
 	private void checkImpact() {
-		for (GameObject p : BreakingPoint.all) {
-			if (p == this || p == currentForce.getOrigin()) {
+		for (GameObject go : BreakingPoint.all) {
+
+			if (go == this) {
 				continue;
 			}
 
-			if (UlteriorUtils.isWithinRange(p, this)) {
-				if (p.intersectsGameobject(this) || p.containsGameObject(this)) {
-					if (currentForce.getOrigin() == p) {
-						System.out.println("OKOKOKOK");
+			if (UlteriorUtils.isWithinRange(go, this)) {
+				if (go.intersectsGameobject(this) || go.containsGameObject(this)) {
+					boolean contains = false;
+					for (Impact im : currentImpacts) {
+						if (im.getOrigin() == go) {
+							contains = true;
+							break;
+						}
 					}
-					Impact i = p.getImpact(this);
-
-					if (i instanceof ImpactForce) {
-						currentForce = (ImpactForce) i;
-						isOriginalForce = false;
-					} else {
-						this.currentImpacts.add(p.getImpact(this));
+					if (!contains) {
+						currentImpacts.add(go.getImpact(this));
+						underImpact = true;
 					}
-
-					underImpact = true;
 				}
 			}
+
 		}
 	}
 
