@@ -13,6 +13,7 @@ import org.newdawn.slick.geom.Circle;
 
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.GameObject.GameObject;
+import se.BaseUlterior.GameObject.GameObjectAgile;
 import se.BaseUlterior.GameObject.GameObjectSprite;
 import se.BaseUlterior.GameObject.WorldBuiderForce;
 import se.BaseUlterior.GameObject.WorldBuilderGround;
@@ -72,10 +73,9 @@ public class BreakingPoint extends BasicGame {
 
 		BreakingPoint.all.add(sprite);
 
-		// GameObject randomBouncyObject = new GameObjectAgile(new Circle(120,
-		// 20, 42).getPoints(), 1.0f);
-		//
-		// BreakingPoint.all.add(randomBouncyObject);
+		GameObject randomBouncyObject = new GameObjectAgile(new Circle(120, 20, 42).getPoints(), 1.0f);
+
+		BreakingPoint.all.add(randomBouncyObject);
 
 	}
 

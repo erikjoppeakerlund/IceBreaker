@@ -24,6 +24,10 @@ public class ImpactBounce extends Impact {
 
 		normals = origin.provideMyNormalAfterHitBy(other);
 
+		if (normals.isEmpty()) {
+			return;
+		}
+
 		Iterator<Normal> ni = normals.iterator();
 		Vector2 N = null;
 		int i = 0;

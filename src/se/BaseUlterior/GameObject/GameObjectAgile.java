@@ -8,6 +8,7 @@ import org.newdawn.slick.SlickException;
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Physics.Impact;
+import se.BaseUlterior.Physics.ImpactBounce;
 import se.BaseUlterior.Physics.ImpactForce;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
@@ -121,7 +122,7 @@ public class GameObjectAgile extends GameObject {
 
 	@Override
 	public Impact getImpact(GameObjectAgile other) {
-		return null;
+		return new ImpactBounce(this, other);
 	}
 
 	@Override
