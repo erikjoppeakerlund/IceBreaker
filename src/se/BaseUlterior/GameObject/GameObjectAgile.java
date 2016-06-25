@@ -14,10 +14,7 @@ import se.BaseUlterior.Utils.UlteriorUtils;
 
 //will most likely be turned into an abstract class...
 public class GameObjectAgile extends GameObject {
-	// private List<Impact> currentImpacts = null;
 	private boolean underImpact = false;
-	// protected Vector2 motion = null;
-
 	protected Impact currentForce = null;
 	private boolean isOriginalForce = true;
 	protected boolean forceException = false;
@@ -28,20 +25,21 @@ public class GameObjectAgile extends GameObject {
 		return this.currentForce;
 	}
 
-	private Color color = Color.lightGray;
+	private Color color;
 
-	public GameObjectAgile(float[] nodes, float bouncyness) {
+	public GameObjectAgile(float[] nodes, float bouncyness, Color color) {
 		super(nodes);
 		this.bouncyness = bouncyness;
-		// motion = new Vector2();
-		// currentImpacts = new ArrayList<>();
 		currentForce = (ImpactForce) BreakingPoint.generalGravity.getImpact(this);
+		this.color = color;
 	}
 
-	public GameObjectAgile(Vector2 startMovement, float[] nodes) {
+	public GameObjectAgile(float[] nodes, float bouncyness, Color color, Vector2 startMovement) {
 		super(nodes);
 		motion = startMovement;
 		currentForce = (ImpactForce) BreakingPoint.generalGravity.getImpact(this);
+		this.bouncyness = bouncyness;
+		this.color = color;
 	}
 
 	public float getBouncyness() {
@@ -76,7 +74,7 @@ public class GameObjectAgile extends GameObject {
 
 			im.calculateEffect(motion);
 
-			if (!im.getOrigin().contains(this)) {
+			if (!im.getOrigin().containsGameObject(this)) {
 				removeIndexes[i] = 1;
 			} else {
 				i++;
@@ -100,7 +98,7 @@ public class GameObjectAgile extends GameObject {
 			}
 
 			if (UlteriorUtils.isWithinRange(p, this)) {
-				if (p.intersectsGameobject(this)) {
+				if (p.intersectsGameobject(this) || p.containsGameObject(this)) {
 					Impact i = p.getImpact(this);
 
 					if (i instanceof ImpactForce) {

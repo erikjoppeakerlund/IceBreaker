@@ -273,4 +273,27 @@ public abstract class GameObject extends Polygon {
 		return result;
 	}
 
+	/**
+	 * Check if the shape passed is entirely contained within this shape.
+	 * 
+	 * @param other
+	 *            The other shape to test against this one
+	 * @return True if the other shape supplied is entirely contained within
+	 *         this one.
+	 */
+	public boolean containsGameObject(GameObject other) {
+		if (other.intersectsGameobject(this)) {
+			return false;
+		}
+
+		for (int i = 0; i < other.getPointCount(); i++) {
+			float[] pt = other.getPoint(i);
+			if (!contains(pt[0] + other.motion.x, pt[1] + other.motion.y)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 }

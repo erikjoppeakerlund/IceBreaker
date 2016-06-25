@@ -69,11 +69,11 @@ public class BreakingPoint extends BasicGame {
 
 		BreakingPoint.all.add(worldPiece1);
 
-		GameObject sprite = new GameObjectSprite(new Circle(310, 20, 75).getPoints(), 0.0f);
+		GameObject sprite = new GameObjectSprite(new Circle(310, 20, 75).getPoints(), 0.0f, Color.blue);
 
 		BreakingPoint.all.add(sprite);
 
-		GameObject randomBouncyObject = new GameObjectAgile(new Circle(120, 20, 42).getPoints(), 1.0f);
+		GameObject randomBouncyObject = new GameObjectAgile(new Circle(120, 20, 42).getPoints(), 1.0f, Color.lightGray);
 
 		BreakingPoint.all.add(randomBouncyObject);
 
