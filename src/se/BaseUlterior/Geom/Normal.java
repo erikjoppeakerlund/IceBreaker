@@ -18,6 +18,13 @@ public class Normal {
 		this.val2 = val2;
 	}
 
+	public Normal makePerpendicular() {
+		float newVal1 = -val2;
+		val2 = val1;
+		val1 = newVal1;
+		return this;
+	}
+
 	@Override
 	public String toString() {
 		return "Normal [val1=" + val1 + ", val2=" + val2 + "]";

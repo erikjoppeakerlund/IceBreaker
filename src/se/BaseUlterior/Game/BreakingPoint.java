@@ -18,12 +18,15 @@ import se.BaseUlterior.GameObject.WorldBuiderForce;
 import se.BaseUlterior.GameObject.WorldBuilderGround;
 import se.BaseUlterior.GameObject.WorldBuilderLiquid;
 import se.BaseUlterior.Physics.Density;
+import se.BaseUlterior.Utils.DoubleClickListener;
 
 public class BreakingPoint extends BasicGame {
 
 	Circle circ = new Circle(20, 20, 20);
 
 	public static WorldBuiderForce generalGravity = null;
+
+	private boolean insertMode = true;
 
 	public BreakingPoint(String title) {
 		super(title);
@@ -35,6 +38,10 @@ public class BreakingPoint extends BasicGame {
 
 	public static List<GameObject> objsToRemove = null;
 
+	private WorldCreator worldCreator = null;
+
+	private List<DoubleClickListener> doubleClickListeners;
+
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		for (GameObject go : BreakingPoint.all) {
@@ -44,20 +51,26 @@ public class BreakingPoint extends BasicGame {
 
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
+		worldCreator = new WorldCreator();
+		doubleClickListeners = new ArrayList<>();
+		doubleClickListeners.add(worldCreator);
 		BreakingPoint.all = new ArrayList<>();
 		BreakingPoint.objsToAdd = new ArrayList<>();
 		objsToRemove = new ArrayList<>();
 
 		float fat = 50.0f;
 
-		float[] wallScene = new float[] { 0.0f - fat, 0.0f - fat, Constants.CANVAS_WIDTH + fat, 0.0f - fat,
-				Constants.CANVAS_WIDTH + fat, Constants.CANVAS_HEIGHT + fat, 0.0f - fat, Constants.CANVAS_HEIGHT + fat,
-				0.0f - fat, 0.0f - fat, 0.0f, 0.0f, Constants.CANVAS_WIDTH, 0.0f, Constants.CANVAS_WIDTH,
-				Constants.CANVAS_HEIGHT, 0.0f, Constants.CANVAS_HEIGHT, 0.0f, 0.0f };
-
-		GameObject wall = new WorldBuilderGround(wallScene, Color.black);
-
-		BreakingPoint.all.add(wall);
+		// float[] wallScene = new float[] { 0.0f - fat, 0.0f - fat,
+		// Constants.CANVAS_WIDTH + fat, 0.0f - fat,
+		// Constants.CANVAS_WIDTH + fat, Constants.CANVAS_HEIGHT + fat, 0.0f -
+		// fat, Constants.CANVAS_HEIGHT + fat,
+		// 0.0f - fat, 0.0f - fat, 0.0f, 0.0f, Constants.CANVAS_WIDTH, 0.0f,
+		// Constants.CANVAS_WIDTH,
+		// Constants.CANVAS_HEIGHT, 0.0f, Constants.CANVAS_HEIGHT, 0.0f, 0.0f };
+		//
+		// GameObject wall = new WorldBuilderGround(wallScene, Color.black);
+		//
+		// BreakingPoint.all.add(wall);
 
 		float[] wholeScene = new float[] { 0.0f, 0.0f, 0.0f, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH,
 				Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0.0f };
@@ -96,6 +109,10 @@ public class BreakingPoint extends BasicGame {
 	@Override
 	public void update(GameContainer container, int arg) throws SlickException {
 
+		if (insertMode) {
+			// return;
+		}
+
 		for (GameObject go : BreakingPoint.all) {
 			go.update(container, arg);
 		}
@@ -117,5 +134,18 @@ public class BreakingPoint extends BasicGame {
 		appGameContainer.setAlwaysRender(true);
 		appGameContainer.start();
 
+	}
+
+	@Override
+	public void mouseClicked(int button, int x, int y, int clickCount) {
+		// if (clickCount == 1) {
+		// message = "Single Click: "+button+" "+x+","+y;
+		// }
+		// if (clickCount == 2) {
+		// message = "Double Click: "+button+" "+x+","+y;
+		// }
+		for (DoubleClickListener dbcl : doubleClickListeners) {
+			dbcl.wasDoubleClicked(button, x, y);
+		}
 	}
 }

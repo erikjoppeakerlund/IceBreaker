@@ -4,6 +4,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Shape;
 
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactForce;
@@ -41,6 +42,11 @@ public class WorldBuiderForce extends WorldBuilder {
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		graphics.setColor(this.color);
 		graphics.fill(this);
+	}
+
+	@Override
+	public Shape[] subtract(Shape other) {
+		return new Shape[0];
 	}
 
 }

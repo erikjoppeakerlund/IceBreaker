@@ -1,6 +1,7 @@
 package se.BaseUlterior.GameObject;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.geom.Shape;
 
 import se.BaseUlterior.Physics.Density;
 import se.BaseUlterior.Physics.Impact;
@@ -46,6 +47,11 @@ public class WorldBuilderLiquid extends WorldBuilder {
 	@Override
 	protected void animateHit() {
 
+	}
+
+	@Override
+	public Shape[] subtract(Shape other) {
+		return new Shape[0];
 	}
 
 }

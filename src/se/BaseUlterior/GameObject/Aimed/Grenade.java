@@ -51,25 +51,27 @@ public class Grenade extends GameObjectAgile {
 	@Override
 	public void update(GameContainer container, int arg) {
 		super.update(container, arg);
-		if (isReleased) {
-			if (System.currentTimeMillis() - wasReleasedAt > TIME_UNTIL_EXPLOTION) {
-				for (GameObject target : BreakingPoint.all) {
-					explotionShape.setCenterX(getCenterX());
-					explotionShape.setCenterY(getCenterY());
-					if (UlteriorUtils.isWithinRange(target, (GameObject) explotionShape)) {
-						if (target.intersects(explotionShape) || target.contains(explotionShape)) {
-							if (target instanceof WorldBuilderGround) {
-								Shape[] result = target.subtract(explotionShape);
-								for (int i = 0; i < result.length; i++) {
-									Shape go = result[i];
-									GameObject gog = new WorldBuilderGround(go.getPoints(), Color.black);
-									BreakingPoint.objsToAdd.add(gog);
-								}
-								BreakingPoint.objsToRemove.add(target);
-								BreakingPoint.objsToRemove.add(this);
-								break;
-							}
+		if (!isReleased) {
+			return;
+		}
+		if (System.currentTimeMillis() - wasReleasedAt > TIME_UNTIL_EXPLOTION) {
+			for (GameObject target : BreakingPoint.all) {
+				explotionShape.setCenterX(getCenterX());
+				explotionShape.setCenterY(getCenterY());
+				if (UlteriorUtils.isWithinRange(target, (GameObject) explotionShape)) {
+					if (target.intersects(explotionShape) || target.contains(explotionShape)) {
+
+						Shape[] result = target.subtract(explotionShape);
+						for (int i = 0; i < result.length; i++) {
+							Shape go = result[i];
+							GameObject gog = new WorldBuilderGround(go.getPoints(), Color.black);
+							BreakingPoint.objsToAdd.add(gog);
 						}
+						System.out.println(result.length);
+						if (result.length > 0) {
+							BreakingPoint.objsToRemove.add(target);
+						}
+						BreakingPoint.objsToRemove.add(this);
 					}
 				}
 			}

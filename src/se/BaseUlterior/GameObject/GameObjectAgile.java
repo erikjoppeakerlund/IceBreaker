@@ -149,7 +149,7 @@ public abstract class GameObjectAgile extends GameObject {
 
 	@Override
 	public Shape[] subtract(Shape other) {
-		return null;
+		return new Shape[0];
 	}
 
 }
