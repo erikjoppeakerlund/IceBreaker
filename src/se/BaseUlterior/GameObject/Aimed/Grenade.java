@@ -8,7 +8,7 @@ import org.newdawn.slick.geom.Shape;
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectAgile;
-import se.BaseUlterior.GameObject.GameObjectSimple;
+import se.BaseUlterior.GameObject.GameObjectExplosion;
 import se.BaseUlterior.GameObject.WorldBuilderGround;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Utils.UlteriorUtils;
@@ -28,7 +28,7 @@ public class Grenade extends GameObjectAgile {
 	public Grenade(float[] nodes) {
 		super(nodes, BOUNCYNESS);
 		color = color.black;
-		explotionShape = new GameObjectSimple(new Circle(getCenterX(), getCenterY(), 200.0f).getPoints());
+
 	}
 
 	public void initMotion(Vector2 motion) {
@@ -54,9 +54,12 @@ public class Grenade extends GameObjectAgile {
 			return;
 		}
 		if (System.currentTimeMillis() - wasReleasedAt > TIME_UNTIL_EXPLOTION) {
+			Shape explotionShape = new GameObjectExplosion(new Circle(getCenterX(), getCenterY(), 200.0f).getPoints());
+			BreakingPoint.objsToAdd.add(
+					new GameObjectExplosion(new Circle(getCenterX(), getCenterY(), 200.0f).getPoints(), Color.red));
 			for (GameObject target : BreakingPoint.all) {
-				explotionShape.setCenterX(getCenterX());
-				explotionShape.setCenterY(getCenterY());
+				// explotionShape.setCenterX(getCenterX());
+				// explotionShape.setCenterY(getCenterY());
 				if (UlteriorUtils.isWithinRange(target, (GameObject) explotionShape)) {
 					if (target.intersects(explotionShape) || target.contains(explotionShape)) {
 
@@ -74,6 +77,7 @@ public class Grenade extends GameObjectAgile {
 					}
 				}
 			}
+			// BreakingPoint.objsToRemove.add(expVisible);
 		}
 
 	}

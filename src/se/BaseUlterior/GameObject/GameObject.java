@@ -12,7 +12,6 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
 
-import se.BaseUlterior.GameObject.Override.PolygonCustom;
 import se.BaseUlterior.Geom.Normal;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Physics.Impact;
@@ -27,16 +26,6 @@ public abstract class GameObject extends Shape {
 	protected Color color = Color.darkGray;
 
 	protected Vector2 motion = null;
-
-	// put argument in builder!
-
-	// public GameObject(float[] nodes) {
-	// points = nodes;
-	// // super(nodes);
-	// currentImpacts = new ArrayList<>();
-	// motion = new Vector2();
-	// // normals = new ArrayList<>();
-	// }
 
 	private void init() {
 		currentImpacts = new ArrayList<>();
@@ -364,13 +353,13 @@ public abstract class GameObject extends Shape {
 	public Shape transform(Transform transform) {
 		checkPoints();
 
-		PolygonCustom resultPolygon = new PolygonCustom();
+		GameObject resultPolygon = new GameObjectExplosion();
 
 		float result[] = new float[points.length];
 		transform.transform(points, 0, result, 0, points.length / 2);
-		resultPolygon.setPoints(result);
-		resultPolygon.findCenterPublic();
-		resultPolygon.setClosed(closed);
+		resultPolygon.points = result;
+		resultPolygon.findCenter();
+		resultPolygon.closed = closed;
 
 		return resultPolygon;
 	}
