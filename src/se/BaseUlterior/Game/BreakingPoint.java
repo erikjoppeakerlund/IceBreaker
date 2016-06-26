@@ -116,13 +116,13 @@ public class BreakingPoint extends BasicGame {
 		for (GameObject go : BreakingPoint.all) {
 			go.update(container, arg);
 		}
-		if (!objsToAdd.isEmpty()) {
-			all.addAll(objsToAdd);
-			objsToAdd.clear();
-		}
 		if (!objsToRemove.isEmpty()) {
 			all.removeAll(objsToRemove);
 			objsToRemove.clear();
+		}
+		if (!objsToAdd.isEmpty()) {
+			all.addAll(objsToAdd);
+			objsToAdd.clear();
 		}
 	}
 

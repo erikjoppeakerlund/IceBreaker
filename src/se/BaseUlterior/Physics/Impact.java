@@ -31,5 +31,4 @@ public abstract class Impact {
 	}
 
 	public abstract void calculateEffect(Vector2 affectedPiece);
-
 }

@@ -1,5 +1,7 @@
 package se.BaseUlterior.GameObject.Aimed;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.geom.Circle;
@@ -23,12 +25,12 @@ public class Grenade extends GameObjectAgile {
 
 	protected final long TIME_UNTIL_EXPLOTION = 2500;
 
-	protected Shape explotionShape = null;
+	protected GameObject explotionShape = null;
 
 	public Grenade(float[] nodes) {
 		super(nodes, BOUNCYNESS);
 		color = color.black;
-
+		explotionShape = new GameObjectExplosion(new Circle(getCenterX(), getCenterY(), 200).getPoints());
 	}
 
 	public void initMotion(Vector2 motion) {
@@ -49,35 +51,39 @@ public class Grenade extends GameObjectAgile {
 
 	@Override
 	public void update(GameContainer container, int arg) {
-		super.update(container, arg);
 		if (!isReleased) {
 			return;
 		}
 		if (System.currentTimeMillis() - wasReleasedAt > TIME_UNTIL_EXPLOTION) {
-			Shape explotionShape = new GameObjectExplosion(new Circle(getCenterX(), getCenterY(), 200.0f).getPoints());
-			BreakingPoint.objsToAdd.add(
-					new GameObjectExplosion(new Circle(getCenterX(), getCenterY(), 200.0f).getPoints(), Color.red));
-			for (GameObject target : BreakingPoint.all) {
-				// explotionShape.setCenterX(getCenterX());
-				// explotionShape.setCenterY(getCenterY());
-				if (UlteriorUtils.isWithinRange(target, (GameObject) explotionShape)) {
-					if (target.intersects(explotionShape) || target.contains(explotionShape)) {
 
+			ArrayList<GameObject> newShapes = new ArrayList<>();
+			for (GameObject target : BreakingPoint.all) {
+				if (target == this || target == this) {
+					continue;
+				}
+				explotionShape.setCenterX(getCenterX());
+				explotionShape.setCenterY(getCenterY());
+				if (UlteriorUtils.isWithinRange(target, explotionShape)) {
+					if (target.intersects(explotionShape)) {
 						Shape[] result = target.subtract(explotionShape);
-						for (int i = 0; i < result.length; i++) {
-							Shape go = result[i];
-							GameObject gog = new WorldBuilderGround(go.getPoints(), Color.black);
-							BreakingPoint.objsToAdd.add(gog);
-						}
-						System.out.println(result.length);
 						if (result.length > 0) {
+							for (int i = 0; i < result.length; i++) {
+								Shape go = result[i];
+								GameObject gog = new WorldBuilderGround(go.getPoints(), Color.black);
+								newShapes.add(gog);
+							}
 							BreakingPoint.objsToRemove.add(target);
 						}
-						BreakingPoint.objsToRemove.add(this);
 					}
 				}
 			}
-			// BreakingPoint.objsToRemove.add(expVisible);
+			for (GameObject go : newShapes) {
+				BreakingPoint.objsToAdd.add(go);
+			}
+
+			BreakingPoint.objsToRemove.add(this);
+		} else {
+			super.update(container, arg);
 		}
 
 	}
