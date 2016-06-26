@@ -9,7 +9,6 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
 
@@ -18,13 +17,10 @@ import se.BaseUlterior.Geom.Normal;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Physics.Impact;
 
-public abstract class GameObject extends Polygon {
+public abstract class GameObject extends Shape {
 
 	private boolean closed = true;
-
-	public GameObject() {
-		// TODO Auto-generated constructor stub
-	}
+	private boolean allowDups = false;
 
 	protected List<Impact> currentImpacts = null;
 
@@ -34,11 +30,81 @@ public abstract class GameObject extends Polygon {
 
 	// put argument in builder!
 
-	public GameObject(float[] nodes) {
-		super(nodes);
+	// public GameObject(float[] nodes) {
+	// points = nodes;
+	// // super(nodes);
+	// currentImpacts = new ArrayList<>();
+	// motion = new Vector2();
+	// // normals = new ArrayList<>();
+	// }
+
+	private void init() {
 		currentImpacts = new ArrayList<>();
 		motion = new Vector2();
-		// normals = new ArrayList<>();
+
+	}
+
+	/**
+	 * Construct a new polygon with 3 or more points. This constructor will take
+	 * the first set of points and copy them after the last set of points to
+	 * create a closed shape.
+	 * 
+	 * @param points
+	 *            An array of points in x, y order.
+	 */
+	public GameObject(float points[]) {
+		init();
+		int length = points.length;
+
+		this.points = new float[length];
+		maxX = -Float.MIN_VALUE;
+		maxY = -Float.MIN_VALUE;
+		minX = Float.MAX_VALUE;
+		minY = Float.MAX_VALUE;
+		x = Float.MAX_VALUE;
+		y = Float.MAX_VALUE;
+
+		for (int i = 0; i < length; i++) {
+			this.points[i] = points[i];
+			if (i % 2 == 0) {
+				if (points[i] > maxX) {
+					maxX = points[i];
+				}
+				if (points[i] < minX) {
+					minX = points[i];
+				}
+				if (points[i] < x) {
+					x = points[i];
+				}
+			} else {
+				if (points[i] > maxY) {
+					maxY = points[i];
+				}
+				if (points[i] < minY) {
+					minY = points[i];
+				}
+				if (points[i] < y) {
+					y = points[i];
+				}
+			}
+		}
+
+		findCenter();
+		calculateRadius();
+		pointsDirty = true;
+	}
+
+	/**
+	 * Create an empty polygon
+	 *
+	 */
+	public GameObject() {
+		init();
+		points = new float[0];
+		maxX = -Float.MIN_VALUE;
+		maxY = -Float.MIN_VALUE;
+		minX = Float.MAX_VALUE;
+		minY = Float.MAX_VALUE;
 	}
 
 	/**
@@ -284,7 +350,6 @@ public abstract class GameObject extends Polygon {
 
 	@Override
 	protected void createPoints() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -335,5 +400,57 @@ public abstract class GameObject extends Polygon {
 	 */
 	public void setClosed(boolean closed) {
 		this.closed = closed;
+	}
+
+	/**
+	 * Add a point to the polygon
+	 * 
+	 * @param x
+	 *            The x coordinate of the point
+	 * @param y
+	 *            The y coordinate of the point
+	 */
+	public void addPoint(float x, float y) {
+		if (hasVertex(x, y) && (!allowDups)) {
+			return;
+		}
+
+		ArrayList tempPoints = new ArrayList();
+		for (int i = 0; i < points.length; i++) {
+			tempPoints.add(new Float(points[i]));
+		}
+		tempPoints.add(new Float(x));
+		tempPoints.add(new Float(y));
+		int length = tempPoints.size();
+		points = new float[length];
+		for (int i = 0; i < length; i++) {
+			points[i] = ((Float) tempPoints.get(i)).floatValue();
+		}
+		if (x > maxX) {
+			maxX = x;
+		}
+		if (y > maxY) {
+			maxY = y;
+		}
+		if (x < minX) {
+			minX = x;
+		}
+		if (y < minY) {
+			minY = y;
+		}
+		findCenter();
+		calculateRadius();
+
+		pointsDirty = true;
+	}
+
+	/**
+	 * Indicate if duplicate points are allow
+	 * 
+	 * @param allowDups
+	 *            True if duplicate points are allowed
+	 */
+	public void setAllowDuplicatePoints(boolean allowDups) {
+		this.allowDups = allowDups;
 	}
 }
