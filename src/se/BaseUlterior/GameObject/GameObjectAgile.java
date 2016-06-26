@@ -19,14 +19,13 @@ public abstract class GameObjectAgile extends GameObject {
 	private boolean underImpact = false;
 	protected Impact currentForce = null;
 	protected boolean forceException = false;
-	protected boolean startForceException = false;
 
 	public boolean isForceException() {
 		return forceException;
 	}
 
 	public void resetForceException() {
-		forceException = startForceException;
+		forceException = false;
 	}
 
 	protected float bouncyness;

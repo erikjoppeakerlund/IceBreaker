@@ -28,7 +28,6 @@ public class Grenade extends GameObjectAgile {
 	public Grenade(float[] nodes) {
 		super(nodes, BOUNCYNESS);
 		color = color.black;
-		startForceException = true;
 		explotionShape = new GameObjectSimple(new Circle(getCenterX(), getCenterY(), 200.0f).getPoints());
 	}
 

@@ -10,47 +10,29 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Polygon;
+import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.geom.Transform;
 
+import se.BaseUlterior.GameObject.Override.PolygonCustom;
 import se.BaseUlterior.Geom.Normal;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Physics.Impact;
 
 public abstract class GameObject extends Polygon {
 
-	protected List<Impact> currentImpacts = null;
+	private boolean closed = true;
 
-	public abstract Impact getImpact(GameObjectAgile agileObject);
+	public GameObject() {
+		// TODO Auto-generated constructor stub
+	}
+
+	protected List<Impact> currentImpacts = null;
 
 	protected Color color = Color.darkGray;
 
-	public void setColor(Color color) {
-		this.color = color;
-	}
-
 	protected Vector2 motion = null;
 
-	public abstract void update(GameContainer container, int arg) throws SlickException;
-
-	public abstract void render(GameContainer container, Graphics graphics) throws SlickException;
-
-	// protected List<Normal> normals = null;
-
-	// TOTO: set back to null if it is not needed (or somethin)
-	// to
-	protected Normal normal = null;
-
-	// TODO: rethink!
-	/*
-	 * public float[] getLatestNormal() { return this.latestNormal; }
-	 */
-
-	// public List<Normal> getNormals() {
-	// return normals;
-	// }
-
-	public Normal getInternalNormal() {
-		return this.normal;
-	}
+	// put argument in builder!
 
 	public GameObject(float[] nodes) {
 		super(nodes);
@@ -300,8 +282,58 @@ public abstract class GameObject extends Polygon {
 		return true;
 	}
 
+	@Override
+	protected void createPoints() {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * Apply a transformation and return a new shape. This will not alter the
+	 * current shape but will return the transformed shape.
+	 * 
+	 * @param transform
+	 *            The transform to be applied
+	 * @return The transformed shape.
+	 */
+	public Shape transform(Transform transform) {
+		checkPoints();
+
+		PolygonCustom resultPolygon = new PolygonCustom();
+
+		float result[] = new float[points.length];
+		transform.transform(points, 0, result, 0, points.length / 2);
+		resultPolygon.setPoints(result);
+		resultPolygon.findCenterPublic();
+		resultPolygon.setClosed(closed);
+
+		return resultPolygon;
+	}
+
 	public void setPoints(float[] points) {
 		this.points = points;
 	}
 
+	public abstract void update(GameContainer container, int arg) throws SlickException;
+
+	public abstract void render(GameContainer container, Graphics graphics) throws SlickException;
+
+	public abstract Impact getImpact(GameObjectAgile agileObject);
+
+	/**
+	 * @see org.newdawn.slick.geom.Shape#closed()
+	 */
+	public boolean closed() {
+		return closed;
+	}
+
+	/**
+	 * Indicate if the polygon should be closed
+	 * 
+	 * @param closed
+	 *            True if the polygon should be closed
+	 */
+	public void setClosed(boolean closed) {
+		this.closed = closed;
+	}
 }
