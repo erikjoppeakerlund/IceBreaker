@@ -1,5 +1,8 @@
 package se.BaseUlterior.GameObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -16,6 +19,7 @@ import se.BaseUlterior.Utils.UlteriorUtils;
 public abstract class GameObjectAgile extends GameObject {
 	private boolean underImpact = false;
 	protected boolean forceException = false;
+	protected List<Impact> impactsToRemove = new ArrayList<>();
 
 	public boolean isForceException() {
 		return forceException;
@@ -83,6 +87,10 @@ public abstract class GameObjectAgile extends GameObject {
 		if (currentImpacts.isEmpty()) {
 			underImpact = false;
 		}
+		if (!impactsToRemove.isEmpty()) {
+			currentImpacts.removeAll(impactsToRemove);
+			impactsToRemove.clear();
+		}
 	}
 
 	private void checkImpact() {
@@ -139,6 +147,10 @@ public abstract class GameObjectAgile extends GameObject {
 	@Override
 	public Shape[] subtract(Shape other) {
 		return new Shape[0];
+	}
+
+	public void removeImpact(Impact im) {
+		impactsToRemove.add(im);
 	}
 
 }

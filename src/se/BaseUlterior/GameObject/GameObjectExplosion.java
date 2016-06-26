@@ -7,42 +7,39 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Shape;
 
 import se.BaseUlterior.Physics.Impact;
+import se.BaseUlterior.Physics.ImpactExplosion;
 
 public class GameObjectExplosion extends GameObject {
 
 	protected long timeSinceCreation;
-	protected final long TIME_UNTIL_GONE = 120;
+	protected final long TIME_UNTIL_GONE = 1400;
+	private ImpactExplosion impactExplosion;
 
 	public GameObjectExplosion(float[] nodes, Color color) {
 		super(nodes);
 		this.color = color;
-		// this.timeSinceCreation = System.currentTimeMillis();
-		// TODO Auto-generated constructor stub
+		this.timeSinceCreation = System.currentTimeMillis();
+		impactExplosion = new ImpactExplosion(this, null);
 	}
 
 	public GameObjectExplosion(float[] nodes) {
 		super(nodes);
 		this.color = Color.yellow;
-		// TODO Auto-generated constructor stub
+		impactExplosion = new ImpactExplosion(this, null);
 	}
 
 	public GameObjectExplosion() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public Impact getImpact(GameObjectAgile agileObject) {
-		// return new ImpactForce(this, agileObject, 0.0f, 0.0f);
-		// return new ImpactExplosion(this, agileObject);
-		return null;
+		impactExplosion.setAgileObject(agileObject);
+		return impactExplosion;
 	}
 
 	@Override
 	public void update(GameContainer container, int arg) throws SlickException {
-		// if (System.currentTimeMillis() - timeSinceCreation > TIME_UNTIL_GONE)
-		// {
-		// BreakingPoint.objsToRemove.add(this);
-		// }
+		impactExplosion.updateUntilGone();
 	}
 
 	@Override

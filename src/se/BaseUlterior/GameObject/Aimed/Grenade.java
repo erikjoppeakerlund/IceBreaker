@@ -55,7 +55,8 @@ public class Grenade extends GameObjectAgile {
 			return;
 		}
 		if (System.currentTimeMillis() - wasReleasedAt > TIME_UNTIL_EXPLOTION) {
-
+			BreakingPoint.objsToAdd
+					.add(new GameObjectExplosion(new Circle(getCenterX(), getCenterY(), 200).getPoints()));
 			ArrayList<GameObject> newShapes = new ArrayList<>();
 			for (GameObject target : BreakingPoint.all) {
 				if (target == this || target == this) {
