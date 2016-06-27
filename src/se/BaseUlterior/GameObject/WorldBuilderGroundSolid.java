@@ -5,8 +5,9 @@ import org.newdawn.slick.geom.Shape;
 
 public class WorldBuilderGroundSolid extends WorldBuilderGround {
 
-	public WorldBuilderGroundSolid(float[] nodes, Color color) {
-		super(nodes, color);
+	public WorldBuilderGroundSolid(float[] nodes) {
+		super(nodes);
+		this.color = Color.white;
 	}
 
 	@Override

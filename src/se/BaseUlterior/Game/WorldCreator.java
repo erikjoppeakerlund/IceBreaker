@@ -1,6 +1,5 @@
 package se.BaseUlterior.Game;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
@@ -14,7 +13,7 @@ public class WorldCreator implements DoubleClickListener {
 	private WorldBuilder wb = null;
 
 	public WorldCreator() {
-		wb = new WorldBuilderGround(new float[0], Color.black);
+		wb = new WorldBuilderGround(new float[0]);
 	}
 
 	public void update(GameContainer container, int arg) throws SlickException {

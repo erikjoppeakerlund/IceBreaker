@@ -2,7 +2,6 @@ package se.BaseUlterior.GameObject.Aimed;
 
 import java.util.ArrayList;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Shape;
@@ -70,7 +69,7 @@ public class Grenade extends GameObjectAgile {
 						if (result.length > 0) {
 							for (int i = 0; i < result.length; i++) {
 								Shape go = result[i];
-								GameObject gog = new WorldBuilderGround(go.getPoints(), Color.black);
+								GameObject gog = new WorldBuilderGround(go.getPoints());
 								newShapes.add(gog);
 							}
 							BreakingPoint.objsToRemove.add(target);

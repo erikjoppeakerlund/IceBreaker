@@ -52,6 +52,9 @@ public class BreakingPoint extends BasicGame {
 
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
+		/*
+		 * TODO: ROTATIONS!
+		 */
 		worldCreator = new WorldCreator();
 		doubleClickListeners = new ArrayList<>();
 		doubleClickListeners.add(worldCreator);
@@ -66,20 +69,19 @@ public class BreakingPoint extends BasicGame {
 				0.0f - fat, 0.0f - fat, 0.0f, 0.0f, Constants.CANVAS_WIDTH, 0.0f, Constants.CANVAS_WIDTH,
 				Constants.CANVAS_HEIGHT, 0.0f, Constants.CANVAS_HEIGHT, 0.0f, 0.0f };
 
-		GameObject wall = new WorldBuilderGroundSolid(wallScene, Color.black);
+		GameObject wall = new WorldBuilderGroundSolid(wallScene);
 
 		BreakingPoint.all.add(wall);
 
 		float[] wholeScene = new float[] { 0.0f, 0.0f, 0.0f, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH,
 				Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0.0f };
 
-		generalGravity = new WorldBuiderForce(wholeScene, Constants.GENERAL_GRAVITY, 0.0f, Color.white);
+		generalGravity = new WorldBuiderForce(wholeScene, Constants.GENERAL_GRAVITY, 0.0f, Color.lightGray);
 
 		BreakingPoint.all.add(generalGravity);
 
 		GameObject otherGravity = new WorldBuiderForce(
-				new float[] { 400.0f, 10.0f, 400.0f, 580.0f, 900.0f, 580.0f, 900.0f, 10.0f }, -0.00f, -0.17f,
-				Color.gray);
+				new float[] { 400.0f, 10.0f, 400.0f, 580.0f, 900.0f, 580.0f, 900.0f, 10.0f }, -0.00f, -0.17f);
 
 		BreakingPoint.all.add(otherGravity);
 
@@ -89,7 +91,7 @@ public class BreakingPoint extends BasicGame {
 		BreakingPoint.all.add(randomWater);
 
 		GameObject worldPiece1 = new WorldBuilderGround(
-				new float[] { 5.0f, 400.0f, 250.0f, 620.0f, 495f, 600.0f, 495.0f, 695.0f, 5.0f, 695.0f }, Color.black);
+				new float[] { 5.0f, 400.0f, 250.0f, 620.0f, 495f, 600.0f, 495.0f, 695.0f, 5.0f, 695.0f });
 
 		BreakingPoint.all.add(worldPiece1);
 

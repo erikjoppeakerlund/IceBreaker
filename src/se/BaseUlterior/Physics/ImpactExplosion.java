@@ -17,7 +17,10 @@ public class ImpactExplosion extends Impact {
 
 	@Override
 	public void calculateEffect(Vector2 affectedPiece) {
-
+		/*
+		 * logict for hadnlign Agile Objects that are within the range of the
+		 * explosion.
+		 */
 	}
 
 	public void updateUntilGone() {
