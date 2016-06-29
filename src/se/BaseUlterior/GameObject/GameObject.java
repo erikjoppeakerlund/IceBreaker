@@ -121,8 +121,7 @@ public abstract class GameObject extends Shape {
 	 *            The shape to check if it intersects with this one.
 	 * @return True if the shapes do intersect, false otherwise.
 	 */
-	public Set<Normal> provideMyNormalAfterHitBy(
-			GameObject shape/* , Normal normal */) {
+	public Set<Normal> getMyNormalsAfterHitBy(GameObject shape) {
 
 		Set<Normal> normals = new HashSet<>();
 		/*
@@ -147,6 +146,8 @@ public abstract class GameObject extends Shape {
 		int thatLength = thatPoints.length;
 		double unknownA;
 		double unknownB;
+
+		Normal lastNormal = null;
 
 		if (!closed()) {
 			length -= 2;
@@ -200,14 +201,41 @@ public abstract class GameObject extends Shape {
 				if (unknownA >= 0 && unknownA <= 1 && unknownB >= 0 && unknownB <= 1) {
 
 					result = true;
+					Normal n;
 					if (points.length > i + 3) {
 
-						float[] norm;
-						norm = getSurfaceNormal(new float[] { points[i], points[i + 1] },
+						float[] norm = getSurfaceNormal(new float[] { points[i], points[i + 1] },
 								new float[] { points[i + 2], points[i + 3] });
-						Normal n = new Normal(norm[0], norm[1]);
+						n = new Normal(norm[0], norm[1]);
 
-						normals.add(n);
+						if (!normals.isEmpty()) {
+
+							float aX = (float) (lastNormal.getVal1() * Math.PI);
+							float aY = (float) (lastNormal.getVal2() * Math.PI);
+							float bX = (float) (n.getVal1() * Math.PI);
+							float bY = (float) (n.getVal2() * Math.PI);
+
+							/*
+							 * "Perpendicular Dot Product". Result is the
+							 * "signed" value. If more than zero - the two
+							 * comparing vectors don't intersect and the
+							 * surfaces which result in the vectors shape an
+							 * edge.
+							 */
+
+							if (aX * bY - aY * bX > 0.0f) {
+								// System.out.println(
+								// "we have run into an edge, and I honestly
+								// don't know how i should implement this
+								// state!");
+							} else {
+								normals.add(n);
+								lastNormal = n;
+							}
+						} else {
+							normals.add(n);
+							lastNormal = n;
+						}
 
 					}
 					// break;
@@ -218,6 +246,7 @@ public abstract class GameObject extends Shape {
 			}
 		}
 		return normals;
+
 		// return result;
 	}
 

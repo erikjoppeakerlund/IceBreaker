@@ -72,6 +72,9 @@ public class AimGrenade extends Aim {
 
 	@Override
 	public void primaryReleased() {
+		if (current == null) {
+			return;
+		}
 		float dX = (float) Math.cos(angle) * force / TIMES_LESS_ACTUAL_FORCE;
 		float dY = (float) Math.sin(angle) * force / TIMES_LESS_ACTUAL_FORCE;
 		current.initMotion(new Vector2(dX, dY));

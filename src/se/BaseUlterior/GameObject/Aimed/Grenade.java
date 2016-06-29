@@ -22,14 +22,16 @@ public class Grenade extends GameObjectAgile {
 	private static float BOUNCYNESS = 0.9f;
 	protected long wasReleasedAt;
 
-	protected final long TIME_UNTIL_EXPLOTION = 2500;
+	protected final long TIME_UNTIL_EXPLOTION = 1500;
 
 	protected GameObject explotionShape = null;
+
+	protected float sizeOfExplostion = 350;
 
 	public Grenade(float[] nodes) {
 		super(nodes, BOUNCYNESS);
 		color = color.black;
-		explotionShape = new GameObjectExplosion(new Circle(getCenterX(), getCenterY(), 200).getPoints());
+		explotionShape = new GameObjectExplosion(new Circle(getCenterX(), getCenterY(), sizeOfExplostion).getPoints());
 	}
 
 	public void initMotion(Vector2 motion) {
@@ -55,7 +57,7 @@ public class Grenade extends GameObjectAgile {
 		}
 		if (System.currentTimeMillis() - wasReleasedAt > TIME_UNTIL_EXPLOTION) {
 			BreakingPoint.objsToAdd
-					.add(new GameObjectExplosion(new Circle(getCenterX(), getCenterY(), 200).getPoints()));
+					.add(new GameObjectExplosion(new Circle(getCenterX(), getCenterY(), sizeOfExplostion).getPoints()));
 			ArrayList<GameObject> newShapes = new ArrayList<>();
 			for (GameObject target : BreakingPoint.all) {
 				if (target == this || target == this) {

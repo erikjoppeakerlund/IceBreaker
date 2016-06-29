@@ -15,7 +15,7 @@ public class ImpactBounce extends Impact {
 
 	// We don't need the normal parameter here!
 	public ImpactBounce(GameObject origin, GameObjectAgile go) {
-		super(origin, /* effect, */go);
+		super(origin, go);
 		normals = new HashSet<Normal>();
 	}
 
@@ -24,8 +24,7 @@ public class ImpactBounce extends Impact {
 
 		other.addForceException();
 
-		normals = origin.provideMyNormalAfterHitBy(other);
-
+		normals = origin.getMyNormalsAfterHitBy(other);
 		if (normals.isEmpty()) {
 			return;
 		}
@@ -44,7 +43,6 @@ public class ImpactBounce extends Impact {
 		}
 
 		N.normalise();
-
 		/*
 		 * using the algorithm: V´ = V - (2*(V . N)) * N
 		 * 

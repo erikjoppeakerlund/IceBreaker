@@ -62,7 +62,7 @@ public class BreakingPoint extends BasicGame {
 		BreakingPoint.objsToAdd = new ArrayList<>();
 		objsToRemove = new ArrayList<>();
 
-		float fat = 50.0f;
+		float fat = 150.0f;
 
 		float[] wallScene = new float[] { 0.0f - fat, 0.0f - fat, Constants.CANVAS_WIDTH + fat, 0.0f - fat,
 				Constants.CANVAS_WIDTH + fat, Constants.CANVAS_HEIGHT + fat, 0.0f - fat, Constants.CANVAS_HEIGHT + fat,

@@ -12,7 +12,6 @@ import se.BaseUlterior.Physics.ImpactExplosion;
 public class GameObjectExplosion extends GameObject {
 
 	protected long timeSinceCreation;
-	protected final long TIME_UNTIL_GONE = 1400;
 	private ImpactExplosion impactExplosion;
 
 	public GameObjectExplosion(float[] nodes, Color color) {
