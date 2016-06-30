@@ -33,4 +33,10 @@ public class GeneralInputHandler implements ActionListenable {
 
 	}
 
+	@Override
+	public void wasMouseWheelMoved(int change) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

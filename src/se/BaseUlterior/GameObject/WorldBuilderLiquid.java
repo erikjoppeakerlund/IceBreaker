@@ -13,6 +13,11 @@ public class WorldBuilderLiquid extends WorldBuilder {
 
 	protected float frictionAmount;
 
+	public WorldBuilderLiquid(float[] nodes) {
+		super(nodes);
+		this.density = Density.WATER;
+	}
+
 	public WorldBuilderLiquid(float[] nodes, Density density) {
 		super(nodes);
 		this.density = density;
@@ -52,6 +57,11 @@ public class WorldBuilderLiquid extends WorldBuilder {
 	@Override
 	public Shape[] subtract(Shape other) {
 		return new Shape[0];
+	}
+
+	public void setDensity(Density d) {
+		this.density = d;
+		init();
 	}
 
 }

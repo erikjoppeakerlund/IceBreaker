@@ -40,4 +40,10 @@ public class ActionListenablers {
 		}
 	}
 
+	public void wasMouseWheelMoved(int change) {
+		for (ActionListenable al : listeners) {
+			al.wasMouseWheelMoved(change);
+		}
+	}
+
 }

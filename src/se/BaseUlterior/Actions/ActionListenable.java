@@ -9,4 +9,6 @@ public interface ActionListenable {
 	void wasWasKeyPressed(int button, char c);
 
 	void wasWasKeyReleased(int button, char c);
+
+	void wasMouseWheelMoved(int change);
 }

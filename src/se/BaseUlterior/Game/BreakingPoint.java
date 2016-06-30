@@ -162,4 +162,11 @@ public class BreakingPoint extends BasicGame {
 		actions.wasKeyReleased(key, c);
 	}
 
+	@Override
+	public void mouseWheelMoved(int change) {
+
+		actions.wasMouseWheelMoved(change);
+
+	}
+
 }
