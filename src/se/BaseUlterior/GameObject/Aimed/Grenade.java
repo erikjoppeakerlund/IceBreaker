@@ -26,7 +26,7 @@ public class Grenade extends GameObjectAgile {
 
 	protected GameObject explotionShape = null;
 
-	protected float sizeOfExplostion = 90;
+	protected float sizeOfExplostion = 210;
 
 	public Grenade(float[] nodes) {
 		super(nodes, BOUNCYNESS);

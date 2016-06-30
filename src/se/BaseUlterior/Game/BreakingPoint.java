@@ -11,6 +11,9 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 
+import se.BaseUlterior.Actions.ActionListenable;
+import se.BaseUlterior.Actions.ActionListenablers;
+import se.BaseUlterior.Actions.WorldCreator;
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectSprite;
@@ -19,18 +22,20 @@ import se.BaseUlterior.GameObject.WorldBuilderGround;
 import se.BaseUlterior.GameObject.WorldBuilderGroundSolid;
 import se.BaseUlterior.GameObject.WorldBuilderLiquid;
 import se.BaseUlterior.Physics.Density;
-import se.BaseUlterior.Utils.DoubleClickListener;
 
 public class BreakingPoint extends BasicGame {
+
+	ActionListenablers actions = null;
 
 	Circle circ = new Circle(20, 20, 20);
 
 	public static WorldBuiderForce generalGravity = null;
 
-	private boolean insertMode = true;
+	public static boolean insertMode = true;
 
 	public BreakingPoint(String title) {
 		super(title);
+
 	}
 
 	public static List<GameObject> all = null;
@@ -41,7 +46,7 @@ public class BreakingPoint extends BasicGame {
 
 	private WorldCreator worldCreator = null;
 
-	private List<DoubleClickListener> doubleClickListeners;
+	private List<ActionListenable> doubleClickListeners;
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
@@ -55,12 +60,13 @@ public class BreakingPoint extends BasicGame {
 		/*
 		 * TODO: ROTATIONS!
 		 */
-		worldCreator = new WorldCreator();
 		doubleClickListeners = new ArrayList<>();
 		doubleClickListeners.add(worldCreator);
 		BreakingPoint.all = new ArrayList<>();
 		BreakingPoint.objsToAdd = new ArrayList<>();
 		objsToRemove = new ArrayList<>();
+
+		actions = new ActionListenablers();
 
 		float fat = 150.0f;
 
@@ -99,22 +105,21 @@ public class BreakingPoint extends BasicGame {
 
 		BreakingPoint.all.add(sprite);
 
+		WorldCreator wc = new WorldCreator();
+
 		// GameObject randomBouncyObject = new GameObjectAgile(new Circle(120,
 		// 20, 42).getPoints(), 1.0f, Color.lightGray);
 		//
 		// BreakingPoint.all.add(randomBouncyObject);
-
 	}
 
 	@Override
 	public void update(GameContainer container, int arg) throws SlickException {
 
-		if (insertMode) {
-			// return;
-		}
-
-		for (GameObject go : BreakingPoint.all) {
-			go.update(container, arg);
+		if (!insertMode) {
+			for (GameObject go : BreakingPoint.all) {
+				go.update(container, arg);
+			}
 		}
 		if (!objsToRemove.isEmpty()) {
 			all.removeAll(objsToRemove);
@@ -138,14 +143,23 @@ public class BreakingPoint extends BasicGame {
 
 	@Override
 	public void mouseClicked(int button, int x, int y, int clickCount) {
-		// if (clickCount == 1) {
-		// message = "Single Click: "+button+" "+x+","+y;
-		// }
-		// if (clickCount == 2) {
-		// message = "Double Click: "+button+" "+x+","+y;
-		// }
-		for (DoubleClickListener dbcl : doubleClickListeners) {
-			dbcl.wasDoubleClicked(button, x, y);
+		if (clickCount == 1) {
+			actions.wasMouseClickedOnce(button, x, y);
+		}
+		if (clickCount == 2) {
+			actions.wasMouseClickedTwice(button, x, y);
 		}
 	}
+
+	@Override
+	public void keyPressed(int key, char c) {
+		actions.wasKeyPressed(key, c);
+
+	}
+
+	@Override
+	public void keyReleased(int key, char c) {
+		actions.wasKeyReleased(key, c);
+	}
+
 }
