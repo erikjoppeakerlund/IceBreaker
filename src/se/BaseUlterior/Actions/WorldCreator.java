@@ -17,7 +17,9 @@ public class WorldCreator implements ActionListenable {
 
 	@Override
 	public void wasDoubleClicked(int button, int x, int y) {
-
+		GameObject wbNew = new WorldBuilderGround(new float[0]);
+		BreakingPoint.objsToAdd.add(wbNew);
+		wb = wbNew;
 	}
 
 	@Override
