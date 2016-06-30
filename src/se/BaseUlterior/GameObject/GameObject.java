@@ -121,7 +121,7 @@ public abstract class GameObject extends Shape {
 	 *            The shape to check if it intersects with this one.
 	 * @return True if the shapes do intersect, false otherwise.
 	 */
-	public Set<Normal> getMyNormalsAfterHitBy(GameObject shape) {
+	public Set<Normal> getMyNormalsAfterHitBy(GameObject shape, boolean runTrough) {
 
 		Set<Normal> normals = new HashSet<>();
 		/*
@@ -156,11 +156,14 @@ public abstract class GameObject extends Shape {
 			thatLength -= 2;
 		}
 
-		float thatDx = shape.motion.x;
-		float thatDy = shape.motion.y;
+		GameObject own = !runTrough ? this : shape;
+		GameObject other = !runTrough ? shape : this;
 
-		float dX = motion.x;
-		float dY = motion.y;
+		float thatDx = other.motion.x;
+		float thatDy = other.motion.y;
+
+		float dX = own.motion.x;
+		float dY = own.motion.y;
 
 		// x1 = thatPoints[j]
 		// x2 = thatPoints[j + 2]
@@ -223,7 +226,10 @@ public abstract class GameObject extends Shape {
 							 * edge.
 							 */
 
-							if (aX * bY - aY * bX > 0.0f) {
+							if (aX * bY - aY * bX > 0.0f && !runTrough) {
+
+								return shape.getMyNormalsAfterHitBy(this, true);
+
 								// System.out.println(
 								// "we have run into an edge, and I honestly
 								// don't know how i should implement this

@@ -8,9 +8,9 @@ import se.BaseUlterior.Geom.Vector2;
 public class ImpactExplosion extends Impact {
 
 	private long timeSinceExplotion;
-	private long TIME_UNTIL_GONE = 200;
+	private long TIME_UNTIL_GONE = 500;
 
-	private final float MAX_IMPACT = 1.0f;
+	private final float MAX_IMPACT = 0.3f;
 
 	public ImpactExplosion(GameObject origin, GameObjectAgile other) {
 		super(origin, other);

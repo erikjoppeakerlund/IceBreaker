@@ -24,7 +24,7 @@ public class ImpactBounce extends Impact {
 
 		other.addForceException();
 
-		normals = origin.getMyNormalsAfterHitBy(other);
+		normals = origin.getMyNormalsAfterHitBy(other, false);
 		if (normals.isEmpty()) {
 			return;
 		}
