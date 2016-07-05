@@ -17,6 +17,7 @@ public class WorldBuilderGround extends WorldBuilder {
 
 	@Override
 	public Impact getImpact(GameObjectAgile piece) {
+		// piece.addForceException();
 		return new ImpactBounce(this, piece);
 	}
 

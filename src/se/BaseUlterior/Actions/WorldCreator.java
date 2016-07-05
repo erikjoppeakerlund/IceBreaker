@@ -79,7 +79,6 @@ public class WorldCreator implements ActionListenable {
 		}
 		BreakingPoint.objsToAdd.add(newCurrentInstance);
 		currentBuilder = newCurrentInstance;
-		System.out.println("hej");
 	}
 
 	@Override

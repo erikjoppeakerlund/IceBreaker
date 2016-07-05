@@ -12,9 +12,9 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
 
-import se.BaseUlterior.Geom.Normal;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Physics.Impact;
+import se.BaseUlterior.Utils.UlteriorUtils;
 
 public abstract class GameObject extends Shape {
 
@@ -26,6 +26,8 @@ public abstract class GameObject extends Shape {
 	protected Color color = Color.darkGray;
 
 	protected Vector2 motion = null;
+
+	public Vector2 lastNormal = null;
 
 	private void init() {
 		currentImpacts = new ArrayList<>();
@@ -121,9 +123,9 @@ public abstract class GameObject extends Shape {
 	 *            The shape to check if it intersects with this one.
 	 * @return True if the shapes do intersect, false otherwise.
 	 */
-	public Set<Normal> getMyNormalsAfterHitBy(GameObject shape, boolean runTrough) {
+	public Set<Vector2> getMyNormalsAfterHitBy(GameObject shape) {
 
-		Set<Normal> normals = new HashSet<>();
+		Set<Vector2> normals = new HashSet<>();
 		/*
 		 * Intersection formula used: (x4 - x3)(y1 - y3) - (y4 - y3)(x1 - x3) UA
 		 * = --------------------------------------- (y4 - y3)(x2 - x1) - (x4 -
@@ -147,7 +149,7 @@ public abstract class GameObject extends Shape {
 		double unknownA;
 		double unknownB;
 
-		Normal lastNormal = null;
+		Vector2 lastNormal = null;
 
 		if (!closed()) {
 			length -= 2;
@@ -156,14 +158,11 @@ public abstract class GameObject extends Shape {
 			thatLength -= 2;
 		}
 
-		GameObject own = !runTrough ? this : shape;
-		GameObject other = !runTrough ? shape : this;
+		float thatDx = shape.motion.x;
+		float thatDy = shape.motion.y;
 
-		float thatDx = other.motion.x;
-		float thatDy = other.motion.y;
-
-		float dX = own.motion.x;
-		float dY = own.motion.y;
+		float dX = motion.x;
+		float dY = motion.y;
 
 		// x1 = thatPoints[j]
 		// x2 = thatPoints[j + 2]
@@ -204,46 +203,35 @@ public abstract class GameObject extends Shape {
 				if (unknownA >= 0 && unknownA <= 1 && unknownB >= 0 && unknownB <= 1) {
 
 					result = true;
-					Normal n;
-					if (points.length > i + 3) {
+					Vector2 newestNormal;
 
-						float[] norm = getSurfaceNormal(new float[] { points[i], points[i + 1] },
-								new float[] { points[i + 2], points[i + 3] });
-						n = new Normal(norm[0], norm[1]);
+					float[] norm = getSurfaceNormal(new float[] { points[i], points[i + 1] },
+							new float[] { points[iNext], points[iNext + 1] });
+					newestNormal = new Vector2(norm[0], norm[1]);
 
-						if (!normals.isEmpty()) {
+					if (!normals.isEmpty()) {
 
-							float aX = (float) (lastNormal.getVal1() * Math.PI);
-							float aY = (float) (lastNormal.getVal2() * Math.PI);
-							float bX = (float) (n.getVal1() * Math.PI);
-							float bY = (float) (n.getVal2() * Math.PI);
+						float aX = (float) (lastNormal.getX() * Math.PI);
+						float aY = (float) (lastNormal.getY() * Math.PI);
+						float bX = (float) (newestNormal.getX() * Math.PI);
+						float bY = (float) (newestNormal.getY() * Math.PI);
 
-							/*
-							 * "Perpendicular Dot Product". Result is the
-							 * "signed" value. If more than zero - the two
-							 * comparing vectors don't intersect and the
-							 * surfaces which result in the vectors shape an
-							 * edge.
-							 */
+						/*
+						 * "Perpendicular Dot Product". Result is the "signed"
+						 * value. If more than zero - the two comparing vectors
+						 * don't intersect and the surfaces which result in the
+						 * vectors shape an edge.
+						 */
 
-							if (aX * bY - aY * bX > 0.0f && !runTrough) {
+						if (aY * bX - aX * bY > 0.0f) {
 
-								return shape.getMyNormalsAfterHitBy(this, true);
-
-								// System.out.println(
-								// "we have run into an edge, and I honestly
-								// don't know how i should implement this
-								// state!");
-							} else {
-								normals.add(n);
-								lastNormal = n;
-							}
-						} else {
-							normals.add(n);
-							lastNormal = n;
 						}
-
 					}
+					UlteriorUtils.createVisualPointAt(points[i], points[i + 1]);
+					UlteriorUtils.createVisualPointAt(points[iNext], points[iNext + 1]);
+
+					normals.add(newestNormal);
+					lastNormal = newestNormal;
 					// break;
 				}
 			}

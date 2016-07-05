@@ -6,17 +6,15 @@ import java.util.Set;
 
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectAgile;
-import se.BaseUlterior.Geom.Normal;
 import se.BaseUlterior.Geom.Vector2;
 
 public class ImpactBounce extends Impact {
 
-	protected Set<Normal> normals = null;
+	protected Set<Vector2> normals = null;
 
-	// We don't need the normal parameter here!
 	public ImpactBounce(GameObject origin, GameObjectAgile go) {
 		super(origin, go);
-		normals = new HashSet<Normal>();
+		normals = new HashSet<Vector2>();
 	}
 
 	@Override
@@ -24,20 +22,21 @@ public class ImpactBounce extends Impact {
 
 		other.addForceException();
 
-		normals = origin.getMyNormalsAfterHitBy(other, false);
+		normals = origin.getMyNormalsAfterHitBy(other);
+
 		if (normals.isEmpty()) {
 			return;
 		}
 
-		Iterator<Normal> ni = normals.iterator();
+		Iterator<Vector2> ni = normals.iterator();
 		Vector2 N = null;
 		int i = 0;
 		while (ni.hasNext()) {
-			Normal no = ni.next();
+			Vector2 no = ni.next();
 			if (i < 1) {
-				N = new Vector2(no.getVal1(), no.getVal2());
+				N = no;
 			} else {
-				N.add(no.getVal1(), no.getVal2());
+				N.add(no);
 			}
 			i++;
 		}

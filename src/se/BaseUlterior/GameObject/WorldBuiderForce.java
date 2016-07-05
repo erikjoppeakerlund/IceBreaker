@@ -19,6 +19,11 @@ public class WorldBuiderForce extends WorldBuilder {
 		this.color = Color.gray;
 	}
 
+	public WorldBuiderForce(float[] nodes, Color color) {
+		super(nodes);
+		this.color = color;
+	}
+
 	public WorldBuiderForce(float[] nodes, float gravityX, float gravityY) {
 		super(nodes);
 		this.gravityX = gravityX;

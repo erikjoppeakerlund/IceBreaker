@@ -18,10 +18,7 @@ import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectSprite;
 import se.BaseUlterior.GameObject.WorldBuiderForce;
-import se.BaseUlterior.GameObject.WorldBuilderGround;
 import se.BaseUlterior.GameObject.WorldBuilderGroundSolid;
-import se.BaseUlterior.GameObject.WorldBuilderLiquid;
-import se.BaseUlterior.Physics.Density;
 
 public class BreakingPoint extends BasicGame {
 
@@ -86,20 +83,23 @@ public class BreakingPoint extends BasicGame {
 
 		BreakingPoint.all.add(generalGravity);
 
-		GameObject otherGravity = new WorldBuiderForce(
-				new float[] { 400.0f, 10.0f, 400.0f, 580.0f, 900.0f, 580.0f, 900.0f, 10.0f }, -0.00f, -0.17f);
+		// GameObject otherGravity = new WorldBuiderForce(
+		// new float[] { 400.0f, 10.0f, 400.0f, 580.0f, 900.0f, 580.0f, 900.0f,
+		// 10.0f }, -0.00f, -0.17f);
+		//
+		// BreakingPoint.all.add(otherGravity);
 
-		BreakingPoint.all.add(otherGravity);
+		// GameObject randomWater = new WorldBuilderLiquid(
+		//
+		// new float[] { 170.0f, 100.0f, 700.0f, 190.0f, 620.0f, 310.0f },
+		// Density.SOIL);
+		// BreakingPoint.all.add(randomWater);
 
-		GameObject randomWater = new WorldBuilderLiquid(
-
-				new float[] { 170.0f, 100.0f, 700.0f, 190.0f, 620.0f, 310.0f }, Density.SOIL);
-		BreakingPoint.all.add(randomWater);
-
-		GameObject worldPiece1 = new WorldBuilderGround(
-				new float[] { 5.0f, 400.0f, 250.0f, 620.0f, 495f, 600.0f, 495.0f, 695.0f, 5.0f, 695.0f });
-
-		BreakingPoint.all.add(worldPiece1);
+		// GameObject worldPiece1 = new WorldBuilderGround(
+		// new float[] { 5.0f, 400.0f, 250.0f, 620.0f, 495f, 600.0f, 495.0f,
+		// 695.0f, 5.0f, 695.0f });
+		//
+		// BreakingPoint.all.add(worldPiece1);
 
 		GameObject sprite = new GameObjectSprite(new Circle(910, 190, Constants.SPRITE_RADIUS).getPoints(), 0.0f);
 
