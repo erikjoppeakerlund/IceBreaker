@@ -12,11 +12,11 @@ public class WorldBuilderGround extends WorldBuilder {
 	// this thing with color int the constructor was just for testing!
 	public WorldBuilderGround(float[] nodes) {
 		super(nodes);
-		this.color = Color.cyan;
+		this.color = Color.red;
 	}
 
 	@Override
-	public Impact getImpact(GameObjectAgile piece) {
+	public Impact getImpact(GameObjectFalling piece) {
 		// piece.addForceException();
 		return new ImpactBounce(this, piece);
 	}
@@ -29,6 +29,8 @@ public class WorldBuilderGround extends WorldBuilder {
 
 	@Override
 	public void update(GameContainer container, int arg) throws SlickException {
+		// TODO Auto-generated method stub
+
 	}
 
 }

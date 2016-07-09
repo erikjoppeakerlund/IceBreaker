@@ -1,30 +1,27 @@
 package se.BaseUlterior.Physics;
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
 import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.GameObjectAgile;
+import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.Geom.Vector2;
 
 public class ImpactBounce extends Impact {
 
 	protected Set<Vector2> normals = null;
 
-	public ImpactBounce(GameObject origin, GameObjectAgile go) {
+	public ImpactBounce(GameObject origin, GameObjectFalling go) {
 		super(origin, go);
-		normals = new HashSet<Vector2>();
-	}
-
-	@Override
-	public void calculateEffect(Vector2 affectedPiece) {
-
-		other.addForceException();
 
 		normals = origin.getMyNormalsAfterHitBy(other);
 
-		if (normals.isEmpty()) {
+	}
+
+	@Override
+	public void calculateIntersects() {
+
+		if (other.noForce || normals.isEmpty()) {
 			return;
 		}
 
@@ -55,5 +52,23 @@ public class ImpactBounce extends Impact {
 
 		N.scale(dot);
 		affectedPiece.sub(N);
+	}
+
+	@Override
+	protected void calculateContains() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onDestroy() {
+		other.noForce = false;
+
+	}
+
+	@Override
+	public void notTouchingButWithin() {
+		other.noForce = false;
+		// other.skipImpact = false;
 	}
 }

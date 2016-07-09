@@ -16,34 +16,34 @@ import se.BaseUlterior.Physics.ImpactBounce;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
 //next thins: enable the user only to use the keyboard!
-public abstract class GameObjectAgile extends GameObject {
+public abstract class GameObjectFalling extends GameObject {
 	private boolean underImpact = false;
-	protected boolean forceException = false;
+	// protected boolean forceException = false;
 	protected List<Impact> impactsToRemove = new ArrayList<>();
 
-	public boolean isForceException() {
-		return forceException;
-	}
-
-	public void resetForceException() {
-		forceException = false;
-	}
+	// public boolean isForceException() {
+	// return forceException;
+	// }
+	//
+	// public void resetForceException() {
+	// forceException = false;
+	// }
 
 	protected float bouncyness;
 
 	protected Color color;
 
-	public GameObjectAgile(float[] nodes, float bouncyness) {
+	public GameObjectFalling(float[] nodes, float bouncyness) {
 		super(nodes);
 		this.bouncyness = bouncyness;
-		resetForceException();
+		// resetForceException();
 	}
 
-	public GameObjectAgile(float[] nodes, float bouncyness, Color color, Vector2 startMovement) {
+	public GameObjectFalling(float[] nodes, float bouncyness, Color color, Vector2 startMovement) {
 		super(nodes);
 		motion = startMovement;
 		this.bouncyness = bouncyness;
-		resetForceException();
+		// resetForceException();
 	}
 
 	public float getBouncyness() {
@@ -63,7 +63,7 @@ public abstract class GameObjectAgile extends GameObject {
 
 	private void runImpact() {
 		for (Impact im : currentImpacts) {
-			im.calculateEffect(motion);
+			im.checkCalculate();
 		}
 
 		int[] removeIndexes = new int[currentImpacts.size()];
@@ -71,16 +71,15 @@ public abstract class GameObjectAgile extends GameObject {
 
 		for (Impact im : currentImpacts) {
 
-			if (!im.getOrigin().containsGameObject(this)) {
+			if (!im.getTrigger().contains(this)) {
 				removeIndexes[i] = 1;
 			} else {
-				// im.calculateEffect(motion);
 				i++;
 			}
 		}
 		for (int j = 0; j < removeIndexes.length; j++) {
 			if (removeIndexes[j] == 1) {
-				currentImpacts.get(j).getGameObjectAgile().resetForceException();
+				currentImpacts.get(j).onDestroy();
 				currentImpacts.remove(j);
 			}
 		}
@@ -101,10 +100,10 @@ public abstract class GameObjectAgile extends GameObject {
 			}
 
 			if (UlteriorUtils.isWithinRange(go, this)) {
-				if (go.intersectsGameobject(this) || go.containsGameObject(this)) {
+				if (go.intersects(this) || go.contains(this)) {
 					boolean contains = false;
 					for (Impact im : currentImpacts) {
-						if (im.getOrigin() == go) {
+						if (im.getTrigger() == go || im.getAffected().noForce) {
 							contains = true;
 							break;
 						}
@@ -124,7 +123,7 @@ public abstract class GameObjectAgile extends GameObject {
 	}
 
 	@Override
-	public Impact getImpact(GameObjectAgile other) {
+	public Impact getImpact(GameObjectFalling other) {
 		return new ImpactBounce(this, other);
 	}
 
@@ -139,10 +138,10 @@ public abstract class GameObjectAgile extends GameObject {
 		currentImpacts.add(im);
 	}
 
-	public void addForceException() {
-		forceException = true;
-
-	}
+	// public void addForceException() {
+	// forceException = true;
+	//
+	// }
 
 	@Override
 	public Shape[] subtract(Shape other) {

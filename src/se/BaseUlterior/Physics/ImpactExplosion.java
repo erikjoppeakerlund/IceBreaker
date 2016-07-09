@@ -2,7 +2,7 @@ package se.BaseUlterior.Physics;
 
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.GameObjectAgile;
+import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.Geom.Vector2;
 
 public class ImpactExplosion extends Impact {
@@ -12,13 +12,13 @@ public class ImpactExplosion extends Impact {
 
 	private final float MAX_IMPACT = 0.3f;
 
-	public ImpactExplosion(GameObject origin, GameObjectAgile other) {
+	public ImpactExplosion(GameObject origin, GameObjectFalling other) {
 		super(origin, other);
 		timeSinceExplotion = System.currentTimeMillis();
 	}
 
 	@Override
-	public void calculateEffect(Vector2 affectedPiece) {
+	public void calculateIntersects() {
 
 		float expX = origin.getCenterX();
 		float expY = origin.getCenterY();
@@ -51,7 +51,31 @@ public class ImpactExplosion extends Impact {
 		}
 	}
 
-	public void setAgileObject(GameObjectAgile agileObject) {
+	public void setAgileObject(GameObjectFalling agileObject) {
 		this.other = agileObject;
+	}
+
+	@Override
+	protected void calculateContains() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void notTouchingButWithin() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void disappear() {
+		if (other != null) {
+			other.removeImpact(this);
+		}
 	}
 }

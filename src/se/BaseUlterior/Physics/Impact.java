@@ -1,34 +1,53 @@
 package se.BaseUlterior.Physics;
 
 import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.GameObjectAgile;
+import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.Geom.Vector2;
 
 public abstract class Impact {
 
 	protected float effect;
 	protected GameObject origin;
-	protected GameObjectAgile other;
+	protected GameObjectFalling other;
+	protected Vector2 affectedPiece;
 
-	public Impact(GameObject origin, float effect, GameObjectAgile other) {
+	public Impact(GameObject origin, float effect, GameObjectFalling other) {
 		this.origin = origin;
 		this.effect = effect;
 		this.other = other;
+		affectedPiece = other.getMotion();
 	}
 
-	public Impact(GameObject origin, GameObjectAgile other) {
+	public Impact(GameObject origin, GameObjectFalling other) {
 		this.origin = origin;
 		this.effect = 2.0f;
 		this.other = other;
+		affectedPiece = other.getMotion();
 	}
 
-	public GameObject getOrigin() {
+	public GameObject getTrigger() {
 		return origin;
 	}
 
-	public GameObjectAgile getGameObjectAgile() {
+	public GameObjectFalling getAffected() {
 		return other;
 	}
 
-	public abstract void calculateEffect(Vector2 affectedPiece);
+	public void checkCalculate() {
+		if (origin.intersectsGameobject(other)) {
+			calculateIntersects();
+		}
+		if (origin.containsGameObject(other)) {
+			calculateIntersects();
+		}
+	}
+
+	protected abstract void calculateIntersects();
+
+	protected abstract void calculateContains();
+
+	public abstract void onDestroy();
+
+	public abstract void notTouchingButWithin();
+
 }

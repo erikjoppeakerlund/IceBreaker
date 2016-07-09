@@ -18,7 +18,6 @@ import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectSprite;
 import se.BaseUlterior.GameObject.WorldBuiderForce;
-import se.BaseUlterior.GameObject.WorldBuilderGroundSolid;
 
 public class BreakingPoint extends BasicGame {
 
@@ -65,21 +64,24 @@ public class BreakingPoint extends BasicGame {
 
 		actions = new ActionListenablers();
 
-		float fat = 150.0f;
-
-		float[] wallScene = new float[] { 0.0f - fat, 0.0f - fat, Constants.CANVAS_WIDTH + fat, 0.0f - fat,
-				Constants.CANVAS_WIDTH + fat, Constants.CANVAS_HEIGHT + fat, 0.0f - fat, Constants.CANVAS_HEIGHT + fat,
-				0.0f - fat, 0.0f - fat, 0.0f, 0.0f, Constants.CANVAS_WIDTH, 0.0f, Constants.CANVAS_WIDTH,
-				Constants.CANVAS_HEIGHT, 0.0f, Constants.CANVAS_HEIGHT, 0.0f, 0.0f };
-
-		GameObject wall = new WorldBuilderGroundSolid(wallScene);
-
-		BreakingPoint.all.add(wall);
+		// float fat = 150.0f;
+		//
+		// float[] wallScene = new float[] { 0.0f - fat, 0.0f - fat,
+		// Constants.CANVAS_WIDTH + fat, 0.0f - fat,
+		// Constants.CANVAS_WIDTH + fat, Constants.CANVAS_HEIGHT + fat, 0.0f -
+		// fat, Constants.CANVAS_HEIGHT + fat,
+		// 0.0f - fat, 0.0f - fat, 0.0f, 0.0f, Constants.CANVAS_WIDTH, 0.0f,
+		// Constants.CANVAS_WIDTH,
+		// Constants.CANVAS_HEIGHT, 0.0f, Constants.CANVAS_HEIGHT, 0.0f, 0.0f };
+		//
+		// GameObject wall = new WorldBuilderGroundSolid(wallScene);
+		//
+		// BreakingPoint.all.add(wall);
 
 		float[] wholeScene = new float[] { 0.0f, 0.0f, 0.0f, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH,
 				Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0.0f };
 
-		generalGravity = new WorldBuiderForce(wholeScene, Constants.GENERAL_GRAVITY, 0.0f, Color.lightGray);
+		generalGravity = new WorldBuiderForce(wholeScene, Constants.GENERAL_GRAVITY, 0.0f, Color.black);
 
 		BreakingPoint.all.add(generalGravity);
 
@@ -101,7 +103,7 @@ public class BreakingPoint extends BasicGame {
 		//
 		// BreakingPoint.all.add(worldPiece1);
 
-		GameObject sprite = new GameObjectSprite(new Circle(910, 190, Constants.SPRITE_RADIUS).getPoints(), 0.0f);
+		GameObject sprite = new GameObjectSprite(new Circle(910, 190, Constants.SPRITE_RADIUS).getPoints(), 0.2f);
 
 		BreakingPoint.all.add(sprite);
 

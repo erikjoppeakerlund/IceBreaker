@@ -1,6 +1,7 @@
 package se.BaseUlterior.GameObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,7 +15,6 @@ import org.newdawn.slick.geom.Transform;
 
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Physics.Impact;
-import se.BaseUlterior.Utils.UlteriorUtils;
 
 public abstract class GameObject extends Shape {
 
@@ -28,6 +28,10 @@ public abstract class GameObject extends Shape {
 	protected Vector2 motion = null;
 
 	public Vector2 lastNormal = null;
+
+	public boolean noForce = false;
+
+	// public boolean rundDuringConatain = false;
 
 	private void init() {
 		currentImpacts = new ArrayList<>();
@@ -158,11 +162,13 @@ public abstract class GameObject extends Shape {
 			thatLength -= 2;
 		}
 
-		float thatDx = shape.motion.x;
-		float thatDy = shape.motion.y;
+		float thatDx = 0;
+		float thatDy = 0;
 
-		float dX = motion.x;
-		float dY = motion.y;
+		float dX = 0;
+		float dY = 0;
+
+		boolean onEdge;
 
 		// x1 = thatPoints[j]
 		// x2 = thatPoints[j + 2]
@@ -208,7 +214,6 @@ public abstract class GameObject extends Shape {
 					float[] norm = getSurfaceNormal(new float[] { points[i], points[i + 1] },
 							new float[] { points[iNext], points[iNext + 1] });
 					newestNormal = new Vector2(norm[0], norm[1]);
-
 					if (!normals.isEmpty()) {
 
 						float aX = (float) (lastNormal.getX() * Math.PI);
@@ -222,16 +227,20 @@ public abstract class GameObject extends Shape {
 						 * don't intersect and the surfaces which result in the
 						 * vectors shape an edge.
 						 */
-
 						if (aY * bX - aX * bY > 0.0f) {
-
+							shape.noForce = true;
+							return Collections.emptySet();
 						}
+
 					}
-					UlteriorUtils.createVisualPointAt(points[i], points[i + 1]);
-					UlteriorUtils.createVisualPointAt(points[iNext], points[iNext + 1]);
+					// UlteriorUtils.createVisualPointAt(points[i], points[i +
+					// 1]);
+					// UlteriorUtils.createVisualPointAt(points[iNext],
+					// points[iNext + 1]);
 
 					normals.add(newestNormal);
 					lastNormal = newestNormal;
+
 					// break;
 				}
 			}
@@ -239,6 +248,7 @@ public abstract class GameObject extends Shape {
 				// break;
 			}
 		}
+		shape.noForce = false;
 		return normals;
 
 		// return result;
@@ -395,7 +405,7 @@ public abstract class GameObject extends Shape {
 
 	public abstract void render(GameContainer container, Graphics graphics) throws SlickException;
 
-	public abstract Impact getImpact(GameObjectAgile agileObject);
+	public abstract Impact getImpact(GameObjectFalling agileObject);
 
 	/**
 	 * @see org.newdawn.slick.geom.Shape#closed()

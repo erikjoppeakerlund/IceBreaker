@@ -8,13 +8,13 @@ import org.newdawn.slick.geom.Shape;
 
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.GameObjectAgile;
 import se.BaseUlterior.GameObject.GameObjectExplosion;
+import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.GameObject.WorldBuilderGround;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
-public class Grenade extends GameObjectAgile {
+public class Grenade extends GameObjectFalling {
 
 	public static final float GRENADE_SIZE = 27.0f;
 	private boolean isReleased = false;
@@ -30,25 +30,26 @@ public class Grenade extends GameObjectAgile {
 
 	public Grenade(float[] nodes) {
 		super(nodes, BOUNCYNESS);
-		color = color.black;
-		explotionShape = new GameObjectExplosion(new Circle(getCenterX(), getCenterY(), sizeOfExplostion).getPoints());
+		color = color.darkGray;
+		// explotionShape = new GameObjectExplosion(new Circle(getCenterX(),
+		// getCenterY(), sizeOfExplostion).getPoints());
 	}
 
 	public void initMotion(Vector2 motion) {
 		this.motion = motion;
 		isReleased = true;
-		resetForceException();
+		// resetForceException();
 		wasReleasedAt = System.currentTimeMillis();
 	}
 
-	@Override
-	public void resetForceException() {
-		if (isReleased) {
-			forceException = false;
-		} else {
-			addForceException();
-		}
-	}
+	// @Override
+	// public void resetForceException() {
+	// if (isReleased) {
+	// // forceException = false;
+	// } else {
+	// addForceException();
+	// }
+	// }
 
 	@Override
 	public void update(GameContainer container, int arg) {
@@ -56,6 +57,8 @@ public class Grenade extends GameObjectAgile {
 			return;
 		}
 		if (System.currentTimeMillis() - wasReleasedAt > TIME_UNTIL_EXPLOTION) {
+			explotionShape = new GameObjectExplosion(
+					new Circle(getCenterX(), getCenterY(), sizeOfExplostion).getPoints());
 			BreakingPoint.objsToAdd
 					.add(new GameObjectExplosion(new Circle(getCenterX(), getCenterY(), sizeOfExplostion).getPoints()));
 			ArrayList<GameObject> newShapes = new ArrayList<>();

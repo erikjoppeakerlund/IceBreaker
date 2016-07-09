@@ -17,6 +17,7 @@ public class WorldBuiderForce extends WorldBuilder {
 	public WorldBuiderForce(float[] nodes) {
 		super(nodes);
 		this.color = Color.gray;
+		// this.rundDuringConatain = true;
 	}
 
 	public WorldBuiderForce(float[] nodes, Color color) {
@@ -39,7 +40,7 @@ public class WorldBuiderForce extends WorldBuilder {
 	}
 
 	@Override
-	public Impact getImpact(GameObjectAgile piece) {
+	public Impact getImpact(GameObjectFalling piece) {
 		return new ImpactForce(this, piece, gravityY, gravityX);
 	}
 
@@ -49,11 +50,12 @@ public class WorldBuiderForce extends WorldBuilder {
 
 	}
 
-	@Override
-	public void update(GameContainer container, int arg) throws SlickException {
-		// TODO Auto-generated method stub
-		super.update(container, arg);
-	}
+	// @Override
+	// public void update(GameContainer container, int arg) throws
+	// SlickException {
+	// // TODO Auto-generated method stub
+	// super.update(container, arg);
+	// }
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
@@ -64,6 +66,12 @@ public class WorldBuiderForce extends WorldBuilder {
 	@Override
 	public Shape[] subtract(Shape other) {
 		return new Shape[0];
+	}
+
+	@Override
+	public void update(GameContainer container, int arg) throws SlickException {
+		// TODO Auto-generated method stub
+
 	}
 
 }

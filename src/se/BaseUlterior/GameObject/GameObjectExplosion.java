@@ -6,11 +6,13 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Shape;
 
+import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactExplosion;
 
 public class GameObjectExplosion extends GameObject {
 
+	private static final long MAX_TIME = 500;
 	protected long timeSinceCreation;
 	private ImpactExplosion impactExplosion;
 
@@ -18,27 +20,36 @@ public class GameObjectExplosion extends GameObject {
 		super(nodes);
 		this.color = color;
 		this.timeSinceCreation = System.currentTimeMillis();
-		impactExplosion = new ImpactExplosion(this, null);
+		// impactExplosion = new ImpactExplosion(this, null);
 	}
 
 	public GameObjectExplosion(float[] nodes) {
 		super(nodes);
 		this.color = Color.yellow;
-		impactExplosion = new ImpactExplosion(this, null);
+		// impactExplosion = new ImpactExplosion(this, null);
 	}
 
 	public GameObjectExplosion() {
 	}
 
 	@Override
-	public Impact getImpact(GameObjectAgile agileObject) {
-		impactExplosion.setAgileObject(agileObject);
+	public Impact getImpact(GameObjectFalling agileObject) {
+		// impactExplosion.setAgileObject(agileObject);
+		// return impactExplosion;
+		impactExplosion = new ImpactExplosion(this, agileObject);
 		return impactExplosion;
 	}
 
 	@Override
 	public void update(GameContainer container, int arg) throws SlickException {
-		impactExplosion.updateUntilGone();
+		if (System.currentTimeMillis() - timeSinceCreation > MAX_TIME) {
+			if (impactExplosion != null) {
+				impactExplosion.disappear();
+			}
+			BreakingPoint.objsToRemove.add(this);
+		}
+		// add timer here to remove it in time!
+		// impactExplosion.updateUntilGone();
 	}
 
 	@Override

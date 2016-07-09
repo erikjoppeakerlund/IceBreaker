@@ -1,6 +1,8 @@
 package se.BaseUlterior.GameObject;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Shape;
 
 import se.BaseUlterior.Physics.Density;
@@ -16,6 +18,7 @@ public class WorldBuilderLiquid extends WorldBuilder {
 	public WorldBuilderLiquid(float[] nodes) {
 		super(nodes);
 		this.density = Density.WATER;
+		// this.rundDuringConatain = true;
 	}
 
 	public WorldBuilderLiquid(float[] nodes, Density density) {
@@ -45,7 +48,7 @@ public class WorldBuilderLiquid extends WorldBuilder {
 	}
 
 	@Override
-	public Impact getImpact(GameObjectAgile piece) {
+	public Impact getImpact(GameObjectFalling piece) {
 		return new ImpactFriction(this, piece, frictionAmount);
 	}
 
@@ -62,6 +65,12 @@ public class WorldBuilderLiquid extends WorldBuilder {
 	public void setDensity(Density d) {
 		this.density = d;
 		init();
+	}
+
+	@Override
+	public void update(GameContainer container, int arg) throws SlickException {
+		// TODO Auto-generated method stub
+
 	}
 
 }

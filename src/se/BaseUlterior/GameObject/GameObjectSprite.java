@@ -13,7 +13,7 @@ import se.BaseUlterior.Aim.AimGrenade;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
-public class GameObjectSprite extends GameObjectAgile {
+public class GameObjectSprite extends GameObjectFalling {
 
 	protected Aim aim = null;
 	protected List<Aim> aims = null;
@@ -26,7 +26,7 @@ public class GameObjectSprite extends GameObjectAgile {
 
 	public GameObjectSprite(float[] nodes, float bouncyness) {
 		super(nodes, bouncyness);
-		color = Color.black;
+		color = Color.gray;
 		initAims();
 	}
 
