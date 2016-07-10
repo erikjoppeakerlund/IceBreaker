@@ -27,7 +27,7 @@ public class BreakingPoint extends BasicGame {
 
 	Circle circ = new Circle(20, 20, 20);
 
-	public static WorldBuiderForce generalGravity = null;
+	// public static WorldBuiderForce generalGravity = null;
 
 	public static boolean insertMode = true;
 
@@ -78,6 +78,15 @@ public class BreakingPoint extends BasicGame {
 
 		actions = new ActionListenablers();
 
+		Level levelDummy = new Level();
+		float[] wholeScene = new float[] { 0.0f, 0.0f, 0.0f, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH,
+				Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0.0f };
+
+		WorldBuiderForce generalGravity = new WorldBuiderForce(wholeScene, Constants.GENERAL_GRAVITY, 0.0f,
+				Color.black);
+
+		levelDummy.levelPieces.add(generalGravity);
+
 		// float fat = 150.0f;
 		//
 		// float[] wallScene = new float[] { 0.0f - fat, 0.0f - fat,
@@ -91,13 +100,6 @@ public class BreakingPoint extends BasicGame {
 		// GameObject wall = new WorldBuilderGroundSolid(wallScene);
 		//
 		// BreakingPoint.all.add(wall);
-
-		float[] wholeScene = new float[] { 0.0f, 0.0f, 0.0f, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH,
-				Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0.0f };
-
-		generalGravity = new WorldBuiderForce(wholeScene, Constants.GENERAL_GRAVITY, 0.0f, Color.black);
-
-		BreakingPoint.all.add(generalGravity);
 
 		// GameObject otherGravity = new WorldBuiderForce(
 		// new float[] { 400.0f, 10.0f, 400.0f, 580.0f, 900.0f, 580.0f, 900.0f,
@@ -126,6 +128,7 @@ public class BreakingPoint extends BasicGame {
 		//
 		// BreakingPoint.all.add(randomBouncyObject);
 
+		BreakingPoint.all.addAll(levelDummy.levelPieces);
 		BreakingPoint.all.add(info);
 	}
 
