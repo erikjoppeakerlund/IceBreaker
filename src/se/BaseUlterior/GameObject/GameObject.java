@@ -211,11 +211,12 @@ public abstract class GameObject extends Shape {
 					result = true;
 					Vector2 newestNormal;
 
+					// if (points.length > i + 3) {
 					float[] norm = getSurfaceNormal(new float[] { points[i], points[i + 1] },
 							new float[] { points[iNext], points[iNext + 1] });
 					newestNormal = new Vector2(norm[0], norm[1]);
-					if (!normals.isEmpty()) {
 
+					if (!normals.isEmpty()) {
 						float aX = (float) (lastNormal.getX() * Math.PI);
 						float aY = (float) (lastNormal.getY() * Math.PI);
 						float bX = (float) (newestNormal.getX() * Math.PI);
@@ -231,24 +232,17 @@ public abstract class GameObject extends Shape {
 							shape.noForce = true;
 							return Collections.emptySet();
 						}
-
 					}
-					// UlteriorUtils.createVisualPointAt(points[i], points[i +
-					// 1]);
-					// UlteriorUtils.createVisualPointAt(points[iNext],
-					// points[iNext + 1]);
 
-					normals.add(newestNormal);
-					lastNormal = newestNormal;
+					if (i != 0) {
+						normals.add(newestNormal);
+						lastNormal = newestNormal;
+					}
 
-					// break;
 				}
 			}
-			if (result) {
-				// break;
-			}
 		}
-		shape.noForce = false;
+		// shape.noForce = false;
 		return normals;
 
 		// return result;

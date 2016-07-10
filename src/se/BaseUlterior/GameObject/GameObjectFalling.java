@@ -64,6 +64,9 @@ public abstract class GameObjectFalling extends GameObject {
 	private void runImpact() {
 		for (Impact im : currentImpacts) {
 			im.checkCalculate();
+			if (!(im.getTrigger().contains(this) || im.getTrigger().intersects(this))) {
+				im.notTouchingButWithin();
+			}
 		}
 
 		int[] removeIndexes = new int[currentImpacts.size()];
@@ -71,7 +74,8 @@ public abstract class GameObjectFalling extends GameObject {
 
 		for (Impact im : currentImpacts) {
 
-			if (!im.getTrigger().contains(this)) {
+			// if (!im.getTrigger().contains(this)) {
+			if (!UlteriorUtils.isWithinRange(im.getTrigger(), this)) {
 				removeIndexes[i] = 1;
 			} else {
 				i++;

@@ -19,7 +19,7 @@ public class Grenade extends GameObjectFalling {
 	public static final float GRENADE_SIZE = 27.0f;
 	private boolean isReleased = false;
 
-	private static float BOUNCYNESS = 0.9f;
+	private static float BOUNCYNESS = 0.4f;
 	protected long wasReleasedAt;
 
 	protected final long TIME_UNTIL_EXPLOTION = 1500;

@@ -13,15 +13,14 @@ public class ImpactBounce extends Impact {
 
 	public ImpactBounce(GameObject origin, GameObjectFalling go) {
 		super(origin, go);
-
 		normals = origin.getMyNormalsAfterHitBy(other);
-
 	}
 
 	@Override
 	public void calculateIntersects() {
 
-		if (other.noForce || normals.isEmpty()) {
+		normals = origin.getMyNormalsAfterHitBy(other);
+		if (normals.isEmpty() || other.noForce) {
 			return;
 		}
 
@@ -39,6 +38,7 @@ public class ImpactBounce extends Impact {
 		}
 
 		N.normalise();
+
 		/*
 		 * using the algorithm: V´ = V - (2*(V . N)) * N
 		 * 
@@ -62,13 +62,12 @@ public class ImpactBounce extends Impact {
 
 	@Override
 	public void onDestroy() {
-		other.noForce = false;
+		// other.noForce = false;
 
 	}
 
 	@Override
 	public void notTouchingButWithin() {
 		other.noForce = false;
-		// other.skipImpact = false;
 	}
 }

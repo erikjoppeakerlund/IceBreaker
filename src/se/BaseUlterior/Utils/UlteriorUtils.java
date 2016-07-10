@@ -39,7 +39,7 @@ public class UlteriorUtils {
 	public static void createVisualPointAt(float pointX, float pointY) {
 		float fat = 3.0f;
 		GameObject point = new WorldBuiderForce(new float[] { pointX - fat, pointY - fat, pointX - fat, pointY + fat,
-				pointX + fat, pointY + fat, pointX + fat, pointY - fat }, Color.red);
+				pointX + fat, pointY + fat, pointX + fat, pointY - fat }, Color.green);
 		BreakingPoint.objsToAdd.add(point);
 	}
 
