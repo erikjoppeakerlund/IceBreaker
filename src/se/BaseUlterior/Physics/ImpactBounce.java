@@ -10,6 +10,7 @@ import se.BaseUlterior.Geom.Vector2;
 public class ImpactBounce extends Impact {
 
 	protected Set<Vector2> normals = null;
+	protected Set<Vector2> normalsTester = null;
 
 	public ImpactBounce(GameObject origin, GameObjectFalling go) {
 		super(origin, go);
@@ -19,9 +20,9 @@ public class ImpactBounce extends Impact {
 	@Override
 	public void calculateIntersects() {
 
-		normals = origin.getMyNormalsAfterHitBy(other);
-		if (other.noForce) {
-			return;
+		normalsTester = origin.getMyNormalsAfterHitBy(other);
+		if (!other.noForce) {
+			normals = normalsTester;
 		}
 		if (normals.isEmpty()) {
 			return;

@@ -18,16 +18,7 @@ import se.BaseUlterior.Utils.UlteriorUtils;
 //next thins: enable the user only to use the keyboard!
 public abstract class GameObjectFalling extends GameObject {
 	private boolean underImpact = false;
-	// protected boolean forceException = false;
 	protected List<Impact> impactsToRemove = new ArrayList<>();
-
-	// public boolean isForceException() {
-	// return forceException;
-	// }
-	//
-	// public void resetForceException() {
-	// forceException = false;
-	// }
 
 	protected float bouncyness;
 
