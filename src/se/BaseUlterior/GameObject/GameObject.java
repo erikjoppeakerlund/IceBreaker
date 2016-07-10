@@ -164,11 +164,11 @@ public abstract class GameObject extends Shape {
 			thatLength -= 2;
 		}
 
-		float thatDx = 0;
-		float thatDy = 0;
+		float thatDx = shape.motion.x;
+		float thatDy = shape.motion.y;
 
-		float dX = 0;
-		float dY = 0;
+		float dX = motion.x;
+		float dY = motion.y;
 
 		boolean onEdge;
 

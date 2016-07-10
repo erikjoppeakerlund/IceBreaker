@@ -34,10 +34,10 @@ public abstract class Impact {
 	}
 
 	public void checkCalculate() {
-		if (origin.intersectsGameobject(other)) {
+		if (origin.intersects(other)) {
 			calculateIntersects();
 		}
-		if (origin.containsGameObject(other)) {
+		if (origin.contains(other)) {
 			calculateIntersects();
 		}
 	}

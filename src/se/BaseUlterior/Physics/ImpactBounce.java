@@ -20,7 +20,10 @@ public class ImpactBounce extends Impact {
 	public void calculateIntersects() {
 
 		normals = origin.getMyNormalsAfterHitBy(other);
-		if (normals.isEmpty() || other.noForce) {
+		if (other.noForce) {
+			return;
+		}
+		if (normals.isEmpty()) {
 			return;
 		}
 
