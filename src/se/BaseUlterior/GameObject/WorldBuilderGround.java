@@ -12,7 +12,7 @@ public class WorldBuilderGround extends WorldBuilder {
 	// this thing with color int the constructor was just for testing!
 	public WorldBuilderGround(float[] nodes) {
 		super(nodes);
-		this.color = Color.red;
+		this.color = Color.white;
 	}
 
 	@Override

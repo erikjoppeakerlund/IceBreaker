@@ -2,9 +2,23 @@ package se.BaseUlterior.Actions;
 
 import org.newdawn.slick.Input;
 
+import se.BaseUlterior.Config.Constants;
+import se.BaseUlterior.Context.SingleText;
+import se.BaseUlterior.Context.TextInfo;
 import se.BaseUlterior.Game.BreakingPoint;
 
 public class GeneralInputHandler implements ActionListenable {
+
+	private String INSERT_MODE = "INSERT_MODE";
+	private String ACTION_MODE = "ACTION_MODE";
+
+	private SingleText insertModeText = new SingleText(0, 0, 27, BreakingPoint.insertMode ? INSERT_MODE : ACTION_MODE);
+
+	public GeneralInputHandler() {
+		TextInfo randomText = new TextInfo(Constants.CANVAS_WIDTH - 220, 22);
+		randomText.singleTexts.add(insertModeText);
+		BreakingPoint.info.textInfos.add(randomText);
+	}
 
 	@Override
 	public void wasDoubleClicked(int button, int x, int y) {
@@ -14,7 +28,6 @@ public class GeneralInputHandler implements ActionListenable {
 
 	@Override
 	public void wasSingleClicked(int button, int x, int y) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -22,8 +35,10 @@ public class GeneralInputHandler implements ActionListenable {
 	public void wasWasKeyPressed(int button, char c) {
 		if (button == Input.KEY_I) {
 			BreakingPoint.insertMode = true;
+			insertModeText.setValue(INSERT_MODE);
 		} else if (button == Input.KEY_ESCAPE) {
 			BreakingPoint.insertMode = false;
+			insertModeText.setValue(ACTION_MODE);
 		}
 	}
 

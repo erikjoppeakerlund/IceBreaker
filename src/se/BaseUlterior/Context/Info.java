@@ -1,4 +1,7 @@
-package se.BaseUlterior.GameObject.Aimed;
+package se.BaseUlterior.Context;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -8,9 +11,10 @@ import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.Physics.Impact;
 
-public class Blade extends GameObject {
+public class Info extends GameObject {
 
-	@Override
+	public List<TextInfo> textInfos = new ArrayList<>();
+
 	public void update(GameContainer container, int arg) throws SlickException {
 		// TODO Auto-generated method stub
 
@@ -18,8 +22,9 @@ public class Blade extends GameObject {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		// TODO Auto-generated method stub
-
+		for (TextInfo ti : textInfos) {
+			ti.draw();
+		}
 	}
 
 	@Override

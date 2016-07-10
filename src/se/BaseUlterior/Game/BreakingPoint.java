@@ -15,6 +15,7 @@ import se.BaseUlterior.Actions.ActionListenable;
 import se.BaseUlterior.Actions.ActionListenablers;
 import se.BaseUlterior.Actions.WorldCreator;
 import se.BaseUlterior.Config.Constants;
+import se.BaseUlterior.Context.Info;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.GameObject.GameObjectSprite;
@@ -42,6 +43,8 @@ public class BreakingPoint extends BasicGame {
 	public static List<GameObject> objsToAdd = null;
 
 	public static List<GameObject> objsToRemove = null;
+
+	public static Info info = new Info();
 
 	private WorldCreator worldCreator = null;
 
@@ -122,6 +125,8 @@ public class BreakingPoint extends BasicGame {
 		// 20, 42).getPoints(), 1.0f, Color.lightGray);
 		//
 		// BreakingPoint.all.add(randomBouncyObject);
+
+		BreakingPoint.all.add(info);
 	}
 
 	@Override
