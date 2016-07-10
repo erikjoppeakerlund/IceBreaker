@@ -31,6 +31,8 @@ public abstract class GameObject extends Shape {
 
 	public boolean noForce = false;
 
+	public ArrayList<Impact> generlImacts = new ArrayList<>();
+
 	// public boolean rundDuringConatain = false;
 
 	private void init() {

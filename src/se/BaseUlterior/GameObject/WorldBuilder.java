@@ -10,6 +10,8 @@ public abstract class WorldBuilder extends GameObject {
 	// dummy, just for testing...
 	Color color = null;
 
+	// ArrayList<>();
+
 	// public void resetForceException() {
 	// forceException = false;
 	// }

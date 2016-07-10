@@ -12,7 +12,7 @@ import se.BaseUlterior.Physics.ImpactExplosion;
 
 public class GameObjectExplosion extends GameObject {
 
-	private static final long MAX_TIME = 500;
+	private static final long MAX_TIME = 4;
 	protected long timeSinceCreation;
 	private ImpactExplosion impactExplosion;
 
@@ -26,6 +26,7 @@ public class GameObjectExplosion extends GameObject {
 	public GameObjectExplosion(float[] nodes) {
 		super(nodes);
 		this.color = Color.yellow;
+		this.timeSinceCreation = System.currentTimeMillis();
 		// impactExplosion = new ImpactExplosion(this, null);
 	}
 

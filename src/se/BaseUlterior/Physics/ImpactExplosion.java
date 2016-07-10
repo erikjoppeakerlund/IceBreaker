@@ -1,6 +1,5 @@
 package se.BaseUlterior.Physics;
 
-import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.Geom.Vector2;
@@ -42,19 +41,6 @@ public class ImpactExplosion extends Impact {
 		 */
 	}
 
-	public void updateUntilGone() {
-		if (System.currentTimeMillis() - timeSinceExplotion > TIME_UNTIL_GONE) {
-			BreakingPoint.objsToRemove.add(origin);
-			if (other != null) {
-				other.removeImpact(this);
-			}
-		}
-	}
-
-	public void setAgileObject(GameObjectFalling agileObject) {
-		this.other = agileObject;
-	}
-
 	@Override
 	protected void calculateContains() {
 		// TODO Auto-generated method stub
@@ -74,6 +60,7 @@ public class ImpactExplosion extends Impact {
 	}
 
 	public void disappear() {
+
 		if (other != null) {
 			other.removeImpact(this);
 		}

@@ -156,4 +156,12 @@ public abstract class GameObjectFalling extends GameObject {
 		impactsToRemove.add(im);
 	}
 
+	public void removeCurrentImpactsWhichBelingTo(GameObject go) {
+		for (Impact im : currentImpacts) {
+			if (im.getTrigger() == go) {
+				removeImpact(im);
+			}
+		}
+	}
+
 }

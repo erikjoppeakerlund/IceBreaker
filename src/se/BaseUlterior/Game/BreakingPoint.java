@@ -16,6 +16,7 @@ import se.BaseUlterior.Actions.ActionListenablers;
 import se.BaseUlterior.Actions.WorldCreator;
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.GameObject.GameObject;
+import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.GameObject.GameObjectSprite;
 import se.BaseUlterior.GameObject.WorldBuiderForce;
 
@@ -36,6 +37,8 @@ public class BreakingPoint extends BasicGame {
 
 	public static List<GameObject> all = null;
 
+	public static List<GameObjectFalling> allFalliing = null;
+
 	public static List<GameObject> objsToAdd = null;
 
 	public static List<GameObject> objsToRemove = null;
@@ -43,6 +46,11 @@ public class BreakingPoint extends BasicGame {
 	private WorldCreator worldCreator = null;
 
 	private List<ActionListenable> doubleClickListeners;
+
+	public void addObjToGame(GameObject g) {
+		allFalliing.add((GameObjectFalling) g);
+		objsToAdd.add(g);
+	}
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
@@ -56,6 +64,9 @@ public class BreakingPoint extends BasicGame {
 		/*
 		 * TODO: ROTATIONS!
 		 */
+
+		allFalliing = new ArrayList<>();
+
 		doubleClickListeners = new ArrayList<>();
 		doubleClickListeners.add(worldCreator);
 		BreakingPoint.all = new ArrayList<>();
@@ -105,7 +116,7 @@ public class BreakingPoint extends BasicGame {
 
 		GameObject sprite = new GameObjectSprite(new Circle(910, 190, Constants.SPRITE_RADIUS).getPoints(), 0.0f);
 
-		BreakingPoint.all.add(sprite);
+		addObjToGame(sprite);
 
 		WorldCreator wc = new WorldCreator();
 

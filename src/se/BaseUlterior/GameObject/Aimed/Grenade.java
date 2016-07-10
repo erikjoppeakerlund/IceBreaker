@@ -77,6 +77,7 @@ public class Grenade extends GameObjectFalling {
 								GameObject gog = new WorldBuilderGround(go.getPoints());
 								newShapes.add(gog);
 							}
+							UlteriorUtils.cleanUpImpactFromWorldBuilderObject(target);
 							BreakingPoint.objsToRemove.add(target);
 						}
 					}

@@ -4,6 +4,7 @@ import org.newdawn.slick.Color;
 
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.GameObject;
+import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.GameObject.WorldBuiderForce;
 
 public class UlteriorUtils {
@@ -41,6 +42,12 @@ public class UlteriorUtils {
 		GameObject point = new WorldBuiderForce(new float[] { pointX - fat, pointY - fat, pointX - fat, pointY + fat,
 				pointX + fat, pointY + fat, pointX + fat, pointY - fat }, Color.green);
 		BreakingPoint.objsToAdd.add(point);
+	}
+
+	public static void cleanUpImpactFromWorldBuilderObject(GameObject clearWhichBelongToThis) {
+		for (GameObjectFalling falling : BreakingPoint.allFalliing) {
+			falling.removeCurrentImpactsWhichBelingTo(clearWhichBelongToThis);
+		}
 	}
 
 }
