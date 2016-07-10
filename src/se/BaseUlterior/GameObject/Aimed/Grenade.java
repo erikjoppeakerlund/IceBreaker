@@ -31,25 +31,13 @@ public class Grenade extends GameObjectFalling {
 	public Grenade(float[] nodes) {
 		super(nodes, BOUNCYNESS);
 		color = color.darkGray;
-		// explotionShape = new GameObjectExplosion(new Circle(getCenterX(),
-		// getCenterY(), sizeOfExplostion).getPoints());
 	}
 
 	public void initMotion(Vector2 motion) {
 		this.motion = motion;
 		isReleased = true;
-		// resetForceException();
 		wasReleasedAt = System.currentTimeMillis();
 	}
-
-	// @Override
-	// public void resetForceException() {
-	// if (isReleased) {
-	// // forceException = false;
-	// } else {
-	// addForceException();
-	// }
-	// }
 
 	@Override
 	public void update(GameContainer container, int arg) {

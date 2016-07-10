@@ -118,8 +118,6 @@ public class BreakingPoint extends BasicGame {
 
 		addObjToGame(sprite);
 
-		WorldCreator wc = new WorldCreator();
-
 		// GameObject randomBouncyObject = new GameObjectAgile(new Circle(120,
 		// 20, 42).getPoints(), 1.0f, Color.lightGray);
 		//

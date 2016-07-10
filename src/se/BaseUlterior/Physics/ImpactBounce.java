@@ -66,7 +66,6 @@ public class ImpactBounce extends Impact {
 
 	@Override
 	public void onDestroy() {
-		// other.noForce = false;
 
 	}
 

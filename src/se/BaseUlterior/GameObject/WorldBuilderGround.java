@@ -17,7 +17,6 @@ public class WorldBuilderGround extends WorldBuilder {
 
 	@Override
 	public Impact getImpact(GameObjectFalling piece) {
-		// piece.addForceException();
 		ImpactBounce ib = new ImpactBounce(this, piece);
 		generlImacts.add(ib);
 		return ib;
@@ -32,7 +31,6 @@ public class WorldBuilderGround extends WorldBuilder {
 	@Override
 	public void update(GameContainer container, int arg) throws SlickException {
 		// TODO Auto-generated method stub
-
 	}
 
 }

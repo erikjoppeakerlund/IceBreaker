@@ -49,11 +49,6 @@ public class WorldCreator implements ActionListenable {
 
 	private void betweenCreationHandler() {
 
-		// if (choosingState) {
-		// currentBuilder.setPoints(new float[0]);
-		// choosingState = false;
-		// }
-
 		Class<? extends GameObject> currentInstance = currentBuilder.getClass();
 		GameObject newCurrentInstance = null;
 		try {

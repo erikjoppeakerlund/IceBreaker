@@ -27,14 +27,12 @@ public abstract class GameObjectFalling extends GameObject {
 	public GameObjectFalling(float[] nodes, float bouncyness) {
 		super(nodes);
 		this.bouncyness = bouncyness;
-		// resetForceException();
 	}
 
 	public GameObjectFalling(float[] nodes, float bouncyness, Color color, Vector2 startMovement) {
 		super(nodes);
 		motion = startMovement;
 		this.bouncyness = bouncyness;
-		// resetForceException();
 	}
 
 	public float getBouncyness() {
@@ -64,8 +62,6 @@ public abstract class GameObjectFalling extends GameObject {
 		int i = 0;
 
 		for (Impact im : currentImpacts) {
-
-			// if (!im.getTrigger().contains(this)) {
 			if (!UlteriorUtils.isWithinRange(im.getTrigger(), this)) {
 				removeIndexes[i] = 1;
 			} else {
@@ -126,17 +122,11 @@ public abstract class GameObjectFalling extends GameObject {
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		graphics.setColor(this.color);
 		graphics.fill(this);
-		// this.checkPoints();
 	}
 
 	public void addImpact(Impact im) {
 		currentImpacts.add(im);
 	}
-
-	// public void addForceException() {
-	// forceException = true;
-	//
-	// }
 
 	@Override
 	public Shape[] subtract(Shape other) {

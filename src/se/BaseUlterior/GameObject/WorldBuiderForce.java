@@ -17,7 +17,6 @@ public class WorldBuiderForce extends WorldBuilder {
 	public WorldBuiderForce(float[] nodes) {
 		super(nodes);
 		this.color = Color.gray;
-		// this.rundDuringConatain = true;
 	}
 
 	public WorldBuiderForce(float[] nodes, Color color) {
@@ -49,13 +48,6 @@ public class WorldBuiderForce extends WorldBuilder {
 		// TODO Auto-generated method stub
 
 	}
-
-	// @Override
-	// public void update(GameContainer container, int arg) throws
-	// SlickException {
-	// // TODO Auto-generated method stub
-	// super.update(container, arg);
-	// }
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {

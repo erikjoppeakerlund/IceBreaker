@@ -32,8 +32,6 @@ public abstract class GameObject extends Shape {
 
 	public ArrayList<Impact> generlImacts = new ArrayList<>();
 
-	// public boolean rundDuringConatain = false;
-
 	private void init() {
 		currentImpacts = new ArrayList<>();
 		motion = new Vector2();
@@ -163,13 +161,11 @@ public abstract class GameObject extends Shape {
 			thatLength -= 2;
 		}
 
-		float thatDx = shape.motion.x;
-		float thatDy = shape.motion.y;
+		float thatDx = 0;
+		float thatDy = 0;
 
-		float dX = motion.x;
-		float dY = motion.y;
-
-		boolean onEdge;
+		float dX = 0;
+		float dY = 0;
 
 		// x1 = thatPoints[j]
 		// x2 = thatPoints[j + 2]
@@ -247,122 +243,6 @@ public abstract class GameObject extends Shape {
 		return normals;
 
 		// return result;
-	}
-
-	/**
-	 * Check if this shape intersects with the shape provided.
-	 * 
-	 * @param shape
-	 *            The shape to check if it intersects with this one.
-	 * @return True if the shapes do intersect, false otherwise.
-	 */
-	public boolean intersectsGameobject(GameObject shape) {
-		/*
-		 * Intersection formula used: (x4 - x3)(y1 - y3) - (y4 - y3)(x1 - x3) UA
-		 * = --------------------------------------- (y4 - y3)(x2 - x1) - (x4 -
-		 * x3)(y2 - y1)
-		 * 
-		 * (x2 - x1)(y1 - y3) - (y2 - y1)(x1 - x3) UB =
-		 * --------------------------------------- (y4 - y3)(x2 - x1) - (x4 -
-		 * x3)(y2 - y1)
-		 * 
-		 * if UA and UB are both between 0 and 1 then the lines intersect.
-		 * 
-		 * Source: http://local.wasp.uwa.edu.au/~pbourke/geometry/lineline2d/
-		 */
-		checkPoints();
-
-		boolean result = false;
-		float points[] = getPoints(); // (x3, y3) and (x4, y4)
-		float thatPoints[] = shape.getPoints(); // (x1, y1) and (x2, y2)
-		int length = points.length;
-		int thatLength = thatPoints.length;
-		double unknownA;
-		double unknownB;
-
-		if (!closed()) {
-			length -= 2;
-		}
-		if (!shape.closed()) {
-			thatLength -= 2;
-		}
-
-		float thatDx = shape.motion.x;
-		float thatDy = shape.motion.y;
-
-		float dX = motion.x;
-		float dY = motion.y;
-
-		// x1 = thatPoints[j]
-		// x2 = thatPoints[j + 2]
-		// y1 = thatPoints[j + 1]
-		// y2 = thatPoints[j + 3]
-		// x3 = points[i]
-		// x4 = points[i + 2]
-		// y3 = points[i + 1]
-		// y4 = points[i + 3]
-		for (int i = 0; i < length; i += 2) {
-			int iNext = i + 2;
-			if (iNext >= points.length) {
-				iNext = 0;
-			}
-
-			for (int j = 0; j < thatLength; j += 2) {
-				int jNext = j + 2;
-				if (jNext >= thatPoints.length) {
-					jNext = 0;
-				}
-
-				unknownA = (((points[iNext] + dX - points[i] + dX)
-						* (double) (thatPoints[j + 1] + thatDy - points[i + 1] + thatDy))
-						- ((points[iNext + 1] + dY - points[i + 1] + dY) * (thatPoints[j] + thatDx - points[i] + dX)))
-						/ (((points[iNext + 1] + dY - points[i + 1] + dY)
-								* (thatPoints[jNext] + thatDx - thatPoints[j] + thatDx))
-								- ((points[iNext] + dX + -points[i] + dX)
-										* (thatPoints[jNext + 1] + thatDy - thatPoints[j + 1] + thatDy)));
-				unknownB = (((thatPoints[jNext] + thatDx - thatPoints[j] + thatDx)
-						* (double) (thatPoints[j + 1] + thatDy - points[i + 1] + dY))
-						- ((thatPoints[jNext + 1] + thatDy - thatPoints[j + 1] + thatDy)
-								* (thatPoints[j] + thatDx - points[i] + dX)))
-						/ (((points[iNext + 1] + dY - points[i + 1] + dY)
-								* (thatPoints[jNext] + thatDx - thatPoints[j] + thatDx))
-								- ((points[iNext] + dX - points[i] + dX)
-										* (thatPoints[jNext + 1] + thatDy - thatPoints[j + 1] + thatDy)));
-
-				if (unknownA >= 0 && unknownA <= 1 && unknownB >= 0 && unknownB <= 1) {
-					result = true;
-					break;
-				}
-			}
-			if (result) {
-				break;
-			}
-		}
-
-		return result;
-	}
-
-	/**
-	 * Check if the shape passed is entirely contained within this shape.
-	 * 
-	 * @param other
-	 *            The other shape to test against this one
-	 * @return True if the other shape supplied is entirely contained within
-	 *         this one.
-	 */
-	public boolean containsGameObject(GameObject other) {
-		if (other.intersectsGameobject(this)) {
-			return false;
-		}
-
-		for (int i = 0; i < other.getPointCount(); i++) {
-			float[] pt = other.getPoint(i);
-			if (!contains(pt[0] + other.motion.x, pt[1] + other.motion.y)) {
-				return false;
-			}
-		}
-
-		return true;
 	}
 
 	@Override

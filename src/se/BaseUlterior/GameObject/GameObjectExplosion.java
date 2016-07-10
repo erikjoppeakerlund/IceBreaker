@@ -20,14 +20,12 @@ public class GameObjectExplosion extends GameObject {
 		super(nodes);
 		this.color = color;
 		this.timeSinceCreation = System.currentTimeMillis();
-		// impactExplosion = new ImpactExplosion(this, null);
 	}
 
 	public GameObjectExplosion(float[] nodes) {
 		super(nodes);
 		this.color = Color.yellow;
 		this.timeSinceCreation = System.currentTimeMillis();
-		// impactExplosion = new ImpactExplosion(this, null);
 	}
 
 	public GameObjectExplosion() {
@@ -35,8 +33,6 @@ public class GameObjectExplosion extends GameObject {
 
 	@Override
 	public Impact getImpact(GameObjectFalling agileObject) {
-		// impactExplosion.setAgileObject(agileObject);
-		// return impactExplosion;
 		impactExplosion = new ImpactExplosion(this, agileObject);
 		return impactExplosion;
 	}
@@ -49,8 +45,6 @@ public class GameObjectExplosion extends GameObject {
 			}
 			BreakingPoint.objsToRemove.add(this);
 		}
-		// add timer here to remove it in time!
-		// impactExplosion.updateUntilGone();
 	}
 
 	@Override

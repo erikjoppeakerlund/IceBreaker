@@ -18,7 +18,6 @@ public class WorldBuilderLiquid extends WorldBuilder {
 	public WorldBuilderLiquid(float[] nodes) {
 		super(nodes);
 		this.density = Density.WATER;
-		// this.rundDuringConatain = true;
 	}
 
 	public WorldBuilderLiquid(float[] nodes, Density density) {
