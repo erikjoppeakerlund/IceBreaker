@@ -49,5 +49,4 @@ public class UlteriorUtils {
 			falling.removeCurrentImpactsWhichBelingTo(clearWhichBelongToThis);
 		}
 	}
-
 }
