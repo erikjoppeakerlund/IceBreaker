@@ -6,21 +6,12 @@ import se.BaseUlterior.Geom.Vector2;
 
 public abstract class Impact {
 
-	protected float effect;
 	protected GameObject origin;
 	protected GameObjectFalling other;
 	protected Vector2 affectedPiece;
 
-	public Impact(GameObject origin, float effect, GameObjectFalling other) {
-		this.origin = origin;
-		this.effect = effect;
-		this.other = other;
-		affectedPiece = other.getMotion();
-	}
-
 	public Impact(GameObject origin, GameObjectFalling other) {
 		this.origin = origin;
-		this.effect = 2.0f;
 		this.other = other;
 		affectedPiece = other.getMotion();
 	}

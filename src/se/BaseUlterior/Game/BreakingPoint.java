@@ -48,7 +48,7 @@ public class BreakingPoint extends BasicGame {
 
 	private WorldCreator worldCreator = null;
 
-	private List<ActionListenable> doubleClickListeners;
+	private List<ActionListenable> actionListeners;
 
 	public void addObjToGame(GameObject g) {
 		allFalliing.add((GameObjectFalling) g);
@@ -70,8 +70,8 @@ public class BreakingPoint extends BasicGame {
 
 		allFalliing = new ArrayList<>();
 
-		doubleClickListeners = new ArrayList<>();
-		doubleClickListeners.add(worldCreator);
+		actionListeners = new ArrayList<>();
+		actionListeners.add(worldCreator);
 		BreakingPoint.all = new ArrayList<>();
 		BreakingPoint.objsToAdd = new ArrayList<>();
 		objsToRemove = new ArrayList<>();
@@ -186,6 +186,30 @@ public class BreakingPoint extends BasicGame {
 
 		actions.wasMouseWheelMoved(change);
 
+	}
+
+	@Override
+	public void mouseMoved(int oldx, int oldy, int newx, int newy) {
+		// if (newx > Constants.CANVAS_WIDTH - 50) {
+		// for (GameObject go : BreakingPoint.all) {
+		// go.setX(go.getX() - 4);
+		// }
+		// }
+		// if (newx < 50) {
+		// for (GameObject go : BreakingPoint.all) {
+		// go.setX(go.getX() + 4);
+		// }
+		// }
+		// if (newy > Constants.CANVAS_HEIGHT - 50) {
+		// for (GameObject go : BreakingPoint.all) {
+		// go.setY(go.getY() - 4);
+		// }
+		// }
+		// if (newy < 50) {
+		// for (GameObject go : BreakingPoint.all) {
+		// go.setY(go.getY() + 4);
+		// }
+		// }
 	}
 
 }

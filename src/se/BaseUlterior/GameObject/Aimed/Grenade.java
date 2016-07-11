@@ -22,7 +22,7 @@ public class Grenade extends GameObjectFalling {
 	private static float BOUNCYNESS = 0.5f;
 	protected long wasReleasedAt;
 
-	protected final long TIME_UNTIL_EXPLOTION = 1500;
+	protected final long TIME_UNTIL_EXPLOTION = 2500;
 
 	protected GameObject explotionShape = null;
 

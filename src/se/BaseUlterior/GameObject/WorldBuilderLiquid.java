@@ -1,8 +1,6 @@
 package se.BaseUlterior.GameObject;
 
 import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Shape;
 
 import se.BaseUlterior.Physics.Density;
@@ -61,15 +59,9 @@ public class WorldBuilderLiquid extends WorldBuilder {
 		return new Shape[0];
 	}
 
-	public void setDensity(Density d) {
-		this.density = d;
+	public void setDensity(Density density) {
+		this.density = density;
 		init();
-	}
-
-	@Override
-	public void update(GameContainer container, int arg) throws SlickException {
-		// TODO Auto-generated method stub
-
 	}
 
 }

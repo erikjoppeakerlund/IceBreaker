@@ -1,7 +1,6 @@
 package se.BaseUlterior.Actions;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 
 import org.newdawn.slick.Input;
 
@@ -22,10 +21,7 @@ public class WorldCreator implements ActionListenable {
 
 	GameObject currentBuilder = null;
 
-	private ArrayList<GameObject> worldBuilders = null;
-
 	public WorldCreator() {
-		worldBuilders = new ArrayList<>();
 		wb = new WorldBuilderGround(new float[0]);
 		wbl = new WorldBuilderLiquid(new float[0], Density.WATER);
 		wbf = new WorldBuiderForce(new float[0], 0.0f, 0.0f);

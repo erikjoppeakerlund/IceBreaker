@@ -16,20 +16,17 @@ public class Info extends GameObject {
 	public List<TextInfo> textInfos = new ArrayList<>();
 
 	public void update(GameContainer container, int arg) throws SlickException {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		for (TextInfo ti : textInfos) {
-			ti.draw();
+		for (TextInfo infos : textInfos) {
+			infos.draw();
 		}
 	}
 
 	@Override
 	public Impact getImpact(GameObjectFalling agileObject) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

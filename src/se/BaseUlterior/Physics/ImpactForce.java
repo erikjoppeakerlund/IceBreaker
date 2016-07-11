@@ -31,7 +31,9 @@ public class ImpactForce extends Impact {
 
 	@Override
 	protected void calculateContains() {
-		affectedPiece.add(gravityX, gravityY);
+		if (!other.noForce) {
+			affectedPiece.add(gravityX, gravityY);
+		}
 	}
 
 	@Override

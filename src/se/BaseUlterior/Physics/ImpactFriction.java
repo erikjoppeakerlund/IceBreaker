@@ -5,6 +5,8 @@ import se.BaseUlterior.GameObject.GameObjectFalling;
 
 public class ImpactFriction extends Impact {
 
+	protected float effect;
+
 	public ImpactFriction(GameObject origin, GameObjectFalling other, float effect) {
 		super(origin, other);
 		this.effect = effect;

@@ -9,20 +9,16 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Shape;
-import org.newdawn.slick.geom.Transform;
+import org.newdawn.slick.geom.Polygon;
 
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Physics.Impact;
 
-public abstract class GameObject extends Shape {
-
-	private boolean closed = true;
-	private boolean allowDups = false;
+public abstract class GameObject extends Polygon {
 
 	protected List<Impact> currentImpacts = null;
 
-	protected Color color = Color.darkGray;
+	protected Color color;
 
 	protected Vector2 motion = null;
 
@@ -31,6 +27,10 @@ public abstract class GameObject extends Shape {
 	public boolean noForce = false;
 
 	public ArrayList<Impact> generlImacts = new ArrayList<>();
+
+	public Vector2 getMotions() {
+		return motion;
+	}
 
 	private void init() {
 		currentImpacts = new ArrayList<>();
@@ -47,45 +47,9 @@ public abstract class GameObject extends Shape {
 	 *            An array of points in x, y order.
 	 */
 	public GameObject(float points[]) {
+		super(points);
 		init();
-		int length = points.length;
 
-		this.points = new float[length];
-		maxX = -Float.MIN_VALUE;
-		maxY = -Float.MIN_VALUE;
-		minX = Float.MAX_VALUE;
-		minY = Float.MAX_VALUE;
-		x = Float.MAX_VALUE;
-		y = Float.MAX_VALUE;
-
-		for (int i = 0; i < length; i++) {
-			this.points[i] = points[i];
-			if (i % 2 == 0) {
-				if (points[i] > maxX) {
-					maxX = points[i];
-				}
-				if (points[i] < minX) {
-					minX = points[i];
-				}
-				if (points[i] < x) {
-					x = points[i];
-				}
-			} else {
-				if (points[i] > maxY) {
-					maxY = points[i];
-				}
-				if (points[i] < minY) {
-					minY = points[i];
-				}
-				if (points[i] < y) {
-					y = points[i];
-				}
-			}
-		}
-
-		findCenter();
-		calculateRadius();
-		pointsDirty = true;
 	}
 
 	/**
@@ -93,12 +57,8 @@ public abstract class GameObject extends Shape {
 	 *
 	 */
 	public GameObject() {
+		super();
 		init();
-		points = new float[0];
-		maxX = -Float.MIN_VALUE;
-		maxY = -Float.MIN_VALUE;
-		minX = Float.MAX_VALUE;
-		minY = Float.MAX_VALUE;
 	}
 
 	/**
@@ -245,109 +205,14 @@ public abstract class GameObject extends Shape {
 		// return result;
 	}
 
-	@Override
-	protected void createPoints() {
-
-	}
-
-	/**
-	 * Apply a transformation and return a new shape. This will not alter the
-	 * current shape but will return the transformed shape.
-	 * 
-	 * @param transform
-	 *            The transform to be applied
-	 * @return The transformed shape.
-	 */
-	public Shape transform(Transform transform) {
-		checkPoints();
-
-		GameObject resultPolygon = new GameObjectExplosion();
-
-		float result[] = new float[points.length];
-		transform.transform(points, 0, result, 0, points.length / 2);
-		resultPolygon.points = result;
-		resultPolygon.findCenter();
-		resultPolygon.closed = closed;
-
-		return resultPolygon;
-	}
-
-	public void setPoints(float[] points) {
-		this.points = points;
-	}
-
 	public abstract void update(GameContainer container, int arg) throws SlickException;
 
 	public abstract void render(GameContainer container, Graphics graphics) throws SlickException;
 
 	public abstract Impact getImpact(GameObjectFalling agileObject);
 
-	/**
-	 * @see org.newdawn.slick.geom.Shape#closed()
-	 */
-	public boolean closed() {
-		return closed;
+	public void setColor(Color color) {
+		this.color = color;
 	}
 
-	/**
-	 * Indicate if the polygon should be closed
-	 * 
-	 * @param closed
-	 *            True if the polygon should be closed
-	 */
-	public void setClosed(boolean closed) {
-		this.closed = closed;
-	}
-
-	/**
-	 * Add a point to the polygon
-	 * 
-	 * @param x
-	 *            The x coordinate of the point
-	 * @param y
-	 *            The y coordinate of the point
-	 */
-	public void addPoint(float x, float y) {
-		if (hasVertex(x, y) && (!allowDups)) {
-			return;
-		}
-
-		ArrayList tempPoints = new ArrayList();
-		for (int i = 0; i < points.length; i++) {
-			tempPoints.add(new Float(points[i]));
-		}
-		tempPoints.add(new Float(x));
-		tempPoints.add(new Float(y));
-		int length = tempPoints.size();
-		points = new float[length];
-		for (int i = 0; i < length; i++) {
-			points[i] = ((Float) tempPoints.get(i)).floatValue();
-		}
-		if (x > maxX) {
-			maxX = x;
-		}
-		if (y > maxY) {
-			maxY = y;
-		}
-		if (x < minX) {
-			minX = x;
-		}
-		if (y < minY) {
-			minY = y;
-		}
-		findCenter();
-		calculateRadius();
-
-		pointsDirty = true;
-	}
-
-	/**
-	 * Indicate if duplicate points are allow
-	 * 
-	 * @param allowDups
-	 *            True if duplicate points are allowed
-	 */
-	public void setAllowDuplicatePoints(boolean allowDups) {
-		this.allowDups = allowDups;
-	}
 }

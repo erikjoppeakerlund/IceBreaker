@@ -5,44 +5,44 @@ import java.util.ArrayList;
 public class ActionListenablers {
 
 	private ArrayList<ActionListenable> listeners;
-	private WorldCreator wc = null;
-	private GeneralInputHandler gih = null;
+	private WorldCreator worldCreator = null;
+	private GeneralInputHandler input = null;
 
 	public ActionListenablers() {
 		listeners = new ArrayList<>();
-		gih = new GeneralInputHandler();
-		wc = new WorldCreator();
-		listeners.add(wc);
-		listeners.add(gih);
+		input = new GeneralInputHandler();
+		worldCreator = new WorldCreator();
+		listeners.add(worldCreator);
+		listeners.add(input);
 	}
 
 	public void wasMouseClickedOnce(int button, int x, int y) {
-		for (ActionListenable al : listeners) {
-			al.wasSingleClicked(button, x, y);
+		for (ActionListenable listener : listeners) {
+			listener.wasSingleClicked(button, x, y);
 		}
 	}
 
 	public void wasMouseClickedTwice(int button, int x, int y) {
-		for (ActionListenable al : listeners) {
-			al.wasDoubleClicked(button, x, y);
+		for (ActionListenable listener : listeners) {
+			listener.wasDoubleClicked(button, x, y);
 		}
 	}
 
 	public void wasKeyPressed(int key, char c) {
-		for (ActionListenable al : listeners) {
-			al.wasWasKeyPressed(key, c);
+		for (ActionListenable listener : listeners) {
+			listener.wasWasKeyPressed(key, c);
 		}
 	}
 
 	public void wasKeyReleased(int key, char c) {
-		for (ActionListenable al : listeners) {
-			al.wasWasKeyReleased(key, c);
+		for (ActionListenable listener : listeners) {
+			listener.wasWasKeyReleased(key, c);
 		}
 	}
 
 	public void wasMouseWheelMoved(int change) {
-		for (ActionListenable al : listeners) {
-			al.wasMouseWheelMoved(change);
+		for (ActionListenable listener : listeners) {
+			listener.wasMouseWheelMoved(change);
 		}
 	}
 

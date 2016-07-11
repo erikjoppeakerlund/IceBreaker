@@ -28,9 +28,6 @@ public class GameObjectExplosion extends GameObject {
 		this.timeSinceCreation = System.currentTimeMillis();
 	}
 
-	public GameObjectExplosion() {
-	}
-
 	@Override
 	public Impact getImpact(GameObjectFalling agileObject) {
 		impactExplosion = new ImpactExplosion(this, agileObject);

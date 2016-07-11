@@ -3,7 +3,6 @@ package se.BaseUlterior.GameObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -22,21 +21,9 @@ public abstract class GameObjectFalling extends GameObject {
 
 	protected float bouncyness;
 
-	protected Color color;
-
 	public GameObjectFalling(float[] nodes, float bouncyness) {
 		super(nodes);
 		this.bouncyness = bouncyness;
-	}
-
-	public GameObjectFalling(float[] nodes, float bouncyness, Color color, Vector2 startMovement) {
-		super(nodes);
-		motion = startMovement;
-		this.bouncyness = bouncyness;
-	}
-
-	public float getBouncyness() {
-		return this.bouncyness;
 	}
 
 	@Override
@@ -116,6 +103,10 @@ public abstract class GameObjectFalling extends GameObject {
 	@Override
 	public Impact getImpact(GameObjectFalling other) {
 		return new ImpactBounce(this, other);
+	}
+
+	public float getBouncyness() {
+		return this.bouncyness;
 	}
 
 	@Override
