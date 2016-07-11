@@ -13,12 +13,12 @@ public class ImpactFriction extends Impact {
 	}
 
 	@Override
-	public void calculateIntersects() {
-		affectedPiece.scale(effect);
+	public void calculateIntersects(int delta) {
+		affectedPiece.scale(effect * delta);
 	}
 
 	@Override
-	protected void calculateContains() {
+	protected void calculateContains(int delta) {
 		// TODO Auto-generated method stub
 
 	}

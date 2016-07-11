@@ -3,13 +3,14 @@ package se.BaseUlterior.Game;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.CanvasGameContainer;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
+import org.newdawn.slick.util.Log;
 
 import se.BaseUlterior.Actions.ActionListenable;
 import se.BaseUlterior.Actions.ActionListenablers;
@@ -133,11 +134,11 @@ public class BreakingPoint extends BasicGame {
 	}
 
 	@Override
-	public void update(GameContainer container, int arg) throws SlickException {
+	public void update(GameContainer container, int delta) throws SlickException {
 
 		if (!insertMode) {
 			for (GameObject go : BreakingPoint.all) {
-				go.update(container, arg);
+				go.update(container, delta);
 			}
 		}
 		if (!objsToRemove.isEmpty()) {
@@ -150,14 +151,26 @@ public class BreakingPoint extends BasicGame {
 		}
 	}
 
-	public static void main(String[] s) throws SlickException {
-		AppGameContainer appGameContainer = new AppGameContainer(new BreakingPoint("Breking Point"));
-		int maxFPS = 60;
-		appGameContainer.setTargetFrameRate(maxFPS);
-		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, false);
-		appGameContainer.setAlwaysRender(true);
-		appGameContainer.start();
+	// public static void main(String[] s) throws SlickException {
+	// AppGameContainer appGameContainer = new AppGameContainer(new
+	// BreakingPoint("Breking Point"));
+	// int maxFPS = 60;
+	// appGameContainer.setTargetFrameRate(maxFPS);
+	// appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int)
+	// Constants.CANVAS_HEIGHT, false);
+	// appGameContainer.setAlwaysRender(true);
+	// appGameContainer.start();
+	//
+	// }
 
+	public static void main(String[] args) {
+		try {
+			CanvasGameContainer container = new CanvasGameContainer(new BreakingPoint("Ice Breaker"));
+			container.setSize(Constants.CANVAS_WIDTH, Constants.CANVAS_HEIGHT);
+			new GameWindowBuilder(container);
+		} catch (Exception e) {
+			Log.error(e);
+		}
 	}
 
 	@Override

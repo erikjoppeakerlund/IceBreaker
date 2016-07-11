@@ -2,7 +2,6 @@ package se.BaseUlterior.Physics;
 
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectFalling;
-import se.BaseUlterior.Geom.Vector2;
 
 public class ImpactExplosion extends Impact {
 
@@ -17,7 +16,7 @@ public class ImpactExplosion extends Impact {
 	}
 
 	@Override
-	public void calculateIntersects() {
+	public void calculateIntersects(int delta) {
 
 		float expX = origin.getCenterX();
 		float expY = origin.getCenterY();
@@ -33,7 +32,7 @@ public class ImpactExplosion extends Impact {
 		float impactX = MAX_IMPACT * maxImpact / distanceX;
 		float impactY = MAX_IMPACT * maxImpact / distanceY;
 
-		affectedPiece.add(new Vector2(impactX, impactY));
+		// affectedPiece.add(new Vector2(impactX, impactY));
 
 		/*
 		 * logics for handeling Agile Objects that are within the range of the
@@ -42,8 +41,8 @@ public class ImpactExplosion extends Impact {
 	}
 
 	@Override
-	protected void calculateContains() {
-		// TODO Auto-generated method stub
+	protected void calculateContains(int delta) {
+		// should not the code be here?
 
 	}
 

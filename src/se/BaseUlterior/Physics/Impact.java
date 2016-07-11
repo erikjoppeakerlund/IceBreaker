@@ -24,18 +24,18 @@ public abstract class Impact {
 		return other;
 	}
 
-	public void checkCalculate() {
+	public void checkCalculate(int delta) {
 		if (origin.intersects(other)) {
-			calculateIntersects();
+			calculateIntersects(delta);
 		}
 		if (origin.contains(other)) {
-			calculateIntersects();
+			calculateIntersects(delta);
 		}
 	}
 
-	protected abstract void calculateIntersects();
+	protected abstract void calculateIntersects(int delta);
 
-	protected abstract void calculateContains();
+	protected abstract void calculateContains(int delta);
 
 	public abstract void onDestroy();
 

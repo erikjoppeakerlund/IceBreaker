@@ -17,11 +17,13 @@ public class GameObjectSprite extends GameObjectFalling {
 
 	protected Aim aim = null;
 	protected List<Aim> aims = null;
-	protected float speed = 0.5f;
-	protected final float MAX_SPEED = 8.0f;
+	protected float speed = 0.004f;
+	protected final float MAX_SPEED = 0.2f;
 	protected boolean mouseButtonPirmaryDown = false;
 
 	protected boolean right = true;
+
+	protected float JUMP_POWER = -0.3f;
 
 	public GameObjectSprite(float[] nodes, float bouncyness) {
 		super(nodes, bouncyness);
@@ -36,7 +38,7 @@ public class GameObjectSprite extends GameObjectFalling {
 	}
 
 	@Override
-	public void update(GameContainer container, int arg) {
+	public void update(GameContainer container, int delta) {
 		Input in = container.getInput();
 
 		float mouseX = in.getMouseX();
@@ -48,15 +50,15 @@ public class GameObjectSprite extends GameObjectFalling {
 		}
 		if (in.isKeyDown(in.KEY_A)) {
 			if (motion.getX() > -MAX_SPEED) {
-				motion.add(-speed, 0.0f);
+				motion.add(-speed * delta, 0.0f);
 			}
 		} else if (in.isKeyDown(in.KEY_D)) {
 			if (motion.getX() < MAX_SPEED) {
-				motion.add(speed, 0.0f);
+				motion.add(speed * delta, 0.0f);
 			}
 		}
 		if (in.isKeyDown(in.KEY_W)) {
-			motion.set(new Vector2(motion.getX(), -4.0f));
+			motion.set(new Vector2(motion.getX(), JUMP_POWER));
 		}
 		if (in.isMousePressed(in.MOUSE_LEFT_BUTTON)) {
 			aim.primaryPushed();
@@ -76,7 +78,7 @@ public class GameObjectSprite extends GameObjectFalling {
 
 		aim.update();
 
-		super.update(container, arg);
+		super.update(container, delta);
 	}
 
 }

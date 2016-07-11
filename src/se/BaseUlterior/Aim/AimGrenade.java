@@ -32,6 +32,8 @@ public class AimGrenade extends Aim {
 
 	private final float TIMES_LESS_ACTUAL_FORCE = 2.0f;
 
+	private final float FORCE = 0.03f;
+
 	public AimGrenade() {
 		grenades = new ArrayList<>();
 		Grenade startGrenade = new Grenade(new Circle(x, y, Grenade.GRENADE_SIZE).getPoints());
@@ -59,7 +61,7 @@ public class AimGrenade extends Aim {
 		}
 		if (charge) {
 			if (force < CHARGE_SPEED * CHARGE_ITERATION) {
-				force += CHARGE_SPEED;
+				force += CHARGE_SPEED * FORCE;
 				armLengt -= CHARGE_SPEED;
 			}
 		}

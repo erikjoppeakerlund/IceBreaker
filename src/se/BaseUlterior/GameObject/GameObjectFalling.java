@@ -27,19 +27,19 @@ public abstract class GameObjectFalling extends GameObject {
 	}
 
 	@Override
-	public void update(GameContainer container, int arg) {
+	public void update(GameContainer container, int delta) {
 
 		checkImpact();
 		if (underImpact) {
-			runImpact();
+			runImpact(delta);
 		}
-		setCenterX(getCenterX() + this.motion.getX());
-		setCenterY(getCenterY() + this.motion.getY());
+		setCenterX(getCenterX() + this.motion.getX() * delta);
+		setCenterY(getCenterY() + this.motion.getY() * delta);
 	}
 
-	private void runImpact() {
+	private void runImpact(int delta) {
 		for (Impact im : currentImpacts) {
-			im.checkCalculate();
+			im.checkCalculate(delta);
 			if (!(im.getTrigger().contains(this) || im.getTrigger().intersects(this))) {
 				im.notTouchingButWithin();
 			}

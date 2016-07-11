@@ -18,7 +18,7 @@ public class ImpactBounce extends Impact {
 	}
 
 	@Override
-	public void calculateIntersects() {
+	public void calculateIntersects(int delta) {
 
 		normalsTester = origin.getMyNormalsAfterHitBy(other);
 		if (!other.noForce) {
@@ -55,14 +55,14 @@ public class ImpactBounce extends Impact {
 		float dot = affectedPiece.dot(N) * (1.0f + other.getBouncyness());
 
 		if (!other.noForce) {
-			affectedPiece.add(-N.getX() / 2.0f, -N.getY() / 2.0f);
+			affectedPiece.add((-N.getX() / 100.0f) * delta, (-N.getY() / 100.0f) * delta);
 		}
 		N.scale(dot);
 		affectedPiece.sub(N);
 	}
 
 	@Override
-	protected void calculateContains() {
+	protected void calculateContains(int delta) {
 		// TODO Auto-generated method stub
 
 	}

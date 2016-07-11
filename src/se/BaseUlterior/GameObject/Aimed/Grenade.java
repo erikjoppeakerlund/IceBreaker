@@ -40,7 +40,7 @@ public class Grenade extends GameObjectFalling {
 	}
 
 	@Override
-	public void update(GameContainer container, int arg) {
+	public void update(GameContainer container, int delta) {
 		if (!isReleased) {
 			return;
 		}
@@ -77,7 +77,7 @@ public class Grenade extends GameObjectFalling {
 
 			BreakingPoint.objsToRemove.add(this);
 		} else {
-			super.update(container, arg);
+			super.update(container, delta);
 		}
 
 	}
