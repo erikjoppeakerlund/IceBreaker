@@ -3,6 +3,9 @@ package se.BaseUlterior.Aim;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 
 import se.BaseUlterior.Game.BreakingPoint;
@@ -39,31 +42,6 @@ public class AimGrenade extends Aim {
 	}
 
 	@Override
-	public void update() {
-		if (current != null) {
-			x = spriteX + (float) Math.cos(angle) * armLengt;
-			y = spriteY + (float) Math.sin(angle) * armLengt;
-			current.setCenterX(x);
-			current.setCenterY(y);
-		}
-		if (canMakeNew) {
-			if (System.currentTimeMillis() - currentTime > TIME_BETWEEN) {
-				Grenade newCurrent = new Grenade(new Circle(x, y, Grenade.GRENADE_SIZE).getPoints());
-				grenades.add(newCurrent);
-				current = newCurrent;
-				BreakingPoint.objsToAdd.add(newCurrent);
-				canMakeNew = false;
-			}
-		}
-		if (charge) {
-			if (force < CHARGE_SPEED * CHARGE_ITERATION) {
-				force += CHARGE_SPEED * FORCE;
-				armLengt -= CHARGE_SPEED;
-			}
-		}
-	}
-
-	@Override
 	public void primaryPushed() {
 		charge = true;
 	}
@@ -94,6 +72,35 @@ public class AimGrenade extends Aim {
 	public void secondaryReleased() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void render(GameContainer container, Graphics graphics) throws SlickException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void updateFulfill(GameContainer container, int arg) {
+		if (current != null) {
+			current.setCenterX(x);
+			current.setCenterY(y);
+		}
+		if (canMakeNew) {
+			if (System.currentTimeMillis() - currentTime > TIME_BETWEEN) {
+				Grenade newCurrent = new Grenade(new Circle(x, y, Grenade.GRENADE_SIZE).getPoints());
+				grenades.add(newCurrent);
+				current = newCurrent;
+				BreakingPoint.objsToAdd.add(newCurrent);
+				canMakeNew = false;
+			}
+		}
+		if (charge) {
+			if (force < CHARGE_SPEED * CHARGE_ITERATION) {
+				force += CHARGE_SPEED * FORCE;
+				armLengt -= CHARGE_SPEED;
+			}
+		}
 	}
 
 }

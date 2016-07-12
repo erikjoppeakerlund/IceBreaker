@@ -6,7 +6,9 @@ import java.util.List;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
 
 import se.BaseUlterior.Aim.Aim;
 import se.BaseUlterior.Aim.AimBlade;
@@ -85,9 +87,15 @@ public class GameObjectSprite extends GameObjectFalling {
 
 		aim.setAngleToMouse(angleToPoint);
 
-		aim.update();
+		aim.update(container, delta);
 
 		super.update(container, delta);
+	}
+
+	@Override
+	public void render(GameContainer container, Graphics graphics) throws SlickException {
+		super.render(container, graphics);
+		aim.render(container, graphics);
 	}
 
 }

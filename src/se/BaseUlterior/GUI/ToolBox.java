@@ -91,6 +91,7 @@ public class ToolBox extends Panel {
 			@Override
 			public void onClick() {
 				BreakingPoint.insertMode = !BreakingPoint.insertMode;
+
 			}
 		});
 	}

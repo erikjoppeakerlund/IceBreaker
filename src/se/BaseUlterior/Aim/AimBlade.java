@@ -1,18 +1,19 @@
 package se.BaseUlterior.Aim;
 
+import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Polygon;
+import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
-
-import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.Aimed.Blade;
 
 public class AimBlade extends Aim {
 
-	protected GameObject blade = null;
+	protected Shape blade;
 
 	public AimBlade() {
-		blade = new Blade();
-
+		blade = new Polygon(new float[] { 40, 10, 0, 0, 0, 20 });
 	}
 
 	@Override
@@ -40,12 +41,17 @@ public class AimBlade extends Aim {
 	}
 
 	@Override
-	public void update() {
-		x = spriteX + (float) Math.cos(angle) * armLengt;
-		y = spriteY + (float) Math.sin(angle) * armLengt;
+	public void render(GameContainer container, Graphics graphics) throws SlickException {
+		graphics.setColor(Color.white);
+		graphics.fill(blade);
+
+	}
+
+	@Override
+	protected void updateFulfill(GameContainer container, int arg) {
+		blade = blade.transform(Transform.createRotateTransform(dAngle));
 		blade.setCenterX(x);
 		blade.setCenterY(y);
-		((Blade) blade).seteMe((Polygon) blade.transform(Transform.createRotateTransform(angle)));
 	}
 
 }

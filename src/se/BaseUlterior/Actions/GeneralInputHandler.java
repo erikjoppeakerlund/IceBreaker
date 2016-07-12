@@ -34,7 +34,7 @@ public class GeneralInputHandler implements ActionListenable {
 	public void wasWasKeyPressed(int button, char c) {
 		if (button == Input.KEY_ESCAPE) {
 			BreakingPoint.insertMode = !BreakingPoint.insertMode;
-			insertModeText.setValue(Constants.INSERT_MODE);
+			insertModeText.setValue(BreakingPoint.insertMode ? Constants.INSERT_MODE : Constants.ACTION_MODE);
 		}
 	}
 
