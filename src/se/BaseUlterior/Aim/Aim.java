@@ -26,6 +26,9 @@ public abstract class Aim {
 
 	protected float armLengt = START_ARM_LENGTH;
 
+	protected boolean isRight = true;
+	protected boolean wasJustSwitched = false;
+
 	public void setPosition(float x, float y) {
 		this.spriteX = x;
 		this.spriteY = y;
@@ -34,12 +37,28 @@ public abstract class Aim {
 	protected abstract void updateFulfill(GameContainer container, int arg);
 
 	public void update(GameContainer container, int arg) {
+		if ((angle + Math.PI / 2) > 0 && (angle + Math.PI / 2) < Math.PI) {
+			if (!isRight) {
+				wasJustSwitched = true;
+			}
+			isRight = true;
+		} else {
+			if (isRight) {
+				wasJustSwitched = true;
+			}
+			isRight = false;
+		}
 		x = spriteX + (float) Math.cos(angle) * armLengt;
 		y = spriteY + (float) Math.sin(angle) * armLengt;
 		updateFulfill(container, arg);
+		wasJustSwitched = false;
 	}
 
-	public abstract void render(GameContainer container, Graphics graphics) throws SlickException;
+	public void render(GameContainer container, Graphics graphics) throws SlickException {
+		renderFullfill(container, graphics);
+	}
+
+	protected abstract void renderFullfill(GameContainer container, Graphics graphics) throws SlickException;
 
 	public void setAngleToMouse(float angleToPoint) {
 		dAngle = angleToPoint - angle;

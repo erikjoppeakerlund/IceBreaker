@@ -13,7 +13,10 @@ public class AimBlade extends Aim {
 	protected Shape blade;
 
 	public AimBlade() {
-		blade = new Polygon(new float[] { 40, 10, 0, 0, 0, 20 });
+		blade = new Polygon(new float[] { 1062, 383, 1129, 315, 1037, 365, 1052, 369, 1022, 387, 1036, 415, 1042, 389,
+				1055, 390, });
+		blade.setCenterX(-60);
+		blade.setCenterY(-60);
 	}
 
 	@Override
@@ -41,17 +44,16 @@ public class AimBlade extends Aim {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		graphics.setColor(Color.white);
-		graphics.fill(blade);
-
-	}
-
-	@Override
 	protected void updateFulfill(GameContainer container, int arg) {
 		blade = blade.transform(Transform.createRotateTransform(dAngle));
 		blade.setCenterX(x);
 		blade.setCenterY(y);
+	}
+
+	@Override
+	protected void renderFullfill(GameContainer container, Graphics graphics) throws SlickException {
+		graphics.setColor(Color.cyan);
+		graphics.fill(blade);
 	}
 
 }

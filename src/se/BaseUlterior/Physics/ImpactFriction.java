@@ -13,7 +13,7 @@ public class ImpactFriction extends Impact {
 
 	@Override
 	public void calculateIntersects(int delta) {
-		affectedPiece.scale(effect * delta);
+		affectedPiece.scale(effect);
 	}
 
 	@Override

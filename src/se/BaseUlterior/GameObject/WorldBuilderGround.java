@@ -4,7 +4,6 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 
 import se.BaseUlterior.Game.BreakingPoint;
-import se.BaseUlterior.GameObject.Aimed.Grenade;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactBounce;
 import se.BaseUlterior.Utils.UlteriorUtils;
@@ -40,9 +39,9 @@ public class WorldBuilderGround extends WorldBuilder {
 	private void runImpact(int delta) {
 		for (Impact im : currentImpacts) {
 			// ugly hack :/
-			if (!(im.getTrigger() instanceof Grenade)) {
-				im.checkCalculate(delta);
-			}
+			// if (!(im.getTrigger() instanceof Grenade)) {
+			im.checkCalculate(delta);
+			// }
 			if (!(im.getTrigger().contains(this) || im.getTrigger().intersects(this))) {
 				im.notTouchingButWithin();
 			}

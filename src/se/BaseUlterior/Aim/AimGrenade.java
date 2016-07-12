@@ -75,12 +75,6 @@ public class AimGrenade extends Aim {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	protected void updateFulfill(GameContainer container, int arg) {
 		if (current != null) {
 			current.setCenterX(x);
@@ -101,6 +95,12 @@ public class AimGrenade extends Aim {
 				armLengt -= CHARGE_SPEED;
 			}
 		}
+	}
+
+	@Override
+	protected void renderFullfill(GameContainer container, Graphics graphics) throws SlickException {
+		// TODO Auto-generated method stub
+
 	}
 
 }

@@ -12,7 +12,6 @@ import org.newdawn.slick.SlickException;
 
 import se.BaseUlterior.Aim.Aim;
 import se.BaseUlterior.Aim.AimBlade;
-import se.BaseUlterior.Aim.AimGrenade;
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Utils.UlteriorUtils;
@@ -21,23 +20,23 @@ public class GameObjectSprite extends GameObjectFalling {
 
 	protected Aim aim = null;
 	protected List<Aim> aims = null;
-	protected float speed = 0.001f;
-	protected final float MAX_SPEED = 0.69f;
+	protected float speed = 0.0006f;
+	protected final float MAX_SPEED = 0.27f;
 	protected boolean mouseButtonPirmaryDown = false;
 
 	protected boolean right = true;
 
-	protected float JUMP_POWER = -0.39f;
+	protected float JUMP_POWER = -0.23f;
 
 	public GameObjectSprite(float[] nodes, float bouncyness) {
 		super(nodes, bouncyness);
-		color = Color.gray;
+		color = Color.darkGray;
 		initAims();
 	}
 
 	private void initAims() {
 		aims = new ArrayList<Aim>();
-		aims.add(new AimGrenade());
+		// aims.add(new AimGrenade());
 		aims.add(new AimBlade());
 		aim = aims.get(0);
 	}

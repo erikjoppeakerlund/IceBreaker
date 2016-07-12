@@ -28,19 +28,22 @@ public class WorldBuilderLiquid extends WorldBuilder {
 		switch (density) {
 		case SOIL:
 			this.color = Color.darkGray;
-			this.frictionAmount = 0.89f;
+			this.frictionAmount = 0.81f;
 			break;
 		case MUDD:
 			this.color = Color.green;
-			this.frictionAmount = 0.91f;
+			this.frictionAmount = 0.83f;
 			break;
 		case GREECE:
 			this.color = Color.magenta;
-			this.frictionAmount = 0.96f;
+			this.frictionAmount = 0.88f;
 			break;
 		case WATER:
 			this.color = Color.blue;
-			this.frictionAmount = 0.98f;
+			this.frictionAmount = 0.90f;
+		case LAVA:
+			this.color = Color.red;
+			this.frictionAmount = 0.80f;
 		}
 	}
 

@@ -79,6 +79,7 @@ public class WorldCreator implements ActionListenable {
 		}
 		if (button == Input.MOUSE_LEFT_BUTTON) {
 			currentBuilder.addPoint(x, y);
+			System.out.println(x + ", " + y + ",");
 		}
 	}
 

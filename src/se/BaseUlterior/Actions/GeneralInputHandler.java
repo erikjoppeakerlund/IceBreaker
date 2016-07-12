@@ -11,7 +11,7 @@ import se.BaseUlterior.Game.BreakingPoint;
 public class GeneralInputHandler implements ActionListenable {
 
 	private SingleText insertModeText = new SingleText(0, 0, 19,
-			BreakingPoint.insertMode ? Constants.INSERT_MODE : Constants.ACTION_MODE, Color.green);
+			BreakingPoint.insertMode ? Constants.INSERT_MODE : Constants.ACTION_MODE, Color.red);
 
 	public GeneralInputHandler() {
 		TextInfo randomText = new TextInfo(Constants.CANVAS_WIDTH - 220, 22);

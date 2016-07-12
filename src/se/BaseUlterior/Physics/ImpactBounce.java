@@ -54,7 +54,7 @@ public class ImpactBounce extends Impact {
 		float dot = affectedPiece.dot(N) * (1.0f + bouncyness);
 
 		if (!other.noForce) {
-			affectedPiece.add((-N.getX() / 400.0f) * delta, (-N.getY() / 400.0f) * delta);
+			affectedPiece.add((-N.getX() / 600.0f) * delta, (-N.getY() / 600.0f) * delta);
 		}
 		N.scale(dot);
 		affectedPiece.sub(N);

@@ -25,6 +25,8 @@ import se.BaseUlterior.GameObject.GameObjectSprite;
 import se.BaseUlterior.GameObject.WorldBuiderForce;
 import se.BaseUlterior.GameObject.WorldBuilderGround;
 import se.BaseUlterior.GameObject.WorldBuilderGroundSolid;
+import se.BaseUlterior.GameObject.WorldBuilderLiquid;
+import se.BaseUlterior.Physics.Density;
 
 public class BreakingPoint extends BasicGame {
 
@@ -105,23 +107,22 @@ public class BreakingPoint extends BasicGame {
 
 		BreakingPoint.objsToAdd.add(wall);
 
-		// GameObject otherGravity = new WorldBuiderForce(
-		// new float[] { 400.0f, 10.0f, 400.0f, 580.0f, 900.0f, 580.0f, 900.0f,
-		// 10.0f }, -0.00f, -0.17f);
-		//
-		// BreakingPoint.all.add(otherGravity);
+		GameObject otherGravity = new WorldBuiderForce(
+				new float[] { 1385, 357, 1177, 267, 1314, 241, 1213, 155, 1335, 117, 1237, 83, 1306, 10, 1383, 15, },
+				-0.02f, -0.0f);
 
-		// GameObject randomWater = new WorldBuilderLiquid(
-		//
-		// new float[] { 170.0f, 100.0f, 700.0f, 190.0f, 620.0f, 310.0f },
-		// Density.SOIL);
-		// BreakingPoint.all.add(randomWater);
+		BreakingPoint.all.add(otherGravity);
 
-		float freeSpace = 500;
+		GameObject randomWater = new WorldBuilderLiquid(
 
-		GameObject worldPiece1 = new WorldBuilderGround(new float[] { 0, freeSpace, 0, Constants.CANVAS_HEIGHT,
-				Constants.CANVAS_WIDTH, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0, Constants.CANVAS_WIDTH / 2,
-				0, Constants.CANVAS_WIDTH / 2, freeSpace, });
+				new float[] { 1083, 556, 929, 489, 840, 534, 438, 530, 350, 523, 310, 627, 495, 693, 863, 653, },
+				Density.LAVA);
+		BreakingPoint.all.add(randomWater);
+
+		GameObject worldPiece1 = new WorldBuilderGround(
+				new float[] { 27, 869, 1375, 866, 1390, 421, 1327, 397, 1229, 309, 1125, 287, 1127, 382, 1043, 448, 919,
+						402, 761, 348, 803, 292, 707, 288, 631, 393, 748, 478, 736, 587, 590, 672, 464, 672, 359, 610,
+						349, 548, 363, 504, 330, 438, 208, 417, 47, 308, 4, 427, 12, 525, 36, 533, 10, 787, });
 
 		levelDummy.levelPieces.add(worldPiece1);
 
