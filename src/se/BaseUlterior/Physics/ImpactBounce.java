@@ -51,8 +51,6 @@ public class ImpactBounce extends Impact {
 		 * ('affectedPiece'), V´ is the resulting vector
 		 */
 
-		// Vector2 N = new Vector2(normals.getVal1(), normal.getVal2());
-
 		float dot = affectedPiece.dot(N) * (1.0f + bouncyness);
 
 		if (!other.noForce) {

@@ -23,6 +23,8 @@ import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.GameObject.GameObjectSprite;
 import se.BaseUlterior.GameObject.WorldBuiderForce;
+import se.BaseUlterior.GameObject.WorldBuilderGround;
+import se.BaseUlterior.GameObject.WorldBuilderGroundSolid;
 
 public class BreakingPoint extends BasicGame {
 
@@ -86,25 +88,22 @@ public class BreakingPoint extends BasicGame {
 				Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0.0f };
 
 		WorldBuiderForce generalGravity = new WorldBuiderForce(wholeScene, Constants.GENERAL_GRAVITY, 0.0f,
-				Color.black);
+				Color.transparent);
 
 		levelDummy.levelPieces.add(generalGravity);
 		Panel toolbox = new ToolBox(Alignment.LEFT);
 		toolbox.pack();
 
-		// float fat = 150.0f;
-		//
-		// float[] wallScene = new float[] { 0.0f - fat, 0.0f - fat,
-		// Constants.CANVAS_WIDTH + fat, 0.0f - fat,
-		// Constants.CANVAS_WIDTH + fat, Constants.CANVAS_HEIGHT + fat, 0.0f -
-		// fat, Constants.CANVAS_HEIGHT + fat,
-		// 0.0f - fat, 0.0f - fat, 0.0f, 0.0f, Constants.CANVAS_WIDTH, 0.0f,
-		// Constants.CANVAS_WIDTH,
-		// Constants.CANVAS_HEIGHT, 0.0f, Constants.CANVAS_HEIGHT, 0.0f, 0.0f };
-		//
-		// GameObject wall = new WorldBuilderGroundSolid(wallScene);
-		//
-		// BreakingPoint.all.add(wall);
+		float fat = 150.0f;
+
+		float[] wallScene = new float[] { 0.0f - fat, 0.0f - fat, Constants.CANVAS_WIDTH + fat, 0.0f - fat,
+				Constants.CANVAS_WIDTH + fat, Constants.CANVAS_HEIGHT + fat, 0.0f - fat, Constants.CANVAS_HEIGHT + fat,
+				0.0f - fat, 0.0f - fat, 0.0f, 0.0f, Constants.CANVAS_WIDTH, 0.0f, Constants.CANVAS_WIDTH,
+				Constants.CANVAS_HEIGHT, 0.0f, Constants.CANVAS_HEIGHT, 0.0f, 0.0f };
+
+		GameObject wall = new WorldBuilderGroundSolid(wallScene);
+
+		BreakingPoint.objsToAdd.add(wall);
 
 		// GameObject otherGravity = new WorldBuiderForce(
 		// new float[] { 400.0f, 10.0f, 400.0f, 580.0f, 900.0f, 580.0f, 900.0f,
@@ -118,13 +117,15 @@ public class BreakingPoint extends BasicGame {
 		// Density.SOIL);
 		// BreakingPoint.all.add(randomWater);
 
-		// GameObject worldPiece1 = new WorldBuilderGround(
-		// new float[] { 5.0f, 400.0f, 250.0f, 620.0f, 495f, 600.0f, 495.0f,
-		// 695.0f, 5.0f, 695.0f });
-		//
-		// BreakingPoint.all.add(worldPiece1);
+		float freeSpace = 500;
 
-		GameObject sprite = new GameObjectSprite(new Circle(910, 190, Constants.SPRITE_RADIUS).getPoints(), 0.0f);
+		GameObject worldPiece1 = new WorldBuilderGround(new float[] { 0, freeSpace, 0, Constants.CANVAS_HEIGHT,
+				Constants.CANVAS_WIDTH, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0, Constants.CANVAS_WIDTH / 2,
+				0, Constants.CANVAS_WIDTH / 2, freeSpace, });
+
+		levelDummy.levelPieces.add(worldPiece1);
+
+		GameObject sprite = new GameObjectSprite(new Circle(310, 190, Constants.SPRITE_RADIUS).getPoints(), 0.0f);
 
 		addObjToGame(sprite);
 

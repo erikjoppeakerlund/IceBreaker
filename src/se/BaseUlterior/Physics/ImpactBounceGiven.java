@@ -26,7 +26,6 @@ public class ImpactBounceGiven extends Impact {
 		if (normals.isEmpty()) {
 			return;
 		}
-		origin.noForce = true;
 
 		Iterator<Vector2> ni = normals.iterator();
 		Vector2 N = null;
@@ -50,13 +49,14 @@ public class ImpactBounceGiven extends Impact {
 		 * ('affectedPiece'), V´ is the resulting vector
 		 */
 
-		float dot = affectedPiece.dot(N) * (1.0f + bouncyness);
+		float dot = affectedPiece.dot(N) * (1.0f - bouncyness);
 
-		// if (!other.noForce) {
 		affectedPiece.add((-N.getX() / 100.0f) * delta, (-N.getY() / 100.0f) * delta);
-		// }
 		N.scale(dot);
 		affectedPiece.sub(N);
+		// origin.noForce = false;
+
+		other.noForce = false;
 		origin.noForce = false;
 	}
 
@@ -73,6 +73,6 @@ public class ImpactBounceGiven extends Impact {
 
 	@Override
 	public void notTouchingButWithin() {
-		other.noForce = false;
+		origin.noForce = false;
 	}
 }

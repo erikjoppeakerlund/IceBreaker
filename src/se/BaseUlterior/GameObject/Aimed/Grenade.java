@@ -12,6 +12,8 @@ import se.BaseUlterior.GameObject.GameObjectExplosion;
 import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.GameObject.WorldBuilderGround;
 import se.BaseUlterior.Geom.Vector2;
+import se.BaseUlterior.Physics.Impact;
+import se.BaseUlterior.Physics.ImpactBounce;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
 public class Grenade extends GameObjectFalling {
@@ -19,7 +21,7 @@ public class Grenade extends GameObjectFalling {
 	public static final float GRENADE_SIZE = 27.0f;
 	private boolean isReleased = false;
 
-	private static float BOUNCYNESS = 0.5f;
+	private static float BOUNCYNESS = 0.9f;
 	protected long wasReleasedAt;
 
 	protected final long TIME_UNTIL_EXPLOTION = 2500;
@@ -82,6 +84,11 @@ public class Grenade extends GameObjectFalling {
 			super.update(container, delta);
 		}
 
+	}
+
+	@Override
+	public Impact getImpact(GameObject other) {
+		return new ImpactBounce(this, other, this.bouncyness);
 	}
 
 }
