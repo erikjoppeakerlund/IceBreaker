@@ -139,10 +139,6 @@ public abstract class Component extends GameObject {
 	protected abstract void finalAction();
 
 	@Override
-	public void update(GameContainer container, int arg) throws SlickException {
-	}
-
-	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		graphics.setColor(this.color);
 		graphics.fill(this);

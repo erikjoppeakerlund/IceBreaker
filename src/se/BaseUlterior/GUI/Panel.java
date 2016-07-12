@@ -1,38 +1,23 @@
 package se.BaseUlterior.GUI;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.SlickException;
 
 public class Panel extends Component {
 	protected Alignment alignmentInContainer = Alignment.LEFT;
 
-	public Panel(Alignment alignment) {
-		super(400f, 500f);
+	public Panel(float width, float height, Alignment alignment) {
+		super(width, height);
 		this.alignmentInContainer = alignment;
 		color = Color.white;
-		this.add(new Button("GROUND", 120f, 30f));
-		this.add(new Button("FRICTION", 120f, 30f));
-		this.add(new Button("GRAVITY", 120f, 30f));
-		this.add(new Button("test", 120f, 30f));
-		this.add(new Button("test", 120f, 30f));
-		this.add(new Button("test", 120f, 30f));
-		this.add(new Button("test", 120f, 30f));
-		this.add(new Button("test", 120f, 30f));
-		this.add(new Button("test", 120f, 30f));
-		this.add(new Button("test", 120f, 30f));
-		this.add(new Button("test", 120f, 30f));
-		this.add(new Button("test", 120f, 30f));
-		this.add(new Button("test", 120f, 30f));
-		this.add(new Button("test", 120f, 30f));
-		this.add(new Button("test", 120f, 30f));
-		this.add(new Button("test", 120f, 30f));
-		this.add(new Button("test", 120f, 30f));
-		this.add(new Button("test", 120f, 30f));
-		this.add(new Button("test", 120f, 30f));
-		this.add(new Button("test", 120f, 30f));
-		this.add(new Button("test", 120f, 30f));
-		this.add(new Button("test", 120f, 30f));
-		this.add(new Button("test", 120f, 30f));
-		this.add(new Button("test", 120f, 30f));
+
+	}
+
+	@Override
+	public void update(GameContainer container, int arg) throws SlickException {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override

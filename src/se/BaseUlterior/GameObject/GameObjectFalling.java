@@ -28,7 +28,6 @@ public abstract class GameObjectFalling extends GameObject {
 
 	@Override
 	public void update(GameContainer container, int delta) {
-
 		checkImpact();
 		if (underImpact) {
 			runImpact(delta);

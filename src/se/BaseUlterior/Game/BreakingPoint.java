@@ -18,6 +18,7 @@ import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Context.Info;
 import se.BaseUlterior.GUI.Alignment;
 import se.BaseUlterior.GUI.Panel;
+import se.BaseUlterior.GUI.ToolBox;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.GameObject.GameObjectSprite;
@@ -88,7 +89,7 @@ public class BreakingPoint extends BasicGame {
 				Color.black);
 
 		levelDummy.levelPieces.add(generalGravity);
-		Panel toolbox = new Panel(Alignment.LEFT);
+		Panel toolbox = new ToolBox(Alignment.LEFT);
 		toolbox.pack();
 
 		// float fat = 150.0f;
@@ -140,11 +141,11 @@ public class BreakingPoint extends BasicGame {
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 
-		if (!insertMode) {
-			for (GameObject go : BreakingPoint.all) {
-				go.update(container, delta);
-			}
+		// if (!insertMode) {
+		for (GameObject go : BreakingPoint.all) {
+			go.update(container, delta);
 		}
+		// }
 		if (!objsToRemove.isEmpty()) {
 			all.removeAll(objsToRemove);
 			objsToRemove.clear();
@@ -156,7 +157,7 @@ public class BreakingPoint extends BasicGame {
 	}
 
 	public static void main(String[] s) throws SlickException {
-		AppGameContainer appGameContainer = new AppGameContainer(new BreakingPoint("Breking Point"));
+		AppGameContainer appGameContainer = new AppGameContainer(new BreakingPoint("Ice Breaker"));
 		int maxFPS = 60;
 		appGameContainer.setTargetFrameRate(maxFPS);
 		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, false);

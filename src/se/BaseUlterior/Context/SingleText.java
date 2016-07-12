@@ -30,6 +30,10 @@ public class SingleText {
 		this.value = value;
 	}
 
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
 	public Font font;
 	public TrueTypeFont trueTypeFont;
 

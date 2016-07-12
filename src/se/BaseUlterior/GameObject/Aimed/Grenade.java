@@ -31,6 +31,8 @@ public class Grenade extends GameObjectFalling {
 	public Grenade(float[] nodes) {
 		super(nodes, BOUNCYNESS);
 		color = color.darkGray;
+		setX(-70f);
+		setY(-70f);
 	}
 
 	public void initMotion(Vector2 motion) {

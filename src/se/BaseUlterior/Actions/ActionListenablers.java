@@ -46,4 +46,9 @@ public class ActionListenablers {
 		}
 	}
 
+	public void wasMouseMoved(int oldx, int oldy, int newx, int newy) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

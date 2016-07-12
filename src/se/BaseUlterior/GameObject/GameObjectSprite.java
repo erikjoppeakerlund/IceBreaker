@@ -10,6 +10,7 @@ import org.newdawn.slick.Input;
 
 import se.BaseUlterior.Aim.Aim;
 import se.BaseUlterior.Aim.AimGrenade;
+import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
@@ -39,6 +40,9 @@ public class GameObjectSprite extends GameObjectFalling {
 
 	@Override
 	public void update(GameContainer container, int delta) {
+		if (BreakingPoint.insertMode) {
+			return;
+		}
 		Input in = container.getInput();
 
 		float mouseX = in.getMouseX();
