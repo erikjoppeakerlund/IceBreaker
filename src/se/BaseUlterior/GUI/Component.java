@@ -9,7 +9,6 @@ import org.newdawn.slick.SlickException;
 
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.Physics.Impact;
 
 public abstract class Component extends GameObject {
@@ -161,7 +160,7 @@ public abstract class Component extends GameObject {
 	}
 
 	@Override
-	public Impact getImpact(GameObjectFalling agileObject) {
+	public Impact getImpact(GameObject agileObject) {
 		// TODO Auto-generated method stub
 		return null;
 	}

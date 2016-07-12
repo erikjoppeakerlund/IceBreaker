@@ -5,7 +5,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import se.BaseUlterior.Physics.Impact;
-import se.BaseUlterior.Physics.ImpactBounce;
 
 public abstract class WorldBuilder extends GameObject {
 
@@ -27,7 +26,5 @@ public abstract class WorldBuilder extends GameObject {
 	}
 
 	@Override
-	public Impact getImpact(GameObjectFalling piece) {
-		return new ImpactBounce(this, piece);
-	}
+	public abstract Impact getImpact(GameObject piece);
 }

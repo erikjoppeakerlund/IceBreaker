@@ -1,25 +1,18 @@
 package se.BaseUlterior.GameObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Shape;
 
 import se.BaseUlterior.Game.BreakingPoint;
-import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Physics.Impact;
-import se.BaseUlterior.Physics.ImpactBounce;
+import se.BaseUlterior.Physics.ImpactBounceGiven;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
 //next thins: enable the user only to use the keyboard!
 public abstract class GameObjectFalling extends GameObject {
 	private boolean underImpact = false;
-	protected List<Impact> impactsToRemove = new ArrayList<>();
-
-	protected float bouncyness;
 
 	public GameObjectFalling(float[] nodes, float bouncyness) {
 		super(nodes);
@@ -98,13 +91,9 @@ public abstract class GameObjectFalling extends GameObject {
 		}
 	}
 
-	public Vector2 getMotion() {
-		return motion;
-	}
-
 	@Override
-	public Impact getImpact(GameObjectFalling other) {
-		return new ImpactBounce(this, other);
+	public Impact getImpact(GameObject other) {
+		return new ImpactBounceGiven(this, other, bouncyness);
 	}
 
 	public float getBouncyness() {
@@ -124,10 +113,6 @@ public abstract class GameObjectFalling extends GameObject {
 	@Override
 	public Shape[] subtract(Shape other) {
 		return new Shape[0];
-	}
-
-	public void removeImpact(Impact im) {
-		impactsToRemove.add(im);
 	}
 
 	public void removeCurrentImpactsWhichBelingTo(GameObject go) {

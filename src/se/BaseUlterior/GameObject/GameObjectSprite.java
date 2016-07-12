@@ -21,13 +21,13 @@ public class GameObjectSprite extends GameObjectFalling {
 
 	protected Aim aim = null;
 	protected List<Aim> aims = null;
-	protected float speed = 0.004f;
-	protected final float MAX_SPEED = 0.4f;
+	protected float speed = 0.001f;
+	protected final float MAX_SPEED = 0.69f;
 	protected boolean mouseButtonPirmaryDown = false;
 
 	protected boolean right = true;
 
-	protected float JUMP_POWER = -0.3f;
+	protected float JUMP_POWER = -0.39f;
 
 	public GameObjectSprite(float[] nodes, float bouncyness) {
 		super(nodes, bouncyness);
@@ -69,7 +69,9 @@ public class GameObjectSprite extends GameObjectFalling {
 			}
 		}
 		if (in.isKeyDown(Input.KEY_W)) {
-			motion.set(new Vector2(motion.getX(), JUMP_POWER));
+			if (motion.y > 0) {
+				motion.set(new Vector2(motion.getX(), JUMP_POWER));
+			}
 		}
 		if (in.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 			aim.primaryPushed();

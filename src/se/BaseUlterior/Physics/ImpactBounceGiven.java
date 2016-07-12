@@ -6,28 +6,27 @@ import java.util.Set;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Geom.Vector2;
 
-public class ImpactBounce extends Impact {
+public class ImpactBounceGiven extends Impact {
 
 	protected Set<Vector2> normals = null;
 	protected Set<Vector2> normalsTester = null;
 	protected float bouncyness;
 
-	public ImpactBounce(GameObject origin, GameObject go, float bouncyness) {
+	public ImpactBounceGiven(GameObject origin, GameObject go, float bouncyness) {
 		super(origin, go);
-		normals = origin.getMyNormalsAfterHitBy(other);
+		normalsTester = other.getMyNormalsAfterHitBy(origin);
 		this.bouncyness = bouncyness;
+		affectedPiece = origin.getMotion();
 	}
 
 	@Override
 	public void calculateIntersects(int delta) {
 
-		normalsTester = origin.getMyNormalsAfterHitBy(other);
-		if (!other.noForce) {
-			normals = normalsTester;
-		}
+		normals = other.getMyNormalsAfterHitBy(origin);
 		if (normals.isEmpty()) {
 			return;
 		}
+		origin.noForce = true;
 
 		Iterator<Vector2> ni = normals.iterator();
 		Vector2 N = null;
@@ -51,15 +50,14 @@ public class ImpactBounce extends Impact {
 		 * ('affectedPiece'), V´ is the resulting vector
 		 */
 
-		// Vector2 N = new Vector2(normals.getVal1(), normal.getVal2());
-
 		float dot = affectedPiece.dot(N) * (1.0f + bouncyness);
 
-		if (!other.noForce) {
-			affectedPiece.add((-N.getX() / 400.0f) * delta, (-N.getY() / 400.0f) * delta);
-		}
+		// if (!other.noForce) {
+		affectedPiece.add((-N.getX() / 100.0f) * delta, (-N.getY() / 100.0f) * delta);
+		// }
 		N.scale(dot);
 		affectedPiece.sub(N);
+		origin.noForce = false;
 	}
 
 	@Override

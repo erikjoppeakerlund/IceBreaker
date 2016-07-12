@@ -29,7 +29,7 @@ public class GameObjectExplosion extends GameObject {
 	}
 
 	@Override
-	public Impact getImpact(GameObjectFalling agileObject) {
+	public Impact getImpact(GameObject agileObject) {
 		impactExplosion = new ImpactExplosion(this, agileObject);
 		return impactExplosion;
 	}

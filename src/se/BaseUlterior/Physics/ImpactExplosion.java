@@ -1,7 +1,6 @@
 package se.BaseUlterior.Physics;
 
 import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.GameObjectFalling;
 
 public class ImpactExplosion extends Impact {
 
@@ -10,7 +9,7 @@ public class ImpactExplosion extends Impact {
 
 	private final float MAX_IMPACT = 0.3f;
 
-	public ImpactExplosion(GameObject origin, GameObjectFalling other) {
+	public ImpactExplosion(GameObject origin, GameObject other) {
 		super(origin, other);
 		timeSinceExplotion = System.currentTimeMillis();
 	}

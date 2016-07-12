@@ -8,7 +8,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.Physics.Impact;
 
 public class Info extends GameObject {
@@ -26,7 +25,7 @@ public class Info extends GameObject {
 	}
 
 	@Override
-	public Impact getImpact(GameObjectFalling agileObject) {
+	public Impact getImpact(GameObject agileObject) {
 		return null;
 	}
 

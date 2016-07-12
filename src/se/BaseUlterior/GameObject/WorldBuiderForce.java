@@ -39,7 +39,7 @@ public class WorldBuiderForce extends WorldBuilder {
 	}
 
 	@Override
-	public Impact getImpact(GameObjectFalling piece) {
+	public Impact getImpact(GameObject piece) {
 		return new ImpactForce(this, piece, gravityY, gravityX);
 	}
 

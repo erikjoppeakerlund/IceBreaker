@@ -18,7 +18,11 @@ public abstract class GameObject extends Polygon {
 
 	protected List<Impact> currentImpacts = null;
 
+	protected List<Impact> impactsToRemove = new ArrayList<>();
+
 	protected Color color;
+
+	public float bouncyness;
 
 	protected Vector2 motion = null;
 
@@ -28,7 +32,7 @@ public abstract class GameObject extends Polygon {
 
 	public ArrayList<Impact> generlImacts = new ArrayList<>();
 
-	public Vector2 getMotions() {
+	public Vector2 getMotion() {
 		return motion;
 	}
 
@@ -77,6 +81,10 @@ public abstract class GameObject extends Polygon {
 		dx /= len;
 		dy /= len;
 		return new float[] { -dy, dx };
+	}
+
+	public void removeImpact(Impact im) {
+		impactsToRemove.add(im);
 	}
 
 	/**
@@ -209,7 +217,9 @@ public abstract class GameObject extends Polygon {
 
 	public abstract void render(GameContainer container, Graphics graphics) throws SlickException;
 
-	public abstract Impact getImpact(GameObjectFalling agileObject);
+	public Impact getImpact(GameObject agileObject) {
+		return null;
+	}
 
 	public void setColor(Color color) {
 		this.color = color;

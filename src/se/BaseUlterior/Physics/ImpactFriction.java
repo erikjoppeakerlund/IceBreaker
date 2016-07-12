@@ -1,13 +1,12 @@
 package se.BaseUlterior.Physics;
 
 import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.GameObjectFalling;
 
 public class ImpactFriction extends Impact {
 
 	protected float effect;
 
-	public ImpactFriction(GameObject origin, GameObjectFalling other, float effect) {
+	public ImpactFriction(GameObject origin, GameObject other, float effect) {
 		super(origin, other);
 		this.effect = effect;
 	}

@@ -1,16 +1,15 @@
 package se.BaseUlterior.Physics;
 
 import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.Geom.Vector2;
 
 public abstract class Impact {
 
 	protected GameObject origin;
-	protected GameObjectFalling other;
+	protected GameObject other;
 	protected Vector2 affectedPiece;
 
-	public Impact(GameObject origin, GameObjectFalling other) {
+	public Impact(GameObject origin, GameObject other) {
 		this.origin = origin;
 		this.other = other;
 		affectedPiece = other.getMotion();
@@ -20,7 +19,7 @@ public abstract class Impact {
 		return origin;
 	}
 
-	public GameObjectFalling getAffected() {
+	public GameObject getAffected() {
 		return other;
 	}
 

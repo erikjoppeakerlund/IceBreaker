@@ -1,7 +1,6 @@
 package se.BaseUlterior.Physics;
 
 import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.GameObjectFalling;
 
 public class ImpactForce extends Impact {
 
@@ -16,7 +15,7 @@ public class ImpactForce extends Impact {
 		return gravityX;
 	}
 
-	public ImpactForce(GameObject origin, GameObjectFalling other, float gravityX, float gravityY) {
+	public ImpactForce(GameObject origin, GameObject other, float gravityX, float gravityY) {
 		super(origin, other);
 		this.gravityX = gravityX;
 		this.gravityY = gravityY;
