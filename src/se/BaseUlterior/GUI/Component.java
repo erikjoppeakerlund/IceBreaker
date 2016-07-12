@@ -25,11 +25,6 @@ public abstract class Component extends GameObject {
 		this.maxWidth = maxWidth;
 	}
 
-	protected float impliedMargin;
-
-	protected float width;
-	protected float height;
-
 	public float getMaxWidth() {
 		return maxWidth;
 	}
@@ -48,9 +43,16 @@ public abstract class Component extends GameObject {
 
 	public Component(float width, float height) {
 		super(new float[] { 0, 0, width, 0, width, height, 0, height });
+		init();
+	}
+
+	public Component(float[] points) {
+		super(points);
+		init();
+	}
+
+	private void init() {
 		checkStacking();
-		this.width = width;
-		this.height = height;
 		subs = new ArrayList<>();
 	}
 
@@ -126,20 +128,6 @@ public abstract class Component extends GameObject {
 
 	private void wasBreakingLine() {
 
-	}
-
-	public void setCurrentWidth(float currentWidth) {
-		this.width = currentWidth;
-		stack();
-	}
-
-	public void setCurrentHeight(float currentHeight) {
-		this.height = currentHeight;
-		stack();
-	}
-
-	public void setImpliedMargin(float impliedMargin) {
-		this.impliedMargin = impliedMargin;
 	}
 
 	public void pack() {

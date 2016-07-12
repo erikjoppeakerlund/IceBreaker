@@ -6,26 +6,33 @@ public class Panel extends Component {
 	protected Alignment alignmentInContainer = Alignment.LEFT;
 
 	public Panel(Alignment alignment) {
-		super(500f, 500f);
+		super(400f, 500f);
 		this.alignmentInContainer = alignment;
 		color = Color.white;
-		this.add(new Button("[GROUND]"));
-		this.add(new Button("[FRICTION]"));
-		this.add(new Button("[GRAVITY]"));
-		this.add(new Button("[TEST]"));
-		this.add(new Button("[TEST]"));
-		this.add(new Button("[TEST]"));
-		this.add(new Button("[TEST]"));
-		this.add(new Button("[TEST]"));
-		this.add(new Button("[TEST]"));
-		this.add(new Button("[TEST]"));
-		this.add(new Button("[TEST]"));
-		this.add(new Button("[TEST]"));
-		this.add(new Button("[TEST]"));
-		this.add(new Button("[TEST]"));
-		this.add(new Button("[TEST]"));
-		this.add(new Button("[TEST]"));
-
+		this.add(new Button("GROUND", 120f, 30f));
+		this.add(new Button("FRICTION", 120f, 30f));
+		this.add(new Button("GRAVITY", 120f, 30f));
+		this.add(new Button("test", 120f, 30f));
+		this.add(new Button("test", 120f, 30f));
+		this.add(new Button("test", 120f, 30f));
+		this.add(new Button("test", 120f, 30f));
+		this.add(new Button("test", 120f, 30f));
+		this.add(new Button("test", 120f, 30f));
+		this.add(new Button("test", 120f, 30f));
+		this.add(new Button("test", 120f, 30f));
+		this.add(new Button("test", 120f, 30f));
+		this.add(new Button("test", 120f, 30f));
+		this.add(new Button("test", 120f, 30f));
+		this.add(new Button("test", 120f, 30f));
+		this.add(new Button("test", 120f, 30f));
+		this.add(new Button("test", 120f, 30f));
+		this.add(new Button("test", 120f, 30f));
+		this.add(new Button("test", 120f, 30f));
+		this.add(new Button("test", 120f, 30f));
+		this.add(new Button("test", 120f, 30f));
+		this.add(new Button("test", 120f, 30f));
+		this.add(new Button("test", 120f, 30f));
+		this.add(new Button("test", 120f, 30f));
 	}
 
 	@Override
