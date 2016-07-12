@@ -86,7 +86,10 @@ public abstract class GameObjectFalling extends GameObject {
 						}
 					}
 					if (!contains) {
-						currentImpacts.add(go.getImpact(this));
+						Impact im = go.getImpact(this);
+						if (im != null) {
+							currentImpacts.add(im);
+						}
 						underImpact = true;
 					}
 				}

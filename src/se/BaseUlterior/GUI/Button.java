@@ -41,7 +41,12 @@ public abstract class Button extends Component {
 		float mouseX = in.getMouseX();
 		float mouseY = in.getMouseY();
 		if (mouseX > this.getMinX() && mouseX < this.getMaxX() && mouseY > this.getMinY() && mouseY < this.getMaxY()) {
-			onMouseOver();
+			if (mouseIsOutside) {
+				onMouseOver();
+			}
+			if (in.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+				onClick();
+			}
 		} else if (!mouseIsOutside) {
 			onMouseOut();
 			mouseIsOutside = true;
@@ -62,5 +67,9 @@ public abstract class Button extends Component {
 	@Override
 	protected void finalAction() {
 		setText(text);
+	}
+
+	public void updateText(String value) {
+		this.label.setValue(value);
 	}
 }

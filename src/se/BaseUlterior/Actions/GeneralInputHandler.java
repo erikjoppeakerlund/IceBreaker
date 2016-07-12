@@ -10,11 +10,8 @@ import se.BaseUlterior.Game.BreakingPoint;
 
 public class GeneralInputHandler implements ActionListenable {
 
-	private String INSERT_MODE = "INSERT_MODE";
-	private String ACTION_MODE = "ACTION_MODE";
-
-	private SingleText insertModeText = new SingleText(0, 0, 27, BreakingPoint.insertMode ? INSERT_MODE : ACTION_MODE,
-			Color.green);
+	private SingleText insertModeText = new SingleText(0, 0, 27,
+			BreakingPoint.insertMode ? Constants.INSERT_MODE : Constants.ACTION_MODE, Color.green);
 
 	public GeneralInputHandler() {
 		TextInfo randomText = new TextInfo(Constants.CANVAS_WIDTH - 220, 22);
@@ -37,10 +34,10 @@ public class GeneralInputHandler implements ActionListenable {
 	public void wasWasKeyPressed(int button, char c) {
 		if (button == Input.KEY_I) {
 			BreakingPoint.insertMode = true;
-			insertModeText.setValue(INSERT_MODE);
+			insertModeText.setValue(Constants.INSERT_MODE);
 		} else if (button == Input.KEY_ESCAPE) {
 			BreakingPoint.insertMode = false;
-			insertModeText.setValue(ACTION_MODE);
+			insertModeText.setValue(Constants.ACTION_MODE);
 		}
 	}
 

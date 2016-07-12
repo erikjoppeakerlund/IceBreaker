@@ -1,5 +1,7 @@
 package se.BaseUlterior.GUI;
 
+import se.BaseUlterior.Game.BreakingPoint;
+
 public class ToolBox extends Panel {
 
 	public ToolBox(Alignment alignment) {
@@ -9,8 +11,7 @@ public class ToolBox extends Panel {
 
 			@Override
 			public void onClick() {
-				// TODO Auto-generated method stub
-
+				BreakingPoint.insertMode = !BreakingPoint.insertMode;
 			}
 		});
 		this.add(new Button("GROUND", 180f, 30f) {
