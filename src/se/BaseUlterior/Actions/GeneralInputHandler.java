@@ -32,12 +32,9 @@ public class GeneralInputHandler implements ActionListenable {
 
 	@Override
 	public void wasWasKeyPressed(int button, char c) {
-		if (button == Input.KEY_I) {
-			BreakingPoint.insertMode = true;
+		if (button == Input.KEY_ESCAPE) {
+			BreakingPoint.insertMode = !BreakingPoint.insertMode;
 			insertModeText.setValue(Constants.INSERT_MODE);
-		} else if (button == Input.KEY_ESCAPE) {
-			BreakingPoint.insertMode = false;
-			insertModeText.setValue(Constants.ACTION_MODE);
 		}
 	}
 

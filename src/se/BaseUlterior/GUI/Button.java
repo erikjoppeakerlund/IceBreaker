@@ -13,22 +13,27 @@ public abstract class Button extends Component {
 	String text;
 	private final static float tabSize = 12f;
 	private SingleText label;
+	private boolean active = true;
 
-	public Button(String text, float width, float height) {
+	public Button(String text, float width, float height, boolean active) {
 		super(new float[] { 0, 0, width, 0, width, height - tabSize, width - tabSize, height, 0, height });
-		this.color = Color.gray;
-		this.text = text;
+		this.active = active;
+		init(text);
 	}
 
 	public Button(String text) {
 		super(120f, 30f);
+		init(text);
+	}
+
+	private void init(String text) {
 		this.color = Color.gray;
 		this.text = text;
 	}
 
 	protected void setText(String text) {
 		TextInfo buttonText = new TextInfo(getX(), getY());
-		label = new SingleText(0, 0, 20, text, Color.black);
+		label = new SingleText(0, 0, 20, text, getIsActiveColor(active));
 		buttonText.singleTexts.add(label);
 		BreakingPoint.info.textInfos.add(buttonText);
 	}
@@ -45,7 +50,7 @@ public abstract class Button extends Component {
 				onMouseOver();
 			}
 			if (in.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-				onClick();
+				onClickImpl();
 			}
 		} else if (!mouseIsOutside) {
 			onMouseOut();
@@ -54,13 +59,21 @@ public abstract class Button extends Component {
 	}
 
 	private void onMouseOut() {
-		label.setColor(Color.black);
+		if (active)
+			label.setColor(Color.black);
+	}
+
+	private void onClickImpl() {
+		if (active) {
+			onClick();
+		}
 	}
 
 	public abstract void onClick();
 
 	public void onMouseOver() {
-		label.setColor(Color.darkGray);
+		if (active)
+			label.setColor(Color.darkGray);
 		mouseIsOutside = false;
 	}
 
@@ -71,5 +84,10 @@ public abstract class Button extends Component {
 
 	public void updateText(String value) {
 		this.label.setValue(value);
+	}
+
+	public Color getIsActiveColor(boolean active) {
+		// label.setColor(active ? Color.black : Color.darkGray);
+		return active ? Color.black : Color.darkGray;
 	}
 }
