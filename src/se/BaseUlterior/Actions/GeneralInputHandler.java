@@ -1,5 +1,6 @@
 package se.BaseUlterior.Actions;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Input;
 
 import se.BaseUlterior.Config.Constants;
@@ -12,7 +13,8 @@ public class GeneralInputHandler implements ActionListenable {
 	private String INSERT_MODE = "INSERT_MODE";
 	private String ACTION_MODE = "ACTION_MODE";
 
-	private SingleText insertModeText = new SingleText(0, 0, 27, BreakingPoint.insertMode ? INSERT_MODE : ACTION_MODE);
+	private SingleText insertModeText = new SingleText(0, 0, 27, BreakingPoint.insertMode ? INSERT_MODE : ACTION_MODE,
+			Color.green);
 
 	public GeneralInputHandler() {
 		TextInfo randomText = new TextInfo(Constants.CANVAS_WIDTH - 220, 22);

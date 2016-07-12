@@ -2,8 +2,6 @@ package se.BaseUlterior.Context;
 
 import java.util.ArrayList;
 
-import org.newdawn.slick.Color;
-
 public class TextInfo {
 
 	public ArrayList<SingleText> singleTexts = new ArrayList<>();
@@ -33,7 +31,7 @@ public class TextInfo {
 		for (SingleText st : singleTexts) {
 			trueX = st.getX();
 			trueY = st.getY();
-			st.trueTypeFont.drawString(x + trueX, y + trueY, st.getValue(), Color.green);
+			st.trueTypeFont.drawString(x + trueX, y + trueY, st.getValue(), st.color);
 		}
 	}
 

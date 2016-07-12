@@ -3,20 +3,21 @@ package se.BaseUlterior.Game;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.CanvasGameContainer;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
-import org.newdawn.slick.util.Log;
 
 import se.BaseUlterior.Actions.ActionListenable;
 import se.BaseUlterior.Actions.ActionListenablers;
 import se.BaseUlterior.Actions.WorldCreator;
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Context.Info;
+import se.BaseUlterior.GUI.Alignment;
+import se.BaseUlterior.GUI.Panel;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.GameObject.GameObjectSprite;
@@ -87,6 +88,8 @@ public class BreakingPoint extends BasicGame {
 				Color.black);
 
 		levelDummy.levelPieces.add(generalGravity);
+		Panel toolbox = new Panel(Alignment.LEFT);
+		toolbox.pack();
 
 		// float fat = 150.0f;
 		//
@@ -130,7 +133,8 @@ public class BreakingPoint extends BasicGame {
 		// BreakingPoint.all.add(randomBouncyObject);
 
 		BreakingPoint.all.addAll(levelDummy.levelPieces);
-		BreakingPoint.all.add(info);
+		BreakingPoint.objsToAdd.add(info);
+		levelDummy.levelPieces.add(toolbox);
 	}
 
 	@Override
@@ -151,26 +155,14 @@ public class BreakingPoint extends BasicGame {
 		}
 	}
 
-	// public static void main(String[] s) throws SlickException {
-	// AppGameContainer appGameContainer = new AppGameContainer(new
-	// BreakingPoint("Breking Point"));
-	// int maxFPS = 60;
-	// appGameContainer.setTargetFrameRate(maxFPS);
-	// appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int)
-	// Constants.CANVAS_HEIGHT, false);
-	// appGameContainer.setAlwaysRender(true);
-	// appGameContainer.start();
-	//
-	// }
+	public static void main(String[] s) throws SlickException {
+		AppGameContainer appGameContainer = new AppGameContainer(new BreakingPoint("Breking Point"));
+		int maxFPS = 60;
+		appGameContainer.setTargetFrameRate(maxFPS);
+		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, false);
+		appGameContainer.setAlwaysRender(true);
+		appGameContainer.start();
 
-	public static void main(String[] args) {
-		try {
-			CanvasGameContainer container = new CanvasGameContainer(new BreakingPoint("Ice Breaker"));
-			container.setSize(Constants.CANVAS_WIDTH, Constants.CANVAS_HEIGHT);
-			new GameWindowBuilder(container);
-		} catch (Exception e) {
-			Log.error(e);
-		}
 	}
 
 	@Override

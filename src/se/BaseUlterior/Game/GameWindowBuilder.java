@@ -15,8 +15,8 @@ import org.newdawn.slick.CanvasGameContainer;
 import org.newdawn.slick.util.Log;
 
 public class GameWindowBuilder {
-	Panel toolbox;
-	Frame mainFrame;
+	protected Panel toolbox;
+	protected Frame mainFrame;
 
 	public GameWindowBuilder(CanvasGameContainer container) {
 		init();
@@ -57,5 +57,14 @@ public class GameWindowBuilder {
 		});
 		toolbox = new Panel();
 		toolbox.setBackground(Color.BLACK);
+	}
+
+	public void inserMode() {
+		toolbox.setVisible(true);
+
+	}
+
+	public void actionMode() {
+		toolbox.setVisible(false);
 	}
 }

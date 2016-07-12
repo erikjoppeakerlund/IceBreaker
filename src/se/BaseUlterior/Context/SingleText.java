@@ -2,9 +2,12 @@ package se.BaseUlterior.Context;
 
 import java.awt.Font;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 
 public class SingleText {
+
+	Color color;
 
 	private String value;
 
@@ -30,11 +33,12 @@ public class SingleText {
 	public Font font;
 	public TrueTypeFont trueTypeFont;
 
-	public SingleText(float x, float y, int size, String value) {
+	public SingleText(float x, float y, int size, String value, Color color) {
 		this.x = x;
 		this.y = y;
 		this.value = value;
 		font = new Font("monospaced", Font.BOLD, size);
 		trueTypeFont = new TrueTypeFont(font, true);
+		this.color = color;
 	}
 }
