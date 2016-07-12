@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.newdawn.slick.geom.Circle;
 
-import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.Aimed.Grenade;
 import se.BaseUlterior.Geom.Vector2;
@@ -19,14 +18,11 @@ public class AimGrenade extends Aim {
 
 	private final long TIME_BETWEEN = 500;
 
-	protected final float START_ARM_LENGTH = Constants.SPRITE_RADIUS * 2.1f;
-
-	protected float armLengt = START_ARM_LENGTH;
 	private boolean canMakeNew;
 
 	private float force = 0.0f;
 	private boolean charge = false;
-	private final float CHARGE_SPEED = 0.2f;
+	private final float CHARGE_SPEED = 0.9f;
 
 	private final int CHARGE_ITERATION = 10;
 

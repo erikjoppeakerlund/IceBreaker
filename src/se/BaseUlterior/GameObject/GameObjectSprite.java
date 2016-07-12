@@ -9,6 +9,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 
 import se.BaseUlterior.Aim.Aim;
+import se.BaseUlterior.Aim.AimBlade;
 import se.BaseUlterior.Aim.AimGrenade;
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.Geom.Vector2;
@@ -35,6 +36,7 @@ public class GameObjectSprite extends GameObjectFalling {
 	private void initAims() {
 		aims = new ArrayList<Aim>();
 		aims.add(new AimGrenade());
+		aims.add(new AimBlade());
 		aim = aims.get(0);
 	}
 
@@ -51,25 +53,28 @@ public class GameObjectSprite extends GameObjectFalling {
 		if (Mouse.getDWheel() > 0) {
 			int i = aims.indexOf(aim);
 			aim = i == aims.size() - 1 ? aims.get(0) : aims.get(i + 1);
+		} else if (Mouse.getDWheel() < 0) {
+			int i = aims.indexOf(aim);
+			aim = i == 0 ? aims.get(aims.size() - 1) : aims.get(i - 1);
 		}
-		if (in.isKeyDown(in.KEY_A)) {
+		if (in.isKeyDown(Input.KEY_A)) {
 			if (motion.getX() > -MAX_SPEED) {
 				motion.add(-speed * delta, 0.0f);
 			}
-		} else if (in.isKeyDown(in.KEY_D)) {
+		} else if (in.isKeyDown(Input.KEY_D)) {
 			if (motion.getX() < MAX_SPEED) {
 				motion.add(speed * delta, 0.0f);
 			}
 		}
-		if (in.isKeyDown(in.KEY_W)) {
+		if (in.isKeyDown(Input.KEY_W)) {
 			motion.set(new Vector2(motion.getX(), JUMP_POWER));
 		}
-		if (in.isMousePressed(in.MOUSE_LEFT_BUTTON)) {
+		if (in.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 			aim.primaryPushed();
 			if (!mouseButtonPirmaryDown) {
 				mouseButtonPirmaryDown = true;
 			}
-		} else if (!in.isMouseButtonDown(in.MOUSE_LEFT_BUTTON) && mouseButtonPirmaryDown) {
+		} else if (!in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && mouseButtonPirmaryDown) {
 			mouseButtonPirmaryDown = false;
 			aim.primaryReleased();
 		}
