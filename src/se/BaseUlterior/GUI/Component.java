@@ -14,6 +14,9 @@ import se.BaseUlterior.Physics.Impact;
 
 public abstract class Component extends GameObject {
 
+	protected float forcedWidth;
+	protected float forcedHeight;
+
 	protected float margin = 5.0f;
 
 	protected float maxWidth = -1;
@@ -54,6 +57,8 @@ public abstract class Component extends GameObject {
 	private void init() {
 		checkStacking();
 		subs = new ArrayList<>();
+		forcedHeight = getHeight();
+		forcedWidth = getWidth();
 	}
 
 	public void add(Component component) {
@@ -103,23 +108,33 @@ public abstract class Component extends GameObject {
 
 	private void stack() {
 
-		float tempWidth = getWidth() * horizontalFloat;
-		float tempHeight = getHeight() * verticalFloat;
+		float tempWidth = forcedWidth * horizontalFloat;
+		float tempHeight = forcedHeight * verticalFloat;
 
 		for (Component comp : subs) {
 			comp.setX(tempWidth);
 			comp.setY(tempHeight);
 			tempHeight += (comp.getHeight() + comp.getMargin()) * verticalAdjustAlignment;
 			tempWidth += (comp.getWidth() + comp.getMargin()) * horizontalAdjustAlignment;
-			if (tempWidth + (comp.getWidth() * horizontalAdjustAlignment) > getWidth()) {
+			if (tempWidth + (comp.getWidth() * horizontalAdjustAlignment) > forcedWidth) {
 				tempWidth = 0;
 				tempHeight += comp.getHeight() + comp.getMargin();
 			}
-			if (tempHeight + (comp.getHeight() * verticalAdjustAlignment) > getHeight()) {
+			if (tempHeight + (comp.getHeight() * verticalAdjustAlignment) > forcedHeight) {
 				tempHeight = 0;
 				tempWidth += comp.getWidth() + comp.getMargin();
 			}
 		}
+	}
+
+	public void setForcedWidth(float forcedWidth) {
+		this.forcedWidth = forcedWidth;
+		stack();
+	}
+
+	public void setForcedHeight(float forcedHeight) {
+		this.forcedHeight = forcedHeight;
+		stack();
 	}
 
 	public float getMargin() {

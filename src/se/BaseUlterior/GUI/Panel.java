@@ -10,8 +10,14 @@ public class Panel extends Component {
 	public Panel(float width, float height, Alignment alignment) {
 		super(width, height);
 		this.alignmentInContainer = alignment;
-		color = Color.white;
+		this.color = Color.transparent;
 
+	}
+
+	public Panel(float[] points, Alignment alignment) {
+		super(points);
+		this.alignmentInContainer = alignment;
+		this.color = Color.transparent;
 	}
 
 	@Override

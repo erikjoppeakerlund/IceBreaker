@@ -133,9 +133,9 @@ public class BreakingPoint extends BasicGame {
 		//
 		// BreakingPoint.all.add(randomBouncyObject);
 
+		levelDummy.levelPieces.add(toolbox);
 		BreakingPoint.all.addAll(levelDummy.levelPieces);
 		BreakingPoint.objsToAdd.add(info);
-		levelDummy.levelPieces.add(toolbox);
 	}
 
 	@Override

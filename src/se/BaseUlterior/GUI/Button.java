@@ -11,9 +11,11 @@ import se.BaseUlterior.Game.BreakingPoint;
 
 public abstract class Button extends Component {
 	String text;
-	private final static float tabSize = 12f;
+	private final static float tabSize = 14f;
 	private SingleText label;
 	private boolean active = true;
+	public final static float PREFERED_HEIGHT = 30f;
+	public final static float PREFERED_WIDTH = 180f;
 
 	public Button(String text, float width, float height, boolean active) {
 		super(new float[] { 0, 0, width, 0, width, height - tabSize, width - tabSize, height, 0, height });
@@ -22,7 +24,7 @@ public abstract class Button extends Component {
 	}
 
 	public Button(String text) {
-		super(120f, 30f);
+		super(PREFERED_WIDTH, PREFERED_HEIGHT);
 		init(text);
 	}
 

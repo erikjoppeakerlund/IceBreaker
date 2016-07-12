@@ -1,29 +1,35 @@
 package se.BaseUlterior.GUI;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import se.BaseUlterior.Game.BreakingPoint;
 
 public class ToolBox extends Panel {
 
+	private List<Button> buttons = null;
+
+	private static final float styleHeigth = 269;
+	private static final float styleWidth = 169;
+
+	private final static float tabSize = 0.0f;
+
 	public ToolBox(Alignment alignment) {
-		super(190, 300, alignment);
+		super(new float[] { 0, 0, styleWidth, 0, styleWidth, styleHeigth - tabSize, styleWidth - tabSize, styleHeigth,
+				0, styleHeigth }, alignment);
 
-		this.add(new Button("STATS", 180f, 30f, true) {
+		buttons = new ArrayList<>();
+		init();
+		for (Button b : buttons) {
+			add(b);
+		}
+		setForcedHeight((buttons.size() + 1) * Button.PREFERED_HEIGHT);
+		setForcedWidth(Button.PREFERED_WIDTH);
 
-			@Override
-			public void onClick() {
-				// TODO Auto-generated method stub
+	}
 
-			}
-		});
-		this.add(new Button("COUNTER FORCES", 180f, 30f, true) {
-
-			@Override
-			public void onClick() {
-				// TODO Auto-generated method stub
-
-			}
-		});
-		this.add(new Button("SETTINGS", 180f, 30f, true) {
+	private void init() {
+		buttons.add(new Button("STATS", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, true) {
 
 			@Override
 			public void onClick() {
@@ -31,7 +37,7 @@ public class ToolBox extends Panel {
 
 			}
 		});
-		this.add(new Button("LEVELS", 180f, 30f, true) {
+		buttons.add(new Button("COUNTER:FORCES", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, true) {
 
 			@Override
 			public void onClick() {
@@ -39,7 +45,7 @@ public class ToolBox extends Panel {
 
 			}
 		});
-		this.add(new Button("GROUND", 180f, 30f, !BreakingPoint.insertMode) {
+		buttons.add(new Button("SETTINGS", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, true) {
 
 			@Override
 			public void onClick() {
@@ -47,7 +53,7 @@ public class ToolBox extends Panel {
 
 			}
 		});
-		this.add(new Button("FRICTION", 180f, 30f, !BreakingPoint.insertMode) {
+		buttons.add(new Button("LEVELS", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, true) {
 
 			@Override
 			public void onClick() {
@@ -55,7 +61,23 @@ public class ToolBox extends Panel {
 
 			}
 		});
-		this.add(new Button("GRAVITY", 180f, 30f, !BreakingPoint.insertMode) {
+		buttons.add(new Button("(GROUND)", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, !BreakingPoint.insertMode) {
+
+			@Override
+			public void onClick() {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		buttons.add(new Button("(FRICTION)", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, !BreakingPoint.insertMode) {
+
+			@Override
+			public void onClick() {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		buttons.add(new Button("(GRAVITY)", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, !BreakingPoint.insertMode) {
 
 			@Override
 			public void onClick() {
@@ -64,7 +86,7 @@ public class ToolBox extends Panel {
 			}
 		});
 
-		this.add(new Button("MODE -> ESC", 180f, 30f, true) {
+		buttons.add(new Button("MODE:ESC", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, true) {
 
 			@Override
 			public void onClick() {
