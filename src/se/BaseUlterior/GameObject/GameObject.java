@@ -225,4 +225,11 @@ public abstract class GameObject extends Polygon {
 		this.color = color;
 	}
 
+	public boolean isSolid() {
+		return false;
+	}
+
+	public void putOnTop() {
+	}
+
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Shape;
 
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.GameObject;
@@ -163,5 +164,23 @@ public abstract class Component extends GameObject {
 	public Impact getImpact(GameObject agileObject) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Shape[] subtract(Shape other) {
+		return new Shape[0];
+	}
+
+	@Override
+	public boolean isSolid() {
+		return true;
+	}
+
+	@Override
+	public void putOnTop() {
+		for (GameObject sub : subs) {
+			// BreakingPoint.addOnTop(sub);
+			sub.putOnTop();
+		}
 	}
 }

@@ -16,6 +16,7 @@ public abstract class Button extends Component {
 	private boolean active = true;
 	public final static float PREFERED_HEIGHT = 30f;
 	public final static float PREFERED_WIDTH = 180f;
+	TextInfo buttonText;
 
 	public Button(String text, float width, float height, boolean active) {
 		super(new float[] { 0, 0, width, 0, width, height - tabSize, width - tabSize, height, 0, height });
@@ -34,7 +35,7 @@ public abstract class Button extends Component {
 	}
 
 	protected void setText(String text) {
-		TextInfo buttonText = new TextInfo(getX(), getY());
+		buttonText = new TextInfo(getX(), getY());
 		label = new SingleText(0, 0, 20, text, getIsActiveColor(active));
 		buttonText.singleTexts.add(label);
 		BreakingPoint.info.textInfos.add(buttonText);
@@ -61,8 +62,11 @@ public abstract class Button extends Component {
 	}
 
 	private void onMouseOut() {
-		if (active)
-			label.setColor(Color.black);
+		if (active) {
+			setCenterX(getCenterX() - 12);
+			buttonText.setX(buttonText.getX() - 12);
+			label.setColor(getIsActiveColor(active));
+		}
 	}
 
 	private void onClickImpl() {
@@ -74,8 +78,11 @@ public abstract class Button extends Component {
 	public abstract void onClick();
 
 	public void onMouseOver() {
-		if (active)
-			label.setColor(Color.darkGray);
+		if (active) {
+			setCenterX(getCenterX() + 12);
+			buttonText.setX(buttonText.getX() + 12);
+			label.setColor(Color.white);
+		}
 		mouseIsOutside = false;
 	}
 
@@ -90,6 +97,11 @@ public abstract class Button extends Component {
 
 	public Color getIsActiveColor(boolean active) {
 		// label.setColor(active ? Color.black : Color.darkGray);
-		return active ? Color.black : Color.darkGray;
+		return active ? Color.darkGray : Color.lightGray;
+	}
+
+	@Override
+	public void putOnTop() {
+
 	}
 }

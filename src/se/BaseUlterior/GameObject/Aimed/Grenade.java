@@ -32,7 +32,7 @@ public class Grenade extends GameObjectFalling {
 
 	public Grenade(float[] nodes) {
 		super(nodes, BOUNCYNESS);
-		color = color.darkGray;
+		color = color.green;
 		setX(-70f);
 		setY(-70f);
 	}
@@ -71,6 +71,12 @@ public class Grenade extends GameObjectFalling {
 							}
 							UlteriorUtils.cleanUpImpactFromWorldBuilderObject(target);
 							BreakingPoint.objsToRemove.add(target);
+							for (GameObject anySort : BreakingPoint.all) {
+								if (anySort.isSolid()) {
+									BreakingPoint.addOnTop(anySort);
+									BreakingPoint.addOnTop(BreakingPoint.info);
+								}
+							}
 						}
 					}
 				}

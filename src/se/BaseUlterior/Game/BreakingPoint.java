@@ -16,6 +16,9 @@ import se.BaseUlterior.Actions.ActionListenablers;
 import se.BaseUlterior.Actions.WorldCreator;
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Context.Info;
+import se.BaseUlterior.GUI.Alignment;
+import se.BaseUlterior.GUI.Panel;
+import se.BaseUlterior.GUI.ToolBox;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.GameObject.GameObjectSprite;
@@ -89,8 +92,8 @@ public class BreakingPoint extends BasicGame {
 				Color.transparent);
 
 		levelDummy.levelPieces.add(generalGravity);
-		// Panel toolbox = new ToolBox(Alignment.LEFT);
-		// toolbox.pack();
+		Panel toolbox = new ToolBox(Alignment.LEFT);
+		toolbox.pack();
 
 		float fat = 150.0f;
 
@@ -124,7 +127,7 @@ public class BreakingPoint extends BasicGame {
 
 		addObjToGame(sprite);
 
-		// levelDummy.levelPieces.add(toolbox);
+		levelDummy.levelPieces.add(toolbox);
 		BreakingPoint.all.addAll(levelDummy.levelPieces);
 		BreakingPoint.objsToAdd.add(info);
 	}
@@ -211,11 +214,21 @@ public class BreakingPoint extends BasicGame {
 
 	public static void moveScreen(float x, float y) {
 		for (GameObject go : BreakingPoint.all) {
-			go.setX(go.getX() - x);
+			if (!go.isSolid()) {
+				go.setX(go.getX() - x);
+			}
 		}
 		for (GameObject go : BreakingPoint.all) {
-			go.setY(go.getY() - y);
+			if (!go.isSolid()) {
+				go.setY(go.getY() - y);
+			}
 		}
+	}
+
+	public static void addOnTop(GameObject anySort) {
+		objsToRemove.add(anySort);
+		objsToAdd.add(anySort);
+		// anySort.putOnTop();
 	}
 
 }
