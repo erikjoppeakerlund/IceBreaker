@@ -49,7 +49,7 @@ public class ImpactBounceGiven extends Impact {
 		 * ('affectedPiece'), V´ is the resulting vector
 		 */
 
-		float dot = affectedPiece.dot(N) * (1.0f - bouncyness);
+		float dot = affectedPiece.dot(N) * (1.0f);
 
 		affectedPiece.add((-N.getX() / 250.0f) * delta, (-N.getY() / 250.0f) * delta);
 		N.scale(dot);

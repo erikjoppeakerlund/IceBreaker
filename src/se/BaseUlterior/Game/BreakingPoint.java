@@ -52,7 +52,7 @@ public class BreakingPoint extends BasicGame {
 
 	public static Info info = new GameInfo();
 	// nono!
-	public static GameObject toolbox;
+	private GameObject toolbox;
 
 	private WorldCreator worldCreator = null;
 

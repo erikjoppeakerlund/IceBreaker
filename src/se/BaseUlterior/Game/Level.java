@@ -15,6 +15,8 @@ import se.BaseUlterior.Physics.Density;
 public class Level {
 	public List<GameObject> levelPieces;
 
+	Color colorGravity = new Color(0.7f, 0.7f, 1.0f, 0.30f);
+
 	public Level() {
 		levelPieces = new ArrayList<>();
 
@@ -24,11 +26,9 @@ public class Level {
 
 		levelPieces.add(worldPieceLava);
 
-		levelPieces.add(new WorldBuiderForce(new float[] { 3715, 798, 3088, 653, 3762, 993, 2897, 775, 3441, 1214, 3946,
-				1382, 4118, 1329, 4141, 924, 3745, 409, 3379, 234, 2712, 280, 2263, 138, 1788, 448, 2085, 996, 2646,
-				1112, 3524, 1098, 3953, 1072,
-
-		}, 0.0f, -Constants.GENERAL_GRAVITY * 1.2f, Color.white));
+		levelPieces.add(
+				new WorldBuiderForce(new float[] { 3148, 679, 4471, 1270, 4507, 49, 2541, 39, 1956, 181, 2966, 326, },
+						0.0f, -Constants.GENERAL_GRAVITY * 1.2f, colorGravity));
 
 		levelPieces.add(new WorldBuilderGround(new float[] { 3570, 2610, 3821, 2541, 3425, 2570, 3458, 2772, 3742, 2739,
 				4491, 2719, 4422, 1128, 4098, 1775, 3781, 2069, 3438, 2237, 3052, 2392, 2567, 2478, 3019, 2567, 3214,
@@ -48,6 +48,11 @@ public class Level {
 
 		levelPieces.add(new WorldBuilderGround(new float[] { 393, 81, 210, 117, 135, 273, 99, 498, 411, 543, 405, 348,
 				516, 309, 804, 276, 1173, 249, 1440, 243, 1584, 162, 972, 162, 492, 162, }));
+
+		levelPieces.add(new WorldBuilderGround(new float[] { 4273, 429, 4319, 735, 4164, 405, 4339, 330, 4441, 42, 3049,
+				39, 3352, 419, 3781, 280, 4098, 508, 4095, 739, 4560, 1082, 4468, 224,
+
+		}, 20.0f));
 
 	}
 }

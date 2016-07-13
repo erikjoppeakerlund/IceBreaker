@@ -11,10 +11,17 @@ import se.BaseUlterior.Utils.UlteriorUtils;
 public class WorldBuilderGround extends WorldBuilder {
 
 	protected boolean underImpact;
+	protected float extraBouncyness = 0.0f;
 
 	public WorldBuilderGround(float[] nodes) {
 		super(nodes);
 		this.color = Color.darkGray;
+	}
+
+	public WorldBuilderGround(float[] nodes, float extraBouncyness) {
+		super(nodes);
+		this.color = Color.darkGray;
+		this.extraBouncyness = extraBouncyness;
 	}
 
 	@Override
@@ -25,7 +32,7 @@ public class WorldBuilderGround extends WorldBuilder {
 
 	@Override
 	public Impact getImpact(GameObject piece) {
-		return new ImpactBounce(this, piece, piece.bouncyness);
+		return new ImpactBounce(this, piece, piece.bouncyness + extraBouncyness);
 	}
 
 	@Override
