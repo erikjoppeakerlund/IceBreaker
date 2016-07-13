@@ -66,4 +66,9 @@ public class WorldBuiderForce extends WorldBuilder {
 
 	}
 
+	@Override
+	public boolean isBackgroundObj() {
+		return true;
+	}
+
 }

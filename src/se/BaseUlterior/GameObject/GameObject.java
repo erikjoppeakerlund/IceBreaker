@@ -235,4 +235,8 @@ public abstract class GameObject extends Polygon {
 
 	public void wasActionStateSet(Action action) {
 	}
+
+	public boolean isBackgroundObj() {
+		return false;
+	}
 }
