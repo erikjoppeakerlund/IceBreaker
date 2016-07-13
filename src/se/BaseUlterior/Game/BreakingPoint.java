@@ -6,7 +6,6 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -26,8 +25,6 @@ import se.BaseUlterior.GUI.ToolBox;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.GameObject.GameObjectSprite;
-import se.BaseUlterior.GameObject.WorldBuiderForce;
-import se.BaseUlterior.GameObject.WorldBuilderGroundSolid;
 
 public class BreakingPoint extends BasicGame {
 
@@ -122,28 +119,9 @@ public class BreakingPoint extends BasicGame {
 		actions = new ActionListenablers();
 
 		Level levelDummy = new Level();
-		float[] wholeScene = new float[] { 0.0f, 0.0f, 0.0f, Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL,
-				Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL, 0.0f };
 
-		WorldBuiderForce generalGravity = new WorldBuiderForce(wholeScene, 0, Constants.GENERAL_GRAVITY,
-				Color.transparent);
-
-		levelDummy.levelPieces.add(generalGravity);
 		toolbox = new ToolBox(Alignment.LEFT);
 		((Component) toolbox).pack();
-
-		float fat = 150.0f;
-
-		float BOTTOM = Constants.CANVAS_HEIGHT_FULL;
-
-		float[] wallScene = new float[] { 0.0f - fat, 0.0f - fat, Constants.CANVAS_WIDTH_FULL + fat, 0.0f - fat,
-				Constants.CANVAS_WIDTH_FULL + fat, BOTTOM + fat, 0.0f - fat, BOTTOM + fat, 0.0f - fat, 0.0f - fat, 0.0f,
-				0.0f, Constants.CANVAS_WIDTH_FULL, 0.0f, Constants.CANVAS_WIDTH_FULL, BOTTOM, 0.0f, BOTTOM, 0.0f,
-				0.0f };
-
-		GameObject wall = new WorldBuilderGroundSolid(wallScene);
-
-		BreakingPoint.objsToAdd.add(wall);
 
 		GameObject sprite = new GameObjectSprite(
 				new Circle(Constants.CANVAS_WIDTH / 2, Constants.CANVAS_HEIGHT / 2, Constants.SPRITE_RADIUS)
@@ -151,19 +129,15 @@ public class BreakingPoint extends BasicGame {
 				0.0f);
 
 		addObjToGame(sprite);
-
-		levelDummy.levelPieces.add(toolbox);
 		BreakingPoint.all.addAll(levelDummy.levelPieces);
 		BreakingPoint.objsToAdd.add(info);
 	}
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
-		// if (!insertMode) {
 		for (GameObject go : BreakingPoint.all) {
 			go.update(container, delta);
 		}
-		// }
 		if (!objsToRemove.isEmpty()) {
 			all.removeAll(objsToRemove);
 			objsToRemove.clear();

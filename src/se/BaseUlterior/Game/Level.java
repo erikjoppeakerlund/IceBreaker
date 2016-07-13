@@ -9,6 +9,7 @@ import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.WorldBuiderForce;
 import se.BaseUlterior.GameObject.WorldBuilderGround;
+import se.BaseUlterior.GameObject.WorldBuilderGroundSolid;
 import se.BaseUlterior.GameObject.WorldBuilderLiquid;
 import se.BaseUlterior.Physics.Density;
 
@@ -57,6 +58,29 @@ public class Level {
 		// Extra bouncy!
 		levelPieces.add(new WorldBuilderGround(
 				new float[] { 4049, 92, 4303, 207, 4448, 376, 4524, 1432, 3550, 452, 2910, 36, 3847, 66, }, 2.3f));
+
+		// ______________________________________________________
+
+		float[] wholeScene = new float[] { 0.0f, 0.0f, 0.0f, Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL,
+				Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL, 0.0f };
+
+		WorldBuiderForce generalGravity = new WorldBuiderForce(wholeScene, 0, Constants.GENERAL_GRAVITY,
+				Color.transparent);
+
+		levelPieces.add(generalGravity);
+
+		float fat = 150.0f;
+
+		float BOTTOM = Constants.CANVAS_HEIGHT_FULL;
+
+		float[] wallScene = new float[] { 0.0f - fat, 0.0f - fat, Constants.CANVAS_WIDTH_FULL + fat, 0.0f - fat,
+				Constants.CANVAS_WIDTH_FULL + fat, BOTTOM + fat, 0.0f - fat, BOTTOM + fat, 0.0f - fat, 0.0f - fat, 0.0f,
+				0.0f, Constants.CANVAS_WIDTH_FULL, 0.0f, Constants.CANVAS_WIDTH_FULL, BOTTOM, 0.0f, BOTTOM, 0.0f,
+				0.0f };
+
+		GameObject wall = new WorldBuilderGroundSolid(wallScene);
+
+		levelPieces.add(wall);
 
 	}
 }
