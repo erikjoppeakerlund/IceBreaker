@@ -8,11 +8,14 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Shape;
 
+import se.BaseUlterior.Actions.Action;
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Physics.Impact;
 
 public abstract class Component extends GameObject {
+
+	private boolean hide = false;
 
 	protected float forcedWidth;
 	protected float forcedHeight;
@@ -155,8 +158,10 @@ public abstract class Component extends GameObject {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		graphics.setColor(this.color);
-		graphics.fill(this);
+		if (!hide) {
+			graphics.setColor(this.color);
+			graphics.fill(this);
+		}
 
 	}
 
@@ -181,6 +186,17 @@ public abstract class Component extends GameObject {
 		for (GameObject sub : subs) {
 			// BreakingPoint.addOnTop(sub);
 			sub.putOnTop();
+		}
+	}
+
+	@Override
+	public void wasActionStateSet(Action action) {
+		switch (action) {
+		case INSERT_MODE:
+			hide = true;
+			break;
+		case ACTION_MODE:
+			hide = false;
 		}
 	}
 }

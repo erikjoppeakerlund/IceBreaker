@@ -11,21 +11,21 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 
+import se.BaseUlterior.Actions.Action;
 import se.BaseUlterior.Actions.ActionListenable;
 import se.BaseUlterior.Actions.ActionListenablers;
 import se.BaseUlterior.Actions.WorldCreator;
 import se.BaseUlterior.Config.Constants;
+import se.BaseUlterior.Context.GameInfo;
 import se.BaseUlterior.Context.Info;
 import se.BaseUlterior.GUI.Alignment;
-import se.BaseUlterior.GUI.Panel;
+import se.BaseUlterior.GUI.Component;
 import se.BaseUlterior.GUI.ToolBox;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.GameObject.GameObjectSprite;
 import se.BaseUlterior.GameObject.WorldBuiderForce;
 import se.BaseUlterior.GameObject.WorldBuilderGroundSolid;
-import se.BaseUlterior.GameObject.WorldBuilderLiquid;
-import se.BaseUlterior.Physics.Density;
 
 public class BreakingPoint extends BasicGame {
 
@@ -50,7 +50,9 @@ public class BreakingPoint extends BasicGame {
 
 	public static List<GameObject> objsToRemove = null;
 
-	public static Info info = new Info();
+	public static Info info = new GameInfo();
+	// nono!
+	public static GameObject toolbox;
 
 	private WorldCreator worldCreator = null;
 
@@ -92,8 +94,8 @@ public class BreakingPoint extends BasicGame {
 				Color.transparent);
 
 		levelDummy.levelPieces.add(generalGravity);
-		Panel toolbox = new ToolBox(Alignment.LEFT);
-		toolbox.pack();
+		toolbox = new ToolBox(Alignment.LEFT);
+		((Component) toolbox).pack();
 
 		float fat = 150.0f;
 
@@ -107,18 +109,6 @@ public class BreakingPoint extends BasicGame {
 		GameObject wall = new WorldBuilderGroundSolid(wallScene);
 
 		BreakingPoint.objsToAdd.add(wall);
-
-		GameObject otherGravity = new WorldBuiderForce(
-				new float[] { 1385, 357, 1177, 267, 1314, 241, 1213, 155, 1335, 117, 1237, 83, 1306, 10, 1383, 15, },
-				-0.02f, -0.0f);
-
-		// levelDummy.levelPieces.add(otherGravity);
-
-		GameObject randomWater = new WorldBuilderLiquid(
-
-				new float[] { 1083, 556, 929, 489, 840, 534, 438, 530, 350, 523, 310, 627, 495, 693, 863, 653, },
-				Density.LAVA);
-		// levelDummy.levelPieces.add(randomWater);
 
 		GameObject sprite = new GameObjectSprite(
 				new Circle(Constants.CANVAS_WIDTH / 2, Constants.CANVAS_HEIGHT / 2, Constants.SPRITE_RADIUS)
@@ -229,6 +219,13 @@ public class BreakingPoint extends BasicGame {
 		objsToRemove.add(anySort);
 		objsToAdd.add(anySort);
 		// anySort.putOnTop();
+	}
+
+	public static void setActionModeAction(Action action) {
+		for (GameObject go : BreakingPoint.all) {
+			go.wasActionStateSet(action);
+		}
+
 	}
 
 }

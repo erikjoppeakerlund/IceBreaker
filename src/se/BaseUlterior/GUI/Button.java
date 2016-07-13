@@ -35,7 +35,7 @@ public abstract class Button extends Component {
 	}
 
 	protected void setText(String text) {
-		buttonText = new TextInfo(getX(), getY());
+		buttonText = new TextInfo(getX(), getY(), false);
 		label = new SingleText(0, 0, 20, text, getIsActiveColor(active));
 		buttonText.singleTexts.add(label);
 		BreakingPoint.info.textInfos.add(buttonText);

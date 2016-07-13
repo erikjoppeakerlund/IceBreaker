@@ -9,12 +9,13 @@ import se.BaseUlterior.Context.TextInfo;
 import se.BaseUlterior.Game.BreakingPoint;
 
 public class GeneralInputHandler implements ActionListenable {
+	private static final String ESC = "|SWITCH::ESC";
 
-	private SingleText insertModeText = new SingleText(0, 0, 19,
-			BreakingPoint.insertMode ? Constants.INSERT_MODE : Constants.ACTION_MODE, Color.red);
+	private SingleText insertModeText = new SingleText(0, 0, 21,
+			BreakingPoint.insertMode ? Constants.INSERT_MODE + ESC : Constants.ACTION_MODE + ESC, Color.red);
 
 	public GeneralInputHandler() {
-		TextInfo randomText = new TextInfo(Constants.CANVAS_WIDTH - 220, 22);
+		TextInfo randomText = new TextInfo(Constants.CANVAS_WIDTH - 320, 22, true);
 		randomText.singleTexts.add(insertModeText);
 		BreakingPoint.info.textInfos.add(randomText);
 	}
@@ -34,7 +35,9 @@ public class GeneralInputHandler implements ActionListenable {
 	public void wasWasKeyPressed(int button, char c) {
 		if (button == Input.KEY_ESCAPE) {
 			BreakingPoint.insertMode = !BreakingPoint.insertMode;
-			insertModeText.setValue(BreakingPoint.insertMode ? Constants.INSERT_MODE : Constants.ACTION_MODE);
+			insertModeText
+					.setValue(BreakingPoint.insertMode ? Constants.INSERT_MODE + ESC : Constants.ACTION_MODE + ESC);
+			BreakingPoint.setActionModeAction(BreakingPoint.insertMode ? Action.ACTION_MODE : Action.INSERT_MODE);
 		}
 	}
 

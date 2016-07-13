@@ -2,12 +2,18 @@ package se.BaseUlterior.Context;
 
 import java.util.ArrayList;
 
+import se.BaseUlterior.Actions.Action;
+
 public class TextInfo {
 
 	public ArrayList<SingleText> singleTexts = new ArrayList<>();
 
 	private float x;
 	private float y;
+
+	protected boolean showAllways = true;
+
+	protected boolean show = true;
 
 	public float getX() {
 		return x;
@@ -26,6 +32,9 @@ public class TextInfo {
 	}
 
 	public void draw() {
+		if (!show && !showAllways) {
+			return;
+		}
 		float trueX;
 		float trueY;
 		for (SingleText st : singleTexts) {
@@ -35,8 +44,19 @@ public class TextInfo {
 		}
 	}
 
-	public TextInfo(float x, float y) {
+	public TextInfo(float x, float y, boolean showAllways) {
 		this.x = x;
 		this.y = y;
+		this.showAllways = showAllways;
+	}
+
+	public void wasShowAction(Action action) {
+		switch (action) {
+		case INSERT_MODE:
+			show = false;
+			break;
+		case ACTION_MODE:
+			show = true;
+		}
 	}
 }

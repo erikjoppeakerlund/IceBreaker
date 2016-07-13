@@ -10,7 +10,7 @@ import org.newdawn.slick.SlickException;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Physics.Impact;
 
-public class Info extends GameObject {
+public abstract class Info extends GameObject {
 
 	public List<TextInfo> textInfos = new ArrayList<>();
 
