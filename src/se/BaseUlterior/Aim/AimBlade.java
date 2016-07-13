@@ -8,9 +8,13 @@ import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
 
+import se.BaseUlterior.Utils.UlteriorUtils;
+
 public class AimBlade extends Aim {
 
 	protected Shape blade;
+
+	private float SIZE_OF_CUT = 110f;
 
 	public AimBlade() {
 		blade = new Polygon(new float[] { 1062, 383, 1129, 315, 1037, 365, 1052, 369, 1022, 387, 1036, 415, 1042, 389,
@@ -27,8 +31,7 @@ public class AimBlade extends Aim {
 
 	@Override
 	public void primaryReleased() {
-		// TODO Auto-generated method stub
-
+		UlteriorUtils.removeGround(x, y, SIZE_OF_CUT, null);
 	}
 
 	@Override

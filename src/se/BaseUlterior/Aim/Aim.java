@@ -22,7 +22,7 @@ public abstract class Aim {
 
 	protected float angle;
 	protected float dAngle;
-	protected final float START_ARM_LENGTH = Constants.SPRITE_RADIUS * 4.1f;
+	protected final float START_ARM_LENGTH = Constants.SPRITE_RADIUS * 3.2f;
 
 	protected float armLengt = START_ARM_LENGTH;
 

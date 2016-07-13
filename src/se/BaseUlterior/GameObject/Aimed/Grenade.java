@@ -1,16 +1,11 @@
 package se.BaseUlterior.GameObject.Aimed;
 
-import java.util.ArrayList;
-
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.geom.Circle;
-import org.newdawn.slick.geom.Shape;
 
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.GameObjectExplosion;
 import se.BaseUlterior.GameObject.GameObjectFalling;
-import se.BaseUlterior.GameObject.WorldBuilderGround;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactBounce;
@@ -32,7 +27,7 @@ public class Grenade extends GameObjectFalling {
 
 	public Grenade(float[] nodes) {
 		super(nodes, BOUNCYNESS);
-		color = color.green;
+		color = Color.red;
 		setX(-70f);
 		setY(-70f);
 	}
@@ -49,41 +44,7 @@ public class Grenade extends GameObjectFalling {
 			return;
 		}
 		if (System.currentTimeMillis() - wasReleasedAt > TIME_UNTIL_EXPLOTION) {
-			explotionShape = new GameObjectExplosion(
-					new Circle(getCenterX(), getCenterY(), sizeOfExplostion).getPoints());
-			BreakingPoint.objsToAdd
-					.add(new GameObjectExplosion(new Circle(getCenterX(), getCenterY(), sizeOfExplostion).getPoints()));
-			ArrayList<GameObject> newShapes = new ArrayList<>();
-			for (GameObject target : BreakingPoint.all) {
-				if (target == this || target == this) {
-					continue;
-				}
-				explotionShape.setCenterX(getCenterX());
-				explotionShape.setCenterY(getCenterY());
-				if (UlteriorUtils.isWithinRange(target, explotionShape)) {
-					if (target.intersects(explotionShape)) {
-						Shape[] result = target.subtract(explotionShape);
-						if (result.length > 0) {
-							for (int i = 0; i < result.length; i++) {
-								Shape go = result[i];
-								GameObject gog = new WorldBuilderGround(go.getPoints());
-								newShapes.add(gog);
-							}
-							UlteriorUtils.cleanUpImpactFromWorldBuilderObject(target);
-							BreakingPoint.objsToRemove.add(target);
-							for (GameObject anySort : BreakingPoint.all) {
-								if (anySort.isSolid()) {
-									// BreakingPoint.addOnTop(anySort);
-									BreakingPoint.addOnTop(BreakingPoint.info);
-								}
-							}
-						}
-					}
-				}
-			}
-			for (GameObject go : newShapes) {
-				BreakingPoint.objsToAdd.add(go);
-			}
+			UlteriorUtils.removeGround(getCenterX(), getCenterY(), sizeOfExplostion, this);
 
 			BreakingPoint.objsToRemove.add(this);
 		} else {
