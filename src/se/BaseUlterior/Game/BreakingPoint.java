@@ -3,11 +3,13 @@ package se.BaseUlterior.Game;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 
@@ -42,6 +44,14 @@ public class BreakingPoint extends BasicGame {
 
 	}
 
+	public Image image;
+	public float patternPositionX;
+	public float patternPositionY;
+	public float tileCountX;
+	public float tileCountY;
+	public float patternWidth;
+	public float patternHeight;
+
 	public static List<GameObject> all = null;
 
 	public static List<GameObjectFalling> allFalliing = null;
@@ -51,8 +61,9 @@ public class BreakingPoint extends BasicGame {
 	public static List<GameObject> objsToRemove = null;
 
 	public static Info info = new GameInfo();
-	// nono!
+
 	private GameObject toolbox;
+	private Image background = null;
 
 	private WorldCreator worldCreator = null;
 
@@ -68,16 +79,37 @@ public class BreakingPoint extends BasicGame {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
+		image.bind();
+
+		GL11.glBegin(GL11.GL_QUADS);
+		GL11.glTexCoord2f(0, 0);
+		GL11.glVertex2f(0, 0);
+		GL11.glTexCoord2f(3, 0);
+		GL11.glVertex2f(patternWidth, 0);
+		GL11.glTexCoord2f(3, 3);
+		GL11.glVertex2f(patternWidth, patternHeight);
+		GL11.glTexCoord2f(0, 3);
+		GL11.glVertex2f(0, patternHeight);
+		GL11.glEnd();
+
 		for (GameObject go : BreakingPoint.all) {
 			go.render(container, graphics);
 		}
+
 	}
 
 	@Override
-	public void init(GameContainer arg0) throws SlickException {
+	public void init(GameContainer container) throws SlickException {
 		/*
 		 * TODO: ROTATIONS!
 		 */
+
+		// load image
+		image = new Image("res/img/tilesBackground.jpg");
+
+		// set width and height of background pattern
+		patternWidth = container.getWidth();
+		patternHeight = container.getHeight();
 
 		allFalliing = new ArrayList<>();
 
@@ -127,7 +159,6 @@ public class BreakingPoint extends BasicGame {
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
-
 		// if (!insertMode) {
 		for (GameObject go : BreakingPoint.all) {
 			go.update(container, delta);
@@ -179,30 +210,6 @@ public class BreakingPoint extends BasicGame {
 
 		actions.wasMouseWheelMoved(change);
 
-	}
-
-	@Override
-	public void mouseMoved(int oldx, int oldy, int newx, int newy) {
-		// if (newx > Constants.CANVAS_WIDTH - 50) {
-		// for (GameObject go : BreakingPoint.all) {
-		// go.setX(go.getX() - 4);
-		// }
-		// }
-		// if (newx < 50) {
-		// for (GameObject go : BreakingPoint.all) {
-		// go.setX(go.getX() + 4);
-		// }
-		// }
-		// if (newy > Constants.CANVAS_HEIGHT - 50) {
-		// for (GameObject go : BreakingPoint.all) {
-		// go.setY(go.getY() - 4);
-		// }
-		// }
-		// if (newy < 50) {
-		// for (GameObject go : BreakingPoint.all) {
-		// go.setY(go.getY() + 4);
-		// }
-		// }
 	}
 
 	public static void moveScreen(float x, float y) {

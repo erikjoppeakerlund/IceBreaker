@@ -55,7 +55,7 @@ public class AimBlade extends Aim {
 
 	@Override
 	protected void renderFullfill(GameContainer container, Graphics graphics) throws SlickException {
-		graphics.setColor(Color.cyan);
+		graphics.setColor(Color.black);
 		graphics.fill(blade);
 	}
 

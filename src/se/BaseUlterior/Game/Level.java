@@ -15,7 +15,7 @@ import se.BaseUlterior.Physics.Density;
 public class Level {
 	public List<GameObject> levelPieces;
 
-	Color colorGravity = new Color(0.7f, 0.7f, 1.0f, 0.30f);
+	Color colorGravity = new Color(0, 0, 0, 0.30f);
 
 	public Level() {
 		levelPieces = new ArrayList<>();
@@ -54,7 +54,7 @@ public class Level {
 						2069, 339, 1607, 287, 1392, 455, 1504, 679, 1907, 755, 2227, 732, 2395, 544,
 
 				}));
-
+		// Extra bouncy!
 		levelPieces.add(new WorldBuilderGround(
 				new float[] { 4049, 92, 4303, 207, 4448, 376, 4524, 1432, 3550, 452, 2910, 36, 3847, 66, }, 2.3f));
 

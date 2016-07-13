@@ -27,7 +27,7 @@ public class Grenade extends GameObjectFalling {
 
 	public Grenade(float[] nodes) {
 		super(nodes, BOUNCYNESS);
-		color = Color.red;
+		color = Color.black;
 		setX(-70f);
 		setY(-70f);
 	}

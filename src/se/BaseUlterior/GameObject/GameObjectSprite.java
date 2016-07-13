@@ -33,7 +33,7 @@ public class GameObjectSprite extends GameObjectFalling {
 
 	public GameObjectSprite(float[] nodes, float bouncyness) {
 		super(nodes, bouncyness);
-		color = Color.darkGray;
+		color = Color.black;
 		initAims();
 	}
 

@@ -15,12 +15,12 @@ public class WorldBuilderGround extends WorldBuilder {
 
 	public WorldBuilderGround(float[] nodes) {
 		super(nodes);
-		this.color = Color.darkGray;
+		this.color = Color.black;
 	}
 
 	public WorldBuilderGround(float[] nodes, float extraBouncyness) {
 		super(nodes);
-		this.color = Color.lightGray;
+		this.color = new Color(0.1f, 0.1f, 0.1f);
 		this.extraBouncyness = extraBouncyness;
 	}
 
