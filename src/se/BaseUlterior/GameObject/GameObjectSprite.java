@@ -47,6 +47,8 @@ public class GameObjectSprite extends GameObjectFalling {
 		if (BreakingPoint.insertMode) {
 			return;
 		}
+		BreakingPoint.moveScreen(this.motion.getX() * delta, this.motion.getY() * delta);
+
 		Input in = container.getInput();
 
 		float mouseX = in.getMouseX();

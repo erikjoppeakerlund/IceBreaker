@@ -32,6 +32,7 @@ public class WorldCreator implements ActionListenable {
 
 	@Override
 	public void wasDoubleClicked(int button, int x, int y) {
+		System.out.println();
 		if (!BreakingPoint.insertMode) {
 			return;
 		}
@@ -79,7 +80,7 @@ public class WorldCreator implements ActionListenable {
 		}
 		if (button == Input.MOUSE_LEFT_BUTTON) {
 			currentBuilder.addPoint(x, y);
-			System.out.println(x + ", " + y + ",");
+			System.out.println(x * 3 + ", " + y * 3 + ",");
 		}
 	}
 
