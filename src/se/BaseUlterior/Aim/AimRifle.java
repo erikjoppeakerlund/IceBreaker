@@ -7,13 +7,18 @@ import org.newdawn.slick.SlickException;
 
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.GameObject;
+import se.BaseUlterior.Utils.UlteriorUtils;
 
 public class AimRifle extends Aim {
 
+	private float aimAtX;
+	private float aimAtY;
+
+	private final int EXPLOTION_SIZE = 41;
+
 	@Override
 	public void primaryPushed() {
-		// TODO Auto-generated method stub
-
+		UlteriorUtils.removeGround(aimAtX, aimAtY, EXPLOTION_SIZE, null);
 	}
 
 	@Override
@@ -50,6 +55,8 @@ public class AimRifle extends Aim {
 			yTarget += Math.sin(angle) * STEP;
 			for (GameObject go : BreakingPoint.all) {
 				if (go.contains(xTarget, yTarget) && !go.isBackgroundObj()) {
+					aimAtX = xTarget;
+					aimAtY = yTarget;
 					notFound = false;
 					break;
 				}
