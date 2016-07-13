@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 
 import se.BaseUlterior.Game.BreakingPoint;
 
@@ -112,11 +109,12 @@ public class ToolBox extends Panel {
 		});
 	}
 
-	@Override
-	public void render(GameContainer container, Graphics graphics) throws SlickException {
-
-		graphics.setColor(colorAlpha);
-		graphics.fill(this);
-	}
+	// @Override
+	// public void render(GameContainer container, Graphics graphics) throws
+	// SlickException {
+	//
+	// graphics.setColor(colorAlpha);
+	// graphics.fill(this);
+	// }
 
 }

@@ -49,10 +49,8 @@ public class Level {
 		levelPieces.add(new WorldBuilderGround(new float[] { 393, 81, 210, 117, 135, 273, 99, 498, 411, 543, 405, 348,
 				516, 309, 804, 276, 1173, 249, 1440, 243, 1584, 162, 972, 162, 492, 162, }));
 
-		levelPieces.add(new WorldBuilderGround(new float[] { 4273, 429, 4319, 735, 4164, 405, 4339, 330, 4441, 42, 3049,
-				39, 3352, 419, 3781, 280, 4098, 508, 4095, 739, 4560, 1082, 4468, 224,
-
-		}, 20.0f));
+		levelPieces.add(new WorldBuilderGround(
+				new float[] { 4049, 92, 4303, 207, 4448, 376, 4524, 1432, 3550, 452, 2910, 36, 3847, 66, }, 2.3f));
 
 	}
 }

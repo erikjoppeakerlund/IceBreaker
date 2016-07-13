@@ -20,7 +20,7 @@ public class WorldBuilderGround extends WorldBuilder {
 
 	public WorldBuilderGround(float[] nodes, float extraBouncyness) {
 		super(nodes);
-		this.color = Color.darkGray;
+		this.color = Color.lightGray;
 		this.extraBouncyness = extraBouncyness;
 	}
 
