@@ -45,7 +45,6 @@ public class Grenade extends GameObjectFalling {
 		}
 		if (System.currentTimeMillis() - wasReleasedAt > TIME_UNTIL_EXPLOTION) {
 			UlteriorUtils.removeGround(getCenterX(), getCenterY(), sizeOfExplostion, this);
-
 			BreakingPoint.objsToRemove.add(this);
 		} else {
 			super.update(container, delta);

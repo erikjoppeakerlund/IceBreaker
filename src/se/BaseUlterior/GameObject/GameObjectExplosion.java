@@ -12,7 +12,7 @@ import se.BaseUlterior.Physics.ImpactExplosion;
 
 public class GameObjectExplosion extends GameObject {
 
-	private static final long MAX_TIME = 4;
+	private static final long MAX_TIME = 69;
 	protected long timeSinceCreation;
 	private ImpactExplosion impactExplosion;
 
@@ -30,8 +30,9 @@ public class GameObjectExplosion extends GameObject {
 
 	@Override
 	public Impact getImpact(GameObject agileObject) {
-		impactExplosion = new ImpactExplosion(this, agileObject);
-		return impactExplosion;
+		// impactExplosion = new ImpactExplosion(this, agileObject);
+		// return impactExplosion;
+		return null;
 	}
 
 	@Override

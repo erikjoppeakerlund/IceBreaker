@@ -12,7 +12,7 @@ import se.BaseUlterior.Utils.UlteriorUtils;
 
 //next thins: enable the user only to use the keyboard!
 public abstract class GameObjectFalling extends GameObject {
-	private boolean underImpact = false;
+	protected boolean underImpact = false;
 
 	public GameObjectFalling(float[] nodes, float bouncyness) {
 		super(nodes);
@@ -62,7 +62,7 @@ public abstract class GameObjectFalling extends GameObject {
 		}
 	}
 
-	private void checkImpact() {
+	protected void checkImpact() {
 		for (GameObject go : BreakingPoint.all) {
 
 			if (go == this) {

@@ -64,8 +64,6 @@ public class UlteriorUtils {
 			if (target == origin || target == origin) {
 				continue;
 			}
-			explotionShape.setCenterX(x);
-			explotionShape.setCenterY(y);
 			if (UlteriorUtils.isWithinRange(target, explotionShape)) {
 				if (target.intersects(explotionShape)) {
 					Shape[] result = target.subtract(explotionShape);
