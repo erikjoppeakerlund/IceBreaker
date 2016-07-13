@@ -43,7 +43,7 @@ public class WorldBuilderLiquid extends WorldBuilder {
 			this.frictionAmount = 0.90f;
 		case LAVA:
 			this.color = Color.red;
-			this.frictionAmount = 0.80f;
+			this.frictionAmount = 0.86f;
 		}
 	}
 

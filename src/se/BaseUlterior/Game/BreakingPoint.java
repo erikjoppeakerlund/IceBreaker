@@ -82,10 +82,10 @@ public class BreakingPoint extends BasicGame {
 		actions = new ActionListenablers();
 
 		Level levelDummy = new Level();
-		float[] wholeScene = new float[] { 0.0f, 0.0f, 0.0f, Constants.CANVAS_HEIGHT * 3, Constants.CANVAS_WIDTH * 3,
-				Constants.CANVAS_HEIGHT * 3, Constants.CANVAS_WIDTH * 3, 0.0f };
+		float[] wholeScene = new float[] { 0.0f, 0.0f, 0.0f, Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL,
+				Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL, 0.0f };
 
-		WorldBuiderForce generalGravity = new WorldBuiderForce(wholeScene, Constants.GENERAL_GRAVITY, 0.0f,
+		WorldBuiderForce generalGravity = new WorldBuiderForce(wholeScene, 0, Constants.GENERAL_GRAVITY,
 				Color.transparent);
 
 		levelDummy.levelPieces.add(generalGravity);
@@ -94,10 +94,11 @@ public class BreakingPoint extends BasicGame {
 
 		float fat = 150.0f;
 
-		float[] wallScene = new float[] { 0.0f - fat, 0.0f - fat, Constants.CANVAS_WIDTH * 3 + fat, 0.0f - fat,
-				Constants.CANVAS_WIDTH * 3 + fat, Constants.CANVAS_HEIGHT * 3 + fat, 0.0f - fat,
-				Constants.CANVAS_HEIGHT * 3 + fat, 0.0f - fat, 0.0f - fat, 0.0f, 0.0f, Constants.CANVAS_WIDTH * 3, 0.0f,
-				Constants.CANVAS_WIDTH * 3, Constants.CANVAS_HEIGHT * 3, 0.0f, Constants.CANVAS_HEIGHT * 3, 0.0f,
+		float BOTTOM = Constants.CANVAS_HEIGHT_FULL;
+
+		float[] wallScene = new float[] { 0.0f - fat, 0.0f - fat, Constants.CANVAS_WIDTH_FULL + fat, 0.0f - fat,
+				Constants.CANVAS_WIDTH_FULL + fat, BOTTOM + fat, 0.0f - fat, BOTTOM + fat, 0.0f - fat, 0.0f - fat, 0.0f,
+				0.0f, Constants.CANVAS_WIDTH_FULL, 0.0f, Constants.CANVAS_WIDTH_FULL, BOTTOM, 0.0f, BOTTOM, 0.0f,
 				0.0f };
 
 		GameObject wall = new WorldBuilderGroundSolid(wallScene);

@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.newdawn.slick.Input;
 
+import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.WorldBuiderForce;
@@ -80,7 +81,8 @@ public class WorldCreator implements ActionListenable {
 		}
 		if (button == Input.MOUSE_LEFT_BUTTON) {
 			currentBuilder.addPoint(x, y);
-			System.out.println(x * 3 + ", " + y * 3 + ",");
+			System.out.println((int) (x * Constants.CANVAS_EXTENTION_FACTOR * 1.1f) + ", "
+					+ (int) (y * Constants.CANVAS_EXTENTION_FACTOR * 1.1f) + ",");
 		}
 	}
 

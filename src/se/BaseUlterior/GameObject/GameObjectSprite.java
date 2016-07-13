@@ -13,6 +13,7 @@ import org.newdawn.slick.SlickException;
 import se.BaseUlterior.Aim.Aim;
 import se.BaseUlterior.Aim.AimBlade;
 import se.BaseUlterior.Aim.AimGrenade;
+import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Utils.UlteriorUtils;
@@ -22,12 +23,12 @@ public class GameObjectSprite extends GameObjectFalling {
 	protected Aim aim = null;
 	protected List<Aim> aims = null;
 	protected float speed = 0.0006f;
-	protected final float MAX_SPEED = 0.27f;
+	protected final float MAX_SPEED = 0.31f;
 	protected boolean mouseButtonPirmaryDown = false;
 
 	protected boolean right = true;
 
-	protected float JUMP_POWER = -0.23f;
+	protected float JUMP_POWER = -0.31f;
 
 	public GameObjectSprite(float[] nodes, float bouncyness) {
 		super(nodes, bouncyness);
@@ -47,7 +48,6 @@ public class GameObjectSprite extends GameObjectFalling {
 		if (BreakingPoint.insertMode) {
 			return;
 		}
-		BreakingPoint.moveScreen(this.motion.getX() * delta, this.motion.getY() * delta);
 
 		Input in = container.getInput();
 
@@ -94,6 +94,8 @@ public class GameObjectSprite extends GameObjectFalling {
 		aim.update(container, delta);
 
 		super.update(container, delta);
+		BreakingPoint.moveScreen(getCenterX() - Constants.CANVAS_WIDTH / 2f,
+				getCenterY() - Constants.CANVAS_HEIGHT / 2f);
 	}
 
 	@Override
