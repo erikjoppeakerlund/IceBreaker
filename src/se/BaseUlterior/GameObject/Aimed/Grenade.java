@@ -88,7 +88,7 @@ public class Grenade extends GameObjectFalling {
 
 	@Override
 	public Impact getImpact(GameObject other) {
-		return new ImpactBounce(this, other, this.bouncyness);
+		return new ImpactBounce(this, other, bouncyness);
 	}
 
 }

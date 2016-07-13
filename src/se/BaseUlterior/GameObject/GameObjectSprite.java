@@ -12,6 +12,7 @@ import org.newdawn.slick.SlickException;
 
 import se.BaseUlterior.Aim.Aim;
 import se.BaseUlterior.Aim.AimBlade;
+import se.BaseUlterior.Aim.AimGrenade;
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Utils.UlteriorUtils;
@@ -36,8 +37,8 @@ public class GameObjectSprite extends GameObjectFalling {
 
 	private void initAims() {
 		aims = new ArrayList<Aim>();
-		// aims.add(new AimGrenade());
 		aims.add(new AimBlade());
+		aims.add(new AimGrenade());
 		aim = aims.get(0);
 	}
 

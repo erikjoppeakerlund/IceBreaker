@@ -54,7 +54,6 @@ public class ImpactBounceGiven extends Impact {
 		affectedPiece.add((-N.getX() / 250.0f) * delta, (-N.getY() / 250.0f) * delta);
 		N.scale(dot);
 		affectedPiece.sub(N);
-		// origin.noForce = false;
 
 		other.noForce = false;
 		origin.noForce = false;
