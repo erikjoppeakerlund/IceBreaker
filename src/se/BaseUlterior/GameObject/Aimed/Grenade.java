@@ -73,7 +73,7 @@ public class Grenade extends GameObjectFalling {
 							BreakingPoint.objsToRemove.add(target);
 							for (GameObject anySort : BreakingPoint.all) {
 								if (anySort.isSolid()) {
-									BreakingPoint.addOnTop(anySort);
+									// BreakingPoint.addOnTop(anySort);
 									BreakingPoint.addOnTop(BreakingPoint.info);
 								}
 							}

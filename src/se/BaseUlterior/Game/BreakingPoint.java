@@ -218,7 +218,7 @@ public class BreakingPoint extends BasicGame {
 	public static void addOnTop(GameObject anySort) {
 		objsToRemove.add(anySort);
 		objsToAdd.add(anySort);
-		// anySort.putOnTop();
+		anySort.putOnTop();
 	}
 
 	public static void setActionModeAction(Action action) {

@@ -183,10 +183,10 @@ public abstract class Component extends GameObject {
 
 	@Override
 	public void putOnTop() {
-		for (GameObject sub : subs) {
-			// BreakingPoint.addOnTop(sub);
-			sub.putOnTop();
-		}
+		// for (GameObject sub : subs) {
+		// BreakingPoint.addOnTop(sub);
+		// sub.putOnTop();
+		// }
 	}
 
 	@Override

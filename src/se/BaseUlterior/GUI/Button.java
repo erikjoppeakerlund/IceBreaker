@@ -32,11 +32,12 @@ public abstract class Button extends Component {
 	private void init(String text) {
 		this.color = Color.gray;
 		this.text = text;
+		padding = 4;
 	}
 
 	protected void setText(String text) {
 		buttonText = new TextInfo(getX(), getY(), false);
-		label = new SingleText(0, 0, 20, text, getIsActiveColor(active));
+		label = new SingleText(padding, 0, 20, text, getIsActiveColor(active));
 		buttonText.singleTexts.add(label);
 		BreakingPoint.info.textInfos.add(buttonText);
 	}
@@ -63,8 +64,8 @@ public abstract class Button extends Component {
 
 	private void onMouseOut() {
 		if (active) {
-			setCenterX(getCenterX() - 12);
-			buttonText.setX(buttonText.getX() - 12);
+			setCenterX(getCenterX() - 10);
+			buttonText.setX(buttonText.getX() - 10);
 			label.setColor(getIsActiveColor(active));
 		}
 	}
@@ -79,9 +80,9 @@ public abstract class Button extends Component {
 
 	public void onMouseOver() {
 		if (active) {
-			setCenterX(getCenterX() + 12);
-			buttonText.setX(buttonText.getX() + 12);
-			label.setColor(Color.white);
+			setCenterX(getCenterX() + 10);
+			buttonText.setX(buttonText.getX() + 10);
+			label.setColor(Color.black);
 		}
 		mouseIsOutside = false;
 	}
@@ -100,8 +101,4 @@ public abstract class Button extends Component {
 		return active ? Color.darkGray : Color.lightGray;
 	}
 
-	@Override
-	public void putOnTop() {
-
-	}
 }
