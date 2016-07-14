@@ -62,6 +62,7 @@ public class AimRifle extends Aim {
 				}
 			}
 		}
+		graphics.setLineWidth(1);
 		graphics.drawLine(x, y, xTarget, yTarget);
 	}
 

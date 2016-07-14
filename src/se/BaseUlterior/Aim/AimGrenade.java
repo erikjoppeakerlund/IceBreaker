@@ -31,7 +31,7 @@ public class AimGrenade extends Aim {
 
 	private final float TIMES_LESS_ACTUAL_FORCE = 2.0f;
 
-	private final float FORCE = 0.04f;
+	private final float FORCE = 0.06f;
 
 	public AimGrenade() {
 		grenades = new ArrayList<>();

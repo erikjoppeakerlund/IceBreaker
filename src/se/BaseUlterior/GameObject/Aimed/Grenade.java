@@ -1,8 +1,8 @@
 package se.BaseUlterior.GameObject.Aimed;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 
+import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectFalling;
@@ -27,7 +27,7 @@ public class Grenade extends GameObjectFalling {
 
 	public Grenade(float[] nodes) {
 		super(nodes, BOUNCYNESS);
-		color = Color.black;
+		color = Constants.THEME_COLOR;
 		setX(-70f);
 		setY(-70f);
 	}

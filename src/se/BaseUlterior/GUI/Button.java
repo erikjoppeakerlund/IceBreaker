@@ -5,6 +5,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
+import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Context.SingleText;
 import se.BaseUlterior.Context.TextInfo;
 import se.BaseUlterior.Game.BreakingPoint;
@@ -82,7 +83,7 @@ public abstract class Button extends Component {
 		if (active) {
 			setCenterX(getCenterX() + 10);
 			buttonText.setX(buttonText.getX() + 10);
-			label.setColor(Color.black);
+			label.setColor(Constants.THEME_COLOR);
 		}
 		mouseIsOutside = false;
 	}
