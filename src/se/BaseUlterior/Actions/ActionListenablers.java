@@ -5,14 +5,14 @@ import java.util.ArrayList;
 public class ActionListenablers {
 
 	private ArrayList<ActionListenable> listeners;
-	private WorldCreator worldCreator = null;
+	// private WorldCreator worldCreator = null;
 	private GeneralInputHandler input = null;
 
 	public ActionListenablers() {
 		listeners = new ArrayList<>();
 		input = new GeneralInputHandler();
-		worldCreator = new WorldCreator();
-		listeners.add(worldCreator);
+		// worldCreator = new WorldCreator();
+		// listeners.add(worldCreator);
 		listeners.add(input);
 	}
 

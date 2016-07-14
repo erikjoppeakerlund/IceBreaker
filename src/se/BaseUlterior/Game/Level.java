@@ -7,7 +7,7 @@ import org.newdawn.slick.Color;
 
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.WorldBuiderForce;
+import se.BaseUlterior.GameObject.WorldBuilderForce;
 import se.BaseUlterior.GameObject.WorldBuilderGround;
 import se.BaseUlterior.GameObject.WorldBuilderGroundSolid;
 import se.BaseUlterior.GameObject.WorldBuilderLiquid;
@@ -87,7 +87,7 @@ public class Level {
 		// levelPieces.add(new WorldBuilderGround(new float[] {
 		//
 
-		levelPieces.add(new WorldBuiderForce(new float[] { 10477, 2579, 5049, 77, 10477, 66, },
+		levelPieces.add(new WorldBuilderForce(new float[] { 10477, 2579, 5049, 77, 10477, 66, },
 				Constants.GENERAL_GRAVITY, 0f, colorGravity));
 
 		// Extra bouncy!
@@ -100,7 +100,7 @@ public class Level {
 		float[] wholeScene = new float[] { 0.0f, 0.0f, 0.0f, Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL,
 				Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL, 0.0f };
 
-		WorldBuiderForce generalGravity = new WorldBuiderForce(wholeScene, 0, Constants.GENERAL_GRAVITY,
+		WorldBuilderForce generalGravity = new WorldBuilderForce(wholeScene, 0, Constants.GENERAL_GRAVITY,
 				Color.transparent);
 
 		levelPieces.add(generalGravity);

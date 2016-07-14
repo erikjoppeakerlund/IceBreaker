@@ -32,7 +32,7 @@ public abstract class GameObjectFalling extends GameObject {
 	private void runImpact(int delta) {
 		for (Impact im : currentImpacts) {
 			im.checkCalculate(delta);
-			if (!(im.getTrigger().contains(this) || im.getTrigger().intersects(this))) {
+			if (!im.getTrigger().intersects(this)) {
 				im.notTouchingButWithin();
 			}
 		}

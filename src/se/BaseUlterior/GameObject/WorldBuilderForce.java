@@ -9,29 +9,29 @@ import org.newdawn.slick.geom.Shape;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactForce;
 
-public class WorldBuiderForce extends WorldBuilder {
+public class WorldBuilderForce extends WorldBuilder {
 
 	protected float gravityY;
 	protected float gravityX;
 
-	public WorldBuiderForce(float[] nodes) {
+	public WorldBuilderForce(float[] nodes) {
 		super(nodes);
 		this.color = Color.yellow;
 	}
 
-	public WorldBuiderForce(float[] nodes, Color color) {
+	public WorldBuilderForce(float[] nodes, Color color) {
 		super(nodes);
 		this.color = color;
 	}
 
-	public WorldBuiderForce(float[] nodes, float gravityX, float gravityY) {
+	public WorldBuilderForce(float[] nodes, float gravityX, float gravityY) {
 		super(nodes);
 		this.gravityX = gravityX;
 		this.gravityY = gravityY;
 		this.color = Color.yellow;
 	}
 
-	public WorldBuiderForce(float[] nodes, float gravityX, float gravityY, Color color) {
+	public WorldBuilderForce(float[] nodes, float gravityX, float gravityY, Color color) {
 		super(nodes);
 		this.gravityX = gravityX;
 		this.gravityY = gravityY;

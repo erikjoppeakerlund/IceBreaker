@@ -10,7 +10,7 @@ import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectExplosion;
 import se.BaseUlterior.GameObject.GameObjectFalling;
-import se.BaseUlterior.GameObject.WorldBuiderForce;
+import se.BaseUlterior.GameObject.WorldBuilderForce;
 import se.BaseUlterior.GameObject.WorldBuilderGround;
 
 public class UlteriorUtils {
@@ -45,7 +45,7 @@ public class UlteriorUtils {
 
 	public static void createVisualPointAt(float pointX, float pointY) {
 		float fat = 3.0f;
-		GameObject point = new WorldBuiderForce(new float[] { pointX - fat, pointY - fat, pointX - fat, pointY + fat,
+		GameObject point = new WorldBuilderForce(new float[] { pointX - fat, pointY - fat, pointX - fat, pointY + fat,
 				pointX + fat, pointY + fat, pointX + fat, pointY - fat }, Color.green);
 		BreakingPoint.objsToAdd.add(point);
 	}

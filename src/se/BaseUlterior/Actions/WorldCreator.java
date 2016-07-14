@@ -7,7 +7,7 @@ import org.newdawn.slick.Input;
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.WorldBuiderForce;
+import se.BaseUlterior.GameObject.WorldBuilderForce;
 import se.BaseUlterior.GameObject.WorldBuilderGround;
 import se.BaseUlterior.GameObject.WorldBuilderLiquid;
 import se.BaseUlterior.Physics.Density;
@@ -25,7 +25,7 @@ public class WorldCreator implements ActionListenable {
 	public WorldCreator() {
 		wb = new WorldBuilderGround(new float[0]);
 		wbl = new WorldBuilderLiquid(new float[0], Density.WATER);
-		wbf = new WorldBuiderForce(new float[0], 0.0f, 0.0f);
+		wbf = new WorldBuilderForce(new float[0], 0.0f, 0.0f);
 		currentBuilder = wb;
 		BreakingPoint.objsToAdd.add(currentBuilder);
 

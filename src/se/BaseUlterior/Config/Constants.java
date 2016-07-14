@@ -1,5 +1,7 @@
 package se.BaseUlterior.Config;
 
+import org.newdawn.slick.Color;
+
 public class Constants {
 	public static final float GENERAL_GRAVITY = 0.009f;
 	public static final int CANVAS_WIDTH = 1920;
@@ -9,6 +11,9 @@ public class Constants {
 
 	public static final int CANVAS_WIDTH_FULL = CANVAS_WIDTH * CANVAS_EXTENTION_FACTOR;
 	public static final int CANVAS_HEIGHT_FULL = CANVAS_HEIGHT * CANVAS_EXTENTION_FACTOR;
+
+	public static final int LINE_WIDTH = 4;
+	public static final Color LINE_COLOR = Color.white;
 
 	public static final float SPRITE_RADIUS = 34.0f;
 
