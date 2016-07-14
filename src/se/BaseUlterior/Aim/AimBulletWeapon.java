@@ -13,6 +13,9 @@ public abstract class AimBulletWeapon extends Aim {
 
 	protected final int EXPLOTION_SIZE = 41;
 
+	protected boolean wasJustShoot = false;
+	protected final float BACK_FIRE = 14f;
+
 	@Override
 	public void primaryPushed() {
 		// TODO Auto-generated method stub
@@ -27,6 +30,8 @@ public abstract class AimBulletWeapon extends Aim {
 
 	protected void wasShoot() {
 		UlteriorUtils.removeGround(aimAtX, aimAtY, EXPLOTION_SIZE, null);
+		wasJustShoot = true;
+		armLengt -= BACK_FIRE;
 	}
 
 	@Override
@@ -60,7 +65,11 @@ public abstract class AimBulletWeapon extends Aim {
 				}
 			}
 		}
-
+		if (wasJustShoot && armLengt < START_ARM_LENGTH) {
+			armLengt += 3f;
+		} else if (wasJustShoot) {
+			wasJustShoot = false;
+		}
 	}
 
 }
