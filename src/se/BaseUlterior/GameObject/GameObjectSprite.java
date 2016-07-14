@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.input.Mouse;
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 
 import se.BaseUlterior.Aim.Aim;
 import se.BaseUlterior.Aim.AimBlade;
@@ -29,11 +31,31 @@ public class GameObjectSprite extends GameObjectFalling {
 	protected boolean right = true;
 
 	protected float JUMP_POWER = -0.31f;
+	private SpriteSheet sprite = null;
+	protected Animation animationMoveRight = null;
+	protected Animation animationMoveLeft = null;
+	private static final int SHEET_UPDATE_RATE = 85;
+
+	private boolean directionIsRight = true;
 
 	public GameObjectSprite(float[] nodes, float bouncyness) {
 		super(nodes, bouncyness);
 		color = Constants.THEME_COLOR;
 		initAims();
+		try {
+			sprite = new SpriteSheet("res/img/spriteSheet.png", 88, 88);
+			animationMoveRight = new Animation(false);
+			animationMoveLeft = new Animation(false);
+			for (int i = 0; i < 4; i++) {
+				animationMoveRight.addFrame(sprite.getSprite(i, 0), SHEET_UPDATE_RATE);
+			}
+			for (int i = 0; i < 4; i++) {
+				animationMoveLeft.addFrame(sprite.getSprite(i, 0).getFlippedCopy(true, false), SHEET_UPDATE_RATE);
+			}
+			// animation.stop();
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void initAims() {
@@ -63,13 +85,24 @@ public class GameObjectSprite extends GameObjectFalling {
 			aim = i == 0 ? aims.get(aims.size() - 1) : aims.get(i - 1);
 		}
 		if (in.isKeyDown(Input.KEY_A)) {
+			if (directionIsRight) {
+				directionIsRight = false;
+			}
+			directionIsRight = false;
+			animationMoveLeft.update(delta);
 			if (motion.getX() > -MAX_SPEED) {
 				motion.add(-speed * delta, 0.0f);
 			}
 		} else if (in.isKeyDown(Input.KEY_D)) {
+			if (!directionIsRight) {
+				directionIsRight = true;
+			}
+			animationMoveRight.update(delta);
 			if (motion.getX() < MAX_SPEED) {
 				motion.add(speed * delta, 0.0f);
 			}
+		} else {
+			animationMoveRight.setCurrentFrame(0);
 		}
 		if (in.isKeyDown(Input.KEY_W)) {
 			if (motion.y > 0) {
@@ -127,7 +160,12 @@ public class GameObjectSprite extends GameObjectFalling {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		super.render(container, graphics);
+		if (directionIsRight) {
+			animationMoveRight.draw(getX(), getY());
+		} else {
+			animationMoveLeft.draw(getX(), getY());
+		}
+		// super.render(container, graphics);
 		aim.render(container, graphics);
 	}
 
