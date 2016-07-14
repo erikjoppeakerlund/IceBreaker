@@ -23,16 +23,16 @@ public class ImpactForce extends Impact {
 
 	@Override
 	public void calculateIntersects(int delta) {
-		if (!other.noForce) {
-			affectedPiece.add(gravityX, gravityY);
-		}
+		// if (!other.noForce) {
+		affectedPiece.add(gravityX, gravityY);
+		// }
 	}
 
 	@Override
 	protected void calculateContains(int delta) {
-		if (!other.noForce) {
-			affectedPiece.add(gravityX, gravityY);
-		}
+		// if (!other.noForce) {
+		affectedPiece.add(gravityX, gravityY);
+		// }
 	}
 
 	@Override

@@ -24,7 +24,7 @@ public class GameObjectExplosion extends GameObject {
 
 	public GameObjectExplosion(float[] nodes) {
 		super(nodes);
-		this.color = Color.red;
+		this.color = Color.white;
 		this.timeSinceCreation = System.currentTimeMillis();
 	}
 

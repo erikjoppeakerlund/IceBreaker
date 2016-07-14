@@ -1,6 +1,5 @@
 package se.BaseUlterior.Aim;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -8,6 +7,7 @@ import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
 
+import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
 public class AimBlade extends Aim {
@@ -55,7 +55,7 @@ public class AimBlade extends Aim {
 
 	@Override
 	protected void renderFullfill(GameContainer container, Graphics graphics) throws SlickException {
-		graphics.setColor(Color.black);
+		graphics.setColor(Constants.THEME_COLOR);
 		graphics.fill(blade);
 	}
 

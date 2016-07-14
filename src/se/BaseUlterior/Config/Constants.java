@@ -12,7 +12,7 @@ public class Constants {
 	public static final int CANVAS_WIDTH_FULL = CANVAS_WIDTH * CANVAS_EXTENTION_FACTOR;
 	public static final int CANVAS_HEIGHT_FULL = CANVAS_HEIGHT * CANVAS_EXTENTION_FACTOR;
 
-	public static final int LINE_WIDTH = 8;
+	public static final int LINE_WIDTH = 3;
 	public static final Color THEME_COLOR = new Color(0.2f, 0.3f, 0.2f);
 
 	public static final float SPRITE_RADIUS = 34.0f;
