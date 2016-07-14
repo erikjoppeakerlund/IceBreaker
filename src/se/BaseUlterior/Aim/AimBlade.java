@@ -2,7 +2,6 @@ package se.BaseUlterior.Aim;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
@@ -47,14 +46,15 @@ public class AimBlade extends Aim {
 	}
 
 	@Override
-	protected void updateFulfill(GameContainer container, int arg) {
+	public void update(GameContainer container, int arg) {
+		super.update(container, arg);
 		blade = blade.transform(Transform.createRotateTransform(dAngle));
 		blade.setCenterX(x);
 		blade.setCenterY(y);
 	}
 
 	@Override
-	protected void renderFullfill(GameContainer container, Graphics graphics) throws SlickException {
+	public void render(GameContainer container, Graphics graphics) {
 		graphics.setColor(Constants.THEME_COLOR);
 		graphics.fill(blade);
 	}

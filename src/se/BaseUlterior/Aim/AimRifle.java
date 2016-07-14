@@ -6,16 +6,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-import se.BaseUlterior.Game.BreakingPoint;
-import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.Utils.UlteriorUtils;
-
-public class AimRifle extends Aim {
-
-	private float aimAtX;
-	private float aimAtY;
-
-	private final int EXPLOTION_SIZE = 41;
+public class AimRifle extends AimBulletWeapon {
 
 	private Image rifleImageRight = null;
 	private Image rifleImageLeft = null;
@@ -41,7 +32,7 @@ public class AimRifle extends Aim {
 
 	@Override
 	public void primaryPushed() {
-		UlteriorUtils.removeGround(aimAtX, aimAtY, EXPLOTION_SIZE, null);
+		wasShoot();
 	}
 
 	@Override
@@ -63,11 +54,7 @@ public class AimRifle extends Aim {
 	}
 
 	@Override
-	protected void updateFulfill(GameContainer container, int arg) {
-	}
-
-	@Override
-	protected void renderFullfill(GameContainer container, Graphics graphics) throws SlickException {
+	public void render(GameContainer container, Graphics graphics) {
 		if (isRight) {
 			rifleImageRight.setRotation((float) Math.toDegrees(angle));
 			rifleImageRight.draw(x - imageWidth / 2, y - imageHeight / 2);
@@ -76,24 +63,8 @@ public class AimRifle extends Aim {
 			rifleImageLeft.draw(x - imageWidth / 2, y - imageHeight / 2);
 		}
 		graphics.setColor(Color.red);
-		float xTarget = x;
-		float yTarget = y;
-		boolean notFound = true;
-		int STEP = 10;
-		while (notFound) {
-			xTarget += Math.cos(angle) * STEP;
-			yTarget += Math.sin(angle) * STEP;
-			for (GameObject go : BreakingPoint.all) {
-				if (go.contains(xTarget, yTarget) && !go.isBackgroundObj()) {
-					aimAtX = xTarget;
-					aimAtY = yTarget;
-					notFound = false;
-					break;
-				}
-			}
-		}
-		graphics.setLineWidth(1);
-		graphics.drawLine(x, y, xTarget, yTarget);
+		graphics.drawLine(x, y, aimAtX, aimAtY);
+
 	}
 
 }

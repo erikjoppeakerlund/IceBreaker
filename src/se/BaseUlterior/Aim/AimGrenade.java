@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 
 import se.BaseUlterior.Game.BreakingPoint;
@@ -75,7 +74,8 @@ public class AimGrenade extends Aim {
 	}
 
 	@Override
-	protected void updateFulfill(GameContainer container, int arg) {
+	public void update(GameContainer container, int arg) {
+		super.update(container, arg);
 		if (current != null) {
 			current.setCenterX(x);
 			current.setCenterY(y);
@@ -98,7 +98,7 @@ public class AimGrenade extends Aim {
 	}
 
 	@Override
-	protected void renderFullfill(GameContainer container, Graphics graphics) throws SlickException {
+	public void render(GameContainer container, Graphics graphics) {
 		// TODO Auto-generated method stub
 
 	}

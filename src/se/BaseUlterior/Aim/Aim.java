@@ -2,7 +2,6 @@ package se.BaseUlterior.Aim;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 
 import se.BaseUlterior.Config.Constants;
 
@@ -34,8 +33,6 @@ public abstract class Aim {
 		this.spriteY = y;
 	}
 
-	protected abstract void updateFulfill(GameContainer container, int arg);
-
 	public void update(GameContainer container, int arg) {
 		if ((angle + Math.PI / 2) > 0 && (angle + Math.PI / 2) < Math.PI) {
 			if (!isRight) {
@@ -50,15 +47,18 @@ public abstract class Aim {
 		}
 		x = spriteX + (float) Math.cos(angle) * armLengt;
 		y = spriteY + (float) Math.sin(angle) * armLengt;
-		updateFulfill(container, arg);
+		// updateFulfill(container, arg);
 		wasJustSwitched = false;
 	}
 
-	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		renderFullfill(container, graphics);
-	}
+	// public void render(GameContainer container, Graphics graphics) throws
+	// SlickException {
+	// renderFullfill(container, graphics);
+	// }
+	public abstract void render(GameContainer container, Graphics graphics);
 
-	protected abstract void renderFullfill(GameContainer container, Graphics graphics) throws SlickException;
+	// protected abstract void renderFullfill(GameContainer container, Graphics
+	// graphics) throws SlickException;
 
 	public void setAngleToMouse(float angleToPoint) {
 		dAngle = angleToPoint - angle;

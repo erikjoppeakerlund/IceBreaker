@@ -52,7 +52,6 @@ public class GameObjectSprite extends GameObjectFalling {
 			for (int i = 0; i < 4; i++) {
 				animationMoveLeft.addFrame(sprite.getSprite(i, 0).getFlippedCopy(true, false), SHEET_UPDATE_RATE);
 			}
-			// animation.stop();
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
@@ -165,7 +164,6 @@ public class GameObjectSprite extends GameObjectFalling {
 		} else {
 			animationMoveLeft.draw(getX(), getY());
 		}
-		// super.render(container, graphics);
 		aim.render(container, graphics);
 	}
 
