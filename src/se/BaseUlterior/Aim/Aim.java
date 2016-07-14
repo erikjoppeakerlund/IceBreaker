@@ -47,18 +47,10 @@ public abstract class Aim {
 		}
 		x = spriteX + (float) Math.cos(angle) * armLengt;
 		y = spriteY + (float) Math.sin(angle) * armLengt;
-		// updateFulfill(container, arg);
 		wasJustSwitched = false;
 	}
 
-	// public void render(GameContainer container, Graphics graphics) throws
-	// SlickException {
-	// renderFullfill(container, graphics);
-	// }
 	public abstract void render(GameContainer container, Graphics graphics);
-
-	// protected abstract void renderFullfill(GameContainer container, Graphics
-	// graphics) throws SlickException;
 
 	public void setAngleToMouse(float angleToPoint) {
 		dAngle = angleToPoint - angle;

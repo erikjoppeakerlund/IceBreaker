@@ -1,12 +1,37 @@
 package se.BaseUlterior.Aim;
 
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
 public abstract class AimBulletWeapon extends Aim {
+
+	private Image rifleImageRight = null;
+	private Image rifleImageLeft = null;
+	private int imageHeight;
+	private int imageWidth;
+	private static final float IMAGE_SCALE = 0.26f;
+
+	public AimBulletWeapon(String pathToImage) {
+		try {
+			rifleImageRight = new Image(pathToImage);
+			rifleImageLeft = new Image(pathToImage, true);
+			imageHeight = (int) (rifleImageRight.getHeight() * IMAGE_SCALE);
+			imageWidth = (int) (rifleImageRight.getWidth() * IMAGE_SCALE);
+			rifleImageLeft = rifleImageLeft.getScaledCopy(IMAGE_SCALE).getFlippedCopy(false, true);
+			rifleImageRight = rifleImageRight.getScaledCopy(IMAGE_SCALE);
+			rifleImageRight.setCenterOfRotation((imageWidth / 2), (imageHeight / 2));
+			rifleImageLeft.setCenterOfRotation((imageWidth / 2), (imageHeight / 2));
+
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+	}
 
 	protected float aimAtX;
 	protected float aimAtY;
@@ -70,6 +95,18 @@ public abstract class AimBulletWeapon extends Aim {
 		} else if (wasJustShoot) {
 			wasJustShoot = false;
 		}
+	}
+
+	@Override
+	public void render(GameContainer container, Graphics graphics) {
+		if (isRight) {
+			rifleImageRight.setRotation((float) Math.toDegrees(angle));
+			rifleImageRight.draw(x - imageWidth / 2, y - imageHeight / 2);
+		} else {
+			rifleImageLeft.setRotation((float) Math.toDegrees(angle) - (float) Math.PI);
+			rifleImageLeft.draw(x - imageWidth / 2, y - imageHeight / 2);
+		}
+
 	}
 
 }

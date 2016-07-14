@@ -14,6 +14,7 @@ import org.newdawn.slick.SpriteSheet;
 import se.BaseUlterior.Aim.Aim;
 import se.BaseUlterior.Aim.AimBlade;
 import se.BaseUlterior.Aim.AimGrenade;
+import se.BaseUlterior.Aim.AimMachineGun;
 import se.BaseUlterior.Aim.AimRifle;
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Game.BreakingPoint;
@@ -62,6 +63,7 @@ public class GameObjectSprite extends GameObjectFalling {
 		aims.add(new AimBlade());
 		aims.add(new AimGrenade());
 		aims.add(new AimRifle());
+		aims.add(new AimMachineGun());
 		aim = aims.get(0);
 	}
 
