@@ -80,7 +80,10 @@ public class GameObjectSprite extends GameObjectFalling {
 
 		if (Mouse.getDWheel() > 0) {
 			int i = aims.indexOf(aim);
+			aim.cleanUp();
 			aim = i == aims.size() - 1 ? aims.get(0) : aims.get(i + 1);
+			aim.onThisWasChoosen();
+
 		} else if (Mouse.getDWheel() < 0) {
 			int i = aims.indexOf(aim);
 			aim = i == 0 ? aims.get(aims.size() - 1) : aims.get(i - 1);

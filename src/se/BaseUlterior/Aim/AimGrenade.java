@@ -103,4 +103,18 @@ public class AimGrenade extends Aim {
 
 	}
 
+	@Override
+	public void cleanUp() {
+		if (current != null) {
+			BreakingPoint.objsToRemove.add(current);
+		}
+	}
+
+	@Override
+	public void onThisWasChoosen() {
+		if (current != null) {
+			BreakingPoint.objsToAdd.add(current);
+		}
+	}
+
 }

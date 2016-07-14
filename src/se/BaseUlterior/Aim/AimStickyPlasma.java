@@ -90,4 +90,8 @@ public class AimStickyPlasma extends Aim {
 
 	}
 
+	@Override
+	public void cleanUp() {
+	}
+
 }

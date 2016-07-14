@@ -57,4 +57,12 @@ public abstract class Aim {
 		angle = angleToPoint;
 	}
 
+	public void cleanUp() {
+
+	}
+
+	public void onThisWasChoosen() {
+
+	}
+
 }

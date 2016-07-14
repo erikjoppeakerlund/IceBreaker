@@ -45,6 +45,12 @@ public class AimRifle extends AimBulletWeapon {
 	}
 
 	@Override
+	public void update(GameContainer container, int arg) {
+		super.update(container, arg);
+		updateAim();
+	}
+
+	@Override
 	public void primaryPushed() {
 		wasShoot();
 	}
