@@ -96,21 +96,30 @@ public class GameObjectSprite extends GameObjectFalling {
 
 		super.update(container, delta);
 
-		float moveScreenX = getCenterX() - Constants.CANVAS_WIDTH / 2f;
-		float moveScreenY = getCenterY() - Constants.CANVAS_HEIGHT / 2f;
+		float moveScreenX = 0;
+		float moveScreenY = 0;
 
-		if (motion.x < 0 && BreakingPoint.currentX <= 0
-				|| motion.x > 0 && BreakingPoint.currentX + Constants.CANVAS_WIDTH >= Constants.CANVAS_WIDTH_FULL
-				|| motion.x > 0 && getCenterX() < Constants.CANVAS_WIDTH / 2 || motion.x < 0 && getCenterX()
-						+ BreakingPoint.currentX > Constants.CANVAS_WIDTH_FULL - Constants.CANVAS_WIDTH / 2) {
-			moveScreenX = 0;
+		float centerX = getCenterX();
+		float centerY = getCenterY();
+
+		if (!(centerX > Constants.CANVAS_WIDTH
+				&& BreakingPoint.currentX >= Constants.CANVAS_WIDTH_FULL - Constants.CANVAS_WIDTH
+				|| centerX < 0 && BreakingPoint.currentX <= 0)) {
+			if (centerX > Constants.CANVAS_WIDTH) {
+				moveScreenX = Constants.CANVAS_WIDTH;
+			} else if (centerX < 0) {
+				moveScreenX = -Constants.CANVAS_WIDTH;
+			}
 		}
 
-		if (motion.y < 0 && BreakingPoint.currentY <= 0
-				|| motion.y > 0 && BreakingPoint.currentY + Constants.CANVAS_HEIGHT >= Constants.CANVAS_HEIGHT_FULL
-				|| motion.y > 0 && getCenterY() < Constants.CANVAS_HEIGHT / 2 || motion.y < 0 && getCenterY()
-						+ BreakingPoint.currentY > Constants.CANVAS_HEIGHT_FULL - Constants.CANVAS_HEIGHT / 2) {
-			moveScreenY = 0;
+		if (!(centerY > Constants.CANVAS_HEIGHT
+				&& BreakingPoint.currentY >= Constants.CANVAS_HEIGHT_FULL - Constants.CANVAS_HEIGHT
+				|| centerY < 0 && BreakingPoint.currentY <= 0)) {
+			if (centerY > Constants.CANVAS_HEIGHT) {
+				moveScreenY = Constants.CANVAS_HEIGHT;
+			} else if (centerY < 0) {
+				moveScreenY = -Constants.CANVAS_HEIGHT;
+			}
 		}
 
 		BreakingPoint.moveScreen(moveScreenX, moveScreenY);
