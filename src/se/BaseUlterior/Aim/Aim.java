@@ -62,7 +62,7 @@ public abstract class Aim {
 
 	public void setAngleToMouse(float angleToPoint) {
 		dAngle = angleToPoint - angle;
-		this.angle = angleToPoint;
+		angle = angleToPoint;
 	}
 
 }

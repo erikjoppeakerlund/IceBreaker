@@ -88,7 +88,6 @@ public class GameObjectSprite extends GameObjectFalling {
 			if (directionIsRight) {
 				directionIsRight = false;
 			}
-			directionIsRight = false;
 			animationMoveLeft.update(delta);
 			if (motion.getX() > -MAX_SPEED) {
 				motion.add(-speed * delta, 0.0f);
@@ -103,6 +102,7 @@ public class GameObjectSprite extends GameObjectFalling {
 			}
 		} else {
 			animationMoveRight.setCurrentFrame(0);
+			animationMoveLeft.setCurrentFrame(0);
 		}
 		if (in.isKeyDown(Input.KEY_W)) {
 			if (motion.y > 0) {
