@@ -12,6 +12,10 @@ public abstract class AimTriggerHoldable extends AimBulletWeapon {
 		super(pathToImage);
 	}
 
+	public AimTriggerHoldable(String pathToImage, float startArmLength) {
+		super(pathToImage, startArmLength);
+	}
+
 	@Override
 	public void primaryPushed() {
 		iterator = 0;

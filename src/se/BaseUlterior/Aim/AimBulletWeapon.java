@@ -17,7 +17,19 @@ public abstract class AimBulletWeapon extends Aim {
 	private int imageWidth;
 	private static final float IMAGE_SCALE = 0.26f;
 
+	protected float startShotX;
+	protected float startShotY;
+
 	public AimBulletWeapon(String pathToImage) {
+		init(pathToImage);
+	}
+
+	public AimBulletWeapon(String pathToImage, float startArmLength) {
+		super(startArmLength);
+		init(pathToImage);
+	}
+
+	private void init(String pathToImage) {
 		try {
 			rifleImageRight = new Image(pathToImage);
 			rifleImageLeft = new Image(pathToImage, true);
@@ -75,22 +87,8 @@ public abstract class AimBulletWeapon extends Aim {
 	@Override
 	public void update(GameContainer container, int arg) {
 		super.update(container, arg);
-		// float xTarget = x;
-		// float yTarget = y;
-		// boolean notFound = true;
-		// int STEP = 10;
-		// while (notFound) {
-		// xTarget += Math.cos(angle) * STEP;
-		// yTarget += Math.sin(angle) * STEP;
-		// for (GameObject go : BreakingPoint.all) {
-		// if (go.contains(xTarget, yTarget) && !go.isBackgroundObj()) {
-		// aimAtX = xTarget;
-		// aimAtY = yTarget;
-		// notFound = false;
-		// break;
-		// }
-		// }
-		// }
+		startShotX = spriteX + (float) cosX * (armLengt + imageWidth / 2);
+		startShotY = spriteY + (float) sinY * (armLengt + imageWidth / 2);
 		if (wasJustShoot && armLengt < START_ARM_LENGTH) {
 			armLengt += 3f;
 		} else if (wasJustShoot) {
@@ -104,8 +102,8 @@ public abstract class AimBulletWeapon extends Aim {
 		boolean notFound = true;
 		int STEP = 10;
 		while (notFound) {
-			xTarget += Math.cos(angle) * STEP;
-			yTarget += Math.sin(angle) * STEP;
+			xTarget += cosX * STEP;
+			yTarget += sinY * STEP;
 			for (GameObject go : BreakingPoint.all) {
 				if (go.contains(xTarget, yTarget) && !go.isBackgroundObj()) {
 					aimAtX = xTarget;

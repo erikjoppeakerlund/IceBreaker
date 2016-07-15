@@ -16,6 +16,7 @@ public class Constants {
 	public static final Color THEME_COLOR = new Color(0.2f, 0.3f, 0.2f);
 
 	public static final float SPRITE_RADIUS = 44.0f;
+	public static final float PERFERED_ARM_LENGTH = Constants.SPRITE_RADIUS * 3.2f;
 
 	public static String INSERT_MODE = "INSERT_MODE";
 	public static String ACTION_MODE = "ACTION_MODE";
