@@ -24,18 +24,9 @@ public class AimRifle extends AimBulletWeapon {
 		super.render(container, graphics);
 		graphics.setColor(Color.red);
 		graphics.drawLine(startShotX, startShotY, aimAtX, aimAtY);
-		if (wasJustShoot) {
-			gunFire.restart();
-			animationsIsDrawn = true;
-		}
 		if (animationsIsDrawn) {
 			gunFire.getCurrentFrame().setRotation((float) Math.toDegrees(angle + (Math.PI / 2f - 0.5f)));
 			gunFire.draw(startShotX - gunFireFrameWidth / 2, startShotY - gunFireFrameHeight / 2);
-			if (gunFire.getFrame() >= gunFire.getFrameCount() - 1) {
-				gunFire.setCurrentFrame(0);
-				gunFire.stop();
-				animationsIsDrawn = false;
-			}
 		}
 
 	}
@@ -44,6 +35,17 @@ public class AimRifle extends AimBulletWeapon {
 	public void update(GameContainer container, int arg) {
 		super.update(container, arg);
 		updateAim();
+		if (wasJustShoot) {
+			gunFire.setCurrentFrame(0);
+			gunFire.update(arg);
+			animationsIsDrawn = true;
+		} else if (animationsIsDrawn) {
+			if (gunFire.getFrame() < gunFire.getFrameCount() - 1) {
+				gunFire.update(arg);
+			} else {
+				animationsIsDrawn = false;
+			}
+		}
 	}
 
 	@Override

@@ -65,6 +65,7 @@ public class GameObjectSprite extends GameObjectFalling {
 		try {
 			gunFire = new SpriteSheet("res/img/GUNFIREsimple.png", 96, 96);
 			animationGunfire = new Animation(gunFire, 10);
+			animationGunfire.setAutoUpdate(false);
 			gunFireFrameWidth = animationGunfire.getCurrentFrame().getWidth();
 			gunFireFrameHeight = animationGunfire.getCurrentFrame().getHeight();
 			gunFire.setCenterOfRotation(gunFireFrameWidth / 2f, gunFireFrameHeight / 2f);
