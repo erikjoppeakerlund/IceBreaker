@@ -39,10 +39,15 @@ public class GameObjectSprite extends GameObjectFalling {
 
 	private boolean directionIsRight = true;
 
+	private SpriteSheet gunFire = null;
+	private Animation animationGunfire = null;
+
+	private int gunFireFrameWidth;
+	private int gunFireFrameHeight;
+
 	public GameObjectSprite(float[] nodes, float bouncyness) {
 		super(nodes, bouncyness);
 		color = Constants.THEME_COLOR;
-		initAims();
 		try {
 			sprite = new SpriteSheet("res/img/spriteSheet.png", 88, 88);
 			animationMoveRight = new Animation(false);
@@ -56,6 +61,17 @@ public class GameObjectSprite extends GameObjectFalling {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
+
+		try {
+			gunFire = new SpriteSheet("res/img/GUNFIREsimple.png", 96, 96);
+			animationGunfire = new Animation(gunFire, 10);
+			gunFireFrameWidth = animationGunfire.getCurrentFrame().getWidth();
+			gunFireFrameHeight = animationGunfire.getCurrentFrame().getHeight();
+			gunFire.setCenterOfRotation(gunFireFrameWidth / 2f, gunFireFrameHeight / 2f);
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+		initAims();
 	}
 
 	private void initAims() {
@@ -63,7 +79,7 @@ public class GameObjectSprite extends GameObjectFalling {
 		aims.add(new AimBlade());
 		aims.add(new AimGrenade());
 		aims.add(new AimRifle());
-		aims.add(new AimMachineGun());
+		aims.add(new AimMachineGun(animationGunfire));
 		aim = aims.get(0);
 	}
 

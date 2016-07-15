@@ -1,5 +1,6 @@
 package se.BaseUlterior.Aim;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
@@ -30,6 +31,7 @@ public abstract class Aim {
 
 	protected float cosX;
 	protected float sinY;
+	protected Animation gunFire = null;
 
 	public Aim() {
 		START_ARM_LENGTH = Constants.PERFERED_ARM_LENGTH;

@@ -124,7 +124,6 @@ public abstract class AimBulletWeapon extends Aim {
 			rifleImageLeft.setRotation((float) Math.toDegrees(angle) - (float) Math.PI);
 			rifleImageLeft.draw(x - imageWidth / 2, y - imageHeight / 2);
 		}
-
 	}
 
 }

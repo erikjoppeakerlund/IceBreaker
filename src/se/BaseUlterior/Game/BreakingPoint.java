@@ -69,6 +69,8 @@ public class BreakingPoint extends BasicGame {
 	public static float currentX = 0;
 	public static float currentY = 0;
 
+	// public static UlteriorDraw drawClass = new UlteriorDraw();
+
 	public void addObjToGame(GameObject g) {
 		allFalliing.add((GameObjectFalling) g);
 		objsToAdd.add(g);
@@ -100,7 +102,6 @@ public class BreakingPoint extends BasicGame {
 		/*
 		 * TODO: ROTATIONS!
 		 */
-
 		// load image
 		image = new Image("res/img/tilesBackground.jpg");
 

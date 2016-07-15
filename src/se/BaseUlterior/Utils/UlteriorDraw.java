@@ -1,15 +1,32 @@
 package se.BaseUlterior.Utils;
 
-import org.newdawn.slick.Color;
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 
 public class UlteriorDraw {
-	public static void drawWithAlphe(Graphics g, float aplha, float[] points, Color color) {
+
+	private static SpriteSheet gunFire = null;
+	private static Animation animationGunfire = null;
+
+	private static int gunFireFrameWidth;
+	private static int gunFireFrameHeight;
+
+	public UlteriorDraw() {
+		try {
+			gunFire = new SpriteSheet("res/img/GUNFIREsimple.png", 96, 96);
+			animationGunfire = new Animation(gunFire, 10);
+			gunFireFrameWidth = animationGunfire.getCurrentFrame().getWidth();
+			gunFireFrameHeight = animationGunfire.getCurrentFrame().getHeight();
+			gunFire.setCenterOfRotation(gunFireFrameWidth / 2f, gunFireFrameHeight / 2f);
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public static void drawBorder(Graphics g, float[] points) {
-		for (int i = 0; i < points.length - 2; i += 2) {
-			g.drawLine(points[i], points[i + 1], points[i + 2], points[i + 3]);
-		}
+	public void gunFire(Graphics g, float x, float y, float angle) {
+		animationGunfire.getCurrentFrame().setRotation((float) Math.toDegrees(angle + (Math.PI / 2f - 0.5f)));
+		animationGunfire.draw(x - gunFireFrameWidth / 2, y - gunFireFrameHeight / 2);
 	}
 }
