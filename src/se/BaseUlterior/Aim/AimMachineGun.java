@@ -11,6 +11,8 @@ public class AimMachineGun extends AimTriggerHoldable {
 	private int gunFireFrameWidth;
 	private int gunFireFrameHeight;
 
+	private boolean animationsIsDrawn = false;
+
 	public AimMachineGun(Animation gunFire) {
 		super("res/img/GUNSmachineGun.png", Constants.PERFERED_ARM_LENGTH * 0.7f);
 		this.gunFire = gunFire;
@@ -21,8 +23,18 @@ public class AimMachineGun extends AimTriggerHoldable {
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
 		super.render(container, graphics);
-		gunFire.getCurrentFrame().setRotation((float) Math.toDegrees(angle + (Math.PI / 2f - 0.5f)));
-		gunFire.draw(startShotX - gunFireFrameWidth / 2, startShotY - gunFireFrameHeight / 2);
+		if (wasJustShoot) {
+			gunFire.restart();
+			animationsIsDrawn = true;
+		}
+		if (animationsIsDrawn) {
+			gunFire.getCurrentFrame().setRotation((float) Math.toDegrees(angle + (Math.PI / 2f - 0.5f)));
+			gunFire.draw(startShotX - gunFireFrameWidth / 2, startShotY - gunFireFrameHeight / 2);
+			if (gunFire.getFrame() >= gunFire.getFrameCount() - 1) {
+				gunFire.stop();
+				animationsIsDrawn = false;
+			}
+		}
 	}
 
 }
