@@ -31,7 +31,7 @@ public class GameObjectSprite extends GameObjectFalling {
 
 	protected boolean right = true;
 
-	protected float JUMP_POWER = -0.31f;
+	protected float JUMP_POWER = -0.41f;
 	private SpriteSheet sprite = null;
 	protected Animation animationMoveRight = null;
 	protected Animation animationMoveLeft = null;
@@ -126,9 +126,9 @@ public class GameObjectSprite extends GameObjectFalling {
 			animationMoveLeft.setCurrentFrame(0);
 		}
 		if (in.isKeyDown(Input.KEY_W)) {
-			if (motion.y > 0) {
-				motion.set(new Vector2(motion.getX(), JUMP_POWER));
-			}
+			setCenterY(getCenterY() - 4);
+			motion.set(new Vector2(motion.getX(), JUMP_POWER));
+
 		}
 		if (in.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 			aim.primaryPushed();

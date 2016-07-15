@@ -196,7 +196,7 @@ public abstract class GameObject extends Polygon {
 						 */
 						if (aY * bX - aX * bY > 0.0f) {
 							shape.noForce = true;
-
+							noForce = true;
 						}
 					}
 

@@ -22,7 +22,7 @@ public class ImpactBounceGiven extends Impact {
 	@Override
 	public void calculateIntersects(int delta) {
 
-		normals = other.getMyNormalsAfterHitBy(origin);
+		normals = origin.getMyNormalsAfterHitBy(other);
 		if (normals.isEmpty()) {
 			return;
 		}
@@ -55,8 +55,8 @@ public class ImpactBounceGiven extends Impact {
 		N.scale(dot);
 		affectedPiece.sub(N);
 
-		other.noForce = false;
-		origin.noForce = false;
+		// other.noForce = false;
+		// origin.noForce = false;
 	}
 
 	@Override
