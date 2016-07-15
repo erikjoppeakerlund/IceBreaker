@@ -15,7 +15,7 @@ import se.BaseUlterior.Physics.Impact;
 
 public abstract class Component extends GameObject {
 
-	private boolean hide = false;
+	protected boolean hide = false;
 
 	protected float forcedWidth;
 	protected float forcedHeight;
@@ -26,6 +26,11 @@ public abstract class Component extends GameObject {
 	protected float minWidth = -1;
 	protected float maxHeight = -1;
 	protected float minHeight = -1;
+
+	@Override
+	public boolean isBackgroundObj() {
+		return true;
+	}
 
 	public void setMaxWidth(float maxWidth) {
 		this.maxWidth = maxWidth;

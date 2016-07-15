@@ -12,7 +12,7 @@ public class ToolBox extends Panel {
 	private List<Button> buttons = null;
 
 	private static final float styleHeigth = 200;
-	private static final float styleWidth = 400;
+	private static final float styleWidth = 500;
 
 	private final static float tabSize = 50f;
 
@@ -42,7 +42,7 @@ public class ToolBox extends Panel {
 
 			}
 		});
-		buttons.add(new Button("COUNTER:FORCES", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, true) {
+		buttons.add(new Button("WEAPONS::SCROLL", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, true) {
 
 			@Override
 			public void onClick() {
@@ -58,7 +58,7 @@ public class ToolBox extends Panel {
 
 			}
 		});
-		buttons.add(new Button("LEVELS", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, true) {
+		buttons.add(new Button("MAP SELECT", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, true) {
 
 			@Override
 			public void onClick() {
@@ -66,23 +66,7 @@ public class ToolBox extends Panel {
 
 			}
 		});
-		buttons.add(new Button("(GROUND)", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, !BreakingPoint.insertMode) {
-
-			@Override
-			public void onClick() {
-				// TODO Auto-generated method stub
-
-			}
-		});
-		buttons.add(new Button("(FRICTION)", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, !BreakingPoint.insertMode) {
-
-			@Override
-			public void onClick() {
-				// TODO Auto-generated method stub
-
-			}
-		});
-		buttons.add(new Button("(GRAVITY)", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, !BreakingPoint.insertMode) {
+		buttons.add(new Button("(CHEET)", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, !BreakingPoint.insertMode) {
 
 			@Override
 			public void onClick() {
@@ -100,6 +84,22 @@ public class ToolBox extends Panel {
 			}
 		});
 		buttons.add(new Button("ABOUT", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, true) {
+
+			@Override
+			public void onClick() {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		buttons.add(new Button("INSTRUCTIONS", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, true) {
+
+			@Override
+			public void onClick() {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		buttons.add(new Button("DIFFICULTY", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, true) {
 
 			@Override
 			public void onClick() {

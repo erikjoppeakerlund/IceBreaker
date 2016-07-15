@@ -30,6 +30,8 @@ public abstract class AimBulletWeapon extends Aim {
 	}
 
 	private void init(String pathToImage) {
+		x = -60;
+		y = -60;
 		try {
 			rifleImageRight = new Image(pathToImage);
 			rifleImageLeft = new Image(pathToImage, true);

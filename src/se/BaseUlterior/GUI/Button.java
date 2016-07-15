@@ -2,6 +2,7 @@ package se.BaseUlterior.GUI;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
@@ -16,7 +17,7 @@ public abstract class Button extends Component {
 	private SingleText label;
 	private boolean active = true;
 	public final static float PREFERED_HEIGHT = 30f;
-	public final static float PREFERED_WIDTH = 180f;
+	public final static float PREFERED_WIDTH = 200f;
 	TextInfo buttonText;
 
 	public Button(String text, float width, float height, boolean active) {
@@ -102,4 +103,13 @@ public abstract class Button extends Component {
 		return active ? Color.darkGray : Color.lightGray;
 	}
 
+	@Override
+	public void render(GameContainer container, Graphics graphics) throws SlickException {
+		super.render(container, graphics);
+		if (!hide) {
+			graphics.setLineWidth(3);
+			graphics.setColor(Color.darkGray);
+			graphics.draw(this);
+		}
+	}
 }

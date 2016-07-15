@@ -81,7 +81,7 @@ public class GameObjectSprite extends GameObjectFalling {
 		aims.add(new AimGrenade());
 		aims.add(new AimRifle(animationGunfire));
 		aims.add(new AimMachineGun(animationGunfire));
-		aim = aims.get(0);
+		aim = aims.get(2);
 	}
 
 	@Override
