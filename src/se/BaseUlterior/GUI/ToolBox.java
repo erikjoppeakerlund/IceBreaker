@@ -109,12 +109,4 @@ public class ToolBox extends Panel {
 		});
 	}
 
-	// @Override
-	// public void render(GameContainer container, Graphics graphics) throws
-	// SlickException {
-	//
-	// graphics.setColor(colorAlpha);
-	// graphics.fill(this);
-	// }
-
 }

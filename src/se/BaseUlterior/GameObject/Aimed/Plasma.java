@@ -9,6 +9,9 @@ import org.newdawn.slick.geom.Circle;
 import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.Geom.Vector2;
 
+/*
+ * Work In Progress!
+ */
 public class Plasma extends GameObjectFalling {
 
 	private boolean hitWall = false;

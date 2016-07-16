@@ -32,8 +32,6 @@ public class BreakingPoint extends BasicGame {
 
 	Circle circ = new Circle(20, 20, 20);
 
-	// public static WorldBuiderForce generalGravity = null;
-
 	public static boolean insertMode = true;
 
 	public BreakingPoint(String title) {
@@ -99,13 +97,8 @@ public class BreakingPoint extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		/*
-		 * TODO: ROTATIONS!
-		 */
-		// load image
 		image = new Image("res/img/tilesBackground.jpg");
 
-		// set width and height of background pattern
 		patternWidth = container.getWidth();
 		patternHeight = container.getHeight();
 
@@ -153,7 +146,7 @@ public class BreakingPoint extends BasicGame {
 		AppGameContainer appGameContainer = new AppGameContainer(new BreakingPoint("Ice Breaker"));
 		int maxFPS = 60;
 		appGameContainer.setTargetFrameRate(maxFPS);
-		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, false);
+		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, true);
 		appGameContainer.setAlwaysRender(true);
 		appGameContainer.start();
 

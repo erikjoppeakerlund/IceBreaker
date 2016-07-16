@@ -7,7 +7,8 @@ import org.newdawn.slick.util.FastTrig;
 /**
  * A two dimensional vector
  * 
- * @author Kevin Glass, small changes by Johan Åkerlund
+ * @author Kevin Glass, minor changes by Johan Åkerlund, but I don't take any
+ *         credit!
  */
 public strictfp class Vector2 implements Serializable {
 	/** The version ID for this class */

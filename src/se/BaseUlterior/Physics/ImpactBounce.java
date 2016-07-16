@@ -58,15 +58,6 @@ public class ImpactBounce extends Impact {
 		}
 
 		/*
-		 * we need to check so that we only chose to run this function if the
-		 * to-be-affected vector is pointed outwards!
-		 * 
-		 * set the sprite bounce to more than zero to understand why! This will
-		 * solve the "glue" to the cieling and the grenade which "sinks" into
-		 * the ground.
-		 */
-
-		/*
 		 * using the algorithm: V´ = V - (2*(V . N)) * N
 		 * 
 		 * ...where N is the normal of the hit surface, V is the moving particle

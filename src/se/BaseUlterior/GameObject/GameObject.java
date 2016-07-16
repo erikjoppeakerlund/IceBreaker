@@ -16,6 +16,11 @@ import se.BaseUlterior.Actions.Action;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Physics.Impact;
 
+/*
+ * IMPORTANT NOTE: This class contains functions which are not written by be,
+ * but by the author of Slick2d!
+ */
+
 public abstract class GameObject extends Polygon {
 
 	protected List<Impact> currentImpacts = null;

@@ -10,6 +10,9 @@ import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.Aimed.Plasma;
 import se.BaseUlterior.Geom.Vector2;
 
+/*
+ * Work In Progess!
+ */
 public class AimStickyPlasma extends Aim {
 
 	Plasma current;

@@ -2,7 +2,6 @@ package se.BaseUlterior.Utils;
 
 import java.util.ArrayList;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Shape;
 
@@ -46,7 +45,7 @@ public class UlteriorUtils {
 	public static void createVisualPointAt(float pointX, float pointY) {
 		float fat = 3.0f;
 		GameObject point = new WorldBuilderForce(new float[] { pointX - fat, pointY - fat, pointX - fat, pointY + fat,
-				pointX + fat, pointY + fat, pointX + fat, pointY - fat }, Color.green);
+				pointX + fat, pointY + fat, pointX + fat, pointY - fat });
 		BreakingPoint.objsToAdd.add(point);
 	}
 
@@ -56,6 +55,9 @@ public class UlteriorUtils {
 		}
 	}
 
+	/*
+	 * Not current used, due to game play decision.
+	 */
 	public static void removeGroundReal(float x, float y, float sizeOfExplostion, GameObject origin) {
 		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion).getPoints());
 		BreakingPoint.objsToAdd.add(explotionShape);

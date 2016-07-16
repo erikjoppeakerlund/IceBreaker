@@ -99,7 +99,6 @@ public abstract class Button extends Component {
 	}
 
 	public Color getIsActiveColor(boolean active) {
-		// label.setColor(active ? Color.black : Color.darkGray);
 		return active ? Color.darkGray : Color.lightGray;
 	}
 

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class ActionListenablers {
 
 	private ArrayList<ActionListenable> listeners;
-	// private WorldCreator worldCreator = null;
 	private GeneralInputHandler input = null;
 
 	public ActionListenablers() {
