@@ -1,5 +1,9 @@
 package se.BaseUlterior.Aim;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -7,7 +11,6 @@ import org.newdawn.slick.SlickException;
 
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.Utils.UlteriorUtils;
 
 public abstract class AimBulletWeapon extends Aim {
 
@@ -16,9 +19,17 @@ public abstract class AimBulletWeapon extends Aim {
 	private int imageHeight;
 	private int imageWidth;
 	private static final float IMAGE_SCALE = 0.26f;
+	private static final float SMOKE_LENGTH = 41f;
 
 	protected float startShotX;
 	protected float startShotY;
+	protected int shotRayFrames;
+	protected ArrayList<float[]> explostions;
+	protected ArrayList<float[]> rays;
+
+	private Color rayColor = Color.darkGray;
+
+	private final int WALL_HIT_EXPLOTION_SIZE = 5;
 
 	public AimBulletWeapon(String pathToImage) {
 		init(pathToImage);
@@ -45,12 +56,14 @@ public abstract class AimBulletWeapon extends Aim {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
+		rays = new ArrayList<>();
+		explostions = new ArrayList<>();
 	}
 
 	protected float aimAtX;
 	protected float aimAtY;
 
-	protected final int EXPLOTION_SIZE = 41;
+	protected final int EXPLOTION_SIZE = 29;
 
 	protected boolean wasJustShoot = false;
 	protected final float BACK_FIRE = 14f;
@@ -69,9 +82,11 @@ public abstract class AimBulletWeapon extends Aim {
 
 	protected void wasShoot() {
 		updateAim();
-		UlteriorUtils.removeGround(aimAtX, aimAtY, EXPLOTION_SIZE, null);
+		// UlteriorUtils.removeGround(aimAtX, aimAtY, EXPLOTION_SIZE, null);
 		wasJustShoot = true;
 		armLengt -= BACK_FIRE;
+		explostions.add(new float[] { aimAtX, aimAtY, SMOKE_LENGTH });
+		rays.add(new float[] { x, y, aimAtX, aimAtY, SMOKE_LENGTH });
 	}
 
 	@Override
@@ -96,6 +111,27 @@ public abstract class AimBulletWeapon extends Aim {
 		} else if (wasJustShoot) {
 			wasJustShoot = false;
 		}
+		if (!rays.isEmpty()) {
+			Iterator<float[]> it = rays.iterator();
+			while (it.hasNext()) {
+				float[] ray = it.next();
+				if (ray[4] < 1) {
+					it.remove();
+				}
+				ray[4]--;
+			}
+		}
+		if (!explostions.isEmpty()) {
+			Iterator<float[]> it = explostions.iterator();
+			while (it.hasNext()) {
+				float[] expl = it.next();
+				if (expl[2] < 1) {
+					it.remove();
+				}
+				expl[2]--;
+			}
+		}
+
 	}
 
 	protected void updateAim() {
@@ -125,6 +161,20 @@ public abstract class AimBulletWeapon extends Aim {
 		} else {
 			rifleImageLeft.setRotation((float) Math.toDegrees(angle) - (float) Math.PI);
 			rifleImageLeft.draw(x - imageWidth / 2, y - imageHeight / 2);
+		}
+		if (!rays.isEmpty()) {
+			for (float[] ray : rays) {
+
+				rayColor.a = ray[4] / SMOKE_LENGTH;
+				graphics.setColor(rayColor);
+				graphics.drawLine(ray[0], ray[1], ray[2], ray[3]);
+			}
+		}
+		if (!explostions.isEmpty()) {
+			for (float[] expl : explostions) {
+				graphics.drawRect(expl[0] - WALL_HIT_EXPLOTION_SIZE, expl[1] - WALL_HIT_EXPLOTION_SIZE,
+						WALL_HIT_EXPLOTION_SIZE, WALL_HIT_EXPLOTION_SIZE);
+			}
 		}
 	}
 

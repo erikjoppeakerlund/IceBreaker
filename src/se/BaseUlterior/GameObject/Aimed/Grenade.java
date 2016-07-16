@@ -1,8 +1,10 @@
 package se.BaseUlterior.GameObject.Aimed;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
 
-import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectFalling;
@@ -27,7 +29,8 @@ public class Grenade extends GameObjectFalling {
 
 	public Grenade(float[] nodes) {
 		super(nodes, BOUNCYNESS);
-		color = Constants.THEME_COLOR;
+		// color = Constants.THEME_COLOR;
+		color = Color.darkGray;
 		setX(-70f);
 		setY(-70f);
 	}
@@ -55,6 +58,14 @@ public class Grenade extends GameObjectFalling {
 	@Override
 	public Impact getImpact(GameObject other) {
 		return new ImpactBounce(this, other, -bouncyness, true);
+	}
+
+	@Override
+	public void render(GameContainer container, Graphics graphics) throws SlickException {
+		color.a = 1;
+		super.render(container, graphics);
+		graphics.setColor(Color.white);
+		graphics.draw(this);
 	}
 
 }
