@@ -113,11 +113,11 @@ public abstract class AimBulletWeapon extends Aim {
 	@Override
 	public void update(GameContainer container, int arg) {
 		super.update(container, arg);
-		startShotX = spriteX + (float) cosX * (armLengt + imageWidth / 2);
-		startShotY = spriteY + (float) sinY * (armLengt + imageWidth / 2);
+		startShotX = spriteX + cosX * (armLengt + imageWidth / 2);
+		startShotY = spriteY + sinY * (armLengt + imageWidth / 2);
 
-		gunFireStartAtX = spriteX + (float) cosX * (armLengt + gunFireFrameWidth / 2 + imageWidth / 2);
-		gunFireStartAtY = spriteY + (float) sinY * (armLengt + gunFireFrameWidth / 2 + imageWidth / 2);
+		gunFireStartAtX = spriteX + cosX * (armLengt + gunFireFrameWidth / 2 + imageWidth / 2);
+		gunFireStartAtY = spriteY + sinY * (armLengt + gunFireFrameWidth / 2 + imageWidth / 2);
 
 		if (wasJustShoot && armLengt < START_ARM_LENGTH) {
 			armLengt += 3f;

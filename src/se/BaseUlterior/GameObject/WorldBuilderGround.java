@@ -13,7 +13,7 @@ public class WorldBuilderGround extends WorldBuilderMateriaFirm {
 
 	public WorldBuilderGround(float[] nodes) {
 		super(nodes);
-		this.color = Color.black;
+		this.color = Color.white;
 	}
 
 	public WorldBuilderGround(float[] nodes, float extraBouncyness) {
@@ -36,7 +36,7 @@ public class WorldBuilderGround extends WorldBuilderMateriaFirm {
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		super.render(container, graphics);
 		graphics.setLineWidth(Constants.LINE_WIDTH);
-		graphics.setColor(Color.white);
+		graphics.setColor(Color.black);
 		graphics.draw(this);
 	}
 

@@ -3,9 +3,9 @@ package se.BaseUlterior.Game;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -76,18 +76,20 @@ public class BreakingPoint extends BasicGame {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		image.bind();
+		// image.bind();
+		//
+		// GL11.glBegin(GL11.GL_QUADS);
+		// GL11.glTexCoord2f(0, 0);
+		// GL11.glVertex2f(0, 0);
+		// GL11.glTexCoord2f(3, 0);
+		// GL11.glVertex2f(patternWidth, 0);
+		// GL11.glTexCoord2f(3, 3);
+		// GL11.glVertex2f(patternWidth, patternHeight);
+		// GL11.glTexCoord2f(0, 3);
+		// GL11.glVertex2f(0, patternHeight);
+		// GL11.glEnd();
 
-		GL11.glBegin(GL11.GL_QUADS);
-		GL11.glTexCoord2f(0, 0);
-		GL11.glVertex2f(0, 0);
-		GL11.glTexCoord2f(3, 0);
-		GL11.glVertex2f(patternWidth, 0);
-		GL11.glTexCoord2f(3, 3);
-		GL11.glVertex2f(patternWidth, patternHeight);
-		GL11.glTexCoord2f(0, 3);
-		GL11.glVertex2f(0, patternHeight);
-		GL11.glEnd();
+		graphics.setBackground(Color.lightGray);
 
 		for (GameObject go : BreakingPoint.all) {
 			go.render(container, graphics);

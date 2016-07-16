@@ -26,12 +26,13 @@ public class ImpactBounce extends Impact {
 
 	@Override
 	public void calculateImpact(int delta) {
-		normalsTester = origin.getMyNormalsAfterHitBy(other);
+		reset = true;
 		if (!origin.intersects(other) || !other.intersects(origin)) {
 			origin.noForce = false;
 			other.noForce = false;
-			reset = true;
+			return;
 		}
+		normalsTester = origin.getMyNormalsAfterHitBy(other);
 		if ((!normalsTester.isEmpty() || reset) && !(self && (origin.noForce))) {
 			normals = normalsTester;
 		}

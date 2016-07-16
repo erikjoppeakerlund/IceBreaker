@@ -32,7 +32,7 @@ public abstract class Button extends Component {
 	}
 
 	private void init(String text) {
-		this.color = Color.gray;
+		this.color = Color.white;
 		this.text = text;
 		padding = 4;
 	}

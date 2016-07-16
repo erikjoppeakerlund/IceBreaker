@@ -50,8 +50,8 @@ public class AimGrenade extends Aim {
 		if (current == null) {
 			return;
 		}
-		float dX = (float) cosX * force / TIMES_LESS_ACTUAL_FORCE;
-		float dY = (float) sinY * force / TIMES_LESS_ACTUAL_FORCE;
+		float dX = cosX * force / TIMES_LESS_ACTUAL_FORCE;
+		float dY = sinY * force / TIMES_LESS_ACTUAL_FORCE;
 		current.initMotion(new Vector2(dX, dY));
 		currentTime = System.currentTimeMillis();
 		canMakeNew = true;
