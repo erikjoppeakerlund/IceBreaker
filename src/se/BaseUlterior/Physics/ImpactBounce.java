@@ -26,14 +26,16 @@ public class ImpactBounce extends Impact {
 
 	@Override
 	public void calculateImpact(int delta) {
-		reset = true;
 		if (!origin.intersects(other) || !other.intersects(origin)) {
-			origin.noForce = false;
-			other.noForce = false;
+			if (self) {
+				origin.noForce = false;
+			} else {
+				other.noForce = false;
+			}
 			return;
 		}
 		normalsTester = origin.getMyNormalsAfterHitBy(other);
-		if ((!normalsTester.isEmpty() || reset) && !(self && (origin.noForce))) {
+		if ((!normalsTester.isEmpty()) && !(self && (origin.noForce))) {
 			normals = normalsTester;
 		}
 		if (normals.isEmpty()) {
@@ -75,8 +77,11 @@ public class ImpactBounce extends Impact {
 
 	@Override
 	public void onReset() {
-		other.noForce = false;
-		origin.noForce = false;
+		if (!self) {
+			other.noForce = false;
+		} else {
+			origin.noForce = false;
+		}
 	}
 
 }
