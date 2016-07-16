@@ -90,10 +90,4 @@ public abstract class WorldBuilderMateriaFirm extends WorldBuilder {
 
 	}
 
-	// @Override
-	// public Impact getImpact(GameObject piece) {
-	// // TODO Auto-generated method stub
-	// return null;
-	// }
-
 }

@@ -32,7 +32,7 @@ public class ImpactBounce extends Impact {
 			other.noForce = false;
 			reset = true;
 		}
-		if ((!normalsTester.isEmpty() || reset) && !(self && origin.noForce)) {
+		if ((!normalsTester.isEmpty() || reset) && !(self && (origin.noForce))) {
 			normals = normalsTester;
 		}
 		if (normals.isEmpty()) {
@@ -53,6 +53,19 @@ public class ImpactBounce extends Impact {
 		}
 		N.normalise();
 
+		if (N.dot(affectedPiece.copy().normalise()) < 0) {
+			return;
+		}
+
+		/*
+		 * we need to check so that we only chose to run this function if the
+		 * to-be-affected vector is pointed outwards!
+		 * 
+		 * set the sprite bounce to more than zero to understand why! This will
+		 * solve the "glue" to the cieling and the grenade which "sinks" into
+		 * the ground.
+		 */
+
 		/*
 		 * using the algorithm: V´ = V - (2*(V . N)) * N
 		 * 
@@ -61,7 +74,7 @@ public class ImpactBounce extends Impact {
 		 */
 
 		float dot = affectedPiece.dot(N) * (1.0f + bouncyness);
-		affectedPiece.add((-N.getX() / 250.0f) * delta, (-N.getY() / 250.0f) * delta);
+
 		N.scale(dot);
 		if (!(self & origin.noForce)) {
 			affectedPiece.sub(N);
@@ -70,6 +83,8 @@ public class ImpactBounce extends Impact {
 
 	@Override
 	public void onReset() {
+		other.noForce = false;
+		origin.noForce = false;
 	}
 
 }

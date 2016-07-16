@@ -127,7 +127,7 @@ public class BreakingPoint extends BasicGame {
 		GameObject sprite = new GameObjectSprite(
 				new Circle(Constants.CANVAS_WIDTH / 2, Constants.CANVAS_HEIGHT / 2, Constants.SPRITE_RADIUS)
 						.getPoints(),
-				0.0f);
+				0.3f);
 
 		addObjToGame(sprite);
 		BreakingPoint.all.addAll(levelDummy.levelPieces);

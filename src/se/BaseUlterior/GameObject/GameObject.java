@@ -19,17 +19,10 @@ import se.BaseUlterior.Physics.Impact;
 public abstract class GameObject extends Polygon {
 
 	protected List<Impact> currentImpacts = null;
-
 	protected List<Impact> impactsToRemove = new ArrayList<>();
-
 	protected Color color;
-
 	public float bouncyness;
-
 	protected Vector2 motion = null;
-
-	public Vector2 lastNormal = null;
-
 	public boolean noForce = false;
 	public float maxRadiusStart;
 
@@ -40,10 +33,10 @@ public abstract class GameObject extends Polygon {
 	}
 
 	private void init() {
+		// why set on anything but falling pieces?
 		currentImpacts = new ArrayList<>();
 		motion = new Vector2();
 		maxRadiusStart = getBoundingCircleRadius();
-
 	}
 
 	/**
