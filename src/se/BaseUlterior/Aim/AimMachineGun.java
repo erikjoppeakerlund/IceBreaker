@@ -8,9 +8,6 @@ import se.BaseUlterior.Config.Constants;
 
 public class AimMachineGun extends AimTriggerHoldable {
 
-	private int gunFireFrameWidth;
-	private int gunFireFrameHeight;
-
 	private boolean animationsIsDrawn = false;
 
 	public AimMachineGun(Animation gunFire) {
@@ -25,7 +22,7 @@ public class AimMachineGun extends AimTriggerHoldable {
 		super.render(container, graphics);
 		if (animationsIsDrawn) {
 			gunFire.getCurrentFrame().setRotation((float) Math.toDegrees(angle + (Math.PI / 2f - 0.5f)));
-			gunFire.draw(startShotX - gunFireFrameWidth / 2, startShotY - gunFireFrameHeight / 2);
+			gunFire.draw(gunFireStartAtX - gunFireFrameWidth / 2, gunFireStartAtY - gunFireFrameHeight / 2);
 		}
 	}
 

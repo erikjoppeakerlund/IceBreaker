@@ -14,22 +14,29 @@ import se.BaseUlterior.GameObject.GameObject;
 
 public abstract class AimBulletWeapon extends Aim {
 
-	private Image rifleImageRight = null;
-	private Image rifleImageLeft = null;
-	private int imageHeight;
-	private int imageWidth;
+	protected Image rifleImageRight = null;
+	protected Image rifleImageLeft = null;
+	protected int imageHeight;
+	protected int imageWidth;
 	private static final float IMAGE_SCALE = 0.26f;
 	private static final float SMOKE_LENGTH = 41f;
 
 	protected float startShotX;
 	protected float startShotY;
+
+	protected float startGunFireImageAtX;
+	protected float startGunFireImageAtY;
+
 	protected int shotRayFrames;
 	protected ArrayList<float[]> explostions;
 	protected ArrayList<float[]> rays;
 
 	private Color rayColor = Color.darkGray;
 
-	private final int WALL_HIT_EXPLOTION_SIZE = 5;
+	private final int WALL_HIT_EXPLOTION_SIZE = 6;
+
+	protected int gunFireFrameWidth;
+	protected int gunFireFrameHeight;
 
 	public AimBulletWeapon(String pathToImage) {
 		init(pathToImage);
@@ -67,6 +74,8 @@ public abstract class AimBulletWeapon extends Aim {
 
 	protected boolean wasJustShoot = false;
 	protected final float BACK_FIRE = 14f;
+	protected float gunFireStartAtX;
+	protected float gunFireStartAtY;
 
 	@Override
 	public void primaryPushed() {
@@ -85,7 +94,7 @@ public abstract class AimBulletWeapon extends Aim {
 		// UlteriorUtils.removeGround(aimAtX, aimAtY, EXPLOTION_SIZE, null);
 		wasJustShoot = true;
 		armLengt -= BACK_FIRE;
-		explostions.add(new float[] { aimAtX, aimAtY, SMOKE_LENGTH });
+		explostions.add(new float[] { aimAtX, aimAtY, SMOKE_LENGTH / 4 });
 		rays.add(new float[] { x, y, aimAtX, aimAtY, SMOKE_LENGTH });
 	}
 
@@ -106,6 +115,10 @@ public abstract class AimBulletWeapon extends Aim {
 		super.update(container, arg);
 		startShotX = spriteX + (float) cosX * (armLengt + imageWidth / 2);
 		startShotY = spriteY + (float) sinY * (armLengt + imageWidth / 2);
+
+		gunFireStartAtX = spriteX + (float) cosX * (armLengt + gunFireFrameWidth / 2 + imageWidth / 2);
+		gunFireStartAtY = spriteY + (float) sinY * (armLengt + gunFireFrameWidth / 2 + imageWidth / 2);
+
 		if (wasJustShoot && armLengt < START_ARM_LENGTH) {
 			armLengt += 3f;
 		} else if (wasJustShoot) {
@@ -172,7 +185,8 @@ public abstract class AimBulletWeapon extends Aim {
 		}
 		if (!explostions.isEmpty()) {
 			for (float[] expl : explostions) {
-				graphics.drawRect(expl[0] - WALL_HIT_EXPLOTION_SIZE, expl[1] - WALL_HIT_EXPLOTION_SIZE,
+				graphics.setColor(Color.yellow);
+				graphics.fillRect(expl[0] - WALL_HIT_EXPLOTION_SIZE, expl[1] - WALL_HIT_EXPLOTION_SIZE,
 						WALL_HIT_EXPLOTION_SIZE, WALL_HIT_EXPLOTION_SIZE);
 			}
 		}

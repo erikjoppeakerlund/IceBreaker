@@ -7,9 +7,6 @@ import org.newdawn.slick.Graphics;
 
 public class AimRifle extends AimBulletWeapon {
 
-	private int gunFireFrameWidth;
-	private int gunFireFrameHeight;
-
 	private boolean animationsIsDrawn = false;
 
 	public AimRifle(Animation gunFire) {
@@ -26,7 +23,7 @@ public class AimRifle extends AimBulletWeapon {
 		graphics.drawLine(startShotX, startShotY, aimAtX, aimAtY);
 		if (animationsIsDrawn) {
 			gunFire.getCurrentFrame().setRotation((float) Math.toDegrees(angle + (Math.PI / 2f - 0.5f)));
-			gunFire.draw(startShotX - gunFireFrameWidth / 2, startShotY - gunFireFrameHeight / 2);
+			gunFire.draw(gunFireStartAtX - gunFireFrameWidth / 2, gunFireStartAtY - gunFireFrameHeight / 2);
 		}
 
 	}
