@@ -6,6 +6,7 @@ public class ImpactForce extends Impact {
 
 	protected float gravityY;
 	protected float gravityX;
+	protected boolean contains = false;
 
 	public float getGravityY() {
 		return gravityY;
@@ -22,28 +23,21 @@ public class ImpactForce extends Impact {
 	}
 
 	@Override
-	public void calculateIntersects(int delta) {
+	public void calculateImpact(int delta) {
 		if (!other.noForce) {
-			affectedPiece.add(gravityX, gravityY);
+			if (!contains) {
+				if (origin.contains(other)) {
+					contains = true;
+				}
+			}
+			if (contains) {
+				affectedPiece.add(gravityX, gravityY);
+			}
 		}
 	}
 
 	@Override
-	protected void calculateContains(int delta) {
-		if (!other.noForce) {
-			affectedPiece.add(gravityX, gravityY);
-		}
-	}
-
-	@Override
-	public void onDestroy() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void notTouchingButWithin() {
-		// TODO Auto-generated method stub
-
+	public void onReset() {
+		contains = false;
 	}
 }

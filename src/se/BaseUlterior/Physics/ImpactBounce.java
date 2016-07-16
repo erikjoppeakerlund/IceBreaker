@@ -11,24 +11,34 @@ public class ImpactBounce extends Impact {
 	protected Set<Vector2> normals = null;
 	protected Set<Vector2> normalsTester = null;
 	protected float bouncyness;
+	protected boolean self;
+	protected boolean reset = false;
 
-	public ImpactBounce(GameObject origin, GameObject go, float bouncyness) {
+	public ImpactBounce(GameObject origin, GameObject go, float bouncyness, boolean self) {
 		super(origin, go);
+		if (self) {
+			affectedPiece = origin.getMotion();
+		}
+		this.self = self;
 		normals = origin.getMyNormalsAfterHitBy(other);
 		this.bouncyness = bouncyness;
 	}
 
 	@Override
-	public void calculateIntersects(int delta) {
-
+	public void calculateImpact(int delta) {
 		normalsTester = origin.getMyNormalsAfterHitBy(other);
-		if (!other.noForce) {
+		if (!origin.intersects(other) || !other.intersects(origin)) {
+			origin.noForce = false;
+			other.noForce = false;
+			reset = true;
+		}
+		if ((!normalsTester.isEmpty() || reset) && !(self && origin.noForce)) {
 			normals = normalsTester;
 		}
 		if (normals.isEmpty()) {
 			return;
 		}
-
+		reset = false;
 		Iterator<Vector2> ni = normals.iterator();
 		Vector2 N = null;
 		int i = 0;
@@ -41,7 +51,6 @@ public class ImpactBounce extends Impact {
 			}
 			i++;
 		}
-
 		N.normalise();
 
 		/*
@@ -52,24 +61,15 @@ public class ImpactBounce extends Impact {
 		 */
 
 		float dot = affectedPiece.dot(N) * (1.0f + bouncyness);
-
+		affectedPiece.add((-N.getX() / 250.0f) * delta, (-N.getY() / 250.0f) * delta);
 		N.scale(dot);
-		affectedPiece.sub(N);
+		if (!(self & origin.noForce)) {
+			affectedPiece.sub(N);
+		}
 	}
 
 	@Override
-	protected void calculateContains(int delta) {
-		// TODO Auto-generated method stub
-
+	public void onReset() {
 	}
 
-	@Override
-	public void onDestroy() {
-
-	}
-
-	@Override
-	public void notTouchingButWithin() {
-		other.noForce = false;
-	}
 }

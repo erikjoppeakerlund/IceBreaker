@@ -22,8 +22,8 @@ public class UlteriorUtils {
 		float y2 = go2.getCenterY();
 
 		float dist = (float) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
-		dist -= go2.getBoundingCircleRadius();
-		if (go1.getBoundingCircleRadius() > dist) {
+		dist -= go2.maxRadiusStart;
+		if (go1.maxRadiusStart > dist) {
 			return true;
 		}
 		return false;

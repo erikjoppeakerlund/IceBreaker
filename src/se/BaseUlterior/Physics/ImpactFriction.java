@@ -5,6 +5,7 @@ import se.BaseUlterior.GameObject.GameObject;
 public class ImpactFriction extends Impact {
 
 	protected float effect;
+	protected boolean contains = false;
 
 	public ImpactFriction(GameObject origin, GameObject other, float effect) {
 		super(origin, other);
@@ -12,25 +13,19 @@ public class ImpactFriction extends Impact {
 	}
 
 	@Override
-	public void calculateIntersects(int delta) {
-		affectedPiece.scale(effect);
+	public void calculateImpact(int delta) {
+		if (!contains) {
+			if (origin.contains(other)) {
+				contains = true;
+			}
+		}
+		if (contains) {
+			affectedPiece.scale(effect);
+		}
 	}
 
 	@Override
-	protected void calculateContains(int delta) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onDestroy() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void notTouchingButWithin() {
-		// TODO Auto-generated method stub
-
+	public void onReset() {
+		contains = false;
 	}
 }

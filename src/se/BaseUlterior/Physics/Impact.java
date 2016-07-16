@@ -23,21 +23,7 @@ public abstract class Impact {
 		return other;
 	}
 
-	public void checkCalculate(int delta) {
-		if (origin.intersects(other)) {
-			calculateIntersects(delta);
-		}
-		if (origin.contains(other)) {
-			calculateIntersects(delta);
-		}
-	}
+	public abstract void calculateImpact(int delta);
 
-	protected abstract void calculateIntersects(int delta);
-
-	protected abstract void calculateContains(int delta);
-
-	public abstract void onDestroy();
-
-	public abstract void notTouchingButWithin();
-
+	public abstract void onReset();
 }

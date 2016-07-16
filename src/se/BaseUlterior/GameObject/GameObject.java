@@ -1,6 +1,7 @@
 package se.BaseUlterior.GameObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,6 +31,7 @@ public abstract class GameObject extends Polygon {
 	public Vector2 lastNormal = null;
 
 	public boolean noForce = false;
+	public float maxRadiusStart;
 
 	public ArrayList<Impact> generlImacts = new ArrayList<>();
 
@@ -40,6 +42,7 @@ public abstract class GameObject extends Polygon {
 	private void init() {
 		currentImpacts = new ArrayList<>();
 		motion = new Vector2();
+		maxRadiusStart = getBoundingCircleRadius();
 
 	}
 
@@ -195,8 +198,9 @@ public abstract class GameObject extends Polygon {
 						 * vectors shape an edge.
 						 */
 						if (aY * bX - aX * bY > 0.0f) {
+							// noForce = true;
 							shape.noForce = true;
-							noForce = true;
+							return Collections.emptySet();
 						}
 					}
 
@@ -208,10 +212,7 @@ public abstract class GameObject extends Polygon {
 				}
 			}
 		}
-		// shape.noForce = false;
 		return normals;
-
-		// return result;
 	}
 
 	public abstract void update(GameContainer container, int arg) throws SlickException;

@@ -47,6 +47,8 @@ public class GameObjectSprite extends GameObjectFalling {
 
 	public GameObjectSprite(float[] nodes, float bouncyness) {
 		super(nodes, bouncyness);
+		this.setCenterX(Constants.CANVAS_WIDTH / 2);
+		this.setCenterY(Constants.CANVAS_HEIGHT / 2);
 		color = Constants.THEME_COLOR;
 		try {
 			sprite = new SpriteSheet("res/img/spriteSheet.png", 88, 88);
@@ -81,7 +83,7 @@ public class GameObjectSprite extends GameObjectFalling {
 		aims.add(new AimGrenade());
 		aims.add(new AimRifle(animationGunfire));
 		aims.add(new AimMachineGun(animationGunfire));
-		aim = aims.get(2);
+		aim = aims.get(1);
 	}
 
 	@Override
@@ -126,7 +128,7 @@ public class GameObjectSprite extends GameObjectFalling {
 			animationMoveLeft.setCurrentFrame(0);
 		}
 		if (in.isKeyDown(Input.KEY_W)) {
-			setCenterY(getCenterY() - 4);
+			setCenterY(getCenterY() - 1);
 			motion.set(new Vector2(motion.getX(), JUMP_POWER));
 
 		}
@@ -186,6 +188,7 @@ public class GameObjectSprite extends GameObjectFalling {
 		} else {
 			animationMoveLeft.draw(getX(), getY());
 		}
+		// graphics.fill(this);
 		aim.render(container, graphics);
 	}
 

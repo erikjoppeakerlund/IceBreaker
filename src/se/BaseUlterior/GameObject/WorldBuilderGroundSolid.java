@@ -9,7 +9,7 @@ import org.newdawn.slick.geom.Shape;
 public class WorldBuilderGroundSolid extends WorldBuilderGround {
 
 	public WorldBuilderGroundSolid(float[] nodes) {
-		super(nodes);
+		super(nodes, 2.3f);
 		this.color = Color.transparent;
 	}
 

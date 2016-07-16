@@ -13,7 +13,7 @@ import se.BaseUlterior.Utils.UlteriorUtils;
 
 public class Grenade extends GameObjectFalling {
 
-	public static final float GRENADE_SIZE = 20.0f;
+	public static final float GRENADE_SIZE = 30.0f;
 	private boolean isReleased = false;
 
 	private static float BOUNCYNESS = 0.9f;
@@ -54,7 +54,7 @@ public class Grenade extends GameObjectFalling {
 
 	@Override
 	public Impact getImpact(GameObject other) {
-		return new ImpactBounce(this, other, bouncyness);
+		return new ImpactBounce(this, other, -bouncyness, true);
 	}
 
 }

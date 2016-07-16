@@ -15,8 +15,7 @@ public class ImpactExplosion extends Impact {
 	}
 
 	@Override
-	public void calculateIntersects(int delta) {
-
+	public void calculateImpact(int delta) {
 		float expX = origin.getCenterX();
 		float expY = origin.getCenterY();
 
@@ -39,28 +38,16 @@ public class ImpactExplosion extends Impact {
 		 */
 	}
 
-	@Override
-	protected void calculateContains(int delta) {
-		// should not the code be here?
-
-	}
-
-	@Override
-	public void onDestroy() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void notTouchingButWithin() {
-		// TODO Auto-generated method stub
-
-	}
-
 	public void disappear() {
 
 		if (other != null) {
 			other.removeImpact(this);
 		}
+	}
+
+	@Override
+	public void onReset() {
+		// TODO Auto-generated method stub
+
 	}
 }
