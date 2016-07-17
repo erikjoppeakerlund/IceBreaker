@@ -3,7 +3,6 @@ package se.BaseUlterior.GameObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -19,7 +18,6 @@ import se.BaseUlterior.Aim.AimRifle;
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.Geom.Vector2;
-import se.BaseUlterior.Utils.UlteriorUtils;
 
 public class GameObjectSprite extends GameObjectFalling {
 
@@ -94,20 +92,7 @@ public class GameObjectSprite extends GameObjectFalling {
 
 		Input in = container.getInput();
 
-		float mouseX = in.getMouseX();
-		float mouseY = in.getMouseY();
-
-		if (Mouse.getDWheel() > 0) {
-			int i = aims.indexOf(aim);
-			aim.cleanUp();
-			aim = i == aims.size() - 1 ? aims.get(0) : aims.get(i + 1);
-			aim.onThisWasChoosen();
-
-		} else if (Mouse.getDWheel() < 0) {
-			int i = aims.indexOf(aim);
-			aim = i == 0 ? aims.get(aims.size() - 1) : aims.get(i - 1);
-		}
-		if (in.isKeyDown(Input.KEY_A)) {
+		if (in.isKeyDown(Input.KEY_LEFT)) {
 			if (directionIsRight) {
 				directionIsRight = false;
 			}
@@ -115,7 +100,8 @@ public class GameObjectSprite extends GameObjectFalling {
 			if (motion.getX() > -MAX_SPEED) {
 				motion.add(-speed * delta, 0.0f);
 			}
-		} else if (in.isKeyDown(Input.KEY_D)) {
+			aim.setIsRight(false);
+		} else if (in.isKeyDown(Input.KEY_RIGHT)) {
 			if (!directionIsRight) {
 				directionIsRight = true;
 			}
@@ -123,30 +109,40 @@ public class GameObjectSprite extends GameObjectFalling {
 			if (motion.getX() < MAX_SPEED) {
 				motion.add(speed * delta, 0.0f);
 			}
+			aim.setIsRight(true);
 		} else {
 			animationMoveRight.setCurrentFrame(0);
 			animationMoveLeft.setCurrentFrame(0);
 		}
-		if (in.isKeyDown(Input.KEY_W)) {
+		if (in.isKeyDown(Input.KEY_Q)) {
 			setCenterY(getCenterY() - 1);
 			motion.set(new Vector2(motion.getX(), JUMP_POWER));
 
 		}
-		if (in.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+		if (in.isKeyPressed(Input.KEY_Z)) {
 			aim.primaryPushed();
 			if (!mouseButtonPirmaryDown) {
 				mouseButtonPirmaryDown = true;
 			}
-		} else if (!in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && mouseButtonPirmaryDown) {
+		} else if (!in.isKeyDown(Input.KEY_Z) && mouseButtonPirmaryDown) {
 			mouseButtonPirmaryDown = false;
 			aim.primaryReleased();
 		}
+		if (in.isKeyDown(Input.KEY_UP)) {
+			aim.angleUp();
+		} else if (in.isKeyDown(Input.KEY_DOWN)) {
+			aim.angleDown();
+		}
+		if (in.isKeyPressed(Input.KEY_A)) {
+			int i = aims.indexOf(aim);
+			aim.cleanUp();
+			aim = i == aims.size() - 1 ? aims.get(0) : aims.get(i + 1);
+			aim.onThisWasChoosen();
 
-		float angleToPoint = UlteriorUtils.angleToPoint(getCenterX(), getCenterY(), mouseX, mouseY);
+		}
 
-		aim.setPosition(getCenterX(), getCenterY());
-
-		aim.setAngleToMouse(angleToPoint);
+		aim.spriteX = getCenterX();
+		aim.spriteY = getCenterY();
 
 		aim.update(container, delta);
 

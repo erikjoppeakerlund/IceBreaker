@@ -30,7 +30,7 @@ public class AimBlade extends Aim {
 
 	@Override
 	public void primaryReleased() {
-		UlteriorUtils.removeGround(x, y, SIZE_OF_CUT, null);
+		UlteriorUtils.removeGround(xGrip, yGrip, SIZE_OF_CUT, null);
 	}
 
 	@Override
@@ -49,8 +49,8 @@ public class AimBlade extends Aim {
 	public void update(GameContainer container, int arg) {
 		super.update(container, arg);
 		blade = blade.transform(Transform.createRotateTransform(dAngle));
-		blade.setCenterX(x);
-		blade.setCenterY(y);
+		blade.setCenterX(xGrip);
+		blade.setCenterY(yGrip);
 	}
 
 	@Override

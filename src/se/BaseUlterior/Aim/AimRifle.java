@@ -22,7 +22,7 @@ public class AimRifle extends AimBulletWeapon {
 		graphics.setColor(Color.red);
 		graphics.drawLine(startShotX, startShotY, aimAtX, aimAtY);
 		if (animationsIsDrawn) {
-			gunFire.getCurrentFrame().setRotation((float) Math.toDegrees(angle + (Math.PI / 2f - 0.5f)));
+			gunFire.getCurrentFrame().setRotation((float) arm.getTheta() + 65);
 			gunFire.draw(gunFireStartAtX - gunFireFrameWidth / 2, gunFireStartAtY - gunFireFrameHeight / 2);
 		}
 

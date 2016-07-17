@@ -33,7 +33,7 @@ public abstract class AimBulletWeapon extends Aim {
 
 	private Color rayColor = Color.darkGray;
 
-	private final int WALL_HIT_EXPLOTION_SIZE = 6;
+	private final int WALL_HIT_EXPLOTION_SIZE = 10;
 
 	protected int gunFireFrameWidth;
 	protected int gunFireFrameHeight;
@@ -48,8 +48,8 @@ public abstract class AimBulletWeapon extends Aim {
 	}
 
 	private void init(String pathToImage) {
-		x = -60;
-		y = -60;
+		xGrip = -60;
+		yGrip = -60;
 		try {
 			rifleImageRight = new Image(pathToImage);
 			rifleImageLeft = new Image(pathToImage, true);
@@ -94,8 +94,8 @@ public abstract class AimBulletWeapon extends Aim {
 		// UlteriorUtils.removeGround(aimAtX, aimAtY, EXPLOTION_SIZE, null);
 		wasJustShoot = true;
 		armLengt -= BACK_FIRE;
-		explostions.add(new float[] { aimAtX, aimAtY, SMOKE_LENGTH / 4 });
-		rays.add(new float[] { x, y, aimAtX, aimAtY, SMOKE_LENGTH });
+		explostions.add(new float[] { aimAtX, aimAtY, SMOKE_LENGTH / 2 });
+		rays.add(new float[] { gunFireStartAtX, gunFireStartAtY, aimAtX, aimAtY, SMOKE_LENGTH });
 	}
 
 	@Override
@@ -113,11 +113,11 @@ public abstract class AimBulletWeapon extends Aim {
 	@Override
 	public void update(GameContainer container, int arg) {
 		super.update(container, arg);
-		startShotX = spriteX + cosX * (armLengt + imageWidth / 2);
-		startShotY = spriteY + sinY * (armLengt + imageWidth / 2);
+		startShotX = getXAimFromDistanceAt(armLengt + imageWidth / 2);
+		startShotY = getYAimFromDistanceAt(armLengt + imageWidth / 2);
 
-		gunFireStartAtX = spriteX + cosX * (armLengt + gunFireFrameWidth / 2 + imageWidth / 2);
-		gunFireStartAtY = spriteY + sinY * (armLengt + gunFireFrameWidth / 2 + imageWidth / 2);
+		gunFireStartAtX = getXAimFromDistanceAt(armLengt + gunFireFrameWidth / 2 + imageWidth / 2);
+		gunFireStartAtY = getYAimFromDistanceAt(armLengt + gunFireFrameWidth / 2 + imageWidth / 2);
 
 		if (wasJustShoot && armLengt < START_ARM_LENGTH) {
 			armLengt += 3f;
@@ -148,13 +148,13 @@ public abstract class AimBulletWeapon extends Aim {
 	}
 
 	protected void updateAim() {
-		float xTarget = x;
-		float yTarget = y;
+		float xTarget = xGrip;
+		float yTarget = yGrip;
 		boolean notFound = true;
 		int STEP = 10;
 		while (notFound) {
-			xTarget += cosX * STEP;
-			yTarget += sinY * STEP;
+			xTarget += arm.x * STEP;
+			yTarget += arm.y * STEP;
 			for (GameObject go : BreakingPoint.all) {
 				if (go.contains(xTarget, yTarget) && !go.isBackgroundObj()) {
 					aimAtX = xTarget;
@@ -168,12 +168,13 @@ public abstract class AimBulletWeapon extends Aim {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
+		super.render(container, graphics);
 		if (isRight) {
-			rifleImageRight.setRotation((float) Math.toDegrees(angle));
-			rifleImageRight.draw(x - imageWidth / 2, y - imageHeight / 2);
+			rifleImageRight.setRotation((float) arm.getTheta());
+			rifleImageRight.draw(xGrip - imageWidth / 2, yGrip - imageHeight / 2);
 		} else {
-			rifleImageLeft.setRotation((float) Math.toDegrees(angle) - (float) Math.PI);
-			rifleImageLeft.draw(x - imageWidth / 2, y - imageHeight / 2);
+			rifleImageLeft.setRotation((float) (arm.getTheta()));
+			rifleImageLeft.draw(xGrip - imageWidth / 2, yGrip - imageHeight / 2);
 		}
 		if (!rays.isEmpty()) {
 			for (float[] ray : rays) {
@@ -185,8 +186,8 @@ public abstract class AimBulletWeapon extends Aim {
 		}
 		if (!explostions.isEmpty()) {
 			for (float[] expl : explostions) {
-				graphics.setColor(Color.yellow);
-				graphics.fillRect(expl[0] - WALL_HIT_EXPLOTION_SIZE, expl[1] - WALL_HIT_EXPLOTION_SIZE,
+				graphics.setColor(Color.white);
+				graphics.fillRect(expl[0] - WALL_HIT_EXPLOTION_SIZE / 2, expl[1] - WALL_HIT_EXPLOTION_SIZE / 2,
 						WALL_HIT_EXPLOTION_SIZE, WALL_HIT_EXPLOTION_SIZE);
 			}
 		}

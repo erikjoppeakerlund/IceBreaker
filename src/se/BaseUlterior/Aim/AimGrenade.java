@@ -50,8 +50,8 @@ public class AimGrenade extends Aim {
 		if (current == null) {
 			return;
 		}
-		float dX = cosX * force / TIMES_LESS_ACTUAL_FORCE;
-		float dY = sinY * force / TIMES_LESS_ACTUAL_FORCE;
+		float dX = arm.x * force / TIMES_LESS_ACTUAL_FORCE;
+		float dY = arm.y * force / TIMES_LESS_ACTUAL_FORCE;
 		current.initMotion(new Vector2(dX, dY));
 		currentTime = System.currentTimeMillis();
 		canMakeNew = true;
@@ -77,8 +77,8 @@ public class AimGrenade extends Aim {
 	public void update(GameContainer container, int arg) {
 		super.update(container, arg);
 		if (current != null) {
-			current.setCenterX(x);
-			current.setCenterY(y);
+			current.setCenterX(xGrip);
+			current.setCenterY(yGrip);
 		}
 		if (canMakeNew) {
 			if (System.currentTimeMillis() - currentTime > TIME_BETWEEN) {
@@ -99,7 +99,7 @@ public class AimGrenade extends Aim {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
-		// TODO Auto-generated method stub
+		super.render(container, graphics);
 
 	}
 

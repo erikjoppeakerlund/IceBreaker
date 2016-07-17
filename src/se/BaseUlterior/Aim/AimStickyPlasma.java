@@ -73,8 +73,8 @@ public class AimStickyPlasma extends Aim {
 	public void update(GameContainer container, int arg) {
 		super.update(container, arg);
 		if (current != null) {
-			current.setCenterX(x);
-			current.setCenterY(y);
+			current.setCenterX(xGrip);
+			current.setCenterY(yGrip);
 		}
 		if (canMakeNew) {
 			if (System.currentTimeMillis() - currentTime > TIME_BETWEEN) {
