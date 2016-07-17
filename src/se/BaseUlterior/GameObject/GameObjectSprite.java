@@ -147,7 +147,33 @@ public class GameObjectSprite extends GameObjectFalling {
 		aim.update(container, delta);
 
 		super.update(container, delta);
+		// switchScreens();
+		screenFollowPlayer();
+	}
 
+	private void screenFollowPlayer() {
+		float moveScreenX = getCenterX() - Constants.CANVAS_WIDTH / 2f;
+		float moveScreenY = getCenterY() - Constants.CANVAS_HEIGHT / 2f;
+
+		if (motion.x < 0 && BreakingPoint.currentX <= 0
+				|| motion.x > 0 && BreakingPoint.currentX + Constants.CANVAS_WIDTH >= Constants.CANVAS_WIDTH_FULL
+				|| motion.x > 0 && getCenterX() < Constants.CANVAS_WIDTH / 2 || motion.x < 0 && getCenterX()
+						+ BreakingPoint.currentX > Constants.CANVAS_WIDTH_FULL - Constants.CANVAS_WIDTH / 2) {
+			moveScreenX = 0;
+		}
+
+		if (motion.y < 0 && BreakingPoint.currentY <= 0
+				|| motion.y > 0 && BreakingPoint.currentY + Constants.CANVAS_HEIGHT >= Constants.CANVAS_HEIGHT_FULL
+				|| motion.y > 0 && getCenterY() < Constants.CANVAS_HEIGHT / 2 || motion.y < 0 && getCenterY()
+						+ BreakingPoint.currentY > Constants.CANVAS_HEIGHT_FULL - Constants.CANVAS_HEIGHT / 2) {
+			moveScreenY = 0;
+		}
+
+		BreakingPoint.moveScreen(moveScreenX, moveScreenY);
+
+	}
+
+	private void switchScreens() {
 		float moveScreenX = 0;
 		float moveScreenY = 0;
 
@@ -175,6 +201,7 @@ public class GameObjectSprite extends GameObjectFalling {
 		}
 
 		BreakingPoint.moveScreen(moveScreenX, moveScreenY);
+
 	}
 
 	@Override
