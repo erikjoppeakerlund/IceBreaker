@@ -29,15 +29,17 @@ public class WorldBuilderGround extends WorldBuilderMateriaFirm {
 
 	@Override
 	public Impact getImpact(GameObject piece) {
-		return new ImpactBounce(this, piece, piece.bouncyness, false);
+		return new ImpactBounce(this, piece, 0, false);
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		super.render(container, graphics);
-		graphics.setLineWidth(Constants.LINE_WIDTH);
-		graphics.setColor(Color.black);
-		graphics.draw(this);
+		if (points.length > 0) {
+			graphics.setLineWidth(Constants.LINE_WIDTH);
+			graphics.setColor(Color.black);
+			graphics.draw(this);
+		}
 	}
 
 }

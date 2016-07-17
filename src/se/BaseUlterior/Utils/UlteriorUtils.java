@@ -80,7 +80,7 @@ public class UlteriorUtils {
 						for (GameObject anySort : BreakingPoint.all) {
 							if (anySort.isSolid()) {
 								// BreakingPoint.addOnTop(anySort);
-								BreakingPoint.addOnTop(BreakingPoint.info);
+								// BreakingPoint.addOnTop(BreakingPoint.info);
 							}
 						}
 					}

@@ -9,6 +9,7 @@ import se.BaseUlterior.Utils.UlteriorUtils;
 public abstract class WorldBuilderMateriaFirm extends WorldBuilder {
 
 	protected boolean underImpact;
+	protected float bouncyness;
 
 	public WorldBuilderMateriaFirm(float[] nodes) {
 		super(nodes);

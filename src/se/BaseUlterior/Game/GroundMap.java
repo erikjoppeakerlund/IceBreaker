@@ -20,6 +20,18 @@ public class GroundMap {
 
 		// ______________________________________________________
 
+		float fat = 150.0f;
+
+		float BOTTOM = Constants.CANVAS_HEIGHT_FULL;
+
+		float[] wallScene = new float[] { 0.0f - fat, 0.0f - fat, Constants.CANVAS_WIDTH_FULL + fat, 0.0f - fat,
+				Constants.CANVAS_WIDTH_FULL + fat, BOTTOM + fat, 0.0f - fat, BOTTOM + fat, 0.0f - fat, 0.0f - fat, 0.0f,
+				0.0f, Constants.CANVAS_WIDTH_FULL, 0.0f, Constants.CANVAS_WIDTH_FULL, BOTTOM, 0.0f, BOTTOM, 0.0f,
+				0.0f };
+		GameObject wall = new WorldBuilderGroundSolid(wallScene);
+
+		levelPieces.add(wall);
+
 		float[] wholeScene = new float[] { 0.0f, 0.0f, 0.0f, Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL,
 				Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL, 0.0f };
 
@@ -29,19 +41,6 @@ public class GroundMap {
 		levelPieces.add(generalGravity);
 
 		levelPieces.add(new WorldBuilderLiquid(wholeScene, Density.AIR, true));
-
-		float fat = 150.0f;
-
-		float BOTTOM = Constants.CANVAS_HEIGHT_FULL;
-
-		float[] wallScene = new float[] { 0.0f - fat, 0.0f - fat, Constants.CANVAS_WIDTH_FULL + fat, 0.0f - fat,
-				Constants.CANVAS_WIDTH_FULL + fat, BOTTOM + fat, 0.0f - fat, BOTTOM + fat, 0.0f - fat, 0.0f - fat, 0.0f,
-				0.0f, Constants.CANVAS_WIDTH_FULL, 0.0f, Constants.CANVAS_WIDTH_FULL, BOTTOM, 0.0f, BOTTOM, 0.0f,
-				0.0f };
-
-		GameObject wall = new WorldBuilderGroundSolid(wallScene);
-
-		levelPieces.add(wall);
 
 	}
 

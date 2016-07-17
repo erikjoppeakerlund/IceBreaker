@@ -81,8 +81,8 @@ public class WorldCreator implements ActionListenable {
 		}
 		if (button == Input.MOUSE_LEFT_BUTTON) {
 			currentBuilder.addPoint(x, y);
-			System.out.println((int) (x * Constants.CANVAS_EXTENTION_FACTOR * 1.1f) + ", "
-					+ (int) (y * Constants.CANVAS_EXTENTION_FACTOR * 1.1f) + ",");
+			System.out.println((int) ((x * Constants.CANVAS_EXTENTION_FACTOR)) + ", "
+					+ (int) ((y * Constants.CANVAS_EXTENTION_FACTOR)) + ",");
 		}
 	}
 

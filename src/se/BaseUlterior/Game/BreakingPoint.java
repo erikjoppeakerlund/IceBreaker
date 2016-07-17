@@ -106,7 +106,7 @@ public class BreakingPoint extends BasicGame {
 
 		Level levelDummy = new Level();
 		GroundMap requiredWallBuilderObjects = new GroundMap();
-		objsToAdd.addAll(requiredWallBuilderObjects.levelPieces);
+		all.addAll(requiredWallBuilderObjects.levelPieces);
 
 		toolbox = new ToolBox(Alignment.LEFT);
 		((Component) toolbox).pack();
@@ -140,7 +140,7 @@ public class BreakingPoint extends BasicGame {
 		AppGameContainer appGameContainer = new AppGameContainer(new BreakingPoint("ICE:BREAKER"));
 		int maxFPS = 60;
 		appGameContainer.setTargetFrameRate(maxFPS);
-		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, true);
+		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, false);
 		appGameContainer.setAlwaysRender(true);
 		appGameContainer.start();
 
@@ -187,12 +187,6 @@ public class BreakingPoint extends BasicGame {
 				go.setY(go.getY() - y);
 			}
 		}
-	}
-
-	public static void addOnTop(GameObject anySort) {
-		objsToRemove.add(anySort);
-		objsToAdd.add(anySort);
-		anySort.putOnTop();
 	}
 
 	public static void setActionModeAction(Action action) {

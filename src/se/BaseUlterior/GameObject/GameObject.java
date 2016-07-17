@@ -26,13 +26,10 @@ public abstract class GameObject extends Polygon {
 	protected List<Impact> currentImpacts = null;
 	protected List<Impact> impactsToRemove = new ArrayList<>();
 	protected Color color;
-	public float bouncyness;
 	protected Vector2 motion = null;
 	public boolean noForce = false;
 	public int maxRadiusStart;
 	public boolean isBackgroundObj = false;
-
-	public ArrayList<Impact> generlImacts = new ArrayList<>();
 
 	public Vector2 getMotion() {
 		return motion;
@@ -221,15 +218,8 @@ public abstract class GameObject extends Polygon {
 		return null;
 	}
 
-	public void setColor(Color color) {
-		this.color = color;
-	}
-
 	public boolean isSolid() {
 		return false;
-	}
-
-	public void putOnTop() {
 	}
 
 	public void wasActionStateSet(Action action) {

@@ -169,14 +169,6 @@ public abstract class Component extends GameObject {
 	}
 
 	@Override
-	public void putOnTop() {
-		// for (GameObject sub : subs) {
-		// BreakingPoint.addOnTop(sub);
-		// sub.putOnTop();
-		// }
-	}
-
-	@Override
 	public void wasActionStateSet(Action action) {
 		switch (action) {
 		case INSERT_MODE:
