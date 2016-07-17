@@ -55,7 +55,10 @@ public class TextInfo {
 		case INSERT_MODE:
 			show = false;
 			break;
-		case ACTION_MODE:
+		case PAUSE:
+			show = false;
+			break;
+		case ACTION_MODE_DESKTOP:
 			show = true;
 		}
 	}

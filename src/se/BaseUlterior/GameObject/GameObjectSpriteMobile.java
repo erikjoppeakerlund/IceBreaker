@@ -18,9 +18,8 @@ import se.BaseUlterior.Aim.AimMachineGun;
 import se.BaseUlterior.Aim.AimRifle;
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Game.BreakingPoint;
-import se.BaseUlterior.Utils.UlteriorUtils;
 
-public class GameObjectSprite extends GameObjectFalling {
+public class GameObjectSpriteMobile extends GameObjectFalling {
 
 	protected Aim aim = null;
 	protected List<Aim> aims = null;
@@ -44,7 +43,7 @@ public class GameObjectSprite extends GameObjectFalling {
 	private int gunFireFrameWidth;
 	private int gunFireFrameHeight;
 
-	public GameObjectSprite() {
+	public GameObjectSpriteMobile() {
 		super(new Circle(Constants.CANVAS_WIDTH / 2, Constants.CANVAS_HEIGHT / 2, Constants.SPRITE_RADIUS).getPoints(),
 				0.3f);
 		this.setCenterX(Constants.CANVAS_WIDTH / 2);
@@ -102,7 +101,6 @@ public class GameObjectSprite extends GameObjectFalling {
 			if (motion.getX() > -MAX_SPEED) {
 				motion.add(-speed * delta, 0.0f);
 			}
-			aim.setIsRight(false);
 		} else if (in.isKeyDown(Input.KEY_D)) {
 			if (!directionIsRight) {
 				directionIsRight = true;
@@ -111,7 +109,6 @@ public class GameObjectSprite extends GameObjectFalling {
 			if (motion.getX() < MAX_SPEED) {
 				motion.add(speed * delta, 0.0f);
 			}
-			aim.setIsRight(true);
 		} else {
 			animationMoveRight.setCurrentFrame(0);
 			animationMoveLeft.setCurrentFrame(0);
@@ -122,14 +119,19 @@ public class GameObjectSprite extends GameObjectFalling {
 			}
 
 		}
-		if (in.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+		if (in.isKeyPressed(Input.KEY_SPACE) || in.isKeyPressed(Input.KEY_E)) {
 			aim.primaryPushed();
 			if (!mouseButtonPirmaryDown) {
 				mouseButtonPirmaryDown = true;
 			}
-		} else if (!in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && mouseButtonPirmaryDown) {
+		} else if (!(in.isKeyDown(Input.KEY_SPACE) || in.isKeyDown(Input.KEY_E)) && mouseButtonPirmaryDown) {
 			mouseButtonPirmaryDown = false;
 			aim.primaryReleased();
+		}
+		if (in.isKeyDown(Input.KEY_UP)) {
+			aim.angleUp();
+		} else if (in.isKeyDown(Input.KEY_DOWN)) {
+			aim.angleDown();
 		}
 		if (in.isKeyPressed(Input.KEY_Q)) {
 			int i = aims.indexOf(aim);
@@ -138,8 +140,13 @@ public class GameObjectSprite extends GameObjectFalling {
 			aim.onThisWasChoosen();
 
 		}
+		if (in.isKeyPressed(Input.KEY_LEFT)) {
+			aim.setIsRight(false);
 
-		aim.setAngleToMouse(UlteriorUtils.angleToPoint(x, y, in.getMouseX(), in.getMouseY()));
+		} else if (in.isKeyPressed(Input.KEY_RIGHT)) {
+			aim.setIsRight(true);
+
+		}
 
 		aim.spriteX = getCenterX();
 		aim.spriteY = getCenterY();

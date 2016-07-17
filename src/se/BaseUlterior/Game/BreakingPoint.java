@@ -8,7 +8,6 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 
@@ -25,6 +24,7 @@ import se.BaseUlterior.GUI.ToolBox;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.GameObject.GameObjectSprite;
+import se.BaseUlterior.GameObject.GameObjectSpriteMobile;
 
 public class BreakingPoint extends BasicGame {
 
@@ -32,14 +32,16 @@ public class BreakingPoint extends BasicGame {
 
 	Circle circ = new Circle(20, 20, 20);
 
-	public static boolean insertMode = true;
+	public static boolean pause = true;
+
+	public static Action MODE_ACTUAL;
+	public static Action MODE_LATEST_ACTION = Action.ACTION_MODE_DESKTOP;
 
 	public BreakingPoint(String title) {
 		super(title);
 
 	}
 
-	// public Image image;
 	public float patternPositionX;
 	public float patternPositionY;
 	public float tileCountX;
@@ -58,7 +60,6 @@ public class BreakingPoint extends BasicGame {
 	public static Info info = new GameInfo();
 
 	private GameObject toolbox;
-	private Image background = null;
 
 	private WorldCreator worldCreator = null;
 
@@ -76,18 +77,6 @@ public class BreakingPoint extends BasicGame {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		// image.bind();
-		//
-		// GL11.glBegin(GL11.GL_QUADS);
-		// GL11.glTexCoord2f(0, 0);
-		// GL11.glVertex2f(0, 0);
-		// GL11.glTexCoord2f(3, 0);
-		// GL11.glVertex2f(patternWidth, 0);
-		// GL11.glTexCoord2f(3, 3);
-		// GL11.glVertex2f(patternWidth, patternHeight);
-		// GL11.glTexCoord2f(0, 3);
-		// GL11.glVertex2f(0, patternHeight);
-		// GL11.glEnd();
 
 		graphics.setBackground(Color.lightGray);
 
@@ -97,9 +86,12 @@ public class BreakingPoint extends BasicGame {
 
 	}
 
+	private static GameObject sprite;
+	private static GameObject spriteMobile;
+	private static GameObject spriteDesktop;
+
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		// image = new Image("res/img/tilesBackground.jpg");
 
 		patternWidth = container.getWidth();
 		patternHeight = container.getHeight();
@@ -119,10 +111,9 @@ public class BreakingPoint extends BasicGame {
 		toolbox = new ToolBox(Alignment.LEFT);
 		((Component) toolbox).pack();
 
-		GameObject sprite = new GameObjectSprite(
-				new Circle(Constants.CANVAS_WIDTH / 2, Constants.CANVAS_HEIGHT / 2, Constants.SPRITE_RADIUS)
-						.getPoints(),
-				0.3f);
+		spriteDesktop = new GameObjectSprite();
+		spriteMobile = new GameObjectSpriteMobile();
+		sprite = spriteDesktop;
 
 		addObjToGame(sprite);
 		BreakingPoint.all.addAll(levelDummy.levelPieces);
@@ -207,7 +198,14 @@ public class BreakingPoint extends BasicGame {
 		for (GameObject go : BreakingPoint.all) {
 			go.wasActionStateSet(action);
 		}
-
 	}
 
+	public static void setSprite(Action actionModeCell) {
+		if (actionModeCell != MODE_LATEST_ACTION) {
+			objsToRemove.add(sprite);
+
+			sprite = (actionModeCell == Action.ACTION_MODE_CELL) ? spriteMobile : spriteDesktop;
+			objsToAdd.add(sprite);
+		}
+	}
 }

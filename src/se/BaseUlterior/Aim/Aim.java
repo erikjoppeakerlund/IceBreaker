@@ -36,6 +36,8 @@ public abstract class Aim {
 	protected boolean isRight = true;
 	protected boolean wasJustSwitched = false;
 
+	protected boolean mobile = false;
+
 	protected Animation gunFire = null;
 
 	public Aim() {
@@ -62,6 +64,22 @@ public abstract class Aim {
 
 		xAim = getXAimFromDistanceAt(armLengt * 3);
 		yAim = getYAimFromDistanceAt(armLengt * 3);
+
+		if (!mobile) {
+			if ((arm.getTheta() > 0 && (arm.getTheta()) < 90) || (arm.getTheta() > 270)) {
+				if (!isRight) {
+					wasJustSwitched = true;
+				}
+				isRight = true;
+			} else {
+				if (isRight) {
+					wasJustSwitched = true;
+				}
+				isRight = false;
+			}
+			wasJustSwitched = false;
+
+		}
 	}
 
 	public void render(GameContainer container, Graphics graphics) {
@@ -73,8 +91,7 @@ public abstract class Aim {
 	}
 
 	public void setAngleToMouse(float angleToPoint) {
-		dAngle = angleToPoint - angle;
-		angle = angleToPoint;
+		arm.setTheta(angleToPoint);
 	}
 
 	public void cleanUp() {

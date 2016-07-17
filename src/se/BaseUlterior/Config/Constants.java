@@ -20,4 +20,5 @@ public class Constants {
 
 	public static String INSERT_MODE = "INSERT_MODE";
 	public static String ACTION_MODE = "ACTION_MODE";
+
 }

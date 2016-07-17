@@ -17,7 +17,7 @@ public abstract class Button extends Component {
 	private SingleText label;
 	private boolean active = true;
 	public final static float PREFERED_HEIGHT = 30f;
-	public final static float PREFERED_WIDTH = 200f;
+	public final static float PREFERED_WIDTH = 260f;
 	TextInfo buttonText;
 
 	public Button(String text, float width, float height, boolean active) {
@@ -108,7 +108,6 @@ public abstract class Button extends Component {
 		if (!hide) {
 			graphics.setLineWidth(3);
 			graphics.setColor(Color.darkGray);
-			graphics.draw(this);
 		}
 	}
 }

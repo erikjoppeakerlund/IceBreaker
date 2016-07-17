@@ -9,10 +9,10 @@ import se.BaseUlterior.Context.TextInfo;
 import se.BaseUlterior.Game.BreakingPoint;
 
 public class GeneralInputHandler implements ActionListenable {
-	private static final String ESC = "|SWITCH::ESC";
+	private static final String ESC = "|SWITCH:ESC";
 
 	private SingleText insertModeText = new SingleText(0, 0, 21,
-			BreakingPoint.insertMode ? Constants.INSERT_MODE + ESC : Constants.ACTION_MODE + ESC, Color.red);
+			BreakingPoint.pause ? Constants.INSERT_MODE + ESC : Constants.ACTION_MODE + ESC, Color.red);
 
 	public GeneralInputHandler() {
 		TextInfo randomText = new TextInfo(Constants.CANVAS_WIDTH - 320, 22, true);
@@ -34,10 +34,10 @@ public class GeneralInputHandler implements ActionListenable {
 	@Override
 	public void wasWasKeyPressed(int button, char c) {
 		if (button == Input.KEY_ESCAPE) {
-			BreakingPoint.insertMode = !BreakingPoint.insertMode;
-			insertModeText
-					.setValue(BreakingPoint.insertMode ? Constants.INSERT_MODE + ESC : Constants.ACTION_MODE + ESC);
-			BreakingPoint.setActionModeAction(BreakingPoint.insertMode ? Action.ACTION_MODE : Action.INSERT_MODE);
+			BreakingPoint.pause = !BreakingPoint.pause;
+			BreakingPoint.MODE_ACTUAL = BreakingPoint.pause ? Action.PAUSE : BreakingPoint.MODE_LATEST_ACTION;
+			insertModeText.setValue(BreakingPoint.pause ? Action.PAUSE + ESC : BreakingPoint.MODE_LATEST_ACTION + ESC);
+			BreakingPoint.setActionModeAction(BreakingPoint.pause ? Action.ACTION_MODE_DESKTOP : Action.INSERT_MODE);
 		}
 	}
 

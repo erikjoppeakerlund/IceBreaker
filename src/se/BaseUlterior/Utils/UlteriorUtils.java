@@ -28,8 +28,8 @@ public class UlteriorUtils {
 		return false;
 	}
 
-	public static float angleToPoint(float x1, float y1, float x2, float y2) {
-		return (float) Math.atan2(y2 - y1, x2 - x1);
+	public static int angleToPoint(float x1, float y1, float x2, float y2) {
+		return (int) Math.toDegrees(Math.atan2(y2 - y1, x2 - x1));
 	}
 
 	public static float distance(GameObject go1, GameObject go2) {
@@ -58,7 +58,7 @@ public class UlteriorUtils {
 	/*
 	 * Not current used, due to game play decision.
 	 */
-	public static void removeGround(float x, float y, float sizeOfExplostion, GameObject origin) {
+	public static void removeGroundReal(float x, float y, float sizeOfExplostion, GameObject origin) {
 		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion, 10).getPoints());
 		BreakingPoint.objsToAdd.add(explotionShape);
 		ArrayList<GameObject> newShapes = new ArrayList<>();
@@ -93,7 +93,7 @@ public class UlteriorUtils {
 
 	}
 
-	public static void removeGroundReal(float x, float y, float sizeOfExplostion, GameObject origin) {
+	public static void removeGround(float x, float y, float sizeOfExplostion, GameObject origin) {
 		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion).getPoints());
 		BreakingPoint.objsToAdd.add(explotionShape);
 	}

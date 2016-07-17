@@ -196,7 +196,10 @@ public abstract class Component extends GameObject {
 		case INSERT_MODE:
 			hide = true;
 			break;
-		case ACTION_MODE:
+		case PAUSE:
+			hide = true;
+			break;
+		case ACTION_MODE_DESKTOP:
 			hide = false;
 		}
 	}

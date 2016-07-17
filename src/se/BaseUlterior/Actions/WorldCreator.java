@@ -34,7 +34,7 @@ public class WorldCreator implements ActionListenable {
 	@Override
 	public void wasDoubleClicked(int button, int x, int y) {
 		System.out.println();
-		if (!BreakingPoint.insertMode) {
+		if (!BreakingPoint.pause) {
 			return;
 		}
 		if (!choosingState) {
@@ -76,7 +76,7 @@ public class WorldCreator implements ActionListenable {
 
 	@Override
 	public void wasSingleClicked(int button, int x, int y) {
-		if (!BreakingPoint.insertMode || choosingState) {
+		if (!BreakingPoint.pause || choosingState) {
 			return;
 		}
 		if (button == Input.MOUSE_LEFT_BUTTON) {
@@ -88,7 +88,7 @@ public class WorldCreator implements ActionListenable {
 
 	@Override
 	public void wasWasKeyPressed(int button, char c) {
-		if (!BreakingPoint.insertMode) {
+		if (!BreakingPoint.pause) {
 			return;
 		}
 		if (!choosingState) {

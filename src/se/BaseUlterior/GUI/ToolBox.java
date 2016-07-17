@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.newdawn.slick.Color;
 
+import se.BaseUlterior.Actions.Action;
 import se.BaseUlterior.Game.BreakingPoint;
 
 public class ToolBox extends Panel {
@@ -12,7 +13,7 @@ public class ToolBox extends Panel {
 	private List<Button> buttons = null;
 
 	private static final float styleHeigth = 200;
-	private static final float styleWidth = 500;
+	private static final float styleWidth = 550;
 
 	private final static float tabSize = 50f;
 
@@ -66,7 +67,7 @@ public class ToolBox extends Panel {
 
 			}
 		});
-		buttons.add(new Button("(CHEET)", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, !BreakingPoint.insertMode) {
+		buttons.add(new Button("(CHEET)", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, !BreakingPoint.pause) {
 
 			@Override
 			public void onClick() {
@@ -75,12 +76,19 @@ public class ToolBox extends Panel {
 			}
 		});
 
-		buttons.add(new Button("MODE:ESC", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, true) {
+		buttons.add(new Button(BreakingPoint.MODE_LATEST_ACTION.toString(), Button.PREFERED_WIDTH,
+				Button.PREFERED_HEIGHT, true) {
 
 			@Override
 			public void onClick() {
-				BreakingPoint.insertMode = !BreakingPoint.insertMode;
-
+				if (BreakingPoint.MODE_LATEST_ACTION == Action.ACTION_MODE_DESKTOP) {
+					BreakingPoint.setSprite(Action.ACTION_MODE_CELL);
+					BreakingPoint.MODE_LATEST_ACTION = Action.ACTION_MODE_CELL;
+				} else if (BreakingPoint.MODE_LATEST_ACTION == Action.ACTION_MODE_CELL) {
+					BreakingPoint.setSprite(Action.ACTION_MODE_DESKTOP);
+					BreakingPoint.MODE_LATEST_ACTION = Action.ACTION_MODE_DESKTOP;
+				}
+				updateText(BreakingPoint.MODE_LATEST_ACTION.toString());
 			}
 		});
 		buttons.add(new Button("ABOUT", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, true) {
