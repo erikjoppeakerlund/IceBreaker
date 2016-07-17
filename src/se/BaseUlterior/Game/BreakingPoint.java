@@ -68,8 +68,6 @@ public class BreakingPoint extends BasicGame {
 	public static float currentX = 0;
 	public static float currentY = 0;
 
-	// public static UlteriorDraw drawClass = new UlteriorDraw();
-
 	public void addObjToGame(GameObject g) {
 		allFalliing.add((GameObjectFalling) g);
 		objsToAdd.add(g);
@@ -107,6 +105,8 @@ public class BreakingPoint extends BasicGame {
 		actions = new ActionListenablers();
 
 		Level levelDummy = new Level();
+		GroundMap requiredWallBuilderObjects = new GroundMap();
+		objsToAdd.addAll(requiredWallBuilderObjects.levelPieces);
 
 		toolbox = new ToolBox(Alignment.LEFT);
 		((Component) toolbox).pack();
@@ -115,8 +115,9 @@ public class BreakingPoint extends BasicGame {
 		spriteMobile = new GameObjectSpriteMobile();
 		sprite = spriteDesktop;
 
-		addObjToGame(sprite);
-		BreakingPoint.all.addAll(levelDummy.levelPieces);
+		BreakingPoint.objsToAdd.add(sprite);
+
+		BreakingPoint.objsToAdd.addAll(levelDummy.levelPieces);
 		BreakingPoint.objsToAdd.add(info);
 	}
 
@@ -136,7 +137,7 @@ public class BreakingPoint extends BasicGame {
 	}
 
 	public static void main(String[] s) throws SlickException {
-		AppGameContainer appGameContainer = new AppGameContainer(new BreakingPoint("Ice Breaker"));
+		AppGameContainer appGameContainer = new AppGameContainer(new BreakingPoint("ICE:BREAKER"));
 		int maxFPS = 60;
 		appGameContainer.setTargetFrameRate(maxFPS);
 		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, true);
@@ -202,7 +203,9 @@ public class BreakingPoint extends BasicGame {
 
 	public static void setSprite(Action actionModeCell) {
 		if (actionModeCell != MODE_LATEST_ACTION) {
-			objsToRemove.add(sprite);
+			if (all.contains(sprite)) {
+				objsToRemove.add(sprite);
+			}
 
 			sprite = (actionModeCell == Action.ACTION_MODE_CELL) ? spriteMobile : spriteDesktop;
 			objsToAdd.add(sprite);

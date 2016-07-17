@@ -6,16 +6,17 @@ import java.util.List;
 import org.newdawn.slick.Color;
 
 import se.BaseUlterior.Actions.Action;
+import se.BaseUlterior.Aim.Aim;
 import se.BaseUlterior.Game.BreakingPoint;
 
 public class ToolBox extends Panel {
 
 	private List<Button> buttons = null;
 
-	private static final float styleHeigth = 200;
-	private static final float styleWidth = 550;
+	private static final int styleHeigth = 200;
+	private static final int styleWidth = 550;
 
-	private final static float tabSize = 50f;
+	private final static int tabSize = 50;
 
 	Color colorAlpha = new Color(0.7f, 0.7f, 0.8f, 0.39f);
 
@@ -84,9 +85,11 @@ public class ToolBox extends Panel {
 				if (BreakingPoint.MODE_LATEST_ACTION == Action.ACTION_MODE_DESKTOP) {
 					BreakingPoint.setSprite(Action.ACTION_MODE_CELL);
 					BreakingPoint.MODE_LATEST_ACTION = Action.ACTION_MODE_CELL;
+					Aim.mobile = true;
 				} else if (BreakingPoint.MODE_LATEST_ACTION == Action.ACTION_MODE_CELL) {
 					BreakingPoint.setSprite(Action.ACTION_MODE_DESKTOP);
 					BreakingPoint.MODE_LATEST_ACTION = Action.ACTION_MODE_DESKTOP;
+					Aim.mobile = false;
 				}
 				updateText(BreakingPoint.MODE_LATEST_ACTION.toString());
 			}

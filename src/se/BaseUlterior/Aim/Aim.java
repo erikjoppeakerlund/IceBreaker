@@ -5,6 +5,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
+import se.BaseUlterior.Actions.Action;
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Geom.Vector2;
 
@@ -36,7 +37,7 @@ public abstract class Aim {
 	protected boolean isRight = true;
 	protected boolean wasJustSwitched = false;
 
-	protected boolean mobile = false;
+	public static boolean mobile = Constants.START_MODE == Action.ACTION_MODE_CELL;
 
 	protected Animation gunFire = null;
 
@@ -66,7 +67,7 @@ public abstract class Aim {
 		yAim = getYAimFromDistanceAt(armLengt * 3);
 
 		if (!mobile) {
-			if ((arm.getTheta() > 0 && (arm.getTheta()) < 90) || (arm.getTheta() > 270)) {
+			if ((arm.getTheta() >= 0 && (arm.getTheta()) < 90) || (arm.getTheta() > 270)) {
 				if (!isRight) {
 					wasJustSwitched = true;
 				}

@@ -13,11 +13,11 @@ import se.BaseUlterior.Game.BreakingPoint;
 
 public abstract class Button extends Component {
 	String text;
-	private final static float tabSize = 14f;
+	private final static int tabSize = 14;
 	private SingleText label;
 	private boolean active = true;
-	public final static float PREFERED_HEIGHT = 30f;
-	public final static float PREFERED_WIDTH = 260f;
+	public final static int PREFERED_HEIGHT = 30;
+	public final static int PREFERED_WIDTH = 260;
 	TextInfo buttonText;
 
 	public Button(String text, float width, float height, boolean active) {
@@ -108,6 +108,7 @@ public abstract class Button extends Component {
 		if (!hide) {
 			graphics.setLineWidth(3);
 			graphics.setColor(Color.darkGray);
+			graphics.draw(this);
 		}
 	}
 }

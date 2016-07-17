@@ -12,7 +12,7 @@ public class GeneralInputHandler implements ActionListenable {
 	private static final String ESC = "|SWITCH:ESC";
 
 	private SingleText insertModeText = new SingleText(0, 0, 21,
-			BreakingPoint.pause ? Constants.INSERT_MODE + ESC : Constants.ACTION_MODE + ESC, Color.red);
+			BreakingPoint.pause ? Action.PAUSE + ESC : BreakingPoint.MODE_LATEST_ACTION + ESC, Color.red);
 
 	public GeneralInputHandler() {
 		TextInfo randomText = new TextInfo(Constants.CANVAS_WIDTH - 320, 22, true);

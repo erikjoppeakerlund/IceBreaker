@@ -17,35 +17,21 @@ public abstract class Component extends GameObject {
 
 	protected boolean hide = false;
 
-	protected float forcedWidth;
-	protected float forcedHeight;
+	protected int forcedWidth;
+	protected int forcedHeight;
 
-	protected float margin = 5.0f;
-
-	protected float maxWidth = -1;
-	protected float minWidth = -1;
-	protected float maxHeight = -1;
-	protected float minHeight = -1;
-
-	public void setMaxWidth(float maxWidth) {
-		this.maxWidth = maxWidth;
-	}
-
-	public float getMaxWidth() {
-		return maxWidth;
-	}
-
+	protected int margin = 5;
 	protected Component parent = null;
 
 	protected int padding;
 	protected Stacking stacking = Stacking.FROM_LEFT;
 
 	protected List<Component> subs = null;
-	protected float horizontalAdjustAlignment;
-	protected float verticalAdjustAlignment;
+	protected int horizontalAdjustAlignment;
+	protected int verticalAdjustAlignment;
 
-	protected float horizontalFloat;
-	protected float verticalFloat;
+	protected int horizontalFloat;
+	protected int verticalFloat;
 
 	public Component(float width, float height) {
 		super(new float[] { 0, 0, width, 0, width, height, 0, height });
@@ -60,8 +46,8 @@ public abstract class Component extends GameObject {
 	private void init() {
 		checkStacking();
 		subs = new ArrayList<>();
-		forcedHeight = getHeight();
-		forcedWidth = getWidth();
+		forcedHeight = (int) getHeight();
+		forcedWidth = (int) getWidth();
 		isBackgroundObj = true;
 	}
 
@@ -75,28 +61,28 @@ public abstract class Component extends GameObject {
 	private void checkStacking() {
 		switch (stacking) {
 		case FROM_LEFT:
-			horizontalAdjustAlignment = 1.0f;
-			verticalAdjustAlignment = 0.0f;
-			horizontalFloat = 0f;
-			verticalFloat = 0f;
+			horizontalAdjustAlignment = 1;
+			verticalAdjustAlignment = 0;
+			horizontalFloat = 0;
+			verticalFloat = 0;
 			break;
 		case FROM_RIGHT:
-			horizontalAdjustAlignment = -1.0f;
-			verticalAdjustAlignment = 0.0f;
-			horizontalFloat = 1.0f;
-			verticalFloat = 0f;
+			horizontalAdjustAlignment = -1;
+			verticalAdjustAlignment = 0;
+			horizontalFloat = 1;
+			verticalFloat = 0;
 			break;
 		case FROM_TOP:
-			horizontalAdjustAlignment = 0.0f;
-			verticalAdjustAlignment = 1.0f;
-			horizontalFloat = 0f;
-			verticalFloat = 0f;
+			horizontalAdjustAlignment = 0;
+			verticalAdjustAlignment = 1;
+			horizontalFloat = 0;
+			verticalFloat = 0;
 			break;
 		case FROM_BOTTOM:
-			horizontalAdjustAlignment = 0.0f;
-			verticalAdjustAlignment = -1.0f;
-			horizontalFloat = 0f;
-			verticalFloat = 1.0f;
+			horizontalAdjustAlignment = 0;
+			verticalAdjustAlignment = -1;
+			horizontalFloat = 0;
+			verticalFloat = 1;
 			break;
 		}
 	}
@@ -131,12 +117,12 @@ public abstract class Component extends GameObject {
 		}
 	}
 
-	public void setForcedWidth(float forcedWidth) {
+	public void setForcedWidth(int forcedWidth) {
 		this.forcedWidth = forcedWidth;
 		stack();
 	}
 
-	public void setForcedHeight(float forcedHeight) {
+	public void setForcedHeight(int forcedHeight) {
 		this.forcedHeight = forcedHeight;
 		stack();
 	}

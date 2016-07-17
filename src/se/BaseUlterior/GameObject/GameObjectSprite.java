@@ -24,8 +24,8 @@ public class GameObjectSprite extends GameObjectFalling {
 
 	protected Aim aim = null;
 	protected List<Aim> aims = null;
-	protected float speed = 0.0039f;
-	protected final float MAX_SPEED = 0.51f;
+	protected float speed = 0.0038f;
+	protected final float MAX_SPEED = 0.49f;
 	protected boolean mouseButtonPirmaryDown = false;
 
 	protected boolean right = true;

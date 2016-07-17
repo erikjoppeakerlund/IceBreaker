@@ -15,7 +15,7 @@ import se.BaseUlterior.Utils.UlteriorUtils;
 
 public class Grenade extends GameObjectFalling {
 
-	public static final float GRENADE_SIZE = 30.0f;
+	public static final int GRENADE_SIZE = 30;
 	private boolean isReleased = false;
 
 	private static float BOUNCYNESS = 0.9f;
@@ -25,7 +25,7 @@ public class Grenade extends GameObjectFalling {
 
 	protected GameObject explotionShape = null;
 
-	protected float sizeOfExplostion = 210;
+	protected int sizeOfExplostion = 210;
 
 	public Grenade(float[] nodes) {
 		super(nodes, BOUNCYNESS);

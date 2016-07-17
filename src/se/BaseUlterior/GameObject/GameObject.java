@@ -29,7 +29,7 @@ public abstract class GameObject extends Polygon {
 	public float bouncyness;
 	protected Vector2 motion = null;
 	public boolean noForce = false;
-	public float maxRadiusStart;
+	public int maxRadiusStart;
 	public boolean isBackgroundObj = false;
 
 	public ArrayList<Impact> generlImacts = new ArrayList<>();
@@ -42,7 +42,7 @@ public abstract class GameObject extends Polygon {
 		// why set on anything but falling pieces?
 		currentImpacts = new ArrayList<>();
 		motion = new Vector2();
-		maxRadiusStart = getBoundingCircleRadius();
+		maxRadiusStart = (int) getBoundingCircleRadius();
 	}
 
 	/**
@@ -115,7 +115,6 @@ public abstract class GameObject extends Polygon {
 		 */
 		checkPoints();
 
-		boolean result = false;
 		float points[] = getPoints(); // (x3, y3) and (x4, y4)
 		float thatPoints[] = shape.getPoints(); // (x1, y1) and (x2, y2)
 		int length = points.length;
@@ -176,7 +175,6 @@ public abstract class GameObject extends Polygon {
 
 				if (unknownA >= 0 && unknownA <= 1 && unknownB >= 0 && unknownB <= 1) {
 
-					result = true;
 					Vector2 newestNormal;
 
 					// if (points.length > i + 3) {
@@ -197,7 +195,6 @@ public abstract class GameObject extends Polygon {
 						 * vectors shape an edge.
 						 */
 						if (aY * bX - aX * bY > 0.0f) {
-							// noForce = true;
 							shape.noForce = true;
 							return Collections.emptySet();
 						} else {

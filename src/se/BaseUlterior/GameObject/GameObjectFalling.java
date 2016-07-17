@@ -9,15 +9,11 @@ import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactBounce;
 
 public abstract class GameObjectFalling extends WorldBuilderMateriaFirm {
-	protected float width;
-	protected float height;
 	protected boolean underImpact = false;
 
 	public GameObjectFalling(float[] nodes, float bouncyness) {
 		super(nodes);
 		this.bouncyness = bouncyness;
-		this.width = getWidth();
-		this.height = getHeight();
 	}
 
 	@Override

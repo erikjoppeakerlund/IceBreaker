@@ -3,6 +3,7 @@ package se.BaseUlterior.GameObject;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.geom.Shape;
 
+import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Physics.Density;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactFriction;
@@ -55,7 +56,7 @@ public class WorldBuilderLiquid extends WorldBuilder {
 			break;
 		case AIR:
 			this.color = Color.transparent;
-			this.frictionAmount = 0.981f;
+			this.frictionAmount = Constants.GENERA_FRICTION;
 			break;
 		}
 	}
