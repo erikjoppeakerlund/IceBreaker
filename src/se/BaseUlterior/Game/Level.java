@@ -95,6 +95,8 @@ public class Level {
 
 		levelPieces.add(generalGravity);
 
+		levelPieces.add(new WorldBuilderLiquid(wholeScene, Density.AIR, true));
+
 		float fat = 150.0f;
 
 		float BOTTOM = Constants.CANVAS_HEIGHT_FULL;

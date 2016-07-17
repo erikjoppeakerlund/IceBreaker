@@ -24,6 +24,13 @@ public class WorldBuilderLiquid extends WorldBuilder {
 		init();
 	}
 
+	public WorldBuilderLiquid(float[] nodes, Density density, boolean isBackground) {
+		super(nodes);
+		isBackgroundObj = isBackground;
+		this.density = density;
+		init();
+	}
+
 	protected void init() {
 		switch (density) {
 		case SOIL:
@@ -41,9 +48,15 @@ public class WorldBuilderLiquid extends WorldBuilder {
 		case WATER:
 			this.color = Color.blue;
 			this.frictionAmount = 0.90f;
+			break;
 		case LAVA:
 			this.color = new Color(1, 0, 0, 0.4f);
 			this.frictionAmount = 0.86f;
+			break;
+		case AIR:
+			this.color = Color.transparent;
+			this.frictionAmount = 0.981f;
+			break;
 		}
 	}
 

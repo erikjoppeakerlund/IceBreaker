@@ -39,7 +39,7 @@ public class BreakingPoint extends BasicGame {
 
 	}
 
-	public Image image;
+	// public Image image;
 	public float patternPositionX;
 	public float patternPositionY;
 	public float tileCountX;
@@ -99,7 +99,7 @@ public class BreakingPoint extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		image = new Image("res/img/tilesBackground.jpg");
+		// image = new Image("res/img/tilesBackground.jpg");
 
 		patternWidth = container.getWidth();
 		patternHeight = container.getHeight();
@@ -148,7 +148,7 @@ public class BreakingPoint extends BasicGame {
 		AppGameContainer appGameContainer = new AppGameContainer(new BreakingPoint("Ice Breaker"));
 		int maxFPS = 60;
 		appGameContainer.setTargetFrameRate(maxFPS);
-		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, false);
+		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, true);
 		appGameContainer.setAlwaysRender(true);
 		appGameContainer.start();
 

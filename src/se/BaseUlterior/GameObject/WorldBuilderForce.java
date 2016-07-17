@@ -16,11 +16,13 @@ public class WorldBuilderForce extends WorldBuilder {
 
 	public WorldBuilderForce(float[] nodes) {
 		super(nodes);
+		isBackgroundObj = true;
 		this.color = new Color(0, 1, 0, 0.19f);
 	}
 
 	public WorldBuilderForce(float[] nodes, float gravityX, float gravityY) {
 		super(nodes);
+		isBackgroundObj = true;
 		this.gravityX = gravityX;
 		this.gravityY = gravityY;
 		this.color = new Color(0, 1, 0, 0.19f);
@@ -28,6 +30,7 @@ public class WorldBuilderForce extends WorldBuilder {
 
 	public WorldBuilderForce(float[] nodes, float gravityX, float gravityY, Color color) {
 		super(nodes);
+		isBackgroundObj = true;
 		this.gravityX = gravityX;
 		this.gravityY = gravityY;
 		this.color = color;
@@ -59,11 +62,6 @@ public class WorldBuilderForce extends WorldBuilder {
 	public void update(GameContainer container, int arg) throws SlickException {
 		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public boolean isBackgroundObj() {
-		return true;
 	}
 
 }

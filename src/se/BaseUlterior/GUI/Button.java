@@ -99,7 +99,7 @@ public abstract class Button extends Component {
 	}
 
 	public Color getIsActiveColor(boolean active) {
-		return active ? Color.darkGray : Color.lightGray;
+		return active ? Color.lightGray : Color.lightGray;
 	}
 
 	@Override

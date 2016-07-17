@@ -70,7 +70,7 @@ public abstract class AimBulletWeapon extends Aim {
 	protected float aimAtX;
 	protected float aimAtY;
 
-	protected final int EXPLOTION_SIZE = 29;
+	protected final int EXPLOTION_SIZE = 70;
 
 	protected boolean wasJustShoot = false;
 	protected final float BACK_FIRE = 14f;
@@ -92,6 +92,7 @@ public abstract class AimBulletWeapon extends Aim {
 	protected void wasShoot() {
 		updateAim();
 		// UlteriorUtils.removeGround(aimAtX, aimAtY, EXPLOTION_SIZE, null);
+
 		wasJustShoot = true;
 		armLengt -= BACK_FIRE;
 		explostions.add(new float[] { aimAtX, aimAtY, SMOKE_LENGTH / 2 });
@@ -156,7 +157,7 @@ public abstract class AimBulletWeapon extends Aim {
 			xTarget += arm.x * STEP;
 			yTarget += arm.y * STEP;
 			for (GameObject go : BreakingPoint.all) {
-				if (go.contains(xTarget, yTarget) && !go.isBackgroundObj()) {
+				if (go.contains(xTarget, yTarget) && !go.isBackgroundObj) {
 					aimAtX = xTarget;
 					aimAtY = yTarget;
 					notFound = false;

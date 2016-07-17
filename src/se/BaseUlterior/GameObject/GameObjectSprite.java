@@ -23,13 +23,13 @@ public class GameObjectSprite extends GameObjectFalling {
 
 	protected Aim aim = null;
 	protected List<Aim> aims = null;
-	protected float speed = 0.0006f;
-	protected final float MAX_SPEED = 0.31f;
+	protected float speed = 0.0039f;
+	protected final float MAX_SPEED = 0.51f;
 	protected boolean mouseButtonPirmaryDown = false;
 
 	protected boolean right = true;
 
-	protected float JUMP_POWER = -0.41f;
+	protected float JUMP_POWER = -0.46f;
 	private SpriteSheet sprite = null;
 	protected Animation animationMoveRight = null;
 	protected Animation animationMoveLeft = null;
@@ -114,17 +114,17 @@ public class GameObjectSprite extends GameObjectFalling {
 			animationMoveRight.setCurrentFrame(0);
 			animationMoveLeft.setCurrentFrame(0);
 		}
-		if (in.isKeyDown(Input.KEY_Q)) {
+		if (in.isKeyDown(Input.KEY_X)) {
 			setCenterY(getCenterY() - 1);
 			motion.set(new Vector2(motion.getX(), JUMP_POWER));
 
 		}
-		if (in.isKeyPressed(Input.KEY_Z)) {
+		if (in.isKeyPressed(Input.KEY_SPACE)) {
 			aim.primaryPushed();
 			if (!mouseButtonPirmaryDown) {
 				mouseButtonPirmaryDown = true;
 			}
-		} else if (!in.isKeyDown(Input.KEY_Z) && mouseButtonPirmaryDown) {
+		} else if (!in.isKeyDown(Input.KEY_SPACE) && mouseButtonPirmaryDown) {
 			mouseButtonPirmaryDown = false;
 			aim.primaryReleased();
 		}
@@ -133,7 +133,7 @@ public class GameObjectSprite extends GameObjectFalling {
 		} else if (in.isKeyDown(Input.KEY_DOWN)) {
 			aim.angleDown();
 		}
-		if (in.isKeyPressed(Input.KEY_A)) {
+		if (in.isKeyPressed(Input.KEY_TAB)) {
 			int i = aims.indexOf(aim);
 			aim.cleanUp();
 			aim = i == aims.size() - 1 ? aims.get(0) : aims.get(i + 1);

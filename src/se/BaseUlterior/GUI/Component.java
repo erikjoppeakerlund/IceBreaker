@@ -27,11 +27,6 @@ public abstract class Component extends GameObject {
 	protected float maxHeight = -1;
 	protected float minHeight = -1;
 
-	@Override
-	public boolean isBackgroundObj() {
-		return true;
-	}
-
 	public void setMaxWidth(float maxWidth) {
 		this.maxWidth = maxWidth;
 	}
@@ -67,6 +62,7 @@ public abstract class Component extends GameObject {
 		subs = new ArrayList<>();
 		forcedHeight = getHeight();
 		forcedWidth = getWidth();
+		isBackgroundObj = true;
 	}
 
 	public void add(Component component) {

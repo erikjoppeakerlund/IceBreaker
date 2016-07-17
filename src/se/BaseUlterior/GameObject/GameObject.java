@@ -30,6 +30,7 @@ public abstract class GameObject extends Polygon {
 	protected Vector2 motion = null;
 	public boolean noForce = false;
 	public float maxRadiusStart;
+	public boolean isBackgroundObj = false;
 
 	public ArrayList<Impact> generlImacts = new ArrayList<>();
 
@@ -199,6 +200,8 @@ public abstract class GameObject extends Polygon {
 							// noForce = true;
 							shape.noForce = true;
 							return Collections.emptySet();
+						} else {
+							shape.noForce = false;
 						}
 					}
 
@@ -233,9 +236,5 @@ public abstract class GameObject extends Polygon {
 	}
 
 	public void wasActionStateSet(Action action) {
-	}
-
-	public boolean isBackgroundObj() {
-		return false;
 	}
 }

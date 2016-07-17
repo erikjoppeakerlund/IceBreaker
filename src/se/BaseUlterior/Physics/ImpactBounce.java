@@ -67,6 +67,9 @@ public class ImpactBounce extends Impact {
 		 * ('affectedPiece'), V´ is the resulting vector
 		 */
 
+		if (self) {
+			bouncyness = -bouncyness;
+		}
 		float dot = affectedPiece.dot(N) * (1.0f + bouncyness);
 
 		N.scale(dot);
