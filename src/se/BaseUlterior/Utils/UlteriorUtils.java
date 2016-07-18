@@ -32,14 +32,14 @@ public class UlteriorUtils {
 		return (int) Math.toDegrees(Math.atan2(y2 - y1, x2 - x1));
 	}
 
-	public static float distance(GameObject go1, GameObject go2) {
+	public static int distance(GameObject go1, GameObject go2) {
 		float x1 = go1.getCenterX();
 		float x2 = go2.getCenterX();
 
 		float y1 = go1.getCenterY();
 		float y2 = go2.getCenterY();
 
-		return (float) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+		return (int) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 	}
 
 	public static void createVisualPointAt(float pointX, float pointY) {

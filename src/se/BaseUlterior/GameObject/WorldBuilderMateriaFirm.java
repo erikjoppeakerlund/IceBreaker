@@ -26,12 +26,9 @@ public abstract class WorldBuilderMateriaFirm extends WorldBuilder {
 
 	private void runImpact(int delta) {
 		for (Impact im : currentImpacts) {
-			// if (im.getTrigger().isBackgroundObj ||
-			// im.getAffected().isBackgroundObj)
-			im.calculateImpact(delta);
-			// if (im.getTrigger().intersects(im.getAffected())) {
-			// im.onReset();
-			// }
+
+			im.checkCalculate(delta);
+
 		}
 
 		int[] removeIndexes = new int[currentImpacts.size()];
