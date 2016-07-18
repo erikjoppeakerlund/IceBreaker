@@ -60,11 +60,13 @@ public class GameObjectSpriteDesktop extends GameObjectSprite {
 			aim.onThisWasChoosen();
 
 		}
+		float centerX = getCenterX();
+		float centerY = getCenterY();
 
-		aim.setAngleToMouse(UlteriorUtils.angleToPoint(x, y, in.getMouseX(), in.getMouseY()));
+		aim.setAngleToMouse(UlteriorUtils.angleToPoint(centerX, centerY, in.getMouseX(), in.getMouseY()));
 
-		aim.spriteX = getCenterX();
-		aim.spriteY = getCenterY();
+		aim.spriteX = centerX;
+		aim.spriteY = centerY;
 
 		aim.update(container, delta);
 
