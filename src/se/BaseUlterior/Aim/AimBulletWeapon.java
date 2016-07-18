@@ -90,7 +90,7 @@ public abstract class AimBulletWeapon extends Aim {
 	}
 
 	protected void wasShoot() {
-		updateAim();
+		// updateAim();
 		// UlteriorUtils.removeGround(aimAtX, aimAtY, EXPLOTION_SIZE, null);
 
 		wasJustShoot = true;
@@ -116,6 +116,10 @@ public abstract class AimBulletWeapon extends Aim {
 		super.update(container, arg);
 		startShotX = getXAimFromDistanceAt(armLengt + imageWidth / 2);
 		startShotY = getYAimFromDistanceAt(armLengt + imageWidth / 2);
+
+		// int gunFireStartAtComplete = gunFireFrameWidth / 2 + imageWidth / 2;
+		//
+		// if(isRight && )
 
 		gunFireStartAtX = getXAimFromDistanceAt(armLengt + gunFireFrameWidth / 2 + imageWidth / 2);
 		gunFireStartAtY = getYAimFromDistanceAt(armLengt + gunFireFrameWidth / 2 + imageWidth / 2);

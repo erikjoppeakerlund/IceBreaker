@@ -45,4 +45,10 @@ public class AimMachineGun extends AimTriggerHoldable {
 
 	}
 
+	@Override
+	protected void wasShoot() {
+		updateAim();
+		super.wasShoot();
+	}
+
 }
