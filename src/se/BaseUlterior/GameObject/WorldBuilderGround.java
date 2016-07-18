@@ -29,7 +29,7 @@ public class WorldBuilderGround extends WorldBuilderMateriaFirm {
 
 	@Override
 	public Impact getImpact(GameObject piece) {
-		return new ImpactBounce(this, piece, 0, false);
+		return new ImpactBounce(this, piece, piece.bouncyness, false);
 	}
 
 	@Override
@@ -39,6 +39,7 @@ public class WorldBuilderGround extends WorldBuilderMateriaFirm {
 			graphics.setLineWidth(Constants.LINE_WIDTH);
 			graphics.setColor(Color.black);
 			graphics.draw(this);
+			graphics.resetLineWidth();
 		}
 	}
 

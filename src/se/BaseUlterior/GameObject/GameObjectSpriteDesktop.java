@@ -4,8 +4,10 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 
 import se.BaseUlterior.Game.BreakingPoint;
+import se.BaseUlterior.Utils.UlteriorUtils;
 
-public class GameObjectSpriteMobile extends GameObjectSprite {
+public class GameObjectSpriteDesktop extends GameObjectSprite {
+
 	@Override
 	public void update(GameContainer container, int delta) {
 		if (BreakingPoint.pause) {
@@ -22,6 +24,7 @@ public class GameObjectSpriteMobile extends GameObjectSprite {
 			if (motion.getX() > -MAX_SPEED) {
 				motion.add(-speed * delta, 0.0f);
 			}
+			aim.setIsRight(false);
 		} else if (in.isKeyDown(Input.KEY_D)) {
 			if (!directionIsRight) {
 				directionIsRight = true;
@@ -30,6 +33,7 @@ public class GameObjectSpriteMobile extends GameObjectSprite {
 			if (motion.getX() < MAX_SPEED) {
 				motion.add(speed * delta, 0.0f);
 			}
+			aim.setIsRight(true);
 		} else {
 			animationMoveRight.setCurrentFrame(0);
 			animationMoveLeft.setCurrentFrame(0);
@@ -40,36 +44,24 @@ public class GameObjectSpriteMobile extends GameObjectSprite {
 			}
 
 		}
-		if (in.isKeyPressed(Input.KEY_SPACE) || in.isKeyPressed(Input.KEY_E)) {
+		if (in.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 			aim.primaryPushed();
 			if (!mouseButtonPirmaryDown) {
 				mouseButtonPirmaryDown = true;
 			}
-		} else if (!(in.isKeyDown(Input.KEY_SPACE) || in.isKeyDown(Input.KEY_E)) && mouseButtonPirmaryDown) {
+		} else if (!in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && mouseButtonPirmaryDown) {
 			mouseButtonPirmaryDown = false;
 			aim.primaryReleased();
-		}
-		if (in.isKeyDown(Input.KEY_UP)) {
-			aim.angleUp();
-		} else if (in.isKeyDown(Input.KEY_DOWN)) {
-			aim.angleDown();
 		}
 		if (in.isKeyPressed(Input.KEY_Q)) {
 			int i = aims.indexOf(aim);
 			aim.cleanUp();
-			int currentAngle = aim.getCurrentThete();
 			aim = i == aims.size() - 1 ? aims.get(0) : aims.get(i + 1);
-			aim.setAngleToMouse(currentAngle);
 			aim.onThisWasChoosen();
 
 		}
-		if (in.isKeyPressed(Input.KEY_LEFT)) {
-			aim.setIsRight(false);
 
-		} else if (in.isKeyPressed(Input.KEY_RIGHT)) {
-			aim.setIsRight(true);
-
-		}
+		aim.setAngleToMouse(UlteriorUtils.angleToPoint(x, y, in.getMouseX(), in.getMouseY()));
 
 		aim.spriteX = getCenterX();
 		aim.spriteY = getCenterY();
@@ -77,7 +69,7 @@ public class GameObjectSpriteMobile extends GameObjectSprite {
 		aim.update(container, delta);
 
 		super.update(container, delta);
+		// switchScreens();
 		screenFollowPlayer();
 	}
-
 }

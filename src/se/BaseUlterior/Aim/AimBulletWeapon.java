@@ -177,6 +177,7 @@ public abstract class AimBulletWeapon extends Aim {
 			rifleImageLeft.setRotation((float) (arm.getTheta()));
 			rifleImageLeft.draw(xGrip - imageWidth / 2, yGrip - imageHeight / 2);
 		}
+		graphics.setLineWidth(3);
 		if (!rays.isEmpty()) {
 			for (float[] ray : rays) {
 
@@ -192,6 +193,7 @@ public abstract class AimBulletWeapon extends Aim {
 						WALL_HIT_EXPLOTION_SIZE, WALL_HIT_EXPLOTION_SIZE);
 			}
 		}
+		graphics.resetLineWidth();
 	}
 
 }

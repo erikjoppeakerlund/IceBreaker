@@ -23,7 +23,7 @@ import se.BaseUlterior.GUI.Component;
 import se.BaseUlterior.GUI.ToolBox;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectFalling;
-import se.BaseUlterior.GameObject.GameObjectSprite;
+import se.BaseUlterior.GameObject.GameObjectSpriteDesktop;
 import se.BaseUlterior.GameObject.GameObjectSpriteMobile;
 
 public class BreakingPoint extends BasicGame {
@@ -111,7 +111,7 @@ public class BreakingPoint extends BasicGame {
 		toolbox = new ToolBox(Alignment.LEFT);
 		((Component) toolbox).pack();
 
-		spriteDesktop = new GameObjectSprite();
+		spriteDesktop = new GameObjectSpriteDesktop();
 		spriteMobile = new GameObjectSpriteMobile();
 		sprite = spriteDesktop;
 
@@ -140,7 +140,7 @@ public class BreakingPoint extends BasicGame {
 		AppGameContainer appGameContainer = new AppGameContainer(new BreakingPoint("ICE:BREAKER"));
 		int maxFPS = 60;
 		appGameContainer.setTargetFrameRate(maxFPS);
-		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, false);
+		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, true);
 		appGameContainer.setAlwaysRender(true);
 		appGameContainer.start();
 

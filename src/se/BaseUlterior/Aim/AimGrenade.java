@@ -112,6 +112,7 @@ public class AimGrenade extends Aim {
 
 	@Override
 	public void onThisWasChoosen() {
+		super.onThisWasChoosen();
 		if (current != null) {
 			BreakingPoint.objsToAdd.add(current);
 		}

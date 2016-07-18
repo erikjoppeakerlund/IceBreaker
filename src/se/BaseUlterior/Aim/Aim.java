@@ -67,20 +67,24 @@ public abstract class Aim {
 		yAim = getYAimFromDistanceAt(armLengt * 3);
 
 		if (!mobile) {
-			if ((arm.getTheta() >= 0 && (arm.getTheta()) < 90) || (arm.getTheta() > 270)) {
-				if (!isRight) {
-					wasJustSwitched = true;
-				}
-				isRight = true;
-			} else {
-				if (isRight) {
-					wasJustSwitched = true;
-				}
-				isRight = false;
-			}
-			wasJustSwitched = false;
-
+			updateWasJustSwitched();
 		}
+	}
+
+	private void updateWasJustSwitched() {
+		if ((arm.getTheta() >= 0 && (arm.getTheta()) < 90) || (arm.getTheta() > 270)) {
+			if (!isRight) {
+				wasJustSwitched = true;
+			}
+			isRight = true;
+		} else {
+			if (isRight) {
+				wasJustSwitched = true;
+			}
+			isRight = false;
+		}
+		wasJustSwitched = false;
+
 	}
 
 	public void render(GameContainer container, Graphics graphics) {
@@ -100,7 +104,7 @@ public abstract class Aim {
 	}
 
 	public void onThisWasChoosen() {
-
+		updateWasJustSwitched();
 	}
 
 	protected float getXAimFromDistanceAt(float distance) {
@@ -137,6 +141,10 @@ public abstract class Aim {
 			arm.set(-arm.x, arm.y);
 		}
 		isRight = is;
+	}
+
+	public int getCurrentThete() {
+		return (int) arm.getTheta();
 	}
 
 }

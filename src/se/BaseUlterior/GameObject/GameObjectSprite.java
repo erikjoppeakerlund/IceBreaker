@@ -6,7 +6,6 @@ import java.util.List;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Circle;
@@ -18,9 +17,8 @@ import se.BaseUlterior.Aim.AimMachineGun;
 import se.BaseUlterior.Aim.AimRifle;
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Game.BreakingPoint;
-import se.BaseUlterior.Utils.UlteriorUtils;
 
-public class GameObjectSprite extends GameObjectFalling {
+public abstract class GameObjectSprite extends GameObjectFalling {
 
 	protected Aim aim = null;
 	protected List<Aim> aims = null;
@@ -36,7 +34,7 @@ public class GameObjectSprite extends GameObjectFalling {
 	protected Animation animationMoveLeft = null;
 	private static final int SHEET_UPDATE_RATE = 85;
 
-	private boolean directionIsRight = true;
+	protected boolean directionIsRight = true;
 
 	private SpriteSheet gunFire = null;
 	private Animation animationGunfire = null;
@@ -44,7 +42,7 @@ public class GameObjectSprite extends GameObjectFalling {
 	private int gunFireFrameWidth;
 	private int gunFireFrameHeight;
 
-	public GameObjectSprite() {
+	protected GameObjectSprite() {
 		super(new Circle(Constants.CANVAS_WIDTH / 2, Constants.CANVAS_HEIGHT / 2, Constants.SPRITE_RADIUS).getPoints(),
 				0.3f);
 		this.setCenterX(Constants.CANVAS_WIDTH / 2);
@@ -86,84 +84,19 @@ public class GameObjectSprite extends GameObjectFalling {
 		aim = aims.get(2);
 	}
 
-	@Override
-	public void update(GameContainer container, int delta) {
-		if (BreakingPoint.pause) {
-			return;
-		}
-
-		Input in = container.getInput();
-
-		if (in.isKeyDown(Input.KEY_A)) {
-			if (directionIsRight) {
-				directionIsRight = false;
-			}
-			animationMoveLeft.update(delta);
-			if (motion.getX() > -MAX_SPEED) {
-				motion.add(-speed * delta, 0.0f);
-			}
-			aim.setIsRight(false);
-		} else if (in.isKeyDown(Input.KEY_D)) {
-			if (!directionIsRight) {
-				directionIsRight = true;
-			}
-			animationMoveRight.update(delta);
-			if (motion.getX() < MAX_SPEED) {
-				motion.add(speed * delta, 0.0f);
-			}
-			aim.setIsRight(true);
-		} else {
-			animationMoveRight.setCurrentFrame(0);
-			animationMoveLeft.setCurrentFrame(0);
-		}
-		if (in.isKeyDown(Input.KEY_W)) {
-			if (motion.getY() > -MAX_SPEED) {
-				motion.add(0, -speed * delta);
-			}
-
-		}
-		if (in.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-			aim.primaryPushed();
-			if (!mouseButtonPirmaryDown) {
-				mouseButtonPirmaryDown = true;
-			}
-		} else if (!in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && mouseButtonPirmaryDown) {
-			mouseButtonPirmaryDown = false;
-			aim.primaryReleased();
-		}
-		if (in.isKeyPressed(Input.KEY_Q)) {
-			int i = aims.indexOf(aim);
-			aim.cleanUp();
-			aim = i == aims.size() - 1 ? aims.get(0) : aims.get(i + 1);
-			aim.onThisWasChoosen();
-
-		}
-
-		aim.setAngleToMouse(UlteriorUtils.angleToPoint(x, y, in.getMouseX(), in.getMouseY()));
-
-		aim.spriteX = getCenterX();
-		aim.spriteY = getCenterY();
-
-		aim.update(container, delta);
-
-		super.update(container, delta);
-		// switchScreens();
-		screenFollowPlayer();
-	}
-
-	private void screenFollowPlayer() {
+	protected void screenFollowPlayer() {
 		float moveScreenX = getCenterX() - Constants.CANVAS_WIDTH / 2f;
 		float moveScreenY = getCenterY() - Constants.CANVAS_HEIGHT / 2f;
 
-		if (motion.x < 0 && BreakingPoint.currentX <= 0
-				|| motion.x > 0 && BreakingPoint.currentX + Constants.CANVAS_WIDTH >= Constants.CANVAS_WIDTH_FULL
+		if (motion.x <= 0 && BreakingPoint.currentX <= 0
+				|| motion.x >= 0 && BreakingPoint.currentX + Constants.CANVAS_WIDTH >= Constants.CANVAS_WIDTH_FULL
 				|| motion.x > 0 && getCenterX() < Constants.CANVAS_WIDTH / 2 || motion.x < 0 && getCenterX()
 						+ BreakingPoint.currentX > Constants.CANVAS_WIDTH_FULL - Constants.CANVAS_WIDTH / 2) {
 			moveScreenX = 0;
 		}
 
-		if (motion.y < 0 && BreakingPoint.currentY <= 0
-				|| motion.y > 0 && BreakingPoint.currentY + Constants.CANVAS_HEIGHT >= Constants.CANVAS_HEIGHT_FULL
+		if (motion.y <= 0 && BreakingPoint.currentY <= 0
+				|| motion.y >= 0 && BreakingPoint.currentY + Constants.CANVAS_HEIGHT >= Constants.CANVAS_HEIGHT_FULL
 				|| motion.y > 0 && getCenterY() < Constants.CANVAS_HEIGHT / 2 || motion.y < 0 && getCenterY()
 						+ BreakingPoint.currentY > Constants.CANVAS_HEIGHT_FULL - Constants.CANVAS_HEIGHT / 2) {
 			moveScreenY = 0;
@@ -173,7 +106,7 @@ public class GameObjectSprite extends GameObjectFalling {
 
 	}
 
-	private void switchScreens() {
+	protected void switchScreens() {
 		float moveScreenX = 0;
 		float moveScreenY = 0;
 
