@@ -29,6 +29,7 @@ public abstract class GameObject extends Polygon {
 	public int maxRadiusStart;
 	public boolean isBackgroundObj = false;
 	protected float bouncyness;
+	public boolean noForce = true;
 
 	public Vector2 getMotion() {
 		return motion;

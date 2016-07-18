@@ -108,9 +108,6 @@ public class BreakingPoint extends BasicGame {
 		GroundMap requiredWallBuilderObjects = new GroundMap();
 		all.addAll(requiredWallBuilderObjects.levelPieces);
 
-		toolbox = new ToolBox(Alignment.LEFT);
-		((Component) toolbox).pack();
-
 		spriteDesktop = new GameObjectSpriteDesktop();
 		spriteMobile = new GameObjectSpriteMobile();
 		sprite = spriteDesktop;
@@ -118,6 +115,8 @@ public class BreakingPoint extends BasicGame {
 		BreakingPoint.objsToAdd.add(sprite);
 
 		BreakingPoint.objsToAdd.addAll(levelDummy.levelPieces);
+		toolbox = new ToolBox(Alignment.LEFT);
+		((Component) toolbox).pack();
 		BreakingPoint.objsToAdd.add(info);
 	}
 
@@ -140,7 +139,7 @@ public class BreakingPoint extends BasicGame {
 		AppGameContainer appGameContainer = new AppGameContainer(new BreakingPoint("ICE:BREAKER"));
 		int maxFPS = 60;
 		appGameContainer.setTargetFrameRate(maxFPS);
-		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, false);
+		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, true);
 		appGameContainer.setAlwaysRender(true);
 		appGameContainer.start();
 

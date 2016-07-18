@@ -14,6 +14,7 @@ public abstract class GameObjectFalling extends WorldBuilderMateriaFirm {
 	public GameObjectFalling(float[] nodes, float bouncyness) {
 		super(nodes);
 		this.bouncyness = bouncyness;
+		noForce = false;
 	}
 
 	@Override
