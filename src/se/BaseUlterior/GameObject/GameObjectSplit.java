@@ -16,6 +16,7 @@ public class GameObjectSplit extends GameObjectFalling {
 	public GameObjectSplit(float x, float y, Vector2 motion) {
 		super(new Circle(x, y, 2f + (float) (Math.random() * 3f), 4).getPoints(), 1.0f);
 		this.motion = motion;
+		isBackgroundObj = true;
 	}
 
 	@Override

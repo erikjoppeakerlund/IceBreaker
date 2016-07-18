@@ -32,7 +32,7 @@ public class ImpactRicochet extends Impact {
 		}
 		N.normalise();
 		Vector2 angled = N.copy();
-		N.setTheta(N.getTheta() + Math.random() * 40 - 10);
+		N.setTheta(N.getTheta() + Math.random() * 40 - 20);
 		float dot = angled.dot(N) * (2.0f);
 
 		N.scale(dot);
