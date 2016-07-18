@@ -12,7 +12,6 @@ public class ImpactBounce extends Impact {
 	protected Set<Vector2> normalsTester = null;
 	protected float bouncyness;
 	protected boolean self;
-	protected boolean reset = false;
 
 	public ImpactBounce(GameObject origin, GameObject go, float bouncyness, boolean self) {
 		super(origin, go);
@@ -41,7 +40,6 @@ public class ImpactBounce extends Impact {
 		if (normals.isEmpty()) {
 			return;
 		}
-		reset = false;
 		Iterator<Vector2> ni = normals.iterator();
 		Vector2 N = null;
 		int i = 0;

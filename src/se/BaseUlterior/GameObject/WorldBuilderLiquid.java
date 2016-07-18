@@ -67,11 +67,6 @@ public class WorldBuilderLiquid extends WorldBuilder {
 	}
 
 	@Override
-	protected void animateHit() {
-
-	}
-
-	@Override
 	public Shape[] subtract(Shape other) {
 		return new Shape[0];
 	}

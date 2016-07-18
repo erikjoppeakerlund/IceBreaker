@@ -1,8 +1,6 @@
 package se.BaseUlterior.GameObject;
 
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Shape;
 
 import se.BaseUlterior.Physics.Impact;
@@ -32,12 +30,13 @@ public abstract class GameObjectFalling extends WorldBuilderMateriaFirm {
 	public float getBouncyness() {
 		return this.bouncyness;
 	}
-
-	@Override
-	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		graphics.setColor(this.color);
-		graphics.fill(this);
-	}
+	//
+	// @Override
+	// public void render(GameContainer container, Graphics graphics) throws
+	// SlickException {
+	// graphics.setColor(this.color);
+	// graphics.fill(this);
+	// }
 
 	public void addImpact(Impact im) {
 		currentImpacts.add(im);

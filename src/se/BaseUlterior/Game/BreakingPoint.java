@@ -112,12 +112,11 @@ public class BreakingPoint extends BasicGame {
 		spriteMobile = new GameObjectSpriteMobile();
 		sprite = spriteDesktop;
 
-		BreakingPoint.objsToAdd.add(sprite);
-
 		BreakingPoint.objsToAdd.addAll(levelDummy.levelPieces);
 		toolbox = new ToolBox(Alignment.LEFT);
 		((Component) toolbox).pack();
 		BreakingPoint.objsToAdd.add(info);
+		BreakingPoint.objsToAdd.add(sprite);
 	}
 
 	@Override

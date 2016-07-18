@@ -225,4 +225,7 @@ public abstract class GameObject extends Polygon {
 
 	public void wasActionStateSet(Action action) {
 	}
+
+	public void animateHit(float aimAtX, float aimAtY) {
+	}
 }

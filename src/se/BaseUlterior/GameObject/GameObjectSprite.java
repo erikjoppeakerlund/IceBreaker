@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -47,7 +48,7 @@ public abstract class GameObjectSprite extends GameObjectFalling {
 				0.31f);
 		this.setCenterX(Constants.CANVAS_WIDTH / 2);
 		this.setCenterY(Constants.CANVAS_HEIGHT / 2);
-		color = Constants.THEME_COLOR;
+		color = Color.transparent;
 		try {
 			sprite = new SpriteSheet("res/img/spriteSheet.png", 88, 88);
 			animationMoveRight = new Animation(false);
@@ -139,6 +140,7 @@ public abstract class GameObjectSprite extends GameObjectFalling {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
+		super.render(container, graphics);
 		if (directionIsRight) {
 			animationMoveRight.draw(getX(), getY());
 		} else {

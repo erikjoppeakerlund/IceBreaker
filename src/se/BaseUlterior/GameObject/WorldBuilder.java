@@ -13,8 +13,6 @@ public abstract class WorldBuilder extends GameObject {
 
 	}
 
-	protected abstract void animateHit();
-
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		graphics.setColor(this.color);

@@ -42,12 +42,6 @@ public class WorldBuilderForce extends WorldBuilder {
 	}
 
 	@Override
-	protected void animateHit() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		graphics.setColor(this.color);
 		graphics.fill(this);

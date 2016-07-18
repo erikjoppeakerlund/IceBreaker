@@ -9,8 +9,8 @@ import se.BaseUlterior.Utils.UlteriorUtils;
 public abstract class WorldBuilderMateriaFirm extends WorldBuilder {
 
 	protected boolean underImpact;
-	// protected float bouncyness;
 
+	// protected float bouncyness;
 	public WorldBuilderMateriaFirm(float[] nodes) {
 		super(nodes);
 	}
@@ -21,7 +21,6 @@ public abstract class WorldBuilderMateriaFirm extends WorldBuilder {
 		if (underImpact) {
 			runImpact(delta);
 		}
-
 	}
 
 	private void runImpact(int delta) {
@@ -82,12 +81,6 @@ public abstract class WorldBuilderMateriaFirm extends WorldBuilder {
 			}
 
 		}
-	}
-
-	@Override
-	protected void animateHit() {
-		// TODO Auto-generated method stub
-
 	}
 
 }

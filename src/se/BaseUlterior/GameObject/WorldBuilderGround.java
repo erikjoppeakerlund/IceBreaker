@@ -22,12 +22,6 @@ public class WorldBuilderGround extends WorldBuilderMateriaFirm {
 	}
 
 	@Override
-	protected void animateHit() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public Impact getImpact(GameObject piece) {
 		return new ImpactBounce(this, piece, piece.bouncyness, false);
 	}

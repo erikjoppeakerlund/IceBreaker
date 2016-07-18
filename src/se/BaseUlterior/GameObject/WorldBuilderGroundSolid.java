@@ -20,8 +20,8 @@ public class WorldBuilderGroundSolid extends WorldBuilderGround {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		graphics.setColor(this.color);
-		graphics.fill(this);
+		// graphics.setColor(this.color);
+		// graphics.fill(this);
 	}
 
 }
