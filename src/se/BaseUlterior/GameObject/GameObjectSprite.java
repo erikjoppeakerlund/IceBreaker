@@ -12,7 +12,6 @@ import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Circle;
 
 import se.BaseUlterior.Aim.Aim;
-import se.BaseUlterior.Aim.AimBlade;
 import se.BaseUlterior.Aim.AimGrenade;
 import se.BaseUlterior.Aim.AimMachineGun;
 import se.BaseUlterior.Aim.AimRifle;
@@ -78,7 +77,7 @@ public abstract class GameObjectSprite extends GameObjectFalling {
 
 	private void initAims() {
 		aims = new ArrayList<Aim>();
-		aims.add(new AimBlade());
+		// aims.add(new AimBlade());
 		aims.add(new AimGrenade());
 		aims.add(new AimRifle(animationGunfire));
 		aims.add(new AimMachineGun(animationGunfire));

@@ -8,7 +8,7 @@ import org.newdawn.slick.geom.Circle;
 
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.GameObjectSimple;
+import se.BaseUlterior.GameObject.GameObjectRicochet;
 
 public abstract class AimBulletWeapon extends Aim {
 
@@ -83,7 +83,7 @@ public abstract class AimBulletWeapon extends Aim {
 	protected void wasShoot() {
 		wasJustShoot = true;
 		armLengt -= BACK_FIRE;
-		GameObject ricochet = new GameObjectSimple(new Circle(aimAtX, aimAtY, 29f).getPoints(), pointBlank);
+		GameObject ricochet = new GameObjectRicochet(new Circle(aimAtX, aimAtY, 29f).getPoints(), pointBlank);
 		BreakingPoint.objsToAdd.add(ricochet);
 	}
 

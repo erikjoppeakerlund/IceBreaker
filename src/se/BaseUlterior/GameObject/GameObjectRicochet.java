@@ -9,7 +9,7 @@ import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactRicochet;
 
-public class GameObjectSimple extends GameObject {
+public class GameObjectRicochet extends GameObject {
 
 	private Color color = Color.yellow;
 
@@ -18,7 +18,7 @@ public class GameObjectSimple extends GameObject {
 	private final int LIFE_SPAN_LIMIT = 4;
 	private int lifeSpan = 0;
 
-	public GameObjectSimple(float[] fs, GameObject target) {
+	public GameObjectRicochet(float[] fs, GameObject target) {
 		super(fs);
 		this.target = target;
 	}
