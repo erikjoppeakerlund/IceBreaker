@@ -26,10 +26,12 @@ public abstract class WorldBuilderMateriaFirm extends WorldBuilder {
 
 	private void runImpact(int delta) {
 		for (Impact im : currentImpacts) {
+			// if (im.getTrigger().isBackgroundObj ||
+			// im.getAffected().isBackgroundObj)
 			im.calculateImpact(delta);
-			if (im.getTrigger().intersects(im.getAffected())) {
-				im.onReset();
-			}
+			// if (im.getTrigger().intersects(im.getAffected())) {
+			// im.onReset();
+			// }
 		}
 
 		int[] removeIndexes = new int[currentImpacts.size()];
@@ -67,7 +69,7 @@ public abstract class WorldBuilderMateriaFirm extends WorldBuilder {
 				if (go.intersects(this) || go.contains(this)) {
 					boolean contains = false;
 					for (Impact im : currentImpacts) {
-						if (im.getTrigger() == go) {
+						if (im.getTrigger() == go || im.getAffected() == go) {
 							contains = true;
 							break;
 						}

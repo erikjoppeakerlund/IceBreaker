@@ -25,5 +25,4 @@ public abstract class Impact {
 
 	public abstract void calculateImpact(int delta);
 
-	public abstract void onReset();
 }

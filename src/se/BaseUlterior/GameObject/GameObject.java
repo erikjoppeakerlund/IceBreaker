@@ -188,9 +188,13 @@ public abstract class GameObject extends Polygon {
 						 * "Perpendicular Dot Product". Result is the "signed"
 						 * value. If more than zero - the two comparing vectors
 						 * don't intersect and the surfaces which result in the
-						 * vectors shape an edge.
+						 * vectors shape an edge. This i when the object should
+						 * rotate!
 						 */
 						if (aY * bX - aX * bY > 0.0f) {
+							float[] floatNormEdge = getNormal(i / 2);
+							Vector2 normEdge = new Vector2(floatNormEdge);
+							// System.out.println(normEdge.add(shape.motion));
 						} else {
 						}
 					}

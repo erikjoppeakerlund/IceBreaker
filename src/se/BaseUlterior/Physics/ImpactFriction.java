@@ -14,18 +14,8 @@ public class ImpactFriction extends Impact {
 
 	@Override
 	public void calculateImpact(int delta) {
-		if (!contains) {
-			if (origin.contains(other)) {
-				contains = true;
-			}
-		}
-		if (contains) {
+		if (origin.contains(other))
 			affectedPiece.scale(effect);
-		}
 	}
 
-	@Override
-	public void onReset() {
-		contains = false;
-	}
 }

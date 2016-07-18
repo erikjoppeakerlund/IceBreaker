@@ -18,8 +18,8 @@ public class AimBlade extends Aim {
 	public AimBlade() {
 		blade = new Polygon(new float[] { 1062, 383, 1129, 315, 1037, 365, 1052, 369, 1022, 387, 1036, 415, 1042, 389,
 				1055, 390, });
-		blade.setCenterX(-60);
-		blade.setCenterY(-60);
+		blade.setCenterX(-260);
+		blade.setCenterY(-260);
 	}
 
 	@Override

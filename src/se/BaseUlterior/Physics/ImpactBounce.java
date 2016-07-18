@@ -28,6 +28,10 @@ public class ImpactBounce extends Impact {
 	public void calculateImpact(int delta) {
 		if (!origin.intersects(other)) {
 			return;
+		} else {
+			// System.out.println("ORIGIN: " +
+			// origin.getClass().getSimpleName());
+			// System.out.println("OTHER: " + other.getClass().getSimpleName());
 		}
 		if (self) {
 			normalsTester = origin.getMyNormalsAfterHitBy(other);
@@ -70,10 +74,6 @@ public class ImpactBounce extends Impact {
 
 		N.scale(dot);
 		affectedPiece.sub(N);
-	}
-
-	@Override
-	public void onReset() {
 	}
 
 }

@@ -45,9 +45,4 @@ public class ImpactExplosion extends Impact {
 		}
 	}
 
-	@Override
-	public void onReset() {
-		// TODO Auto-generated method stub
-
-	}
 }

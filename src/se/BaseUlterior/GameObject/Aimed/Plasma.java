@@ -17,7 +17,7 @@ public class Plasma extends GameObjectFalling {
 	private boolean hitWall = false;
 
 	public Plasma() {
-		super(new Circle(-80, -80, 30).getPoints(), 0.0f);
+		super(new Circle(-180, -180, 30).getPoints(), 0.0f);
 	}
 
 	@Override
