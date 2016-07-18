@@ -1,7 +1,6 @@
 package se.BaseUlterior.GameObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,7 +26,6 @@ public abstract class GameObject extends Polygon {
 	protected List<Impact> impactsToRemove = new ArrayList<>();
 	protected Color color;
 	protected Vector2 motion = null;
-	public boolean noForce = false;
 	public int maxRadiusStart;
 	public boolean isBackgroundObj = false;
 	protected float bouncyness;
@@ -193,10 +191,7 @@ public abstract class GameObject extends Polygon {
 						 * vectors shape an edge.
 						 */
 						if (aY * bX - aX * bY > 0.0f) {
-							shape.noForce = true;
-							return Collections.emptySet();
 						} else {
-							shape.noForce = false;
 						}
 					}
 

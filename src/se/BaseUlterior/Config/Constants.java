@@ -9,7 +9,7 @@ public class Constants {
 	public static final int CANVAS_WIDTH = 1920;
 	public static final int CANVAS_HEIGHT = 1080;
 
-	public static final int CANVAS_EXTENTION_FACTOR = 4;
+	public static final int CANVAS_EXTENTION_FACTOR = 5;
 
 	public static final int CANVAS_WIDTH_FULL = CANVAS_WIDTH * CANVAS_EXTENTION_FACTOR;
 	public static final int CANVAS_HEIGHT_FULL = CANVAS_HEIGHT * CANVAS_EXTENTION_FACTOR;

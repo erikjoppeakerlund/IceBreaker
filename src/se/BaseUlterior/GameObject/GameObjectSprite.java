@@ -44,7 +44,7 @@ public abstract class GameObjectSprite extends GameObjectFalling {
 
 	protected GameObjectSprite() {
 		super(new Circle(Constants.CANVAS_WIDTH / 2, Constants.CANVAS_HEIGHT / 2, Constants.SPRITE_RADIUS).getPoints(),
-				0.3f);
+				0.31f);
 		this.setCenterX(Constants.CANVAS_WIDTH / 2);
 		this.setCenterY(Constants.CANVAS_HEIGHT / 2);
 		color = Constants.THEME_COLOR;

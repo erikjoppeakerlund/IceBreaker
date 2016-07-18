@@ -24,15 +24,13 @@ public class ImpactForce extends Impact {
 
 	@Override
 	public void calculateImpact(int delta) {
-		if (!other.noForce) {
-			if (!contains) {
-				if (origin.contains(other)) {
-					contains = true;
-				}
+		if (!contains) {
+			if (origin.contains(other)) {
+				contains = true;
 			}
-			if (contains) {
-				affectedPiece.add(gravityX, gravityY);
-			}
+		}
+		if (contains) {
+			affectedPiece.add(gravityX, gravityY);
 		}
 	}
 

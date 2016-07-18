@@ -26,16 +26,16 @@ public class ImpactBounce extends Impact {
 
 	@Override
 	public void calculateImpact(int delta) {
-		if (!origin.intersects(other) || !other.intersects(origin)) {
-			if (self) {
-				origin.noForce = false;
-			} else {
-				other.noForce = false;
-			}
+		if (!origin.intersects(other)) {
 			return;
 		}
-		normalsTester = origin.getMyNormalsAfterHitBy(other);
-		if ((!normalsTester.isEmpty()) && !(self && (origin.noForce))) {
+		if (self) {
+			normalsTester = origin.getMyNormalsAfterHitBy(other);
+		} else {
+			normalsTester = other.getMyNormalsAfterHitBy(origin);
+		}
+
+		if ((!normalsTester.isEmpty())) {
 			normals = normalsTester;
 		}
 		if (normals.isEmpty()) {
@@ -66,25 +66,14 @@ public class ImpactBounce extends Impact {
 		 * ...where N is the normal of the hit surface, V is the moving particle
 		 * ('affectedPiece'), V´ is the resulting vector
 		 */
-
-		if (self) {
-			bouncyness = -bouncyness;
-		}
 		float dot = affectedPiece.dot(N) * (1.0f + bouncyness);
 
 		N.scale(dot);
-		if (!(self & origin.noForce)) {
-			affectedPiece.sub(N);
-		}
+		affectedPiece.sub(N);
 	}
 
 	@Override
 	public void onReset() {
-		if (!self) {
-			other.noForce = false;
-		} else {
-			origin.noForce = false;
-		}
 	}
 
 }
