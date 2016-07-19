@@ -3,14 +3,20 @@ package se.BaseUlterior.GameObject;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 
-import se.BaseUlterior.Game.BreakingPoint;
+import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
+/**
+ * Concrete game sprite which can be controlled all by keyboard. FIXME: enable
+ * mobile touch input.
+ * 
+ * @author Johan Akerlund
+ */
 public class GameObjectSpriteDesktop extends GameObjectSprite {
 
 	@Override
 	public void update(GameContainer container, int delta) {
-		if (BreakingPoint.pause) {
+		if (IceBreaker.pause) {
 			return;
 		}
 

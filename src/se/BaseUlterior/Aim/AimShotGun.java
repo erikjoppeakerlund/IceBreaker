@@ -5,11 +5,16 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
 
-import se.BaseUlterior.Game.BreakingPoint;
+import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectRicochet;
 import se.BaseUlterior.Geom.Vector2;
 
+/**
+ * Shotgun Aim
+ * 
+ * @author Johan Akerlund
+ */
 public class AimShotGun extends AimBulletWeapon {
 	private boolean animationsIsDrawn = false;
 
@@ -68,11 +73,11 @@ public class AimShotGun extends AimBulletWeapon {
 			while (notFound) {
 				xTarget += randomAngle.x * STEP;
 				yTarget += randomAngle.y * STEP;
-				for (GameObject go : BreakingPoint.all) {
+				for (GameObject go : IceBreaker.all) {
 					if (go.contains(xTarget, yTarget) && !go.isBackgroundObj) {
 						GameObject ricochet = new GameObjectRicochet(new Circle(xTarget, yTarget, 29f).getPoints(), go,
 								gunFireStartAtX, gunFireStartAtY, xTarget, yTarget, 0.25f);
-						BreakingPoint.objsToAdd.add(ricochet);
+						IceBreaker.objsToAdd.add(ricochet);
 						notFound = false;
 						break;
 					}

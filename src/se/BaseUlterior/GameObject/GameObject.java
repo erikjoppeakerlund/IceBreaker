@@ -16,8 +16,12 @@ import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Physics.Impact;
 
 /*
+ * Class which instances might be affected by logics in an se.BaseUlterior.Physics.Impact
+ * instance, rendered trough Slick2d library.
+ * 
  * IMPORTANT NOTE: This class contains functions which are not written by be,
  * but by the author of Slick2d!
+ * 
  */
 
 public abstract class GameObject extends Polygon {

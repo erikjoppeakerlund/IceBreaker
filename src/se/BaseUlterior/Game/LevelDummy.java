@@ -10,10 +10,10 @@ import se.BaseUlterior.GameObject.WorldBuilderGround;
 import se.BaseUlterior.GameObject.WorldBuilderLiquid;
 import se.BaseUlterior.Physics.Density;
 
-public class Level {
+public class LevelDummy {
 	public List<GameObject> levelPieces;
 
-	public Level() {
+	public LevelDummy() {
 		levelPieces = new ArrayList<>();
 
 		levelPieces.add(new WorldBuilderForce(new float[] { 10477, 2579, 5049, 77, 10477, 66, },

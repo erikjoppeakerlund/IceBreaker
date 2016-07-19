@@ -8,13 +8,17 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import se.BaseUlterior.Game.BreakingPoint;
+import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Physics.Impact;
 
+/**
+ * Stateful game object which produces
+ * se.BaseUlterior.GameObject.GameObjectSplinter instances during
+ * 
+ * @author Johan Akerlund
+ */
 public class GameObjectRicochet extends GameObject {
-
-	private Color color = Color.yellow;
 
 	GameObject target = null;
 
@@ -52,7 +56,7 @@ public class GameObjectRicochet extends GameObject {
 			runEffect();
 		}
 		if (lifeSpan > LIFE_SPAN_LIMIT) {
-			BreakingPoint.objsToRemove.add(this);
+			IceBreaker.objsToRemove.add(this);
 		}
 		lifeSpan++;
 	}
@@ -97,8 +101,8 @@ public class GameObjectRicochet extends GameObject {
 		N.scale(dot);
 		angled.sub(N);
 
-		GameObjectSplit random = new GameObjectSplit(this.getCenterX(), this.getCenterY(), angled);
-		BreakingPoint.objsToAdd.add(random);
+		GameObjectSplinter random = new GameObjectSplinter(this.getCenterX(), this.getCenterY(), angled);
+		IceBreaker.objsToAdd.add(random);
 
 	}
 

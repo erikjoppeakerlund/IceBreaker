@@ -6,9 +6,13 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Shape;
 
-import se.BaseUlterior.Game.BreakingPoint;
+import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactExplosion;
+
+/*
+ * Class not used.
+ */
 
 public class GameObjectExplosion extends GameObject {
 
@@ -41,7 +45,7 @@ public class GameObjectExplosion extends GameObject {
 			// if (impactExplosion != null) {
 			// impactExplosion.disappear();
 			// }
-			BreakingPoint.objsToRemove.add(this);
+			IceBreaker.objsToRemove.add(this);
 		}
 	}
 

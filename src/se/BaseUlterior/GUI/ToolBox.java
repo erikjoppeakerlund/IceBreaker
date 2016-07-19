@@ -7,7 +7,7 @@ import org.newdawn.slick.Color;
 
 import se.BaseUlterior.Actions.Action;
 import se.BaseUlterior.Aim.Aim;
-import se.BaseUlterior.Game.BreakingPoint;
+import se.BaseUlterior.Game.IceBreaker;
 
 public class ToolBox extends Panel {
 
@@ -68,7 +68,7 @@ public class ToolBox extends Panel {
 
 			}
 		});
-		buttons.add(new Button("(CHEET)", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, !BreakingPoint.pause) {
+		buttons.add(new Button("(CHEET)", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, !IceBreaker.pause) {
 
 			@Override
 			public void onClick() {
@@ -77,21 +77,21 @@ public class ToolBox extends Panel {
 			}
 		});
 
-		buttons.add(new Button(BreakingPoint.MODE_LATEST_ACTION.toString(), Button.PREFERED_WIDTH,
+		buttons.add(new Button(IceBreaker.MODE_LATEST_ACTION.toString(), Button.PREFERED_WIDTH,
 				Button.PREFERED_HEIGHT, true) {
 
 			@Override
 			public void onClick() {
-				if (BreakingPoint.MODE_LATEST_ACTION == Action.ACTION_MODE_DESKTOP) {
-					BreakingPoint.setSprite(Action.ACTION_MODE_CELL);
-					BreakingPoint.MODE_LATEST_ACTION = Action.ACTION_MODE_CELL;
+				if (IceBreaker.MODE_LATEST_ACTION == Action.ACTION_MODE_DESKTOP) {
+					IceBreaker.setSprite(Action.ACTION_MODE_CELL);
+					IceBreaker.MODE_LATEST_ACTION = Action.ACTION_MODE_CELL;
 					Aim.mobile = true;
-				} else if (BreakingPoint.MODE_LATEST_ACTION == Action.ACTION_MODE_CELL) {
-					BreakingPoint.setSprite(Action.ACTION_MODE_DESKTOP);
-					BreakingPoint.MODE_LATEST_ACTION = Action.ACTION_MODE_DESKTOP;
+				} else if (IceBreaker.MODE_LATEST_ACTION == Action.ACTION_MODE_CELL) {
+					IceBreaker.setSprite(Action.ACTION_MODE_DESKTOP);
+					IceBreaker.MODE_LATEST_ACTION = Action.ACTION_MODE_DESKTOP;
 					Aim.mobile = false;
 				}
-				updateText(BreakingPoint.MODE_LATEST_ACTION.toString());
+				updateText(IceBreaker.MODE_LATEST_ACTION.toString());
 			}
 		});
 		buttons.add(new Button("ABOUT", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, true) {

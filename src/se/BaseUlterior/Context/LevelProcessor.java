@@ -1,13 +1,13 @@
 package se.BaseUlterior.Context;
 
-import se.BaseUlterior.Game.Level;
+import se.BaseUlterior.Game.LevelDummy;
 
 public class LevelProcessor {
-	public static Level generateLevel(String name) {
+	public static LevelDummy generateLevel(String name) {
 		return null;
 	}
 
-	public static void saveLevel(Level level) {
+	public static void saveLevel(LevelDummy level) {
 
 	}
 }

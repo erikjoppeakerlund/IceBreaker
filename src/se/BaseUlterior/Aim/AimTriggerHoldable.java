@@ -2,6 +2,12 @@ package se.BaseUlterior.Aim;
 
 import org.newdawn.slick.GameContainer;
 
+/**
+ * Like superclass but implemented user input handling according to, shoot once
+ * trigger is pulled principle
+ * 
+ * @author Johan Akerlund
+ */
 public abstract class AimTriggerHoldable extends AimBulletWeapon {
 
 	private int TIME_BETWEEN_FIRES = 10;

@@ -9,7 +9,7 @@ import org.newdawn.slick.SlickException;
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Context.SingleText;
 import se.BaseUlterior.Context.TextInfo;
-import se.BaseUlterior.Game.BreakingPoint;
+import se.BaseUlterior.Game.IceBreaker;
 
 public abstract class Button extends Component {
 	String text;
@@ -41,7 +41,7 @@ public abstract class Button extends Component {
 		buttonText = new TextInfo(getX(), getY(), false);
 		label = new SingleText(padding, 0, 20, text, getIsActiveColor(active));
 		buttonText.singleTexts.add(label);
-		BreakingPoint.info.textInfos.add(buttonText);
+		IceBreaker.info.textInfos.add(buttonText);
 	}
 
 	private boolean mouseIsOutside = true;

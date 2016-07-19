@@ -6,6 +6,12 @@ import java.util.Set;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Geom.Vector2;
 
+/**
+ * Impact which affect the another game objects' motion vector based on either
+ * it's own shape or the other game objects' shape
+ * 
+ * @author Johan Akerlund
+ */
 public class ImpactBounce extends Impact {
 
 	protected Set<Vector2> normals = null;

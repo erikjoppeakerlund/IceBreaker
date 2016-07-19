@@ -9,6 +9,11 @@ import se.BaseUlterior.Actions.Action;
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Geom.Vector2;
 
+/**
+ * Sprites aim
+ * 
+ * @author Johan Akerlund
+ */
 public abstract class Aim {
 	public abstract void primaryPushed();
 

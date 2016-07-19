@@ -6,10 +6,17 @@ import org.newdawn.slick.geom.Shape;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactBounce;
 
-public abstract class GameObjectFalling extends WorldBuilderMateriaFirm {
+/**
+ * Bouncable, gravitation dependend game object. During statefulness searching
+ * for applicable impact
+ * 
+ * @author Johan Akerlund
+ */
+
+public abstract class GameObjectAgile extends WorldBuilderMateriaFirm {
 	protected boolean underImpact = false;
 
-	public GameObjectFalling(float[] nodes, float bouncyness) {
+	public GameObjectAgile(float[] nodes, float bouncyness) {
 		super(nodes);
 		this.bouncyness = bouncyness;
 		noForce = false;

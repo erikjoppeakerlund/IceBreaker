@@ -5,7 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.newdawn.slick.Input;
 
 import se.BaseUlterior.Config.Constants;
-import se.BaseUlterior.Game.BreakingPoint;
+import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.WorldBuilderForce;
 import se.BaseUlterior.GameObject.WorldBuilderGround;
@@ -27,14 +27,14 @@ public class WorldCreator implements ActionListenable {
 		wbl = new WorldBuilderLiquid(new float[0], Density.WATER);
 		wbf = new WorldBuilderForce(new float[0], 0.0f, 0.0f);
 		currentBuilder = wb;
-		BreakingPoint.objsToAdd.add(currentBuilder);
+		IceBreaker.objsToAdd.add(currentBuilder);
 
 	}
 
 	@Override
 	public void wasDoubleClicked(int button, int x, int y) {
 		System.out.println();
-		if (!BreakingPoint.pause) {
+		if (!IceBreaker.pause) {
 			return;
 		}
 		if (!choosingState) {
@@ -70,13 +70,13 @@ public class WorldCreator implements ActionListenable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		BreakingPoint.objsToAdd.add(newCurrentInstance);
+		IceBreaker.objsToAdd.add(newCurrentInstance);
 		currentBuilder = newCurrentInstance;
 	}
 
 	@Override
 	public void wasSingleClicked(int button, int x, int y) {
-		if (!BreakingPoint.pause || choosingState) {
+		if (!IceBreaker.pause || choosingState) {
 			return;
 		}
 		if (button == Input.MOUSE_LEFT_BUTTON) {
@@ -88,22 +88,22 @@ public class WorldCreator implements ActionListenable {
 
 	@Override
 	public void wasWasKeyPressed(int button, char c) {
-		if (!BreakingPoint.pause) {
+		if (!IceBreaker.pause) {
 			return;
 		}
 		if (!choosingState) {
 			switch (button) {
 			case Input.KEY_1:
 				currentBuilder = wb;
-				BreakingPoint.objsToAdd.add(currentBuilder);
+				IceBreaker.objsToAdd.add(currentBuilder);
 				break;
 			case Input.KEY_2:
 				currentBuilder = wbl;
-				BreakingPoint.objsToAdd.add(currentBuilder);
+				IceBreaker.objsToAdd.add(currentBuilder);
 				break;
 			case Input.KEY_3:
 				currentBuilder = wbf;
-				BreakingPoint.objsToAdd.add(currentBuilder);
+				IceBreaker.objsToAdd.add(currentBuilder);
 				break;
 			}
 		} else {

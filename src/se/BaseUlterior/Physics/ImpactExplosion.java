@@ -2,6 +2,11 @@ package se.BaseUlterior.Physics;
 
 import se.BaseUlterior.GameObject.GameObject;
 
+/**
+ * Affect the other game objects' motion vector as a 'punch'. Class not used!
+ * 
+ * @author Johan Akerlund
+ */
 public class ImpactExplosion extends Impact {
 
 	private long timeSinceExplotion;

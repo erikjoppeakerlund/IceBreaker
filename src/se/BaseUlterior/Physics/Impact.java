@@ -4,6 +4,11 @@ import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
+/**
+ * Any sort of impact
+ * 
+ * @author Johan Akerlund
+ */
 public abstract class Impact {
 
 	protected GameObject origin;

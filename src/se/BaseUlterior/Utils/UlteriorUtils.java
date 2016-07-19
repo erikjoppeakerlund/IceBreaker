@@ -5,12 +5,17 @@ import java.util.ArrayList;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Shape;
 
-import se.BaseUlterior.Game.BreakingPoint;
+import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectExplosion;
 import se.BaseUlterior.GameObject.WorldBuilderForce;
 import se.BaseUlterior.GameObject.WorldBuilderGround;
 
+/**
+ * Any logic which does not require instantiation
+ * 
+ * @author Johan Akerlund
+ */
 public class UlteriorUtils {
 	public static boolean isWithinRange(GameObject go1, GameObject go2) {
 		float x1 = go1.getCenterX();
@@ -45,11 +50,11 @@ public class UlteriorUtils {
 		float fat = 3.0f;
 		GameObject point = new WorldBuilderForce(new float[] { pointX - fat, pointY - fat, pointX - fat, pointY + fat,
 				pointX + fat, pointY + fat, pointX + fat, pointY - fat });
-		BreakingPoint.objsToAdd.add(point);
+		IceBreaker.objsToAdd.add(point);
 	}
 
 	public static void cleanUpImpactFromWorldBuilderObject(GameObject clearWhichBelongToThis) {
-		for (GameObject go : BreakingPoint.all) {
+		for (GameObject go : IceBreaker.all) {
 			go.removeCurrentImpactsWhichBelingTo(clearWhichBelongToThis);
 		}
 	}
@@ -59,10 +64,10 @@ public class UlteriorUtils {
 	 */
 	public static void removeGround(float x, float y, float sizeOfExplostion, GameObject origin) {
 		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion, 8).getPoints());
-		BreakingPoint.objsToAdd.add(explotionShape);
+		IceBreaker.objsToAdd.add(explotionShape);
 		ArrayList<GameObject> newShapes = new ArrayList<>();
 		boolean wasFound = false;
-		for (GameObject target : BreakingPoint.all) {
+		for (GameObject target : IceBreaker.all) {
 			if (target == origin || target == origin) {
 				continue;
 			}
@@ -77,7 +82,7 @@ public class UlteriorUtils {
 							wasFound = true;
 						}
 
-						BreakingPoint.objsToRemove.add(target);
+						IceBreaker.objsToRemove.add(target);
 						UlteriorUtils.cleanUpImpactFromWorldBuilderObject(target);
 						// for (GameObject anySort : BreakingPoint.all) {
 						// if (anySort.isSolid()) {
@@ -93,13 +98,13 @@ public class UlteriorUtils {
 			}
 		}
 		for (GameObject go : newShapes) {
-			BreakingPoint.objsToAdd.add(go);
+			IceBreaker.objsToAdd.add(go);
 		}
 
 	}
 
 	public static void removeGroundReal(float x, float y, float sizeOfExplostion, GameObject origin) {
 		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion).getPoints());
-		BreakingPoint.objsToAdd.add(explotionShape);
+		IceBreaker.objsToAdd.add(explotionShape);
 	}
 }

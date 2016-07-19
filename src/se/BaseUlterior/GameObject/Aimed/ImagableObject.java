@@ -5,9 +5,15 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-import se.BaseUlterior.GameObject.GameObjectFalling;
+import se.BaseUlterior.GameObject.GameObjectAgile;
 
-public abstract class ImagableObject extends GameObjectFalling {
+/**
+ * Any aimed game object which is rendered as an image
+ * 
+ * @author Johan Akerlund
+ */
+
+public abstract class ImagableObject extends GameObjectAgile {
 	protected Image rifleImageRight = null;
 	protected Image rifleImageLeft = null;
 	protected int imageHeight;

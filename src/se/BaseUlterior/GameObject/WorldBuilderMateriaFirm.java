@@ -2,10 +2,15 @@ package se.BaseUlterior.GameObject;
 
 import org.newdawn.slick.GameContainer;
 
-import se.BaseUlterior.Game.BreakingPoint;
+import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
+/**
+ * Abstract game object class for any firm materia
+ * 
+ * @author Johan Akerlund
+ */
 public abstract class WorldBuilderMateriaFirm extends WorldBuilder {
 
 	protected boolean underImpact;
@@ -55,7 +60,7 @@ public abstract class WorldBuilderMateriaFirm extends WorldBuilder {
 	}
 
 	private void checkImpact() {
-		for (GameObject go : BreakingPoint.all) {
+		for (GameObject go : IceBreaker.all) {
 
 			if (go == this) {
 				continue;

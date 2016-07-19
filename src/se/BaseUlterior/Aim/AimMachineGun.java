@@ -6,6 +6,11 @@ import org.newdawn.slick.Graphics;
 
 import se.BaseUlterior.Config.Constants;
 
+/**
+ * MachineGun Aim
+ * 
+ * @author Johan Akerlund
+ */
 public class AimMachineGun extends AimTriggerHoldable {
 
 	private boolean animationsIsDrawn = false;

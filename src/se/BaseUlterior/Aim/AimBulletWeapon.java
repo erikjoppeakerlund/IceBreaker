@@ -6,10 +6,16 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 
-import se.BaseUlterior.Game.BreakingPoint;
+import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectRicochet;
 
+/**
+ * Abstract aim class which handles all sub aim classes which do not produce any
+ * sub instance of se.BaseUlterior.GameObjectMateriaFirm
+ * 
+ * @author Johan Akerlund
+ */
 public abstract class AimBulletWeapon extends Aim {
 
 	protected Image rifleImageRight = null;
@@ -90,7 +96,7 @@ public abstract class AimBulletWeapon extends Aim {
 		armLengt -= BACK_FIRE;
 		GameObject ricochet = new GameObjectRicochet(new Circle(aimAtX, aimAtY, 29f).getPoints(), pointBlank,
 				gunFireStartAtX, gunFireStartAtY, aimAtX, aimAtY, weight);
-		BreakingPoint.objsToAdd.add(ricochet);
+		IceBreaker.objsToAdd.add(ricochet);
 	}
 
 	@Override
@@ -130,7 +136,7 @@ public abstract class AimBulletWeapon extends Aim {
 		while (notFound) {
 			xTarget += arm.x * STEP;
 			yTarget += arm.y * STEP;
-			for (GameObject go : BreakingPoint.all) {
+			for (GameObject go : IceBreaker.all) {
 				if (go.contains(xTarget, yTarget) && !go.isBackgroundObj) {
 					aimAtX = xTarget;
 					aimAtY = yTarget;

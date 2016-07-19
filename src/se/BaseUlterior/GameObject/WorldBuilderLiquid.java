@@ -8,6 +8,12 @@ import se.BaseUlterior.Physics.Density;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactFriction;
 
+/**
+ * Game object which getImpact method generates
+ * se.BaseUlterior.Physics.ImpactFriction
+ * 
+ * @author Johan Akerlund
+ */
 public class WorldBuilderLiquid extends WorldBuilder {
 
 	Density density;

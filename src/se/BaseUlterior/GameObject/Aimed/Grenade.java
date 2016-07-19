@@ -5,13 +5,18 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import se.BaseUlterior.Game.BreakingPoint;
+import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactBounce;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
+/**
+ * Bouncable, rotatable, gravitation and time dependent game object
+ * 
+ * @author Johan Akerlund
+ */
 public class Grenade extends ImagableObject {
 
 	public static final int GRENADE_SIZE = 64;
@@ -49,7 +54,7 @@ public class Grenade extends ImagableObject {
 		}
 		if (System.currentTimeMillis() - wasReleasedAt > TIME_UNTIL_EXPLOTION) {
 			UlteriorUtils.removeGround(getCenterX(), getCenterY(), sizeOfExplostion, this);
-			BreakingPoint.objsToRemove.add(this);
+			IceBreaker.objsToRemove.add(this);
 		} else {
 			super.update(container, delta);
 		}

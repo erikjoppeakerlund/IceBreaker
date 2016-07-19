@@ -9,6 +9,12 @@ import org.newdawn.slick.geom.Shape;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactForce;
 
+/**
+ * Game object which getImpact method generates
+ * se.BaseUlterior.Physics.ImpactForce
+ * 
+ * @author Johan Akerlund
+ */
 public class WorldBuilderForce extends WorldBuilder {
 
 	protected float gravityY;

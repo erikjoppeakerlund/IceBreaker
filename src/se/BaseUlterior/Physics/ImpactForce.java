@@ -2,6 +2,12 @@ package se.BaseUlterior.Physics;
 
 import se.BaseUlterior.GameObject.GameObject;
 
+/**
+ * Adds values to a game objects motion vector
+ * 
+ * @author Johan Akerlund
+ */
+
 public class ImpactForce extends Impact {
 
 	protected float gravityY;

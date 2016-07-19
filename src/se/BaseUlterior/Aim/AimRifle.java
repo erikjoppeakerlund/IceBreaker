@@ -5,6 +5,11 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
+/**
+ * Rifle gun Aim
+ * 
+ * @author Johan Akerlund
+ */
 public class AimRifle extends AimBulletWeapon {
 
 	private boolean animationsIsDrawn = false;

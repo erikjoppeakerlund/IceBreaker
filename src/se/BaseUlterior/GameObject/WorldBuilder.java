@@ -6,6 +6,12 @@ import org.newdawn.slick.SlickException;
 
 import se.BaseUlterior.Physics.Impact;
 
+/**
+ * Any type of consistent component in map; gravitation, materia or friction
+ * affecting.
+ * 
+ * @author Johan Akerlund
+ */
 public abstract class WorldBuilder extends GameObject {
 
 	public WorldBuilder(float[] nodes) {

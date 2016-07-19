@@ -9,6 +9,12 @@ import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactBounce;
 
+/**
+ * Game object which getImpact method generates
+ * se.BaseUlterior.Physics.ImpactBounce
+ * 
+ * @author Johan Akerlund
+ */
 public class WorldBuilderGround extends WorldBuilderMateriaFirm {
 
 	public WorldBuilderGround(float[] nodes) {

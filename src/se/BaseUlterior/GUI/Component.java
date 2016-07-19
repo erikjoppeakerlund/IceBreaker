@@ -9,7 +9,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Shape;
 
 import se.BaseUlterior.Actions.Action;
-import se.BaseUlterior.Game.BreakingPoint;
+import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Physics.Impact;
 
@@ -55,7 +55,7 @@ public abstract class Component extends GameObject {
 	public void add(Component component) {
 		this.subs.add(component);
 		this.stack();
-		BreakingPoint.objsToAdd.add(component);
+		IceBreaker.objsToAdd.add(component);
 		// this.parent = parent;
 	}
 

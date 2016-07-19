@@ -17,9 +17,14 @@ import se.BaseUlterior.Aim.AimMachineGun;
 import se.BaseUlterior.Aim.AimRifle;
 import se.BaseUlterior.Aim.AimShotGun;
 import se.BaseUlterior.Config.Constants;
-import se.BaseUlterior.Game.BreakingPoint;
+import se.BaseUlterior.Game.IceBreaker;
 
-public abstract class GameObjectSprite extends GameObjectFalling {
+/**
+ * Game objects which update method contains user input handling
+ * 
+ * @author Johan Akerlund
+ */
+public abstract class GameObjectSprite extends GameObjectAgile {
 
 	protected Aim aim = null;
 	protected List<Aim> aims = null;
@@ -92,21 +97,21 @@ public abstract class GameObjectSprite extends GameObjectFalling {
 		float moveScreenX = centerX - Constants.CANVAS_WIDTH / 2f;
 		float moveScreenY = centerY - Constants.CANVAS_HEIGHT / 2f;
 
-		if (motion.x <= 0 && BreakingPoint.currentX <= 0
-				|| motion.x >= 0 && BreakingPoint.currentX + Constants.CANVAS_WIDTH >= Constants.CANVAS_WIDTH_FULL
-				|| motion.x > 0 && centerX < Constants.CANVAS_WIDTH / 2 || motion.x < 0 && centerX
-						+ BreakingPoint.currentX > Constants.CANVAS_WIDTH_FULL - Constants.CANVAS_WIDTH / 2) {
+		if (motion.x <= 0 && IceBreaker.currentX <= 0
+				|| motion.x >= 0 && IceBreaker.currentX + Constants.CANVAS_WIDTH >= Constants.CANVAS_WIDTH_FULL
+				|| motion.x > 0 && centerX < Constants.CANVAS_WIDTH / 2 || motion.x < 0
+						&& centerX + IceBreaker.currentX > Constants.CANVAS_WIDTH_FULL - Constants.CANVAS_WIDTH / 2) {
 			moveScreenX = 0;
 		}
 
-		if (motion.y <= 0 && BreakingPoint.currentY <= 0
-				|| motion.y >= 0 && BreakingPoint.currentY + Constants.CANVAS_HEIGHT >= Constants.CANVAS_HEIGHT_FULL
-				|| motion.y > 0 && centerY < Constants.CANVAS_HEIGHT / 2 || motion.y < 0 && centerY
-						+ BreakingPoint.currentY > Constants.CANVAS_HEIGHT_FULL - Constants.CANVAS_HEIGHT / 2) {
+		if (motion.y <= 0 && IceBreaker.currentY <= 0
+				|| motion.y >= 0 && IceBreaker.currentY + Constants.CANVAS_HEIGHT >= Constants.CANVAS_HEIGHT_FULL
+				|| motion.y > 0 && centerY < Constants.CANVAS_HEIGHT / 2 || motion.y < 0
+						&& centerY + IceBreaker.currentY > Constants.CANVAS_HEIGHT_FULL - Constants.CANVAS_HEIGHT / 2) {
 			moveScreenY = 0;
 		}
 
-		BreakingPoint.moveScreen(moveScreenX, moveScreenY);
+		IceBreaker.moveScreen(moveScreenX, moveScreenY);
 
 	}
 
@@ -118,8 +123,8 @@ public abstract class GameObjectSprite extends GameObjectFalling {
 		float centerY = getCenterY();
 
 		if (!(centerX > Constants.CANVAS_WIDTH
-				&& BreakingPoint.currentX >= Constants.CANVAS_WIDTH_FULL - Constants.CANVAS_WIDTH
-				|| centerX < 0 && BreakingPoint.currentX <= 0)) {
+				&& IceBreaker.currentX >= Constants.CANVAS_WIDTH_FULL - Constants.CANVAS_WIDTH
+				|| centerX < 0 && IceBreaker.currentX <= 0)) {
 			if (centerX > Constants.CANVAS_WIDTH) {
 				moveScreenX = Constants.CANVAS_WIDTH;
 			} else if (centerX < 0) {
@@ -128,8 +133,8 @@ public abstract class GameObjectSprite extends GameObjectFalling {
 		}
 
 		if (!(centerY > Constants.CANVAS_HEIGHT
-				&& BreakingPoint.currentY >= Constants.CANVAS_HEIGHT_FULL - Constants.CANVAS_HEIGHT
-				|| centerY < 0 && BreakingPoint.currentY <= 0)) {
+				&& IceBreaker.currentY >= Constants.CANVAS_HEIGHT_FULL - Constants.CANVAS_HEIGHT
+				|| centerY < 0 && IceBreaker.currentY <= 0)) {
 			if (centerY > Constants.CANVAS_HEIGHT) {
 				moveScreenY = Constants.CANVAS_HEIGHT;
 			} else if (centerY < 0) {
@@ -137,7 +142,7 @@ public abstract class GameObjectSprite extends GameObjectFalling {
 			}
 		}
 
-		BreakingPoint.moveScreen(moveScreenX, moveScreenY);
+		IceBreaker.moveScreen(moveScreenX, moveScreenY);
 
 	}
 

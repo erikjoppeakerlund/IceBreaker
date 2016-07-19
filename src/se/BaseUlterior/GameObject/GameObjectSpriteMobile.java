@@ -3,12 +3,18 @@ package se.BaseUlterior.GameObject;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 
-import se.BaseUlterior.Game.BreakingPoint;
+import se.BaseUlterior.Game.IceBreaker;
+
+/**
+ * Concrete game sprite which can be controlled both keyboard and mouse input.
+ * 
+ * @author Johan Akerlund
+ */
 
 public class GameObjectSpriteMobile extends GameObjectSprite {
 	@Override
 	public void update(GameContainer container, int delta) {
-		if (BreakingPoint.pause) {
+		if (IceBreaker.pause) {
 			return;
 		}
 

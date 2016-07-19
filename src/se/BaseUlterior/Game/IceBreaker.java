@@ -22,11 +22,16 @@ import se.BaseUlterior.GUI.Alignment;
 import se.BaseUlterior.GUI.Component;
 import se.BaseUlterior.GUI.ToolBox;
 import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.GameObjectFalling;
+import se.BaseUlterior.GameObject.GameObjectAgile;
 import se.BaseUlterior.GameObject.GameObjectSpriteDesktop;
 import se.BaseUlterior.GameObject.GameObjectSpriteMobile;
 
-public class BreakingPoint extends BasicGame {
+/**
+ * Main class, extends BasicGame of Slick2d library
+ * 
+ * @author Johan Akerlund, but credibility to author of Slick2d
+ */
+public class IceBreaker extends BasicGame {
 
 	ActionListenablers actions = null;
 
@@ -37,7 +42,7 @@ public class BreakingPoint extends BasicGame {
 	public static Action MODE_ACTUAL;
 	public static Action MODE_LATEST_ACTION = Action.ACTION_MODE_DESKTOP;
 
-	public BreakingPoint(String title) {
+	public IceBreaker(String title) {
 		super(title);
 
 	}
@@ -51,7 +56,7 @@ public class BreakingPoint extends BasicGame {
 
 	public static List<GameObject> all = null;
 
-	public static List<GameObjectFalling> allFalliing = null;
+	public static List<GameObjectAgile> allFalliing = null;
 
 	public static List<GameObject> objsToAdd = null;
 
@@ -69,7 +74,7 @@ public class BreakingPoint extends BasicGame {
 	public static float currentY = 0;
 
 	public void addObjToGame(GameObject g) {
-		allFalliing.add((GameObjectFalling) g);
+		allFalliing.add((GameObjectAgile) g);
 		objsToAdd.add(g);
 	}
 
@@ -78,7 +83,7 @@ public class BreakingPoint extends BasicGame {
 
 		graphics.setBackground(Color.lightGray);
 
-		for (GameObject go : BreakingPoint.all) {
+		for (GameObject go : IceBreaker.all) {
 			go.render(container, graphics);
 		}
 
@@ -98,13 +103,13 @@ public class BreakingPoint extends BasicGame {
 
 		actionListeners = new ArrayList<>();
 		actionListeners.add(worldCreator);
-		BreakingPoint.all = new ArrayList<>();
-		BreakingPoint.objsToAdd = new ArrayList<>();
+		IceBreaker.all = new ArrayList<>();
+		IceBreaker.objsToAdd = new ArrayList<>();
 		objsToRemove = new ArrayList<>();
 
 		actions = new ActionListenablers();
 
-		Level levelDummy = new Level();
+		LevelDummy levelDummy = new LevelDummy();
 		GroundMap requiredWallBuilderObjects = new GroundMap();
 		all.addAll(requiredWallBuilderObjects.levelPieces);
 
@@ -112,16 +117,16 @@ public class BreakingPoint extends BasicGame {
 		spriteMobile = new GameObjectSpriteMobile();
 		sprite = spriteDesktop;
 
-		BreakingPoint.objsToAdd.addAll(levelDummy.levelPieces);
+		IceBreaker.objsToAdd.addAll(levelDummy.levelPieces);
 		toolbox = new ToolBox(Alignment.LEFT);
 		((Component) toolbox).pack();
-		BreakingPoint.objsToAdd.add(info);
-		BreakingPoint.objsToAdd.add(sprite);
+		IceBreaker.objsToAdd.add(info);
+		IceBreaker.objsToAdd.add(sprite);
 	}
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
-		for (GameObject go : BreakingPoint.all) {
+		for (GameObject go : IceBreaker.all) {
 			go.update(container, delta);
 		}
 		if (!objsToRemove.isEmpty()) {
@@ -135,10 +140,10 @@ public class BreakingPoint extends BasicGame {
 	}
 
 	public static void main(String[] s) throws SlickException {
-		AppGameContainer appGameContainer = new AppGameContainer(new BreakingPoint("ICE:BREAKER"));
+		AppGameContainer appGameContainer = new AppGameContainer(new IceBreaker("ICE:BREAKER"));
 		int maxFPS = 60;
 		appGameContainer.setTargetFrameRate(maxFPS);
-		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, false);
+		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, true);
 		appGameContainer.setAlwaysRender(true);
 		appGameContainer.start();
 
@@ -175,12 +180,12 @@ public class BreakingPoint extends BasicGame {
 	public static void moveScreen(float x, float y) {
 		currentX += x;
 		currentY += y;
-		for (GameObject go : BreakingPoint.all) {
+		for (GameObject go : IceBreaker.all) {
 			if (!go.isSolid()) {
 				go.setX(go.getX() - x);
 			}
 		}
-		for (GameObject go : BreakingPoint.all) {
+		for (GameObject go : IceBreaker.all) {
 			if (!go.isSolid()) {
 				go.setY(go.getY() - y);
 			}
@@ -188,7 +193,7 @@ public class BreakingPoint extends BasicGame {
 	}
 
 	public static void setActionModeAction(Action action) {
-		for (GameObject go : BreakingPoint.all) {
+		for (GameObject go : IceBreaker.all) {
 			go.wasActionStateSet(action);
 		}
 	}

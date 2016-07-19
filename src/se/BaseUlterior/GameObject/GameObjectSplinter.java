@@ -6,14 +6,19 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 
-import se.BaseUlterior.Game.BreakingPoint;
+import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.Geom.Vector2;
 
-public class GameObjectSplit extends GameObjectFalling {
+/**
+ * GamObject which should represent a splinter from a ricochet
+ * 
+ * @author Johan Akerlund
+ */
+public class GameObjectSplinter extends GameObjectAgile {
 	private final int LIFE_SPAN_LIMIT = 32;
 	private int lifeSpan = 0;
 
-	public GameObjectSplit(float x, float y, Vector2 motion) {
+	public GameObjectSplinter(float x, float y, Vector2 motion) {
 		super(new Circle(x, y, 2f + (float) (Math.random() * 3f), 4).getPoints(), 1.0f);
 		this.motion = motion;
 		color = new Color(0.2f, 0, 0);
@@ -31,7 +36,7 @@ public class GameObjectSplit extends GameObjectFalling {
 	public void update(GameContainer container, int delta) {
 		super.update(container, delta);
 		if (lifeSpan > LIFE_SPAN_LIMIT) {
-			BreakingPoint.objsToRemove.add(this);
+			IceBreaker.objsToRemove.add(this);
 		}
 		lifeSpan++;
 	}

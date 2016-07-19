@@ -2,6 +2,11 @@ package se.BaseUlterior.Physics;
 
 import se.BaseUlterior.GameObject.GameObject;
 
+/**
+ * Scale other game objects motion vector
+ * 
+ * @author Johan Akerlund
+ */
 public class ImpactFriction extends Impact {
 
 	protected float effect;

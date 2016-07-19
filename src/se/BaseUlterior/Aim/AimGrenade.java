@@ -7,10 +7,16 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
 
-import se.BaseUlterior.Game.BreakingPoint;
+import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.GameObject.Aimed.Grenade;
 import se.BaseUlterior.Geom.Vector2;
 
+/**
+ * se.BaseUlterior.GameObjectMateriaFirm producing class which produces a and
+ * handling the act of throwing a grenade
+ * 
+ * @author Johan Akerlund
+ */
 public class AimGrenade extends Aim {
 
 	List<Grenade> grenades = null;
@@ -36,7 +42,7 @@ public class AimGrenade extends Aim {
 		grenades = new ArrayList<>();
 		Grenade startGrenade = new Grenade(new Circle(-60, -60, Grenade.GRENADE_SIZE).getPoints());
 		grenades.add(startGrenade);
-		BreakingPoint.objsToAdd.add(startGrenade);
+		IceBreaker.objsToAdd.add(startGrenade);
 		current = startGrenade;
 	}
 
@@ -85,7 +91,7 @@ public class AimGrenade extends Aim {
 				Grenade newCurrent = new Grenade(new Circle(-60, -60, Grenade.GRENADE_SIZE).getPoints());
 				grenades.add(newCurrent);
 				current = newCurrent;
-				BreakingPoint.objsToAdd.add(newCurrent);
+				IceBreaker.objsToAdd.add(newCurrent);
 				canMakeNew = false;
 			}
 		}
@@ -106,7 +112,7 @@ public class AimGrenade extends Aim {
 	@Override
 	public void cleanUp() {
 		if (current != null) {
-			BreakingPoint.objsToRemove.add(current);
+			IceBreaker.objsToRemove.add(current);
 		}
 	}
 
@@ -114,8 +120,8 @@ public class AimGrenade extends Aim {
 	public void onThisWasChoosen() {
 		super.onThisWasChoosen();
 		if (current != null) {
-			BreakingPoint.objsToRemove.add(current);
-			BreakingPoint.objsToAdd.add(current);
+			IceBreaker.objsToRemove.add(current);
+			IceBreaker.objsToAdd.add(current);
 		}
 	}
 
