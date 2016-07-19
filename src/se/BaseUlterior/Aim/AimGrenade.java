@@ -114,6 +114,7 @@ public class AimGrenade extends Aim {
 	public void onThisWasChoosen() {
 		super.onThisWasChoosen();
 		if (current != null) {
+			BreakingPoint.objsToRemove.add(current);
 			BreakingPoint.objsToAdd.add(current);
 		}
 	}

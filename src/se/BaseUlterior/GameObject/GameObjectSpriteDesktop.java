@@ -24,7 +24,6 @@ public class GameObjectSpriteDesktop extends GameObjectSprite {
 			if (motion.getX() > -MAX_SPEED) {
 				motion.add(-speed * delta, 0.0f);
 			}
-			aim.setIsRight(false);
 		} else if (in.isKeyDown(Input.KEY_D)) {
 			if (!directionIsRight) {
 				directionIsRight = true;
@@ -33,7 +32,6 @@ public class GameObjectSpriteDesktop extends GameObjectSprite {
 			if (motion.getX() < MAX_SPEED) {
 				motion.add(speed * delta, 0.0f);
 			}
-			aim.setIsRight(true);
 		} else {
 			animationMoveRight.setCurrentFrame(0);
 			animationMoveLeft.setCurrentFrame(0);

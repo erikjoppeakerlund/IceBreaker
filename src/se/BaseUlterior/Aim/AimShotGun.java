@@ -57,7 +57,7 @@ public class AimShotGun extends AimBulletWeapon {
 		armLengt -= BACK_FIRE * 2f;
 
 		int STEP = 8;
-		int nrOfShots = 6;
+		int nrOfShots = 5;
 		boolean notFound = true;
 		for (int i = 0; i < nrOfShots; i++) {
 			Vector2 randomAngle = arm.copy();

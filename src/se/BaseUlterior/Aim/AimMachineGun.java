@@ -29,7 +29,6 @@ public class AimMachineGun extends AimTriggerHoldable {
 	@Override
 	public void update(GameContainer container, int arg) {
 		super.update(container, arg);
-		updateAim();
 		if (wasJustShoot && !animationsIsDrawn) {
 			gunFire.setCurrentFrame(0);
 			animationsIsDrawn = true;

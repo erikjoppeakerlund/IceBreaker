@@ -78,7 +78,6 @@ public abstract class GameObjectSprite extends GameObjectFalling {
 
 	private void initAims() {
 		aims = new ArrayList<Aim>();
-		// aims.add(new AimBlade());
 		aims.add(new AimGrenade());
 		aims.add(new AimRifle(animationGunfire));
 		aims.add(new AimMachineGun(animationGunfire));
