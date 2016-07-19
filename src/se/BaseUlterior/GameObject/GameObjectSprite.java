@@ -15,6 +15,7 @@ import se.BaseUlterior.Aim.Aim;
 import se.BaseUlterior.Aim.AimGrenade;
 import se.BaseUlterior.Aim.AimMachineGun;
 import se.BaseUlterior.Aim.AimRifle;
+import se.BaseUlterior.Aim.AimShotGun;
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Game.BreakingPoint;
 
@@ -81,6 +82,7 @@ public abstract class GameObjectSprite extends GameObjectFalling {
 		aims.add(new AimGrenade());
 		aims.add(new AimRifle(animationGunfire));
 		aims.add(new AimMachineGun(animationGunfire));
+		aims.add(new AimShotGun(animationGunfire));
 		aim = aims.get(2);
 	}
 

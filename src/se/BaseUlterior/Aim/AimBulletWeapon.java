@@ -16,7 +16,7 @@ public abstract class AimBulletWeapon extends Aim {
 	protected Image rifleImageLeft = null;
 	protected int imageHeight;
 	protected int imageWidth;
-	private static final float IMAGE_SCALE = 0.26f;
+	protected static final float IMAGE_SCALE_STANDARD = 0.26f;
 
 	protected float startShotX;
 	protected float startShotY;
@@ -32,13 +32,16 @@ public abstract class AimBulletWeapon extends Aim {
 	protected int shotRayFrames;
 
 	protected float weight = 1.0f;
+	private float imageScale;
 
-	public AimBulletWeapon(String pathToImage) {
+	public AimBulletWeapon(String pathToImage, float imageScale) {
+		this.imageScale = imageScale;
 		init(pathToImage);
 	}
 
-	public AimBulletWeapon(String pathToImage, float startArmLength) {
+	public AimBulletWeapon(String pathToImage, float startArmLength, float imageScale) {
 		super(startArmLength);
+		this.imageScale = imageScale;
 		init(pathToImage);
 	}
 
@@ -48,10 +51,10 @@ public abstract class AimBulletWeapon extends Aim {
 		try {
 			rifleImageRight = new Image(pathToImage);
 			rifleImageLeft = new Image(pathToImage, true);
-			imageHeight = (int) (rifleImageRight.getHeight() * IMAGE_SCALE);
-			imageWidth = (int) (rifleImageRight.getWidth() * IMAGE_SCALE);
-			rifleImageLeft = rifleImageLeft.getScaledCopy(IMAGE_SCALE).getFlippedCopy(false, true);
-			rifleImageRight = rifleImageRight.getScaledCopy(IMAGE_SCALE);
+			imageHeight = (int) (rifleImageRight.getHeight() * imageScale);
+			imageWidth = (int) (rifleImageRight.getWidth() * imageScale);
+			rifleImageLeft = rifleImageLeft.getScaledCopy(imageScale).getFlippedCopy(false, true);
+			rifleImageRight = rifleImageRight.getScaledCopy(imageScale);
 			rifleImageRight.setCenterOfRotation((imageWidth / 2), (imageHeight / 2));
 			rifleImageLeft.setCenterOfRotation((imageWidth / 2), (imageHeight / 2));
 

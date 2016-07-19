@@ -9,11 +9,11 @@ public abstract class AimTriggerHoldable extends AimBulletWeapon {
 	protected int iterator = 0;
 
 	public AimTriggerHoldable(String pathToImage) {
-		super(pathToImage);
+		super(pathToImage, IMAGE_SCALE_STANDARD);
 	}
 
 	public AimTriggerHoldable(String pathToImage, float startArmLength) {
-		super(pathToImage, startArmLength);
+		super(pathToImage, startArmLength, IMAGE_SCALE_STANDARD);
 	}
 
 	@Override

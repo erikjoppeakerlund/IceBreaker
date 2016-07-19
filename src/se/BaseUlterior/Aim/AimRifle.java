@@ -10,11 +10,11 @@ public class AimRifle extends AimBulletWeapon {
 	private boolean animationsIsDrawn = false;
 
 	public AimRifle(Animation gunFire) {
-		super("res/img/GUNSrifle.png");
+		super("res/img/GUNSrifle.png", IMAGE_SCALE_STANDARD);
 		this.gunFire = gunFire;
 		gunFireFrameWidth = this.gunFire.getCurrentFrame().getWidth();
 		gunFireFrameHeight = this.gunFire.getCurrentFrame().getHeight();
-		weight = 3.0f;
+		weight = 5.0f;
 	}
 
 	@Override

@@ -16,12 +16,14 @@ public class GameObjectSplit extends GameObjectFalling {
 	public GameObjectSplit(float x, float y, Vector2 motion) {
 		super(new Circle(x, y, 2f + (float) (Math.random() * 3f), 4).getPoints(), 1.0f);
 		this.motion = motion;
+		color = new Color(0.2f, 0, 0);
 		isBackgroundObj = true;
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		graphics.setColor(Color.black);
+		color.a = 1f - (float) lifeSpan / (float) LIFE_SPAN_LIMIT;
+		graphics.setColor(color);
 		graphics.fill(this);
 	}
 
