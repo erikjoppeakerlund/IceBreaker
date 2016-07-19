@@ -47,12 +47,12 @@ public abstract class GameObjectFalling extends WorldBuilderMateriaFirm {
 		return new Shape[0];
 	}
 
-	public void removeCurrentImpactsWhichBelingTo(GameObject go) {
-		for (Impact im : currentImpacts) {
-			if (im.getTrigger() == go) {
-				removeImpact(im);
-			}
-		}
-	}
+	// public void removeCurrentImpactsWhichBelingTo(GameObject go) {
+	// for (Impact im : currentImpacts) {
+	// if (im.getTrigger() == go || im.getAffected() == go) {
+	// removeImpact(im);
+	// }
+	// }
+	// }
 
 }

@@ -8,7 +8,6 @@ import org.newdawn.slick.geom.Shape;
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectExplosion;
-import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.GameObject.WorldBuilderForce;
 import se.BaseUlterior.GameObject.WorldBuilderGround;
 
@@ -50,18 +49,19 @@ public class UlteriorUtils {
 	}
 
 	public static void cleanUpImpactFromWorldBuilderObject(GameObject clearWhichBelongToThis) {
-		for (GameObjectFalling falling : BreakingPoint.allFalliing) {
-			falling.removeCurrentImpactsWhichBelingTo(clearWhichBelongToThis);
+		for (GameObject go : BreakingPoint.all) {
+			go.removeCurrentImpactsWhichBelingTo(clearWhichBelongToThis);
 		}
 	}
 
 	/*
 	 * Not current used, due to game play decision.
 	 */
-	public static void removeGroundReal(float x, float y, float sizeOfExplostion, GameObject origin) {
-		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion, 10).getPoints());
+	public static void removeGround(float x, float y, float sizeOfExplostion, GameObject origin) {
+		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion, 8).getPoints());
 		BreakingPoint.objsToAdd.add(explotionShape);
 		ArrayList<GameObject> newShapes = new ArrayList<>();
+		boolean wasFound = false;
 		for (GameObject target : BreakingPoint.all) {
 			if (target == origin || target == origin) {
 				continue;
@@ -74,17 +74,22 @@ public class UlteriorUtils {
 							Shape go = result[i];
 							GameObject gog = new WorldBuilderGround(go.getPoints());
 							newShapes.add(gog);
+							wasFound = true;
 						}
-						UlteriorUtils.cleanUpImpactFromWorldBuilderObject(target);
+
 						BreakingPoint.objsToRemove.add(target);
-						for (GameObject anySort : BreakingPoint.all) {
-							if (anySort.isSolid()) {
-								// BreakingPoint.addOnTop(anySort);
-								// BreakingPoint.addOnTop(BreakingPoint.info);
-							}
-						}
+						UlteriorUtils.cleanUpImpactFromWorldBuilderObject(target);
+						// for (GameObject anySort : BreakingPoint.all) {
+						// if (anySort.isSolid()) {
+						// // BreakingPoint.addOnTop(anySort);
+						// // BreakingPoint.addOnTop(BreakingPoint.info);
+						// }
+						// }
 					}
 				}
+			}
+			if (wasFound) {
+				break;
 			}
 		}
 		for (GameObject go : newShapes) {
@@ -93,7 +98,7 @@ public class UlteriorUtils {
 
 	}
 
-	public static void removeGround(float x, float y, float sizeOfExplostion, GameObject origin) {
+	public static void removeGroundReal(float x, float y, float sizeOfExplostion, GameObject origin) {
 		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion).getPoints());
 		BreakingPoint.objsToAdd.add(explotionShape);
 	}

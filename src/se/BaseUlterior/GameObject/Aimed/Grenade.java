@@ -24,7 +24,7 @@ public class Grenade extends ImagableObject {
 
 	protected GameObject explotionShape = null;
 
-	protected int sizeOfExplostion = 210;
+	protected int sizeOfExplostion = 319;
 
 	public Grenade(float[] nodes) {
 		super(nodes, BOUNCYNESS, "res/img/grenade.png");
@@ -58,7 +58,10 @@ public class Grenade extends ImagableObject {
 
 	@Override
 	public Impact getImpact(GameObject other) {
-		return new ImpactBounce(this, other, bouncyness, true);
+		if (!other.isBackgroundObj) {
+			return new ImpactBounce(this, other, bouncyness, true);
+		}
+		return null;
 	}
 
 	@Override

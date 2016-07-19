@@ -38,9 +38,9 @@ public abstract class ImagableObject extends GameObjectFalling {
 	public void update(GameContainer container, int delta) {
 		super.update(container, delta);
 		if (motion.x <= 0) {
-			angle += rotation * 5.9f;
+			angle += rotation * 10.9f;
 		} else {
-			angle -= rotation * 5.9f;
+			angle -= rotation * 10.9f;
 		}
 	}
 

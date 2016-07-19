@@ -176,29 +176,9 @@ public abstract class GameObject extends Polygon {
 
 					Vector2 newestNormal;
 
-					// if (points.length > i + 3) {
 					float[] norm = getSurfaceNormal(new float[] { points[i], points[i + 1] },
 							new float[] { points[iNext], points[iNext + 1] });
 					newestNormal = new Vector2(norm[0], norm[1]);
-
-					if (!normals.isEmpty()) {
-						float aX = (float) (lastNormal.getX() * Math.PI);
-						float aY = (float) (lastNormal.getY() * Math.PI);
-						float bX = (float) (newestNormal.getX() * Math.PI);
-						float bY = (float) (newestNormal.getY() * Math.PI);
-
-						/*
-						 * "Perpendicular Dot Product". Result is the "signed"
-						 * value. If more than zero - the two comparing vectors
-						 * don't intersect and the surfaces which result in the
-						 * vectors shape an edge. This i when the object should
-						 * rotate!
-						 */
-
-						if (aY * bX - aX * bY > 0.0f) {
-						} else {
-						}
-					}
 
 					if (i != 0) {
 						normals.add(newestNormal);
@@ -228,5 +208,13 @@ public abstract class GameObject extends Polygon {
 	}
 
 	public void animateHit(float aimAtX, float aimAtY) {
+	}
+
+	public void removeCurrentImpactsWhichBelingTo(GameObject go) {
+		for (Impact im : currentImpacts) {
+			if (im.getTrigger() == go || im.getAffected() == go) {
+				removeImpact(im);
+			}
+		}
 	}
 }

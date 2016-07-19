@@ -24,7 +24,7 @@ public class GameObjectExplosion extends GameObject {
 
 	public GameObjectExplosion(float[] nodes) {
 		super(nodes);
-		this.color = new Color(0, 0, 1, 0.39f);
+		this.color = new Color(1, 0, 0, 0.39f);
 		this.timeSinceCreation = System.currentTimeMillis();
 	}
 
@@ -38,9 +38,9 @@ public class GameObjectExplosion extends GameObject {
 	@Override
 	public void update(GameContainer container, int arg) throws SlickException {
 		if (System.currentTimeMillis() - timeSinceCreation > MAX_TIME) {
-			if (impactExplosion != null) {
-				impactExplosion.disappear();
-			}
+			// if (impactExplosion != null) {
+			// impactExplosion.disappear();
+			// }
 			BreakingPoint.objsToRemove.add(this);
 		}
 	}
