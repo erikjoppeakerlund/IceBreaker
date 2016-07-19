@@ -7,8 +7,7 @@ import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
 /**
- * Concrete game sprite which can be controlled all by keyboard. FIXME: enable
- * mobile touch input.
+ * Concrete game sprite which can be controlled all by keyboard. FIXME: enable mobile touch input.
  * 
  * @author Johan Akerlund
  */
@@ -44,7 +43,9 @@ public class GameObjectSpriteDesktop extends GameObjectSprite {
 		}
 		if (in.isKeyDown(Input.KEY_W)) {
 			if (motion.getY() > -MAX_SPEED) {
-				motion.add(0, -speed * delta);
+				motion.add(0, -JUMP_POWER * delta);
+			} else {
+				motion.set(motion.x, -MAX_SPEED);
 			}
 
 		}
