@@ -45,12 +45,16 @@ public abstract class Aim {
 		arm = new Vector2(0.0f);
 		START_ARM_LENGTH = Constants.PERFERED_ARM_LENGTH;
 		armLengt = START_ARM_LENGTH;
+		xAim = -105;
+		yAim = -105;
 	}
 
 	public Aim(float startArmLength) {
 		arm = new Vector2(0.0f);
 		START_ARM_LENGTH = startArmLength;
 		armLengt = startArmLength;
+		xAim = -105;
+		yAim = -105;
 	}
 
 	public void setPosition(float x, float y) {

@@ -20,7 +20,8 @@ public abstract class Component extends GameObject {
 	protected int forcedWidth;
 	protected int forcedHeight;
 
-	protected int margin = 5;
+	protected int marginX = 5;
+	protected int marginY = 0;
 	protected Component parent = null;
 
 	protected int padding;
@@ -102,17 +103,19 @@ public abstract class Component extends GameObject {
 		float tempHeight = forcedHeight * verticalFloat;
 
 		for (Component comp : subs) {
-			comp.setX(tempWidth);
+			comp.setX(tempWidth - (comp.getWidth() + comp.getMarginX()) * horizontalFloat);
 			comp.setY(tempHeight);
-			tempHeight += (comp.getHeight() + comp.getMargin()) * verticalAdjustAlignment;
-			tempWidth += (comp.getWidth() + comp.getMargin()) * horizontalAdjustAlignment;
-			if (tempWidth + (comp.getWidth() * horizontalAdjustAlignment) > forcedWidth) {
-				tempWidth = 0;
-				tempHeight += comp.getHeight() + comp.getMargin();
+			tempHeight += (comp.getHeight() + comp.getMarginY()) * verticalAdjustAlignment;
+			tempWidth += (comp.getWidth() + comp.getMarginX()) * horizontalAdjustAlignment;
+			if (tempWidth + (comp.getWidth() * horizontalAdjustAlignment) > forcedWidth
+					|| tempWidth + (comp.getWidth() * horizontalAdjustAlignment) < 0) {
+				tempWidth = forcedWidth * horizontalFloat;
+				tempHeight += comp.getHeight() + comp.getMarginY() * verticalAdjustAlignment;
 			}
-			if (tempHeight + (comp.getHeight() * verticalAdjustAlignment) > forcedHeight) {
-				tempHeight = 0;
-				tempWidth += comp.getWidth() + comp.getMargin();
+			if (tempHeight + (comp.getHeight() * verticalAdjustAlignment) > forcedHeight
+					|| tempHeight + (comp.getHeight() * verticalAdjustAlignment) < 0) {
+				tempHeight = forcedHeight * verticalFloat;
+				tempWidth += comp.getWidth() + comp.getMarginX() * horizontalAdjustAlignment;
 			}
 		}
 	}
@@ -127,8 +130,20 @@ public abstract class Component extends GameObject {
 		stack();
 	}
 
-	public float getMargin() {
-		return margin;
+	public float getMarginX() {
+		return marginX;
+	}
+
+	public float getMarginY() {
+		return marginY;
+	}
+
+	public void setMarginX(int marginX) {
+		this.marginX = marginX;
+	}
+
+	public void setMarginY(int marginY) {
+		this.marginY = marginY;
 	}
 
 	private void wasBreakingLine() {
