@@ -1,9 +1,5 @@
 package se.BaseUlterior.Aim;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -34,10 +30,8 @@ public abstract class AimBulletWeapon extends Aim {
 	protected GameObject pointBlank = null;
 
 	protected int shotRayFrames;
-	protected ArrayList<float[]> rays;
-	private static final float SMOKE_LENGTH = 9f;
 
-	private Color rayColor = Color.gray;
+	protected float weight = 1.0f;
 
 	public AimBulletWeapon(String pathToImage) {
 		init(pathToImage);
@@ -64,8 +58,6 @@ public abstract class AimBulletWeapon extends Aim {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-		rays = new ArrayList<>();
-
 	}
 
 	protected float aimAtX;
@@ -93,9 +85,9 @@ public abstract class AimBulletWeapon extends Aim {
 	protected void wasShoot() {
 		wasJustShoot = true;
 		armLengt -= BACK_FIRE;
-		GameObject ricochet = new GameObjectRicochet(new Circle(aimAtX, aimAtY, 29f).getPoints(), pointBlank);
+		GameObject ricochet = new GameObjectRicochet(new Circle(aimAtX, aimAtY, 29f).getPoints(), pointBlank,
+				gunFireStartAtX, gunFireStartAtY, aimAtX, aimAtY, weight);
 		BreakingPoint.objsToAdd.add(ricochet);
-		rays.add(new float[] { gunFireStartAtX, gunFireStartAtY, aimAtX, aimAtY, SMOKE_LENGTH });
 	}
 
 	@Override
@@ -123,16 +115,6 @@ public abstract class AimBulletWeapon extends Aim {
 			armLengt += 3f;
 		} else if (wasJustShoot) {
 			wasJustShoot = false;
-		}
-		if (!rays.isEmpty()) {
-			Iterator<float[]> it = rays.iterator();
-			while (it.hasNext()) {
-				float[] ray = it.next();
-				if (ray[4] < 1) {
-					it.remove();
-				}
-				ray[4]--;
-			}
 		}
 
 	}
@@ -167,16 +149,6 @@ public abstract class AimBulletWeapon extends Aim {
 			rifleImageLeft.setRotation((float) (arm.getTheta()));
 			rifleImageLeft.draw(xGrip - imageWidth / 2, yGrip - imageHeight / 2);
 		}
-		graphics.setLineWidth(3);
-		if (!rays.isEmpty()) {
-			for (float[] ray : rays) {
-
-				rayColor.a = ray[4] / SMOKE_LENGTH;
-				graphics.setColor(rayColor);
-				graphics.drawLine(ray[0], ray[1], ray[2], ray[3]);
-			}
-		}
-		graphics.resetLineWidth();
 
 	}
 
