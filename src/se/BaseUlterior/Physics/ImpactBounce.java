@@ -53,6 +53,9 @@ public class ImpactBounce extends Impact {
 			i++;
 		}
 		N.normalise();
+		if (other.isRotatingObject) {
+			other.rotation = N.dot(other.getMotion());
+		}
 
 		if (N.dot(affectedPiece.copy().normalise()) < 0) {
 			return;

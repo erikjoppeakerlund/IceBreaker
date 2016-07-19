@@ -12,7 +12,7 @@ import se.BaseUlterior.Physics.ImpactExplosion;
 
 public class GameObjectExplosion extends GameObject {
 
-	private static final long MAX_TIME = 69;
+	private static final long MAX_TIME = 9;
 	protected long timeSinceCreation;
 	private ImpactExplosion impactExplosion;
 

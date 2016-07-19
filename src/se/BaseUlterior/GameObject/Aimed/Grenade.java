@@ -7,15 +7,14 @@ import org.newdawn.slick.SlickException;
 
 import se.BaseUlterior.Game.BreakingPoint;
 import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.GameObjectFalling;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactBounce;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
-public class Grenade extends GameObjectFalling {
+public class Grenade extends ImagableObject {
 
-	public static final int GRENADE_SIZE = 30;
+	public static final int GRENADE_SIZE = 64;
 	private boolean isReleased = false;
 
 	private static float BOUNCYNESS = 1.3f;
@@ -28,11 +27,13 @@ public class Grenade extends GameObjectFalling {
 	protected int sizeOfExplostion = 210;
 
 	public Grenade(float[] nodes) {
-		super(nodes, BOUNCYNESS);
+		super(nodes, BOUNCYNESS, "res/img/grenade.png");
 		// color = Constants.THEME_COLOR;
 		color = Color.darkGray;
 		setX(-270f);
 		setY(-270f);
+		isRotatingObject = true;
+
 	}
 
 	public void initMotion(Vector2 motion) {
@@ -62,10 +63,6 @@ public class Grenade extends GameObjectFalling {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		color.a = 1;
 		super.render(container, graphics);
-		graphics.setColor(Color.white);
-		graphics.draw(this);
 	}
-
 }

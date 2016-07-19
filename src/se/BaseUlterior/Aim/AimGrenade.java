@@ -28,7 +28,7 @@ public class AimGrenade extends Aim {
 
 	private final int CHARGE_ITERATION = 1;
 
-	private final float TIMES_LESS_ACTUAL_FORCE = 2.0f;
+	private final float TIMES_LESS_ACTUAL_FORCE = 1.0f;
 
 	private final float FORCE = 0.06f;
 

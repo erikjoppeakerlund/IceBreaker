@@ -30,6 +30,8 @@ public abstract class GameObject extends Polygon {
 	public boolean isBackgroundObj = false;
 	protected float bouncyness;
 	public boolean noForce = true;
+	public boolean isRotatingObject = false;
+	public float rotation;
 
 	public Vector2 getMotion() {
 		return motion;
@@ -192,10 +194,8 @@ public abstract class GameObject extends Polygon {
 						 * vectors shape an edge. This i when the object should
 						 * rotate!
 						 */
+
 						if (aY * bX - aX * bY > 0.0f) {
-							float[] floatNormEdge = getNormal(i / 2);
-							Vector2 normEdge = new Vector2(floatNormEdge);
-							// System.out.println(normEdge.add(shape.motion));
 						} else {
 						}
 					}
@@ -203,6 +203,7 @@ public abstract class GameObject extends Polygon {
 					if (i != 0) {
 						normals.add(newestNormal);
 						lastNormal = newestNormal;
+
 					}
 
 				}
