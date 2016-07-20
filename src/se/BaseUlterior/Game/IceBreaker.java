@@ -174,7 +174,7 @@ public class IceBreaker extends BasicGame {
 		currentX += x;
 		currentY += y;
 		for (Parallax parallax : parallaxList) {
-			parallax.moveParalax(-currentX, -currentY);
+			parallax.moveParalax(currentX, currentY);
 		}
 		for (GameObject go : IceBreaker.all) {
 			if (!go.isSolid()) {

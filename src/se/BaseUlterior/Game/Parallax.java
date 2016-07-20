@@ -29,7 +29,8 @@ public class Parallax extends GameObject {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		image.draw(x, y);
+		image.draw(0, 0, container.getWidth(), container.getHeight(), x, y, x + container.getWidth(),
+				y + container.getHeight());
 	}
 
 	@Override
