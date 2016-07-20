@@ -28,13 +28,12 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 
 	protected Aim aim = null;
 	protected List<Aim> aims = null;
-	protected float speed = 0.0038f;
-	protected final float MAX_SPEED = 0.49f;
+	protected final float MAX_SPEED = 0.5f;
 	protected boolean mouseButtonPirmaryDown = false;
 
 	protected boolean right = true;
 
-	protected float JUMP_POWER = -0.46f;
+	protected float JET_POWER = 0.009f;
 	private SpriteSheet sprite = null;
 	protected Animation animationMoveRight = null;
 	protected Animation animationMoveLeft = null;
@@ -49,8 +48,7 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 	private int gunFireFrameHeight;
 
 	protected GameObjectSprite() {
-		super(new Circle(Constants.CANVAS_WIDTH / 2, Constants.CANVAS_HEIGHT / 2, Constants.SPRITE_RADIUS).getPoints(),
-				0.31f);
+		super(new Circle(Constants.CANVAS_WIDTH / 2, Constants.CANVAS_HEIGHT / 2, Constants.SPRITE_RADIUS).getPoints(), 0.31f);
 		this.setCenterX(Constants.CANVAS_WIDTH / 2);
 		this.setCenterY(Constants.CANVAS_HEIGHT / 2);
 		color = Color.transparent;
@@ -97,17 +95,11 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 		float moveScreenX = centerX - Constants.CANVAS_WIDTH / 2f;
 		float moveScreenY = centerY - Constants.CANVAS_HEIGHT / 2f;
 
-		if (motion.x <= 0 && IceBreaker.currentX <= 0
-				|| motion.x >= 0 && IceBreaker.currentX + Constants.CANVAS_WIDTH >= Constants.CANVAS_WIDTH_FULL
-				|| motion.x > 0 && centerX < Constants.CANVAS_WIDTH / 2 || motion.x < 0
-						&& centerX + IceBreaker.currentX > Constants.CANVAS_WIDTH_FULL - Constants.CANVAS_WIDTH / 2) {
+		if (motion.x <= 0 && IceBreaker.currentX <= 0 || motion.x >= 0 && IceBreaker.currentX + Constants.CANVAS_WIDTH >= Constants.CANVAS_WIDTH_FULL || motion.x > 0 && centerX < Constants.CANVAS_WIDTH / 2 || motion.x < 0 && centerX + IceBreaker.currentX > Constants.CANVAS_WIDTH_FULL - Constants.CANVAS_WIDTH / 2) {
 			moveScreenX = 0;
 		}
 
-		if (motion.y <= 0 && IceBreaker.currentY <= 0
-				|| motion.y >= 0 && IceBreaker.currentY + Constants.CANVAS_HEIGHT >= Constants.CANVAS_HEIGHT_FULL
-				|| motion.y > 0 && centerY < Constants.CANVAS_HEIGHT / 2 || motion.y < 0
-						&& centerY + IceBreaker.currentY > Constants.CANVAS_HEIGHT_FULL - Constants.CANVAS_HEIGHT / 2) {
+		if (motion.y <= 0 && IceBreaker.currentY <= 0 || motion.y >= 0 && IceBreaker.currentY + Constants.CANVAS_HEIGHT >= Constants.CANVAS_HEIGHT_FULL || motion.y > 0 && centerY < Constants.CANVAS_HEIGHT / 2 || motion.y < 0 && centerY + IceBreaker.currentY > Constants.CANVAS_HEIGHT_FULL - Constants.CANVAS_HEIGHT / 2) {
 			moveScreenY = 0;
 		}
 
@@ -122,9 +114,7 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 		float centerX = getCenterX();
 		float centerY = getCenterY();
 
-		if (!(centerX > Constants.CANVAS_WIDTH
-				&& IceBreaker.currentX >= Constants.CANVAS_WIDTH_FULL - Constants.CANVAS_WIDTH
-				|| centerX < 0 && IceBreaker.currentX <= 0)) {
+		if (!(centerX > Constants.CANVAS_WIDTH && IceBreaker.currentX >= Constants.CANVAS_WIDTH_FULL - Constants.CANVAS_WIDTH || centerX < 0 && IceBreaker.currentX <= 0)) {
 			if (centerX > Constants.CANVAS_WIDTH) {
 				moveScreenX = Constants.CANVAS_WIDTH;
 			} else if (centerX < 0) {
@@ -132,9 +122,7 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 			}
 		}
 
-		if (!(centerY > Constants.CANVAS_HEIGHT
-				&& IceBreaker.currentY >= Constants.CANVAS_HEIGHT_FULL - Constants.CANVAS_HEIGHT
-				|| centerY < 0 && IceBreaker.currentY <= 0)) {
+		if (!(centerY > Constants.CANVAS_HEIGHT && IceBreaker.currentY >= Constants.CANVAS_HEIGHT_FULL - Constants.CANVAS_HEIGHT || centerY < 0 && IceBreaker.currentY <= 0)) {
 			if (centerY > Constants.CANVAS_HEIGHT) {
 				moveScreenY = Constants.CANVAS_HEIGHT;
 			} else if (centerY < 0) {

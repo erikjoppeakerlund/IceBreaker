@@ -22,6 +22,6 @@ public class Constants {
 
 	public static final Action START_MODE = Action.ACTION_MODE_DESKTOP;
 
-	public static final float GENERA_FRICTION = 0.988f;
+	public static final float GENERA_FRICTION = 0.990f;
 
 }
