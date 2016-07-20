@@ -6,6 +6,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 import se.BaseUlterior.GameObject.GameObjectAgile;
+import se.BaseUlterior.Geom.Vector2;
 
 /**
  * Any aimed game object which is rendered as an image
@@ -20,7 +21,7 @@ public abstract class ImagableObject extends GameObjectAgile {
 	protected int imageWidth;
 	protected float drawX;
 
-	protected float angle;
+	protected Vector2 angle;
 
 	public ImagableObject(float[] nodes, float bouncyness, String pathToImage) {
 		super(nodes, bouncyness);
@@ -37,6 +38,7 @@ public abstract class ImagableObject extends GameObjectAgile {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
+		angle = new Vector2(0.0);
 
 	}
 
@@ -44,15 +46,15 @@ public abstract class ImagableObject extends GameObjectAgile {
 	public void update(GameContainer container, int delta) {
 		super.update(container, delta);
 		if (motion.x <= 0) {
-			angle += rotation * 10.9f;
+			angle.add(rotation * 11.1);
 		} else {
-			angle -= rotation * 10.9f;
+			angle.sub(rotation * 11.1);
 		}
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		rifleImageRight.setRotation(angle);
+		rifleImageRight.setRotation((float) angle.getTheta());
 		rifleImageRight.draw(getCenterX() - imageWidth / 2, y);
 	}
 

@@ -37,6 +37,7 @@ public class AimGrenade extends Aim {
 	private final float TIMES_LESS_ACTUAL_FORCE = 1.0f;
 
 	private final float FORCE = 0.06f;
+	private final float TIMES_LESS_INITIAL_ROTATION = 2.9f;
 
 	public AimGrenade() {
 		grenades = new ArrayList<>();
@@ -59,6 +60,7 @@ public class AimGrenade extends Aim {
 		float dX = arm.x * force / TIMES_LESS_ACTUAL_FORCE;
 		float dY = arm.y * force / TIMES_LESS_ACTUAL_FORCE;
 		current.initMotion(new Vector2(dX, dY));
+		current.rotation = !isRight ? arm.x / TIMES_LESS_INITIAL_ROTATION : -arm.x / TIMES_LESS_INITIAL_ROTATION;
 		currentTime = System.currentTimeMillis();
 		canMakeNew = true;
 		current = null;
