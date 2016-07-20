@@ -26,7 +26,7 @@ public class GameObjectSpriteMobile extends GameObjectSprite {
 			}
 			animationMoveLeft.update(delta);
 			if (motion.getX() > -MAX_SPEED) {
-				motion.add(-speed * delta, 0.0f);
+				motion.add(-JET_POWER * delta, 0.0f);
 			}
 		} else if (in.isKeyDown(Input.KEY_D)) {
 			if (!directionIsRight) {
@@ -34,7 +34,7 @@ public class GameObjectSpriteMobile extends GameObjectSprite {
 			}
 			animationMoveRight.update(delta);
 			if (motion.getX() < MAX_SPEED) {
-				motion.add(speed * delta, 0.0f);
+				motion.add(JET_POWER * delta, 0.0f);
 			}
 		} else {
 			animationMoveRight.setCurrentFrame(0);
@@ -42,9 +42,12 @@ public class GameObjectSpriteMobile extends GameObjectSprite {
 		}
 		if (in.isKeyDown(Input.KEY_W)) {
 			if (motion.getY() > -MAX_SPEED) {
-				motion.add(0, -speed * delta);
+				motion.add(0, -JET_POWER * (1f - motion.y / -MAX_SPEED) * delta);
 			}
-
+		} else if (in.isKeyDown(Input.KEY_S)) {
+			if (motion.getY() < MAX_SPEED) {
+				motion.add(0, JET_POWER * 0.79f * (1f - motion.y / MAX_SPEED) * delta);
+			}
 		}
 		if (in.isKeyPressed(Input.KEY_SPACE) || in.isKeyPressed(Input.KEY_E)) {
 			aim.primaryPushed();

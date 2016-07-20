@@ -28,13 +28,12 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 
 	protected Aim aim = null;
 	protected List<Aim> aims = null;
-	protected float speed = 0.0044f;
-	protected final float MAX_SPEED = 0.49f;
+	protected final float MAX_SPEED = 0.5f;
 	protected boolean mouseButtonPirmaryDown = false;
 
 	protected boolean right = true;
 
-	protected float JUMP_POWER = 0.025f;
+	protected float JET_POWER = 0.009f;
 	private SpriteSheet sprite = null;
 	protected Animation animationMoveRight = null;
 	protected Animation animationMoveLeft = null;
