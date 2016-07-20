@@ -22,7 +22,6 @@ import se.BaseUlterior.GUI.Alignment;
 import se.BaseUlterior.GUI.Component;
 import se.BaseUlterior.GUI.ToolBox;
 import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.GameObjectAgile;
 import se.BaseUlterior.GameObject.GameObjectSpriteDesktop;
 import se.BaseUlterior.GameObject.GameObjectSpriteMobile;
 
@@ -56,11 +55,11 @@ public class IceBreaker extends BasicGame {
 
 	public static List<GameObject> all = null;
 
-	public static List<GameObjectAgile> allFalliing = null;
-
 	public static List<GameObject> objsToAdd = null;
 
 	public static List<GameObject> objsToRemove = null;
+
+	public static List<Parallax> parallaxList = null;
 
 	public static Info info = new GameInfo();
 
@@ -72,11 +71,6 @@ public class IceBreaker extends BasicGame {
 
 	public static float currentX = 0;
 	public static float currentY = 0;
-
-	public void addObjToGame(GameObject g) {
-		allFalliing.add((GameObjectAgile) g);
-		objsToAdd.add(g);
-	}
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
@@ -99,10 +93,9 @@ public class IceBreaker extends BasicGame {
 		patternWidth = container.getWidth();
 		patternHeight = container.getHeight();
 
-		allFalliing = new ArrayList<>();
-
 		actionListeners = new ArrayList<>();
 		actionListeners.add(worldCreator);
+		parallaxList = new ArrayList<>();
 		IceBreaker.all = new ArrayList<>();
 		IceBreaker.objsToAdd = new ArrayList<>();
 		objsToRemove = new ArrayList<>();
@@ -180,6 +173,9 @@ public class IceBreaker extends BasicGame {
 	public static void moveScreen(float x, float y) {
 		currentX += x;
 		currentY += y;
+		for (Parallax parallax : parallaxList) {
+			parallax.moveParalax(-currentX, -currentY);
+		}
 		for (GameObject go : IceBreaker.all) {
 			if (!go.isSolid()) {
 				go.setX(go.getX() - x);
