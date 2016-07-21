@@ -63,7 +63,7 @@ public class UlteriorUtils {
 	 * Not current used, due to game play decision.
 	 */
 	public static void removeGroundReal(float x, float y, float sizeOfExplostion, GameObject origin) {
-		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion, 8).getPoints());
+		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion, 8).getPoints(), 0f);
 		IceBreaker.objsToAdd.add(explotionShape);
 		ArrayList<GameObject> newShapes = new ArrayList<>();
 		boolean wasFound = false;
@@ -104,7 +104,7 @@ public class UlteriorUtils {
 	}
 
 	public static void removeGround(float x, float y, float sizeOfExplostion, GameObject origin) {
-		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion).getPoints());
+		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion).getPoints(), 0.29f);
 		IceBreaker.objsToAdd.add(explotionShape);
 	}
 }

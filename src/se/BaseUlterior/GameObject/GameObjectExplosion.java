@@ -17,35 +17,36 @@ import se.BaseUlterior.Utils.UlteriorUtils;
 
 public class GameObjectExplosion extends GameObject {
 
-	private static final long MAX_TIME = 190;
+	private static final long MAX_TIME = 290;
 	protected long timeSinceCreation;
-	private ImpactExplosion impactExplosion;
+	private float power;
 
-	public GameObjectExplosion(float[] nodes, Color color) {
+	public GameObjectExplosion(float[] nodes, float power, Color color) {
 		super(nodes);
+		this.power = power;
 		this.color = color;
 		this.timeSinceCreation = System.currentTimeMillis();
 		forceUpdate = true;
+		isBackgroundObj = true;
 	}
 
-	public GameObjectExplosion(float[] nodes) {
+	public GameObjectExplosion(float[] nodes, float power) {
 		super(nodes);
+		this.power = power;
 		this.color = new Color(1, 0, 0, 0.39f);
 		this.timeSinceCreation = System.currentTimeMillis();
 		forceUpdate = true;
+		isBackgroundObj = true;
 	}
 
 	@Override
 	public Impact getImpact(GameObject agileObject) {
-		return new ImpactExplosion(this, agileObject, 0);
+		return new ImpactExplosion(this, agileObject, power);
 	}
 
 	@Override
 	public void update(GameContainer container, int arg) throws SlickException {
 		if (System.currentTimeMillis() - timeSinceCreation > MAX_TIME) {
-			// if (impactExplosion != null) {
-			// impactExplosion.disappear();
-			// }
 			UlteriorUtils.cleanUpImpactFromWorldBuilderObject(this);
 			IceBreaker.objsToRemove.add(this);
 		}

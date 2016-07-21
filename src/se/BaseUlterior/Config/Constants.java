@@ -25,4 +25,6 @@ public class Constants {
 	public static final float GENERA_FRICTION = 0.990f;
 	public static final float GROUND_FRICTION = 0.91f;
 
+	public static final float GENERA_OBJECT_MAX_SPEED = 1f;
+
 }

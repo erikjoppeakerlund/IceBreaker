@@ -1,5 +1,6 @@
 package se.BaseUlterior.Physics;
 
+import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Geom.Vector2;
 
@@ -36,10 +37,14 @@ public class ImpactExplosion extends Impact {
 
 		float powerLength = maxImpact - returnValue.length();
 		float powerNormalized = powerLength / maxImpact;
+		if (powerNormalized < 0.2f) {
+			return;
+		}
 
 		returnValue.normalise();
-
-		affectedPiece.add(returnValue.scale(powerNormalized * this.power));
+		if (affectedPiece.length() < Constants.GENERA_OBJECT_MAX_SPEED) {
+			affectedPiece.add(returnValue.scale(powerNormalized * this.power));
+		}
 
 	}
 
