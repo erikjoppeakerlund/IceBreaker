@@ -3,11 +3,13 @@ package se.BaseUlterior.Physics;
 import java.util.Iterator;
 import java.util.Set;
 
+import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Geom.Vector2;
 
 /**
- * Impact which affect the another game objects' motion vector based on either it's own shape or the other game objects' shape
+ * Impact which affect the another game objects' motion vector based on either
+ * it's own shape or the other game objects' shape
  * 
  * @author Johan Akerlund
  */
@@ -69,11 +71,13 @@ public class ImpactBounce extends Impact {
 		/*
 		 * using the algorithm: V� = V - (2*(V . N)) * N
 		 * 
-		 * ...where N is the normal of the hit surface, V is the moving particle ('affectedPiece'), V� is the resulting vector
+		 * ...where N is the normal of the hit surface, V is the moving particle
+		 * ('affectedPiece'), V� is the resulting vector
 		 */
 		float dot = affectedPiece.dot(N) * (1.0f + bouncyness);
 
 		N.scale(dot);
+		affectedPiece.scale(Constants.GROUND_FRICTION);
 		affectedPiece.sub(N);
 	}
 
