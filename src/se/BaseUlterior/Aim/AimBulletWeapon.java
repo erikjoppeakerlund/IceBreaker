@@ -141,6 +141,12 @@ public abstract class AimBulletWeapon extends Aim {
 					aimAtX = xTarget;
 					aimAtY = yTarget;
 					notFound = false;
+					if (pointBlank != go) {
+						if (pointBlank != null && !pointBlank.isRotatingObject) {
+							pointBlank.forceUpdate = false;
+						}
+						go.forceUpdate = true;
+					}
 					pointBlank = go;
 					break;
 				}

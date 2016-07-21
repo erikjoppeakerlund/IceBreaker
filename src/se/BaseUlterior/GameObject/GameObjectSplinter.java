@@ -23,6 +23,7 @@ public class GameObjectSplinter extends GameObjectAgile {
 		this.motion = motion;
 		color = new Color(0.59f, 0.59f, 0.59f);
 		isBackgroundObj = true;
+		forceUpdate = true;
 	}
 
 	@Override
@@ -31,6 +32,7 @@ public class GameObjectSplinter extends GameObjectAgile {
 		graphics.setColor(color);
 		graphics.fill(this);
 		graphics.setColor(color.black);
+		graphics.resetLineWidth();
 		graphics.draw(this);
 	}
 

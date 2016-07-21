@@ -45,11 +45,13 @@ public abstract class Component extends GameObject {
 	}
 
 	private void init() {
+		isSolid = true;
 		checkStacking();
 		subs = new ArrayList<>();
 		forcedHeight = (int) getHeight();
 		forcedWidth = (int) getWidth();
 		isBackgroundObj = true;
+		forceUpdate = true;
 	}
 
 	public void add(Component component) {
@@ -178,10 +180,10 @@ public abstract class Component extends GameObject {
 		return new Shape[0];
 	}
 
-	@Override
-	public boolean isSolid() {
-		return true;
-	}
+	// @Override
+	// public boolean isSolid() {
+	// return true;
+	// }
 
 	@Override
 	public void wasActionStateSet(Action action) {

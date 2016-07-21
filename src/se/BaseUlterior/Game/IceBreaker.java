@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -22,8 +21,10 @@ import se.BaseUlterior.GUI.Alignment;
 import se.BaseUlterior.GUI.Component;
 import se.BaseUlterior.GUI.ToolBox;
 import se.BaseUlterior.GameObject.GameObject;
+import se.BaseUlterior.GameObject.GameObjectEmpty;
 import se.BaseUlterior.GameObject.GameObjectSpriteDesktop;
 import se.BaseUlterior.GameObject.GameObjectSpriteMobile;
+import se.BaseUlterior.Utils.UlteriorUtils;
 
 /**
  * Main class, extends BasicGame of Slick2d library
@@ -71,14 +72,15 @@ public class IceBreaker extends BasicGame {
 
 	public static float currentX = 0;
 	public static float currentY = 0;
+	private GameObject wholeSceene = null;
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 
-		graphics.setBackground(Color.lightGray);
-
 		for (GameObject go : IceBreaker.all) {
-			go.render(container, graphics);
+			if (UlteriorUtils.isWithinRange(go, wholeSceene) || go.forceRender) {
+				go.render(container, graphics);
+			}
 		}
 
 	}
@@ -101,6 +103,9 @@ public class IceBreaker extends BasicGame {
 		objsToRemove = new ArrayList<>();
 
 		actions = new ActionListenablers();
+		wholeSceene = new GameObjectEmpty(new float[] { 0, 0, 0, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH,
+				Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0 });
+		IceBreaker.objsToAdd.add(wholeSceene);
 
 		LevelDummy levelDummy = new LevelDummy();
 		GroundMap requiredWallBuilderObjects = new GroundMap();
@@ -120,7 +125,9 @@ public class IceBreaker extends BasicGame {
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		for (GameObject go : IceBreaker.all) {
-			go.update(container, delta);
+			if (UlteriorUtils.isWithinRange(go, sprite) || go.forceUpdate) {
+				go.update(container, delta);
+			}
 		}
 		if (!objsToRemove.isEmpty()) {
 			all.removeAll(objsToRemove);
@@ -136,7 +143,7 @@ public class IceBreaker extends BasicGame {
 		AppGameContainer appGameContainer = new AppGameContainer(new IceBreaker("ICE:BREAKER"));
 		int maxFPS = 60;
 		appGameContainer.setTargetFrameRate(maxFPS);
-		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, true);
+		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, false);
 		appGameContainer.setAlwaysRender(true);
 		appGameContainer.start();
 
@@ -177,12 +184,12 @@ public class IceBreaker extends BasicGame {
 			parallax.moveParalax(currentX, currentY);
 		}
 		for (GameObject go : IceBreaker.all) {
-			if (!go.isSolid()) {
+			if (!go.isSolid) {
 				go.setX(go.getX() - x);
 			}
 		}
 		for (GameObject go : IceBreaker.all) {
-			if (!go.isSolid()) {
+			if (!go.isSolid) {
 				go.setY(go.getY() - y);
 			}
 		}

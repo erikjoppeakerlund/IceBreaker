@@ -24,12 +24,14 @@ public class GameObjectExplosion extends GameObject {
 		super(nodes);
 		this.color = color;
 		this.timeSinceCreation = System.currentTimeMillis();
+		forceUpdate = true;
 	}
 
 	public GameObjectExplosion(float[] nodes) {
 		super(nodes);
 		this.color = new Color(1, 0, 0, 0.39f);
 		this.timeSinceCreation = System.currentTimeMillis();
+		forceUpdate = true;
 	}
 
 	@Override

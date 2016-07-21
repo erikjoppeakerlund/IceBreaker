@@ -36,6 +36,7 @@ public abstract class GameObject extends Polygon {
 	public boolean noForce = true;
 	public boolean isRotatingObject = false;
 	public float rotation;
+	public boolean forceRender = false;
 
 	public Vector2 getMotion() {
 		return motion;
@@ -204,9 +205,11 @@ public abstract class GameObject extends Polygon {
 		return null;
 	}
 
-	public boolean isSolid() {
-		return false;
-	}
+	public boolean forceUpdate = false;
+	public boolean isSolid = false;
+	// public boolean isSolid() {
+	// return false;
+	// }
 
 	public void wasActionStateSet(Action action) {
 	}

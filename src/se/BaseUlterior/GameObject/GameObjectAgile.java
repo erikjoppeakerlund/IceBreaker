@@ -20,6 +20,7 @@ public abstract class GameObjectAgile extends WorldBuilderMateriaFirm {
 		super(nodes);
 		this.bouncyness = bouncyness;
 		noForce = false;
+		forceUpdate = true;
 	}
 
 	@Override

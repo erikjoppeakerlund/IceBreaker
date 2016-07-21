@@ -124,6 +124,8 @@ public class AimGrenade extends Aim {
 		if (current != null) {
 			IceBreaker.objsToRemove.add(current);
 			IceBreaker.objsToAdd.add(current);
+		} else {
+
 		}
 	}
 
