@@ -19,8 +19,12 @@ public class ImpactFriction extends Impact {
 
 	@Override
 	public void calculateImpact(int delta) {
-		if (origin.contains(other))
+		if (origin.contains(other)) {
+			if (other.isRotatingObject) {
+				other.rotation *= effect;
+			}
 			affectedPiece.scale(effect);
+		}
 	}
 
 }

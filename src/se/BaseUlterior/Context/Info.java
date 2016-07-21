@@ -11,6 +11,15 @@ import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Physics.Impact;
 
 public abstract class Info extends GameObject {
+	// @Override
+	// public boolean isSolid() {
+	// return true;
+	// }
+	public Info() {
+		super();
+		isSolid = true;
+		forceRender = true;
+	}
 
 	public List<TextInfo> textInfos = new ArrayList<>();
 

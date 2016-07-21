@@ -32,17 +32,34 @@ public class GroundMap {
 		}
 		// ______________________________________________________
 
-		float fat = 150.0f;
+		float thickness = 150.0f;
 
-		float BOTTOM = Constants.CANVAS_HEIGHT_FULL;
+		float[] wallLeftPoints = new float[] { -thickness, -thickness, -thickness,
+				Constants.CANVAS_HEIGHT_FULL + thickness, 0, Constants.CANVAS_HEIGHT_FULL + thickness, 0, -thickness };
 
-		float[] wallScene = new float[] { 0.0f - fat, 0.0f - fat, Constants.CANVAS_WIDTH_FULL + fat, 0.0f - fat,
-				Constants.CANVAS_WIDTH_FULL + fat, BOTTOM + fat, 0.0f - fat, BOTTOM + fat, 0.0f - fat, 0.0f - fat, 0.0f,
-				0.0f, Constants.CANVAS_WIDTH_FULL, 0.0f, Constants.CANVAS_WIDTH_FULL, BOTTOM, 0.0f, BOTTOM, 0.0f,
-				0.0f };
-		GameObject wall = new WorldBuilderGroundSolid(wallScene);
+		GameObject wallLeft = new WorldBuilderGroundSolid(wallLeftPoints);
+		levelPieces.add(wallLeft);
 
-		levelPieces.add(wall);
+		float[] wallRightPoints = new float[] { Constants.CANVAS_WIDTH_FULL, -thickness, Constants.CANVAS_WIDTH_FULL,
+				Constants.CANVAS_HEIGHT_FULL + thickness, Constants.CANVAS_WIDTH_FULL + thickness,
+				Constants.CANVAS_HEIGHT_FULL + thickness, Constants.CANVAS_WIDTH_FULL + thickness, -thickness };
+
+		GameObject wallRight = new WorldBuilderGroundSolid(wallRightPoints);
+		levelPieces.add(wallRight);
+
+		float[] floorPoints = new float[] { -thickness, Constants.CANVAS_HEIGHT_FULL,
+				Constants.CANVAS_WIDTH_FULL + thickness, Constants.CANVAS_HEIGHT_FULL,
+				Constants.CANVAS_WIDTH_FULL + thickness, Constants.CANVAS_HEIGHT_FULL + thickness, -thickness,
+				Constants.CANVAS_HEIGHT_FULL + thickness, -thickness, Constants.CANVAS_HEIGHT_FULL };
+
+		GameObject floor = new WorldBuilderGroundSolid(floorPoints);
+		levelPieces.add(floor);
+
+		float[] roofPoints = new float[] { -thickness, 0, Constants.CANVAS_WIDTH_FULL + thickness, 0,
+				Constants.CANVAS_WIDTH_FULL + thickness, -thickness, -thickness, -thickness };
+
+		GameObject roof = new WorldBuilderGroundSolid(roofPoints);
+		levelPieces.add(roof);
 
 		float[] wholeScene = new float[] { 0.0f, 0.0f, 0.0f, Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL,
 				Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL, 0.0f };

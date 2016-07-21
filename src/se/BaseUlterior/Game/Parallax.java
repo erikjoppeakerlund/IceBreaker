@@ -13,6 +13,7 @@ public class Parallax extends GameObject {
 
 	public Parallax(float[] edges, Image image, float parallaxEffect) {
 		super(edges);
+		isSolid = true;
 		this.image = image;
 		this.parallaxEffect = parallaxEffect;
 		isBackgroundObj = true;
@@ -32,8 +33,8 @@ public class Parallax extends GameObject {
 		image.draw(0, 0, container.getWidth(), container.getHeight(), x, y, x + container.getWidth(), y + container.getHeight());
 	}
 
-	@Override
-	public boolean isSolid() {
-		return true;
-	}
+	// @Override
+	// public boolean isSolid() {
+	// return true;
+	// }
 }

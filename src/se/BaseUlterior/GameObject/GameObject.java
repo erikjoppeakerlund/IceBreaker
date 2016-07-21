@@ -36,6 +36,7 @@ public abstract class GameObject extends Polygon {
 	public boolean noForce = true;
 	public boolean isRotatingObject = false;
 	public float rotation;
+	public boolean forceRender = false;
 
 	public Vector2 getMotion() {
 		return motion;
@@ -49,8 +50,9 @@ public abstract class GameObject extends Polygon {
 	}
 
 	/**
-	 * Construct a new polygon with 3 or more points. This constructor will take the first set of points and copy them after the last set of
-	 * points to create a closed shape.
+	 * Construct a new polygon with 3 or more points. This constructor will take
+	 * the first set of points and copy them after the last set of points to
+	 * create a closed shape.
 	 * 
 	 * @param points
 	 *            An array of points in x, y order.
@@ -103,10 +105,13 @@ public abstract class GameObject extends Polygon {
 
 		Set<Vector2> normals = new HashSet<>();
 		/*
-		 * Intersection formula used: (x4 - x3)(y1 - y3) - (y4 - y3)(x1 - x3) UA = --------------------------------------- (y4 - y3)(x2 -
-		 * x1) - (x4 - x3)(y2 - y1)
+		 * Intersection formula used: (x4 - x3)(y1 - y3) - (y4 - y3)(x1 - x3) UA
+		 * = --------------------------------------- (y4 - y3)(x2 - x1) - (x4 -
+		 * x3)(y2 - y1)
 		 * 
-		 * (x2 - x1)(y1 - y3) - (y2 - y1)(x1 - x3) UB = --------------------------------------- (y4 - y3)(x2 - x1) - (x4 - x3)(y2 - y1)
+		 * (x2 - x1)(y1 - y3) - (y2 - y1)(x1 - x3) UB =
+		 * --------------------------------------- (y4 - y3)(x2 - x1) - (x4 -
+		 * x3)(y2 - y1)
 		 * 
 		 * if UA and UB are both between 0 and 1 then the lines intersect.
 		 * 
@@ -156,14 +161,28 @@ public abstract class GameObject extends Polygon {
 					jNext = 0;
 				}
 
-				unknownA = (((points[iNext] + dX - points[i] + dX) * (double) (thatPoints[j + 1] + thatDy - points[i + 1] + thatDy)) - ((points[iNext + 1] + dY - points[i + 1] + dY) * (thatPoints[j] + thatDx - points[i] + dX))) / (((points[iNext + 1] + dY - points[i + 1] + dY) * (thatPoints[jNext] + thatDx - thatPoints[j] + thatDx)) - ((points[iNext] + dX + -points[i] + dX) * (thatPoints[jNext + 1] + thatDy - thatPoints[j + 1] + thatDy)));
-				unknownB = (((thatPoints[jNext] + thatDx - thatPoints[j] + thatDx) * (double) (thatPoints[j + 1] + thatDy - points[i + 1] + dY)) - ((thatPoints[jNext + 1] + thatDy - thatPoints[j + 1] + thatDy) * (thatPoints[j] + thatDx - points[i] + dX))) / (((points[iNext + 1] + dY - points[i + 1] + dY) * (thatPoints[jNext] + thatDx - thatPoints[j] + thatDx)) - ((points[iNext] + dX - points[i] + dX) * (thatPoints[jNext + 1] + thatDy - thatPoints[j + 1] + thatDy)));
+				unknownA = (((points[iNext] + dX - points[i] + dX)
+						* (double) (thatPoints[j + 1] + thatDy - points[i + 1] + thatDy))
+						- ((points[iNext + 1] + dY - points[i + 1] + dY) * (thatPoints[j] + thatDx - points[i] + dX)))
+						/ (((points[iNext + 1] + dY - points[i + 1] + dY)
+								* (thatPoints[jNext] + thatDx - thatPoints[j] + thatDx))
+								- ((points[iNext] + dX + -points[i] + dX)
+										* (thatPoints[jNext + 1] + thatDy - thatPoints[j + 1] + thatDy)));
+				unknownB = (((thatPoints[jNext] + thatDx - thatPoints[j] + thatDx)
+						* (double) (thatPoints[j + 1] + thatDy - points[i + 1] + dY))
+						- ((thatPoints[jNext + 1] + thatDy - thatPoints[j + 1] + thatDy)
+								* (thatPoints[j] + thatDx - points[i] + dX)))
+						/ (((points[iNext + 1] + dY - points[i + 1] + dY)
+								* (thatPoints[jNext] + thatDx - thatPoints[j] + thatDx))
+								- ((points[iNext] + dX - points[i] + dX)
+										* (thatPoints[jNext + 1] + thatDy - thatPoints[j + 1] + thatDy)));
 
 				if (unknownA >= 0 && unknownA <= 1 && unknownB >= 0 && unknownB <= 1) {
 
 					Vector2 newestNormal;
 
-					float[] norm = getSurfaceNormal(new float[] { points[i], points[i + 1] }, new float[] { points[iNext], points[iNext + 1] });
+					float[] norm = getSurfaceNormal(new float[] { points[i], points[i + 1] },
+							new float[] { points[iNext], points[iNext + 1] });
 					newestNormal = new Vector2(norm[0], norm[1]);
 
 					if (i != 0) {
@@ -186,9 +205,11 @@ public abstract class GameObject extends Polygon {
 		return null;
 	}
 
-	public boolean isSolid() {
-		return false;
-	}
+	public boolean forceUpdate = false;
+	public boolean isSolid = false;
+	// public boolean isSolid() {
+	// return false;
+	// }
 
 	public void wasActionStateSet(Action action) {
 	}

@@ -1,5 +1,6 @@
 package se.BaseUlterior.Aim;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -8,6 +9,7 @@ import org.newdawn.slick.geom.Circle;
 
 import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.GameObject.GameObject;
+import se.BaseUlterior.GameObject.GameObjectExplosion;
 import se.BaseUlterior.GameObject.GameObjectRicochet;
 
 /**
@@ -39,6 +41,9 @@ public abstract class AimBulletWeapon extends Aim {
 
 	protected float weight = 1.0f;
 	private float imageScale;
+	protected GameObjectExplosion recoil;
+
+	protected float recoilPower = 0;
 
 	public AimBulletWeapon(String pathToImage, float imageScale) {
 		this.imageScale = imageScale;
@@ -97,6 +102,9 @@ public abstract class AimBulletWeapon extends Aim {
 		GameObject ricochet = new GameObjectRicochet(new Circle(aimAtX, aimAtY, 29f).getPoints(), pointBlank,
 				gunFireStartAtX, gunFireStartAtY, aimAtX, aimAtY, weight);
 		IceBreaker.objsToAdd.add(ricochet);
+		recoil = new GameObjectExplosion(new Circle(xGrip, yGrip, START_ARM_LENGTH * 1.5f).getPoints(), recoilPower,
+				Color.transparent);
+		IceBreaker.objsToAdd.add(recoil);
 	}
 
 	@Override
@@ -122,6 +130,10 @@ public abstract class AimBulletWeapon extends Aim {
 
 		if (wasJustShoot && armLengt < START_ARM_LENGTH) {
 			armLengt += 3f;
+			// if (recoil != null) {
+			// recoil.setCenterX(xGrip);
+			// recoil.setCenterY(yGrip);
+			// }
 		} else if (wasJustShoot) {
 			wasJustShoot = false;
 		}
@@ -141,6 +153,12 @@ public abstract class AimBulletWeapon extends Aim {
 					aimAtX = xTarget;
 					aimAtY = yTarget;
 					notFound = false;
+					if (pointBlank != go) {
+						if (pointBlank != null && !pointBlank.isRotatingObject) {
+							pointBlank.forceUpdate = false;
+						}
+						go.forceUpdate = true;
+					}
 					pointBlank = go;
 					break;
 				}

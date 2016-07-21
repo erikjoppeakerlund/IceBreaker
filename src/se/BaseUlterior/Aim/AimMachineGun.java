@@ -20,6 +20,7 @@ public class AimMachineGun extends AimTriggerHoldable {
 		this.gunFire = gunFire;
 		gunFireFrameWidth = this.gunFire.getCurrentFrame().getWidth();
 		gunFireFrameHeight = this.gunFire.getCurrentFrame().getHeight();
+		recoilPower = 0.45f;
 	}
 
 	@Override

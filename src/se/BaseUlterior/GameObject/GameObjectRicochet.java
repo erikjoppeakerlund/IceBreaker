@@ -37,6 +37,8 @@ public class GameObjectRicochet extends GameObject {
 	public GameObjectRicochet(float[] fs, GameObject target, float gunFireStartAtX, float gunFireStartAtY, float aimAtX,
 			float aimAtY, float weight) {
 		super(fs);
+		forceRender = true;
+		forceUpdate = true;
 		this.target = target;
 		this.gunFireStartAtX = gunFireStartAtX;
 		this.gunFireStartAtY = gunFireStartAtY;

@@ -38,7 +38,6 @@ public class Grenade extends ImagableObject {
 		setX(-270f);
 		setY(-270f);
 		isRotatingObject = true;
-
 	}
 
 	public void initMotion(Vector2 motion) {
