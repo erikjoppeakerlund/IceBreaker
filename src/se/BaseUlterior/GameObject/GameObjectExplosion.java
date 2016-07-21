@@ -9,6 +9,7 @@ import org.newdawn.slick.geom.Shape;
 import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactExplosion;
+import se.BaseUlterior.Utils.UlteriorUtils;
 
 /*
  * Class not used.
@@ -16,7 +17,7 @@ import se.BaseUlterior.Physics.ImpactExplosion;
 
 public class GameObjectExplosion extends GameObject {
 
-	private static final long MAX_TIME = 9;
+	private static final long MAX_TIME = 190;
 	protected long timeSinceCreation;
 	private ImpactExplosion impactExplosion;
 
@@ -36,9 +37,7 @@ public class GameObjectExplosion extends GameObject {
 
 	@Override
 	public Impact getImpact(GameObject agileObject) {
-		// impactExplosion = new ImpactExplosion(this, agileObject);
-		// return impactExplosion;
-		return null;
+		return new ImpactExplosion(this, agileObject, 0);
 	}
 
 	@Override
@@ -47,6 +46,7 @@ public class GameObjectExplosion extends GameObject {
 			// if (impactExplosion != null) {
 			// impactExplosion.disappear();
 			// }
+			UlteriorUtils.cleanUpImpactFromWorldBuilderObject(this);
 			IceBreaker.objsToRemove.add(this);
 		}
 	}

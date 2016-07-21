@@ -1,6 +1,7 @@
 package se.BaseUlterior.Physics;
 
 import se.BaseUlterior.GameObject.GameObject;
+import se.BaseUlterior.Geom.Vector2;
 
 /**
  * Affect the other game objects' motion vector as a 'punch'. Class not used!
@@ -9,14 +10,13 @@ import se.BaseUlterior.GameObject.GameObject;
  */
 public class ImpactExplosion extends Impact {
 
-	private long timeSinceExplotion;
-	private long TIME_UNTIL_GONE = 500;
+	private Vector2 returnValue;
+	private float power;
 
-	private final float MAX_IMPACT = 0.3f;
-
-	public ImpactExplosion(GameObject origin, GameObject other) {
+	public ImpactExplosion(GameObject origin, GameObject other, float power) {
 		super(origin, other);
-		timeSinceExplotion = System.currentTimeMillis();
+		returnValue = new Vector2();
+		this.power = power;
 	}
 
 	@Override
@@ -32,22 +32,15 @@ public class ImpactExplosion extends Impact {
 
 		float maxImpact = origin.getBoundingCircleRadius();
 
-		float impactX = MAX_IMPACT * maxImpact / distanceX;
-		float impactY = MAX_IMPACT * maxImpact / distanceY;
+		returnValue.set(distanceX, distanceY);
 
-		// affectedPiece.add(new Vector2(impactX, impactY));
+		float powerLength = maxImpact - returnValue.length();
+		float powerNormalized = powerLength / maxImpact;
 
-		/*
-		 * logics for handeling Agile Objects that are within the range of the
-		 * explosion.
-		 */
-	}
+		returnValue.normalise();
 
-	public void disappear() {
+		affectedPiece.add(returnValue.scale(powerNormalized * this.power));
 
-		if (other != null) {
-			other.removeImpact(this);
-		}
 	}
 
 }
