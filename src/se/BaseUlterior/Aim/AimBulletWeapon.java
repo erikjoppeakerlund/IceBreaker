@@ -130,10 +130,10 @@ public abstract class AimBulletWeapon extends Aim {
 
 		if (wasJustShoot && armLengt < START_ARM_LENGTH) {
 			armLengt += 3f;
-			// if (recoil != null) {
-			// recoil.setCenterX(xGrip);
-			// recoil.setCenterY(yGrip);
-			// }
+			if (recoil != null) {
+				recoil.setCenterX(xGrip);
+				recoil.setCenterY(yGrip);
+			}
 		} else if (wasJustShoot) {
 			wasJustShoot = false;
 		}

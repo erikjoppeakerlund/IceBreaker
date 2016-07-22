@@ -22,7 +22,7 @@ public class Grenade extends ImagableObject {
 	public static final int GRENADE_SIZE = 64;
 	private boolean isReleased = false;
 
-	private static float BOUNCYNESS = 1.3f;
+	private static float BOUNCYNESS = 0.9f;
 	protected long wasReleasedAt;
 
 	protected final long TIME_UNTIL_EXPLOTION = 2500;
@@ -48,14 +48,16 @@ public class Grenade extends ImagableObject {
 
 	@Override
 	public void update(GameContainer container, int delta) {
-		if (!isReleased) {
-			return;
-		}
-		if (System.currentTimeMillis() - wasReleasedAt > TIME_UNTIL_EXPLOTION) {
-			UlteriorUtils.removeGround(getCenterX(), getCenterY(), sizeOfExplostion, this);
-			IceBreaker.objsToRemove.add(this);
-		} else {
-			super.update(container, delta);
+		if (!IceBreaker.pause) {
+			if (!isReleased) {
+				return;
+			}
+			if (System.currentTimeMillis() - wasReleasedAt > TIME_UNTIL_EXPLOTION) {
+				UlteriorUtils.removeGround(getCenterX(), getCenterY(), sizeOfExplostion, this);
+				IceBreaker.objsToRemove.add(this);
+			} else {
+				super.update(container, delta);
+			}
 		}
 
 	}
