@@ -2,12 +2,11 @@ package se.BaseUlterior.GameObject;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 
 public class GameObjectEmpty extends GameObject {
 
 	@Override
-	public void update(GameContainer container, int arg) throws SlickException {
+	public void update(GameContainer container, int arg) {
 		// TODO Auto-generated method stub
 
 	}
@@ -17,7 +16,7 @@ public class GameObjectEmpty extends GameObject {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics) throws SlickException {
+	public void render(GameContainer container, Graphics graphics) {
 		// TODO Auto-generated method stub
 
 	}

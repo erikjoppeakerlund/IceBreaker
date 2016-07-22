@@ -4,7 +4,6 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
 
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Context.SingleText;
@@ -47,7 +46,7 @@ public abstract class Button extends Component {
 	private boolean mouseIsOutside = true;
 
 	@Override
-	public void update(GameContainer container, int arg) throws SlickException {
+	public void update(GameContainer container, int arg) {
 		Input in = container.getInput();
 		float mouseX = in.getMouseX();
 		float mouseY = in.getMouseY();
@@ -103,7 +102,7 @@ public abstract class Button extends Component {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics) throws SlickException {
+	public void render(GameContainer container, Graphics graphics) {
 		super.render(container, graphics);
 		if (!hide) {
 			graphics.setLineWidth(3);

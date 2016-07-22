@@ -35,7 +35,7 @@ public abstract class AimBulletWeapon extends Aim {
 	protected int gunFireFrameWidth;
 	protected int gunFireFrameHeight;
 
-	protected GameObject pointBlank = null;
+	// protected GameObject pointBlank = null;
 
 	protected int shotRayFrames;
 
@@ -74,8 +74,8 @@ public abstract class AimBulletWeapon extends Aim {
 		}
 	}
 
-	protected float aimAtX;
-	protected float aimAtY;
+	// protected float aimAtX;
+	// protected float aimAtY;
 
 	protected final int EXPLOTION_SIZE = 70;
 
@@ -138,32 +138,6 @@ public abstract class AimBulletWeapon extends Aim {
 			wasJustShoot = false;
 		}
 
-	}
-
-	protected void updateAim() {
-		float xTarget = xGrip;
-		float yTarget = yGrip;
-		boolean notFound = true;
-		int STEP = 8;
-		while (notFound) {
-			xTarget += arm.x * STEP;
-			yTarget += arm.y * STEP;
-			for (GameObject go : IceBreaker.all) {
-				if (go.contains(xTarget, yTarget) && !(go.invisible)) {
-					aimAtX = xTarget;
-					aimAtY = yTarget;
-					notFound = false;
-					if (pointBlank != go) {
-						if (pointBlank != null && !pointBlank.isRotatingObject) {
-							pointBlank.forceUpdate = false;
-						}
-						go.forceUpdate = true;
-					}
-					pointBlank = go;
-					break;
-				}
-			}
-		}
 	}
 
 	@Override

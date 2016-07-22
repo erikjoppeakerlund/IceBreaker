@@ -8,7 +8,6 @@ import java.util.Set;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Polygon;
 
 import se.BaseUlterior.Actions.Action;
@@ -39,6 +38,7 @@ public abstract class GameObject extends Polygon {
 	public boolean forceUpdate = false;
 	public boolean isSolid = true;
 	public float rotation;
+	public short HP = 0;
 
 	public Vector2 getMotion() {
 		return motion;
@@ -189,9 +189,9 @@ public abstract class GameObject extends Polygon {
 		return normals;
 	}
 
-	public abstract void update(GameContainer container, int arg) throws SlickException;
+	public abstract void update(GameContainer container, int arg);
 
-	public abstract void render(GameContainer container, Graphics graphics) throws SlickException;
+	public abstract void render(GameContainer container, Graphics graphics);
 
 	public Impact getImpact(GameObject agileObject) {
 		return null;

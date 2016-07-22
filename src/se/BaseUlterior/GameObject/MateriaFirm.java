@@ -11,11 +11,11 @@ import se.BaseUlterior.Utils.UlteriorUtils;
  * 
  * @author Johan Akerlund
  */
-public abstract class WorldBuilderMateriaFirm extends WorldBuilder {
+public abstract class MateriaFirm extends WorldBuilder {
 
 	protected boolean underImpact;
 
-	public WorldBuilderMateriaFirm(float[] nodes) {
+	public MateriaFirm(float[] nodes) {
 		super(nodes, false, false, false, false, false, true);
 	}
 

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Shape;
 
 import se.BaseUlterior.Actions.Action;
@@ -153,7 +152,7 @@ public abstract class Component extends GameObject {
 	protected abstract void finalAction();
 
 	@Override
-	public void render(GameContainer container, Graphics graphics) throws SlickException {
+	public void render(GameContainer container, Graphics graphics) {
 		if (!hide) {
 			graphics.setColor(this.color);
 			graphics.fill(this);

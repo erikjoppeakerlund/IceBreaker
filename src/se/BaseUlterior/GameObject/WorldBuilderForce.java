@@ -3,7 +3,6 @@ package se.BaseUlterior.GameObject;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Shape;
 
 import se.BaseUlterior.Physics.Impact;
@@ -57,7 +56,7 @@ public class WorldBuilderForce extends WorldBuilder {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics) throws SlickException {
+	public void render(GameContainer container, Graphics graphics) {
 		graphics.setColor(this.color);
 		graphics.fill(this);
 	}
@@ -68,7 +67,7 @@ public class WorldBuilderForce extends WorldBuilder {
 	}
 
 	@Override
-	public void update(GameContainer container, int arg) throws SlickException {
+	public void update(GameContainer container, int arg) {
 		// TODO Auto-generated method stub
 
 	}

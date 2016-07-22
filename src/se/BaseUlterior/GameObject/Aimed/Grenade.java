@@ -3,7 +3,6 @@ package se.BaseUlterior.GameObject.Aimed;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 
 import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.GameObject.GameObject;
@@ -71,7 +70,7 @@ public class Grenade extends ImagableObject {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics) throws SlickException {
+	public void render(GameContainer container, Graphics graphics) {
 		super.render(container, graphics);
 	}
 }

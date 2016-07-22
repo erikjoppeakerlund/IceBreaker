@@ -6,7 +6,6 @@ import java.util.Set;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 
 import se.BaseUlterior.Game.IceBreaker;
@@ -50,7 +49,7 @@ public class GameObjectRicochet extends GameObject {
 	}
 
 	@Override
-	public void update(GameContainer container, int arg) throws SlickException {
+	public void update(GameContainer container, int arg) {
 		if (lifeSpan < LIFE_SPAN_SPLITS && lifeSpan % 2 == 0) {
 			runEffect();
 		}
@@ -61,7 +60,7 @@ public class GameObjectRicochet extends GameObject {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics) throws SlickException {
+	public void render(GameContainer container, Graphics graphics) {
 		rayColor.a = 1f - (float) lifeSpan / (float) LIFE_SPAN_LIMIT;
 		graphics.setColor(rayColor);
 		graphics.setLineWidth(weight * 2f);

@@ -13,7 +13,7 @@ import se.BaseUlterior.Physics.ImpactBounce;
  * @author Johan Akerlund
  */
 
-public abstract class GameObjectAgile extends WorldBuilderMateriaFirm {
+public abstract class GameObjectAgile extends MateriaFirm {
 	protected boolean underImpact = false;
 
 	public GameObjectAgile(float[] nodes, float bouncyness) {

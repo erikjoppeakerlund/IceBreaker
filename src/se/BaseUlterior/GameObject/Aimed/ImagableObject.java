@@ -53,7 +53,7 @@ public abstract class ImagableObject extends GameObjectAgile {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics) throws SlickException {
+	public void render(GameContainer container, Graphics graphics) {
 		rifleImageRight.setRotation((float) angle.getTheta());
 		rifleImageRight.draw(getCenterX() - imageWidth / 2, y);
 	}

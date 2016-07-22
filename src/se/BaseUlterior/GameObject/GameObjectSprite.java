@@ -79,6 +79,7 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 		}
 		initAims();
 		isSolid = false;
+		HP = 100;
 	}
 
 	private void initAims() {
@@ -147,7 +148,7 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics) throws SlickException {
+	public void render(GameContainer container, Graphics graphics) {
 		super.render(container, graphics);
 		if (directionIsRight) {
 			animationMoveRight.draw(getX(), getY());

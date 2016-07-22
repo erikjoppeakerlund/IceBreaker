@@ -2,7 +2,6 @@ package se.BaseUlterior.GUI;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.SlickException;
 
 public class Panel extends Component {
 	protected Alignment alignmentInContainer = Alignment.LEFT;
@@ -21,7 +20,7 @@ public class Panel extends Component {
 	}
 
 	@Override
-	public void update(GameContainer container, int arg) throws SlickException {
+	public void update(GameContainer container, int arg) {
 		// TODO Auto-generated method stub
 
 	}

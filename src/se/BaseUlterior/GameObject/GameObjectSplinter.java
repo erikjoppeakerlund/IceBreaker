@@ -3,7 +3,6 @@ package se.BaseUlterior.GameObject;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 
 import se.BaseUlterior.Game.IceBreaker;
@@ -29,7 +28,7 @@ public class GameObjectSplinter extends GameObjectAgile {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics) throws SlickException {
+	public void render(GameContainer container, Graphics graphics) {
 		color.a = 1f - (float) lifeSpan / (float) LIFE_SPAN_LIMIT;
 		graphics.setColor(color);
 		graphics.fill(this);

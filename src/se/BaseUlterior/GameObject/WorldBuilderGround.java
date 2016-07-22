@@ -3,7 +3,6 @@ package se.BaseUlterior.GameObject;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Physics.Impact;
@@ -15,7 +14,7 @@ import se.BaseUlterior.Physics.ImpactBounce;
  * 
  * @author Johan Akerlund
  */
-public class WorldBuilderGround extends WorldBuilderMateriaFirm {
+public class WorldBuilderGround extends MateriaFirm {
 
 	public WorldBuilderGround(float[] nodes) {
 		super(nodes);
@@ -33,7 +32,7 @@ public class WorldBuilderGround extends WorldBuilderMateriaFirm {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics) throws SlickException {
+	public void render(GameContainer container, Graphics graphics) {
 		super.render(container, graphics);
 		if (points.length > 0) {
 			graphics.setLineWidth(Constants.LINE_WIDTH);
