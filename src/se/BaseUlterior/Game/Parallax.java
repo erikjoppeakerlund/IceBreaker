@@ -19,7 +19,7 @@ public class Parallax extends GameObject {
 		isBackgroundObj = true;
 	}
 
-	public void moveParalax(float xParam, float yParam) {
+	public void moveParallax(float xParam, float yParam) {
 		x = xParam * parallaxEffect;
 		y = yParam * parallaxEffect;
 	}
@@ -30,8 +30,7 @@ public class Parallax extends GameObject {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		image.draw(0, 0, container.getWidth(), container.getHeight(), x, y, x + container.getWidth(),
-				y + container.getHeight());
+		image.draw(0, 0, container.getWidth(), container.getHeight(), x, y, x + container.getWidth(), y + container.getHeight());
 	}
 
 	// @Override
