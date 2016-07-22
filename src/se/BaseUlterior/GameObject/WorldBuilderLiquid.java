@@ -23,14 +23,14 @@ public class WorldBuilderLiquid extends WorldBuilder {
 	public WorldBuilderLiquid(float[] nodes) {
 		super(nodes, false, true, false, false, false, false);
 		this.density = Density.WATER;
-		invisible = true;
+		piercable = true;
 	}
 
 	public WorldBuilderLiquid(float[] nodes, Density density) {
 		super(nodes, false, true, false, false, false, false);
 		this.density = density;
 		init();
-		invisible = true;
+		piercable = true;
 	}
 
 	public WorldBuilderLiquid(float[] nodes, Density density, boolean isBackground) {

@@ -61,7 +61,7 @@ public abstract class MateriaFirm extends WorldBuilder {
 	private void checkImpact() {
 		for (GameObject go : IceBreaker.all) {
 
-			if (go == this || (go.isSolid && this.isSolid)) {
+			if (go == this || (go.motionLess && this.motionLess) || go.isBackgroundObj) {
 				continue;
 			}
 
@@ -78,6 +78,10 @@ public abstract class MateriaFirm extends WorldBuilder {
 						Impact im = go.getImpact(this);
 						if (im != null) {
 							currentImpacts.add(im);
+						} else {
+							System.out.println(this.getClass().getSimpleName());
+							System.out.println(go.getClass().getSimpleName());
+							System.out.println();
 						}
 						underImpact = true;
 					}

@@ -32,11 +32,11 @@ public abstract class GameObject extends Polygon {
 	public int maxRadiusStart;
 	protected float bouncyness;
 	public boolean isBackgroundObj = false;
-	public boolean invisible = false;
+	public boolean piercable = false;
 	public boolean isRotatingObject = false;
 	public boolean forceRender = false;
 	public boolean forceUpdate = false;
-	public boolean isSolid = true;
+	public boolean motionLess = true;
 	public float rotation;
 	public short HP = 0;
 
@@ -56,11 +56,11 @@ public abstract class GameObject extends Polygon {
 		super(points);
 		init();
 		this.isBackgroundObj = isBackgroundObj;
-		this.invisible = invisible;
+		this.piercable = invisible;
 		this.isRotatingObject = isRotatingObject;
 		this.forceRender = forceRender;
 		this.forceUpdate = forceUpdate;
-		this.isSolid = isSolid;
+		this.motionLess = isSolid;
 
 	};
 

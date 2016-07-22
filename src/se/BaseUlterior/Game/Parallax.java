@@ -9,20 +9,11 @@ import se.BaseUlterior.GameObject.GameObject;
 public class Parallax extends GameObject {
 	float parallaxEffect;
 	Image image;
-	// isSolid = true;
-	// this.image = image;
-	// this.parallaxEffect = parallaxEffect;
-	// isBackgroundObj = true;
-	// invisible = true;
 
 	public Parallax(float[] edges, Image image, float parallaxEffect) {
 		super(edges, true, true, true, false, false, true);
-		// super(edges);
-		// isSolid = true;
 		this.image = image;
 		this.parallaxEffect = parallaxEffect;
-		// isBackgroundObj = true;
-		// invisible = true;
 	}
 
 	public void moveParallax(float xParam, float yParam) {
@@ -39,9 +30,4 @@ public class Parallax extends GameObject {
 		image.draw(0, 0, container.getWidth(), container.getHeight(), x, y, x + container.getWidth(),
 				y + container.getHeight());
 	}
-
-	// @Override
-	// public boolean isSolid() {
-	// return true;
-	// }
 }

@@ -77,7 +77,7 @@ public class AimShotGun extends AimBulletWeapon {
 				xTarget += randomAngle.x * STEP;
 				yTarget += randomAngle.y * STEP;
 				for (GameObject go : IceBreaker.all) {
-					if (go.contains(xTarget, yTarget) && !go.invisible) {
+					if (go.contains(xTarget, yTarget) && !go.piercable) {
 						GameObject ricochet = new GameObjectRicochet(go, gunFireStartAtX, gunFireStartAtY, xTarget,
 								yTarget, 0.25f);
 						IceBreaker.objsToAdd.add(ricochet);

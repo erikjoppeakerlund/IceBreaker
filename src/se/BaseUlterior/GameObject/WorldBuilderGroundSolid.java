@@ -16,7 +16,7 @@ public class WorldBuilderGroundSolid extends WorldBuilderGround {
 	public WorldBuilderGroundSolid(float[] nodes) {
 		super(nodes, 2.3f);
 		this.color = Color.transparent;
-		isSolid = true;
+		motionLess = true;
 	}
 
 	@Override

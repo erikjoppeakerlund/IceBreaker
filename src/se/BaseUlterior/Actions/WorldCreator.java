@@ -25,7 +25,7 @@ public class WorldCreator implements ActionListenable {
 	public WorldCreator() {
 		wb = new WorldBuilderGround(new float[0]);
 		wbl = new WorldBuilderLiquid(new float[0], Density.WATER);
-		wbf = new WorldBuilderForce(new float[0], 0.0f, 0.0f, false);
+		wbf = new WorldBuilderForce(new float[0], 0.0f, 0.0f);
 		currentBuilder = wb;
 		IceBreaker.objsToAdd.add(currentBuilder);
 

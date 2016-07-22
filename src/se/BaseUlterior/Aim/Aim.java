@@ -179,7 +179,7 @@ public abstract class Aim {
 			xTarget += arm.x * STEP;
 			yTarget += arm.y * STEP;
 			for (GameObject go : IceBreaker.all) {
-				if (go.contains(xTarget, yTarget) && !(go.invisible)) {
+				if (go.contains(xTarget, yTarget) && !(go.piercable)) {
 					aimAtX = xTarget;
 					aimAtY = yTarget;
 					notFound = false;

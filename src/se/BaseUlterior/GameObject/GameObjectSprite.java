@@ -78,7 +78,7 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 			e.printStackTrace();
 		}
 		initAims();
-		isSolid = false;
+		motionLess = false;
 		HP = 100;
 	}
 

@@ -23,8 +23,8 @@ public class GameObjectSplinter extends GameObjectAgile {
 		color = new Color(0.59f, 0.59f, 0.59f);
 		isBackgroundObj = true;
 		forceUpdate = true;
-		isSolid = false;
-		invisible = true;
+		motionLess = false;
+		piercable = true;
 	}
 
 	@Override

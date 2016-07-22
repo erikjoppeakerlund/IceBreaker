@@ -36,7 +36,7 @@ public class Grenade extends ImagableObject {
 		setX(-270f);
 		setY(-270f);
 		isRotatingObject = true;
-		isSolid = false;
+		motionLess = false;
 	}
 
 	public void initMotion(Vector2 motion) {
@@ -63,10 +63,10 @@ public class Grenade extends ImagableObject {
 
 	@Override
 	public Impact getImpact(GameObject other) {
-		if (!other.isSolid) {
-			return new ImpactBounce(this, other, bouncyness, true);
-		}
-		return null;
+		// if (!other.motionLess) {
+		return new ImpactBounce(this, other, bouncyness, true);
+		// }
+		// return null;
 	}
 
 	@Override

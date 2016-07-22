@@ -64,9 +64,8 @@ public class GroundMap {
 		float[] wholeScene = new float[] { 0.0f, 0.0f, 0.0f, Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL,
 				Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL, 0.0f };
 
-		WorldBuilderForce generalGravity = new WorldBuilderForce(new float[] { 0, 0, 0, Constants.CANVAS_HEIGHT,
-				Constants.CANVAS_WIDTH, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0 }, 0,
-				Constants.GENERAL_GRAVITY, Color.transparent, true);
+		WorldBuilderForce generalGravity = new WorldBuilderForce(wholeScene, 0, Constants.GENERAL_GRAVITY,
+				Color.transparent);
 
 		levelPieces.add(generalGravity);
 

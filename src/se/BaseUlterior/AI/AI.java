@@ -45,7 +45,7 @@ public abstract class AI extends GameObject {
 
 	}
 
-	protected abstract boolean aim();
+	protected abstract void aim();
 
 	protected boolean lookUpClosestTarget() {
 		boolean result = false;
@@ -62,7 +62,7 @@ public abstract class AI extends GameObject {
 					currentAim.set(xDist, yDist);
 					aim.getArm().set(xDist, yDist);
 					aim.updateAim();
-					if (aim.getPointBlank().HP != 0) {
+					if (!aim.getPointBlank().motionLess) {
 						this.target = go;
 						result = true;
 					}
