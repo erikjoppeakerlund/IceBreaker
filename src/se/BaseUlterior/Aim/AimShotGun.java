@@ -25,7 +25,7 @@ public class AimShotGun extends AimBulletWeapon {
 		this.gunFire = gunFire;
 		gunFireFrameWidth = this.gunFire.getCurrentFrame().getWidth();
 		gunFireFrameHeight = this.gunFire.getCurrentFrame().getHeight();
-		recoilPower = 1.4f;
+		recoilPower = 0.2f;
 	}
 
 	@Override
@@ -77,9 +77,9 @@ public class AimShotGun extends AimBulletWeapon {
 				xTarget += randomAngle.x * STEP;
 				yTarget += randomAngle.y * STEP;
 				for (GameObject go : IceBreaker.all) {
-					if (go.contains(xTarget, yTarget) && !go.isBackgroundObj) {
-						GameObject ricochet = new GameObjectRicochet(new Circle(xTarget, yTarget, 29f).getPoints(), go,
-								gunFireStartAtX, gunFireStartAtY, xTarget, yTarget, 0.25f);
+					if (go.contains(xTarget, yTarget) && !go.invisible) {
+						GameObject ricochet = new GameObjectRicochet(go, gunFireStartAtX, gunFireStartAtY, xTarget,
+								yTarget, 0.25f);
 						IceBreaker.objsToAdd.add(ricochet);
 						notFound = false;
 						break;
@@ -88,7 +88,7 @@ public class AimShotGun extends AimBulletWeapon {
 			}
 		}
 		recoil = new GameObjectExplosion(new Circle(xGrip, yGrip, START_ARM_LENGTH * 1.5f).getPoints(), recoilPower,
-				Color.transparent);
+				Color.transparent, true);
 		IceBreaker.objsToAdd.add(recoil);
 
 	}

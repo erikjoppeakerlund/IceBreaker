@@ -99,11 +99,11 @@ public abstract class AimBulletWeapon extends Aim {
 	protected void wasShoot() {
 		wasJustShoot = true;
 		armLengt -= BACK_FIRE;
-		GameObject ricochet = new GameObjectRicochet(new Circle(aimAtX, aimAtY, 29f).getPoints(), pointBlank,
-				gunFireStartAtX, gunFireStartAtY, aimAtX, aimAtY, weight);
+		GameObject ricochet = new GameObjectRicochet(pointBlank, gunFireStartAtX, gunFireStartAtY, aimAtX, aimAtY,
+				weight);
 		IceBreaker.objsToAdd.add(ricochet);
 		recoil = new GameObjectExplosion(new Circle(xGrip, yGrip, START_ARM_LENGTH * 1.5f).getPoints(), recoilPower,
-				Color.transparent);
+				Color.transparent, true);
 		IceBreaker.objsToAdd.add(recoil);
 	}
 
@@ -149,7 +149,7 @@ public abstract class AimBulletWeapon extends Aim {
 			xTarget += arm.x * STEP;
 			yTarget += arm.y * STEP;
 			for (GameObject go : IceBreaker.all) {
-				if (go.contains(xTarget, yTarget) && !go.isBackgroundObj) {
+				if (go.contains(xTarget, yTarget) && !(go.invisible)) {
 					aimAtX = xTarget;
 					aimAtY = yTarget;
 					notFound = false;

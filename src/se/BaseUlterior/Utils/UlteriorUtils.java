@@ -8,7 +8,6 @@ import org.newdawn.slick.geom.Shape;
 import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectExplosion;
-import se.BaseUlterior.GameObject.WorldBuilderForce;
 import se.BaseUlterior.GameObject.WorldBuilderGround;
 
 /**
@@ -46,13 +45,6 @@ public class UlteriorUtils {
 		return (int) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 	}
 
-	public static void createVisualPointAt(float pointX, float pointY) {
-		float fat = 3.0f;
-		GameObject point = new WorldBuilderForce(new float[] { pointX - fat, pointY - fat, pointX - fat, pointY + fat,
-				pointX + fat, pointY + fat, pointX + fat, pointY - fat });
-		IceBreaker.objsToAdd.add(point);
-	}
-
 	public static void cleanUpImpactFromWorldBuilderObject(GameObject clearWhichBelongToThis) {
 		for (GameObject go : IceBreaker.all) {
 			go.removeCurrentImpactsWhichBelingTo(clearWhichBelongToThis);
@@ -63,7 +55,8 @@ public class UlteriorUtils {
 	 * Not current used, due to game play decision.
 	 */
 	public static void removeGroundReal(float x, float y, float sizeOfExplostion, GameObject origin) {
-		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion, 8).getPoints(), 0f);
+		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion, 8).getPoints(), 0f,
+				false);
 		IceBreaker.objsToAdd.add(explotionShape);
 		ArrayList<GameObject> newShapes = new ArrayList<>();
 		boolean wasFound = false;
@@ -104,7 +97,8 @@ public class UlteriorUtils {
 	}
 
 	public static void removeGround(float x, float y, float sizeOfExplostion, GameObject origin) {
-		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion).getPoints(), 0.29f);
+		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion).getPoints(), 0.29f,
+				false);
 		IceBreaker.objsToAdd.add(explotionShape);
 	}
 }

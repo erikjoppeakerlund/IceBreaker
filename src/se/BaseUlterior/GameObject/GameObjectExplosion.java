@@ -21,22 +21,23 @@ public class GameObjectExplosion extends GameObject {
 	protected long timeSinceCreation;
 	private float power;
 
-	public GameObjectExplosion(float[] nodes, float power, Color color) {
-		super(nodes);
+	public GameObjectExplosion(float[] nodes, float power, Color color, boolean isBackground) {
+		super(nodes, isBackground, true, false, true, false, false);
 		this.power = power;
 		this.color = color;
 		this.timeSinceCreation = System.currentTimeMillis();
-		forceUpdate = true;
-		isBackgroundObj = true;
 	}
 
-	public GameObjectExplosion(float[] nodes, float power) {
-		super(nodes);
+	public GameObjectExplosion(float[] nodes, float power, boolean isBackground) {
+		super(nodes, isBackground, true, false, true, false, false);
+		init(power);
+	}
+
+	private void init(float power) {
 		this.power = power;
 		this.color = new Color(1, 0, 0, 0.39f);
 		this.timeSinceCreation = System.currentTimeMillis();
-		forceUpdate = true;
-		isBackgroundObj = true;
+
 	}
 
 	@Override

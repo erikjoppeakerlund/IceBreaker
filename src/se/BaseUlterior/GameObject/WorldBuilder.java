@@ -14,9 +14,10 @@ import se.BaseUlterior.Physics.Impact;
  */
 public abstract class WorldBuilder extends GameObject {
 
-	public WorldBuilder(float[] nodes) {
-		super(nodes);
-
+	protected WorldBuilder(float[] points, boolean isBackgroundObj, boolean invisible, boolean isRotatingObject,
+			boolean forceUpdate, boolean forceRender, boolean isSolid) {
+		super(points, isBackgroundObj, invisible, isRotatingObject, forceUpdate, forceRender, isSolid);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override

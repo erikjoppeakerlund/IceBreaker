@@ -15,9 +15,8 @@ public abstract class WorldBuilderMateriaFirm extends WorldBuilder {
 
 	protected boolean underImpact;
 
-	// protected float bouncyness;
 	public WorldBuilderMateriaFirm(float[] nodes) {
-		super(nodes);
+		super(nodes, false, false, false, false, false, true);
 	}
 
 	@Override
@@ -62,7 +61,7 @@ public abstract class WorldBuilderMateriaFirm extends WorldBuilder {
 	private void checkImpact() {
 		for (GameObject go : IceBreaker.all) {
 
-			if (go == this) {
+			if (go == this || (go.isSolid && this.isSolid)) {
 				continue;
 			}
 

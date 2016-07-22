@@ -16,9 +16,10 @@ public abstract class Info extends GameObject {
 	// return true;
 	// }
 	public Info() {
-		super();
-		isSolid = true;
-		forceRender = true;
+		super(new float[0], false, false, false, false, true, true);
+		// super();
+		// isSolid = true;
+		// forceRender = true;
 	}
 
 	public List<TextInfo> textInfos = new ArrayList<>();

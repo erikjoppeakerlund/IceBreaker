@@ -31,12 +31,14 @@ public abstract class GameObject extends Polygon {
 	protected Color color;
 	protected Vector2 motion = null;
 	public int maxRadiusStart;
-	public boolean isBackgroundObj = false;
 	protected float bouncyness;
-	public boolean noForce = true;
+	public boolean isBackgroundObj = false;
+	public boolean invisible = false;
 	public boolean isRotatingObject = false;
-	public float rotation;
 	public boolean forceRender = false;
+	public boolean forceUpdate = false;
+	public boolean isSolid = true;
+	public float rotation;
 
 	public Vector2 getMotion() {
 		return motion;
@@ -49,28 +51,18 @@ public abstract class GameObject extends Polygon {
 		maxRadiusStart = (int) getBoundingCircleRadius();
 	}
 
-	/**
-	 * Construct a new polygon with 3 or more points. This constructor will take
-	 * the first set of points and copy them after the last set of points to
-	 * create a closed shape.
-	 * 
-	 * @param points
-	 *            An array of points in x, y order.
-	 */
-	public GameObject(float points[]) {
+	protected GameObject(float[] points, boolean isBackgroundObj, boolean invisible, boolean isRotatingObject,
+			boolean forceUpdate, boolean forceRender, boolean isSolid) {
 		super(points);
 		init();
+		this.isBackgroundObj = isBackgroundObj;
+		this.invisible = invisible;
+		this.isRotatingObject = isRotatingObject;
+		this.forceRender = forceRender;
+		this.forceUpdate = forceUpdate;
+		this.isSolid = isSolid;
 
-	}
-
-	/**
-	 * Create an empty polygon
-	 *
-	 */
-	public GameObject() {
-		super();
-		init();
-	}
+	};
 
 	/**
 	 * Get the normal of the line between two points
@@ -204,12 +196,6 @@ public abstract class GameObject extends Polygon {
 	public Impact getImpact(GameObject agileObject) {
 		return null;
 	}
-
-	public boolean forceUpdate = false;
-	public boolean isSolid = false;
-	// public boolean isSolid() {
-	// return false;
-	// }
 
 	public void wasActionStateSet(Action action) {
 	}

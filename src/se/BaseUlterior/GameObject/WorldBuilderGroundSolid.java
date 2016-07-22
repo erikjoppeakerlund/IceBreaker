@@ -17,6 +17,7 @@ public class WorldBuilderGroundSolid extends WorldBuilderGround {
 	public WorldBuilderGroundSolid(float[] nodes) {
 		super(nodes, 2.3f);
 		this.color = Color.transparent;
+		isSolid = true;
 	}
 
 	@Override
@@ -26,8 +27,6 @@ public class WorldBuilderGroundSolid extends WorldBuilderGround {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		// graphics.setColor(this.color);
-		// graphics.fill(this);
 	}
 
 }

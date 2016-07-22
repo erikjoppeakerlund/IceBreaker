@@ -13,7 +13,6 @@ import org.newdawn.slick.geom.Circle;
 import se.BaseUlterior.Actions.Action;
 import se.BaseUlterior.Actions.ActionListenable;
 import se.BaseUlterior.Actions.ActionListenablers;
-import se.BaseUlterior.Actions.WorldCreator;
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Context.GameInfo;
 import se.BaseUlterior.Context.Info;
@@ -66,7 +65,7 @@ public class IceBreaker extends BasicGame {
 
 	private GameObject toolbox;
 
-	private WorldCreator worldCreator = null;
+	// private WorldCreator worldCreator = null;
 
 	private List<ActionListenable> actionListeners;
 
@@ -96,7 +95,7 @@ public class IceBreaker extends BasicGame {
 		patternHeight = container.getHeight();
 
 		actionListeners = new ArrayList<>();
-		actionListeners.add(worldCreator);
+		// actionListeners.add(worldCreator);
 		parallaxList = new ArrayList<>();
 		IceBreaker.all = new ArrayList<>();
 		IceBreaker.objsToAdd = new ArrayList<>();
@@ -143,7 +142,7 @@ public class IceBreaker extends BasicGame {
 		AppGameContainer appGameContainer = new AppGameContainer(new IceBreaker("ICE:BREAKER"));
 		int maxFPS = 60;
 		appGameContainer.setTargetFrameRate(maxFPS);
-		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, true);
+		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, false);
 		appGameContainer.setAlwaysRender(true);
 		appGameContainer.start();
 
@@ -184,12 +183,12 @@ public class IceBreaker extends BasicGame {
 			parallax.moveParallax(currentX, currentY);
 		}
 		for (GameObject go : IceBreaker.all) {
-			if (!go.isSolid) {
+			if (!go.isBackgroundObj) {
 				go.setX(go.getX() - x);
 			}
 		}
 		for (GameObject go : IceBreaker.all) {
-			if (!go.isSolid) {
+			if (!go.isBackgroundObj) {
 				go.setY(go.getY() - y);
 			}
 		}

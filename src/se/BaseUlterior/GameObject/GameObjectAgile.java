@@ -19,7 +19,6 @@ public abstract class GameObjectAgile extends WorldBuilderMateriaFirm {
 	public GameObjectAgile(float[] nodes, float bouncyness) {
 		super(nodes);
 		this.bouncyness = bouncyness;
-		noForce = false;
 		forceUpdate = true;
 	}
 
@@ -38,13 +37,6 @@ public abstract class GameObjectAgile extends WorldBuilderMateriaFirm {
 	public float getBouncyness() {
 		return this.bouncyness;
 	}
-	//
-	// @Override
-	// public void render(GameContainer container, Graphics graphics) throws
-	// SlickException {
-	// graphics.setColor(this.color);
-	// graphics.fill(this);
-	// }
 
 	public void addImpact(Impact im) {
 		currentImpacts.add(im);
@@ -54,13 +46,5 @@ public abstract class GameObjectAgile extends WorldBuilderMateriaFirm {
 	public Shape[] subtract(Shape other) {
 		return new Shape[0];
 	}
-
-	// public void removeCurrentImpactsWhichBelingTo(GameObject go) {
-	// for (Impact im : currentImpacts) {
-	// if (im.getTrigger() == go || im.getAffected() == go) {
-	// removeImpact(im);
-	// }
-	// }
-	// }
 
 }

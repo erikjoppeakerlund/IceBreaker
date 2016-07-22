@@ -35,30 +35,26 @@ public abstract class Component extends GameObject {
 	protected int verticalFloat;
 
 	public Component(float width, float height) {
-		super(new float[] { 0, 0, width, 0, width, height, 0, height });
+		super(new float[] { 0, 0, width, 0, width, height, 0, height }, true, true, false, true, false, true);
 		init();
 	}
 
 	public Component(float[] points) {
-		super(points);
+		super(points, true, true, false, true, false, true);
 		init();
 	}
 
 	private void init() {
-		isSolid = true;
 		checkStacking();
 		subs = new ArrayList<>();
 		forcedHeight = (int) getHeight();
 		forcedWidth = (int) getWidth();
-		isBackgroundObj = true;
-		forceUpdate = true;
 	}
 
 	public void add(Component component) {
 		this.subs.add(component);
 		this.stack();
 		IceBreaker.objsToAdd.add(component);
-		// this.parent = parent;
 	}
 
 	private void checkStacking() {
@@ -148,10 +144,6 @@ public abstract class Component extends GameObject {
 		this.marginY = marginY;
 	}
 
-	private void wasBreakingLine() {
-
-	}
-
 	public void pack() {
 		for (Component comp : subs) {
 			comp.finalAction();
@@ -179,11 +171,6 @@ public abstract class Component extends GameObject {
 	public Shape[] subtract(Shape other) {
 		return new Shape[0];
 	}
-
-	// @Override
-	// public boolean isSolid() {
-	// return true;
-	// }
 
 	@Override
 	public void wasActionStateSet(Action action) {

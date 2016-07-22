@@ -5,10 +5,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 public class GameObjectEmpty extends GameObject {
-	// @Override
-	// public boolean isSolid() {
-	// return true;
-	// }
 
 	@Override
 	public void update(GameContainer container, int arg) throws SlickException {
@@ -17,9 +13,7 @@ public class GameObjectEmpty extends GameObject {
 	}
 
 	public GameObjectEmpty(float[] points) {
-		super(points);
-		isBackgroundObj = true;
-		isSolid = true;
+		super(points, true, true, false, false, false, true);
 	}
 
 	@Override

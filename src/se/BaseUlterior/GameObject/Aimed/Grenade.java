@@ -33,11 +33,11 @@ public class Grenade extends ImagableObject {
 
 	public Grenade(float[] nodes) {
 		super(nodes, BOUNCYNESS, "res/img/grenade.png");
-		// color = Constants.THEME_COLOR;
 		color = Color.darkGray;
 		setX(-270f);
 		setY(-270f);
 		isRotatingObject = true;
+		isSolid = false;
 	}
 
 	public void initMotion(Vector2 motion) {
@@ -64,7 +64,7 @@ public class Grenade extends ImagableObject {
 
 	@Override
 	public Impact getImpact(GameObject other) {
-		if (!other.isBackgroundObj) {
+		if (!other.isSolid) {
 			return new ImpactBounce(this, other, bouncyness, true);
 		}
 		return null;

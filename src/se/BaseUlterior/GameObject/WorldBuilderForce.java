@@ -20,26 +20,35 @@ public class WorldBuilderForce extends WorldBuilder {
 	protected float gravityY;
 	protected float gravityX;
 
-	public WorldBuilderForce(float[] nodes) {
-		super(nodes);
-		isBackgroundObj = true;
+	public WorldBuilderForce(float[] nodes, boolean isBackground) {
+		super(nodes, isBackground, true, false, false, false, true);
+		// super(nodes);
+		// isBackgroundObj = isBackground;
+		// isSolid = true;
 		this.color = new Color(0, 1, 0, 0.19f);
+		// invisible = true;
 	}
 
-	public WorldBuilderForce(float[] nodes, float gravityX, float gravityY) {
-		super(nodes);
-		isBackgroundObj = true;
+	public WorldBuilderForce(float[] nodes, float gravityX, float gravityY, boolean isBackground) {
+		super(nodes, isBackground, true, false, false, false, true);
+		// super(nodes);
+		// isBackgroundObj = isBackground;
+		// isSolid = true;
 		this.gravityX = gravityX;
 		this.gravityY = gravityY;
 		this.color = new Color(0, 1, 0, 0.19f);
+		// invisible = true;
 	}
 
-	public WorldBuilderForce(float[] nodes, float gravityX, float gravityY, Color color) {
-		super(nodes);
-		isBackgroundObj = true;
+	public WorldBuilderForce(float[] nodes, float gravityX, float gravityY, Color color, boolean isBackground) {
+		super(nodes, isBackground, true, false, false, false, true);
+		// super(nodes);
+		isBackgroundObj = isBackground;
+		// isSolid = true;
 		this.gravityX = gravityX;
 		this.gravityY = gravityY;
 		this.color = color;
+		// invisible = true;
 	}
 
 	@Override

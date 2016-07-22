@@ -7,6 +7,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Circle;
 
 import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.Geom.Vector2;
@@ -34,11 +35,9 @@ public class GameObjectRicochet extends GameObject {
 	private float startX;
 	private float startY;
 
-	public GameObjectRicochet(float[] fs, GameObject target, float gunFireStartAtX, float gunFireStartAtY, float aimAtX,
+	public GameObjectRicochet(GameObject target, float gunFireStartAtX, float gunFireStartAtY, float aimAtX,
 			float aimAtY, float weight) {
-		super(fs);
-		forceRender = true;
-		forceUpdate = true;
+		super(new float[] { aimAtX, aimAtY }, false, true, false, true, true, true);
 		this.target = target;
 		this.gunFireStartAtX = gunFireStartAtX;
 		this.gunFireStartAtY = gunFireStartAtY;
@@ -48,8 +47,6 @@ public class GameObjectRicochet extends GameObject {
 		this.LIFE_SPAN_LIMIT *= weight;
 		startX = getX();
 		startY = getY();
-		isBackgroundObj = true;
-
 	}
 
 	@Override
@@ -79,7 +76,7 @@ public class GameObjectRicochet extends GameObject {
 
 	private void runEffect() {
 
-		normals = target.getMyNormalsAfterHitBy(this);
+		normals = target.getMyNormalsAfterHitBy(new GameObjectEmpty(new Circle(x, y, 29f).getPoints()));
 		if (normals.isEmpty()) {
 			return;
 		}
