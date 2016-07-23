@@ -120,7 +120,9 @@ public class IceBreaker extends BasicGame {
 		TurretPlacer turretPlacer = new TurretPlacer();
 
 		for (GameObject groundPiece : levelDummy.levelPieces) {
-			turretPlacer.placeTurretsOnMe(groundPiece);
+			if (!groundPiece.piercable) {
+				turretPlacer.placeTurretsOnMe(groundPiece);
+			}
 		}
 		toolbox = new ToolBox(Alignment.LEFT);
 		((Component) toolbox).pack();

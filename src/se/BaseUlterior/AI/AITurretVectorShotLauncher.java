@@ -19,18 +19,22 @@ public class AITurretVectorShotLauncher extends AITurret {
 
 	@Override
 	protected void shoot() {
-		// TODO Auto-generated method stub
-
+		aim.setPointBlank(target);
+		aim.setAimAt(target.getCenterX(), target.getCenterY());
+		aim.shoot();
 	}
 
 	@Override
 	protected void aim() {
+		// aiming = true;
+		// shootAt = (int) (aim.getArm().getTheta() * Math.random() * 2f - 1);
 
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
 		aim.render(container, graphics);
+		graphics.draw(this);
 	}
 
 }

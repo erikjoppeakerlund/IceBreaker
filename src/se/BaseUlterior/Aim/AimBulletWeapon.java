@@ -96,6 +96,11 @@ public abstract class AimBulletWeapon extends Aim {
 
 	}
 
+	@Override
+	public void shoot() {
+		wasShoot();
+	}
+
 	protected void wasShoot() {
 		wasJustShoot = true;
 		armLengt -= BACK_FIRE;
