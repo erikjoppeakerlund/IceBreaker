@@ -21,20 +21,20 @@ public class WorldBuilderLiquid extends WorldBuilder {
 	protected float frictionAmount;
 
 	public WorldBuilderLiquid(float[] nodes) {
-		super(nodes, false, true, false, false, false, false);
+		super(nodes, false, true, false, false, false, true);
 		this.density = Density.WATER;
 		piercable = true;
 	}
 
 	public WorldBuilderLiquid(float[] nodes, Density density) {
-		super(nodes, false, true, false, false, false, false);
+		super(nodes, false, true, false, false, false, true);
 		this.density = density;
 		init();
 		piercable = true;
 	}
 
 	public WorldBuilderLiquid(float[] nodes, Density density, boolean isBackground) {
-		super(nodes, false, true, false, false, false, false);
+		super(nodes, false, true, false, false, false, true);
 		this.density = density;
 		init();
 	}

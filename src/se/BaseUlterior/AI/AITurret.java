@@ -19,7 +19,7 @@ public abstract class AITurret extends GameObject {
 	protected GameObject target;
 
 	protected Vector2 startAngle;
-	protected final int UPDATE_SPEED = 90;
+	protected final int UPDATE_SPEED = 127;
 	protected Vector2 aimArm;
 
 	protected int timeSinceLast;
@@ -88,9 +88,7 @@ public abstract class AITurret extends GameObject {
 				if (distanceTest < distanceToClosestTarget) {
 					distanceToClosestTarget = distanceTest;
 					injectVector.set(xDist, yDist);
-					injectVector.normalise();
 					aim.setAngleToMouse((float) injectVector.getTheta());
-					this.target = go;
 					if (dotProduct > 0) {
 						result = true;
 					}

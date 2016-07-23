@@ -4,30 +4,23 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
-import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Geom.Vector2;
 
 public class AITurretVectorShotLauncher extends AITurret {
 
-	private float vectorShotSpeed;
-
 	public AITurretVectorShotLauncher(float[] points, Vector2 startangle) {
 		super(points, startangle);
-		vectorShotSpeed = Constants.VECTOR_SHOOOT_SPEED;
 		this.color = Color.red;
 	}
 
 	@Override
 	protected void shoot() {
-		aim.setPointBlank(target);
-		aim.setAimAt(target.getCenterX(), target.getCenterY());
+		aim.updateAim();
 		aim.shoot();
 	}
 
 	@Override
 	protected void aim() {
-		// aiming = true;
-		// shootAt = (int) (aim.getArm().getTheta() * Math.random() * 2f - 1);
 
 	}
 
