@@ -13,11 +13,13 @@ public class ImpactExplosion extends Impact {
 
 	private Vector2 returnValue;
 	private float power;
+	private float size;
 
-	public ImpactExplosion(GameObject origin, GameObject other, float power) {
+	public ImpactExplosion(GameObject origin, GameObject other, float power, float size) {
 		super(origin, other);
 		returnValue = new Vector2();
 		this.power = power;
+		this.size = size;
 	}
 
 	@Override
@@ -31,7 +33,7 @@ public class ImpactExplosion extends Impact {
 		float distanceX = agileX - expX;
 		float distanceY = agileY - expY;
 
-		float maxImpact = origin.getBoundingCircleRadius();
+		float maxImpact = size;
 
 		returnValue.set(distanceX, distanceY);
 

@@ -21,14 +21,14 @@ public class GameObjectExplosion extends GameObject {
 	private float power;
 
 	public GameObjectExplosion(float[] nodes, float power, Color color, boolean isBackground) {
-		super(nodes, false, true, false, true, false, false);
+		super(nodes, false, true, false, true, false, true);
 		this.power = power;
 		this.color = color;
 		this.timeSinceCreation = System.currentTimeMillis();
 	}
 
 	public GameObjectExplosion(float[] nodes, float power, boolean isBackground) {
-		super(nodes, false, true, false, true, false, false);
+		super(nodes, false, true, false, true, false, true);
 		init(power);
 	}
 
@@ -41,7 +41,7 @@ public class GameObjectExplosion extends GameObject {
 
 	@Override
 	public Impact getImpact(GameObject agileObject) {
-		return new ImpactExplosion(this, agileObject, power);
+		return new ImpactExplosion(this, agileObject, power, getBoundingCircleRadius());
 	}
 
 	@Override
