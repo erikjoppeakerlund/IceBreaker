@@ -30,6 +30,6 @@ public class Constants {
 	public static final float GENERA_OBJECT_MAX_SPEED = 1f;
 
 	public static final float VECTOR_SHOOOT_SPEED = 0.5f;
-	public static final float TURRETS_DISTANCE = 350;
+	public static final float TURRETS_DISTANCE = 460;
 
 }

@@ -16,7 +16,7 @@ public abstract class AITurret extends GameObject {
 	protected GameObject target;
 
 	protected Vector2 startAngle;
-	protected final int UPDATE_SPEED = 40;
+	protected final int UPDATE_SPEED = 90;
 	protected Vector2 aimArm;
 
 	protected int timeSinceLast;
@@ -29,22 +29,19 @@ public abstract class AITurret extends GameObject {
 		aim.setPosition(getCenterX(), getCenterY());
 		aimArm = aim.getArm();
 		timeSinceLast = (int) (Math.random() * UPDATE_SPEED);
+		aim.setAngleToMouse((float) startangle.getTheta());
 	}
 
 	@Override
 	public void update(GameContainer container, int arg) {
-		// if (timeSinceLast > UPDATE_SPEED) {
-
 		itr++;
 		if (lookUpClosestTarget()) {
-			// // aim();
 			if (itr % UPDATE_SPEED == 0) {
 				shoot();
+				itr = 0;
 			}
-			// timeSinceLast = 0;
-			// }
-			// } else {
-			// timeSinceLast++;
+		} else {
+			timeSinceLast++;
 		}
 		aim.setPosition(getCenterX(), getCenterY());
 		aim.update(container, arg);
@@ -60,25 +57,22 @@ public abstract class AITurret extends GameObject {
 		boolean result = false;
 		float distanceToClosestTarget = Constants.CANVAS_WIDTH;
 		for (GameObject go : IceBreaker.all) {
-			// more or less than zero? NOTE: CRITICAL!
-			// if (UlteriorUtils.isWithinRange(go, IceBreaker.wholeSceene) &&
-			// aim.getArm().dot(startAngle) > 0.0f) {
+			float dotProduct = aimArm.dot(startAngle);
 			if (UlteriorUtils.isWithinRange(go, IceBreaker.wholeSceene) && !go.motionLess && !go.isBackgroundObj
 					&& go != this) {
 				float xDist = go.getCenterX() - this.getCenterX();
 				float yDist = go.getCenterY() - this.getCenterY();
 				float distanceTest = (float) Math
 						.sqrt((Math.pow(go.getX() - this.getX(), 2) + Math.pow(go.getY() - this.getY(), 2)));
-				// System.out.println(distanceTest);
 				if (distanceTest < distanceToClosestTarget) {
 					distanceToClosestTarget = distanceTest;
 					injectVector.set(xDist, yDist);
 					injectVector.normalise();
 					aim.setAngleToMouse((float) injectVector.getTheta());
-					// aimArm.set(injectVector);
-
 					this.target = go;
-					result = true;
+					if (dotProduct > 0) {
+						result = true;
+					}
 				}
 			}
 		}

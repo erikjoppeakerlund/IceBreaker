@@ -29,7 +29,6 @@ public class AimTurret extends AimBulletWeapon {
 
 		xAim = getXAimFromDistanceAt(armLengt * 3);
 		yAim = getYAimFromDistanceAt(armLengt * 3);
-
 		startShotX = getXAimFromDistanceAt(armLengt);
 		startShotY = getYAimFromDistanceAt(armLengt);
 
@@ -47,5 +46,4 @@ public class AimTurret extends AimBulletWeapon {
 		}
 
 	}
-
 }
