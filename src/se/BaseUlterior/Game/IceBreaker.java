@@ -10,6 +10,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 
+import se.BaseUlterior.AI.TurretPlacer;
 import se.BaseUlterior.Actions.Action;
 import se.BaseUlterior.Actions.ActionListenable;
 import se.BaseUlterior.Actions.ActionListenablers;
@@ -115,6 +116,12 @@ public class IceBreaker extends BasicGame {
 		sprite = spriteDesktop;
 
 		IceBreaker.objsToAdd.addAll(levelDummy.levelPieces);
+
+		TurretPlacer turretPlacer = new TurretPlacer();
+
+		for (GameObject groundPiece : levelDummy.levelPieces) {
+			turretPlacer.placeTurretsOnMe(groundPiece);
+		}
 		toolbox = new ToolBox(Alignment.LEFT);
 		((Component) toolbox).pack();
 		IceBreaker.objsToAdd.add(info);
@@ -124,7 +131,8 @@ public class IceBreaker extends BasicGame {
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		for (GameObject go : IceBreaker.all) {
-			if (UlteriorUtils.isWithinRange(go, sprite) || go.forceUpdate) {
+			// if (UlteriorUtils.isWithinRange(go, sprite) || go.forceUpdate) {
+			if (UlteriorUtils.isWithinRange(go, wholeSceene) || go.forceUpdate) {
 				go.update(container, delta);
 			}
 		}
@@ -142,7 +150,7 @@ public class IceBreaker extends BasicGame {
 		AppGameContainer appGameContainer = new AppGameContainer(new IceBreaker("ICE:BREAKER"));
 		int maxFPS = 60;
 		appGameContainer.setTargetFrameRate(maxFPS);
-		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, false);
+		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, true);
 		appGameContainer.setAlwaysRender(true);
 		appGameContainer.start();
 

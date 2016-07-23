@@ -41,7 +41,7 @@ public class GameObjectExplosion extends GameObject {
 
 	@Override
 	public Impact getImpact(GameObject agileObject) {
-		return new ImpactExplosion(this, agileObject, power);
+		return new ImpactExplosion(this, agileObject, power, getBoundingCircleRadius());
 	}
 
 	@Override

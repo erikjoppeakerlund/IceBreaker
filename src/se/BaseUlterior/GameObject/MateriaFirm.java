@@ -78,10 +78,6 @@ public abstract class MateriaFirm extends WorldBuilder {
 						Impact im = go.getImpact(this);
 						if (im != null) {
 							currentImpacts.add(im);
-						} else {
-							System.out.println(this.getClass().getSimpleName());
-							System.out.println(go.getClass().getSimpleName());
-							System.out.println();
 						}
 						underImpact = true;
 					}
