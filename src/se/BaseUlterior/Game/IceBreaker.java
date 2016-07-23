@@ -102,8 +102,7 @@ public class IceBreaker extends BasicGame {
 		objsToRemove = new ArrayList<>();
 
 		actions = new ActionListenablers();
-		wholeSceene = new GameObjectEmpty(new float[] { 0, 0, 0, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH,
-				Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0 });
+		wholeSceene = new GameObjectEmpty(new float[] { 0, 0, 0, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0 });
 		IceBreaker.objsToAdd.add(wholeSceene);
 
 		LevelDummy levelDummy = new LevelDummy();
@@ -142,7 +141,7 @@ public class IceBreaker extends BasicGame {
 		AppGameContainer appGameContainer = new AppGameContainer(new IceBreaker("ICE:BREAKER"));
 		int maxFPS = 60;
 		appGameContainer.setTargetFrameRate(maxFPS);
-		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, false);
+		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, true);
 		appGameContainer.setAlwaysRender(true);
 		appGameContainer.start();
 

@@ -16,9 +16,9 @@ import se.BaseUlterior.Physics.ImpactBounce;
 public abstract class GameObjectAgile extends MateriaFirm {
 	protected boolean underImpact = false;
 
-	public GameObjectAgile(float[] nodes, float bouncyness) {
+	public GameObjectAgile(float[] nodes, float bounciness) {
 		super(nodes);
-		this.bouncyness = bouncyness;
+		this.bounciness = bounciness;
 		forceUpdate = true;
 	}
 
@@ -31,11 +31,11 @@ public abstract class GameObjectAgile extends MateriaFirm {
 
 	@Override
 	public Impact getImpact(GameObject other) {
-		return new ImpactBounce(this, other, bouncyness, true);
+		return new ImpactBounce(this, other, bounciness, true);
 	}
 
-	public float getBouncyness() {
-		return this.bouncyness;
+	public float getBounciness() {
+		return this.bounciness;
 	}
 
 	public void addImpact(Impact im) {

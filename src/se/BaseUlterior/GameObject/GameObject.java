@@ -30,7 +30,7 @@ public abstract class GameObject extends Polygon {
 	protected Color color;
 	protected Vector2 motion = null;
 	public int maxRadiusStart;
-	protected float bouncyness;
+	protected float bounciness;
 	public boolean isBackgroundObj = false;
 	public boolean piercable = false;
 	public boolean isRotatingObject = false;

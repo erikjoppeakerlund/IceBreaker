@@ -23,8 +23,8 @@ public abstract class ImagableObject extends GameObjectAgile {
 
 	protected Vector2 angle;
 
-	public ImagableObject(float[] nodes, float bouncyness, String pathToImage) {
-		super(nodes, bouncyness);
+	public ImagableObject(float[] nodes, float bounciness, String pathToImage) {
+		super(nodes, bounciness);
 		init(pathToImage);
 	}
 

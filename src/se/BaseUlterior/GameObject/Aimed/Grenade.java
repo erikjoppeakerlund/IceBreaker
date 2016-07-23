@@ -21,7 +21,7 @@ public class Grenade extends ImagableObject {
 	public static final int GRENADE_SIZE = 64;
 	private boolean isReleased = false;
 
-	private static float BOUNCYNESS = 0.9f;
+	private static float BOUNCINESS = 0.5f;
 	protected long wasReleasedAt;
 
 	protected final long TIME_UNTIL_EXPLOTION = 2500;
@@ -31,7 +31,7 @@ public class Grenade extends ImagableObject {
 	protected int sizeOfExplostion = 319;
 
 	public Grenade(float[] nodes) {
-		super(nodes, BOUNCYNESS, "res/img/grenade.png");
+		super(nodes, BOUNCINESS, "res/img/grenade.png");
 		color = Color.darkGray;
 		setX(-270f);
 		setY(-270f);
@@ -64,7 +64,7 @@ public class Grenade extends ImagableObject {
 	@Override
 	public Impact getImpact(GameObject other) {
 		// if (!other.motionLess) {
-		return new ImpactBounce(this, other, bouncyness, true);
+		return new ImpactBounce(this, other, bounciness, true);
 		// }
 		// return null;
 	}

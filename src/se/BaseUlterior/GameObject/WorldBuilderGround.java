@@ -21,14 +21,14 @@ public class WorldBuilderGround extends MateriaFirm {
 		this.color = Color.white;
 	}
 
-	public WorldBuilderGround(float[] nodes, float extraBouncyness) {
+	public WorldBuilderGround(float[] nodes, float extraBounciness) {
 		super(nodes);
 		this.color = Color.darkGray;
 	}
 
 	@Override
 	public Impact getImpact(GameObject piece) {
-		return new ImpactBounce(this, piece, piece.bouncyness, false);
+		return new ImpactBounce(this, piece, piece.bounciness, false);
 	}
 
 	@Override
