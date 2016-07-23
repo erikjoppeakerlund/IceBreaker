@@ -34,7 +34,6 @@ public class AITurretVectorShotLauncher extends AITurret {
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
 		aim.render(container, graphics);
-		graphics.draw(this);
 	}
 
 }

@@ -1,6 +1,9 @@
 package se.BaseUlterior.AI;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 
 import se.BaseUlterior.Aim.Aim;
 import se.BaseUlterior.Aim.AimTurret;
@@ -22,14 +25,32 @@ public abstract class AITurret extends GameObject {
 	protected int timeSinceLast;
 	private int itr;
 
+	private SpriteSheet gunFire = null;
+	private Animation animationGunfire = null;
+
+	private int gunFireFrameWidth;
+	private int gunFireFrameHeight;
+
 	public AITurret(float[] points, Vector2 startangle) {
 		super(points, false, false, false, false, false, true);
-		this.aim = new AimTurret();
+
+		try {
+			gunFire = new SpriteSheet("res/img/GUNFIREsimple.png", 96, 96);
+			animationGunfire = new Animation(gunFire, 10);
+			animationGunfire.setAutoUpdate(false);
+			gunFireFrameWidth = animationGunfire.getCurrentFrame().getWidth();
+			gunFireFrameHeight = animationGunfire.getCurrentFrame().getHeight();
+			gunFire.setCenterOfRotation(gunFireFrameWidth / 2f, gunFireFrameHeight / 2f);
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+		this.aim = new AimTurret(animationGunfire);
 		this.startAngle = startangle;
 		aim.setPosition(getCenterX(), getCenterY());
 		aimArm = aim.getArm();
 		timeSinceLast = (int) (Math.random() * UPDATE_SPEED);
 		aim.setAngleToMouse((float) startangle.getTheta());
+
 	}
 
 	@Override
