@@ -4,7 +4,6 @@ import org.newdawn.slick.GameContainer;
 
 import se.BaseUlterior.Aim.Aim;
 import se.BaseUlterior.Aim.AimTurret;
-import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Geom.Vector2;
@@ -28,12 +27,12 @@ public abstract class AITurret extends GameObject {
 
 	@Override
 	public void update(GameContainer container, int arg) {
-		// if (UlteriorUtils.isWithinRange(IceBreaker.wholeSceene, this)) {
-		// if (lookUpClosestTarget()) {
-		// aim();
-		// shoot();
-		// }
-		// }
+		if (UlteriorUtils.isWithinRange(IceBreaker.wholeSceene, this)) {
+			if (lookUpClosestTarget()) {
+				aim();
+				shoot();
+			}
+		}
 		aim.spriteX = getCenterX();
 		aim.spriteY = getCenterY();
 	}
@@ -44,10 +43,12 @@ public abstract class AITurret extends GameObject {
 
 	protected boolean lookUpClosestTarget() {
 		boolean result = false;
-		float distanceToClosestTarget = Constants.CANVAS_WIDTH;
+		float distanceToClosestTarget = 1000000;
 		for (GameObject go : IceBreaker.all) {
 			// more or less than zero? NOTE: CRITICAL!
-			if (UlteriorUtils.isWithinRange(go, this) && aim.getArm().dot(startAngle) > 0.0f) {
+			// if (UlteriorUtils.isWithinRange(go, IceBreaker.wholeSceene) &&
+			// aim.getArm().dot(startAngle) > 0.0f) {
+			if (UlteriorUtils.isWithinRange(go, IceBreaker.wholeSceene) && !go.motionLess) {
 				float xDist = go.getX() - this.getX();
 				float yDist = go.getY() - this.getY();
 				float distanceTest = (float) Math
@@ -56,11 +57,11 @@ public abstract class AITurret extends GameObject {
 					distanceToClosestTarget = distanceTest;
 					currentAim.set(xDist, yDist);
 					aim.getArm().set(xDist, yDist);
-					aim.updateAim();
-					if (!aim.getPointBlank().motionLess) {
-						this.target = go;
-						result = true;
-					}
+					// aim.updateAim();
+					// if (!aim.getPointBlank().motionLess) {
+					this.target = go;
+					result = true;
+					// }
 				}
 			}
 		}
