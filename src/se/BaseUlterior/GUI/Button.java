@@ -6,7 +6,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
 import se.BaseUlterior.Context.SingleText;
-import se.BaseUlterior.Context.TextInfo;
 
 public abstract class Button extends Component {
 	String text;
@@ -15,7 +14,7 @@ public abstract class Button extends Component {
 	private boolean active = true;
 	public final static int PREFERED_HEIGHT = 30;
 	public final static int PREFERED_WIDTH = 260;
-	TextInfo buttonText;
+	// TextInfo buttonText;
 
 	public Button(String text, float width, float height, boolean active) {
 		super(new float[] { 0, 0, width, 0, width, height - tabSize, width - tabSize, height, 0, height });

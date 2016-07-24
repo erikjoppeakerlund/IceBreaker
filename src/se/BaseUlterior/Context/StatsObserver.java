@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.Color;
 
 import se.BaseUlterior.Config.Constants;
+import se.BaseUlterior.Game.IceBreaker;
 
 public class StatsObserver extends Observer {
 
@@ -45,24 +46,32 @@ public class StatsObserver extends Observer {
 		// }
 	}
 
-	public StatsObserver(Info info, float x, float y, boolean showAllways) {
+	public StatsObserver(float x, float y) {
+		this.info = IceBreaker.gameInfo;
+
+		HP = new SingleText(0, Constants.STATS_BOX_HEIGHT / 5 - 25, 22, "HP: ", Color.black);
+		weapon = new SingleText(0, Constants.STATS_BOX_HEIGHT / 5 * 2 - 25, 22, "WEAPON: ", Color.black);
+		lastHit = new SingleText(0, Constants.STATS_BOX_HEIGHT / 5 * 3 - 25, 22, "LAST HIT: ", Color.black);
+		kills = new SingleText(0, Constants.STATS_BOX_HEIGHT / 5 * 4 - 25, 22, "KILLS: ", Color.black);
+		singleTexts.add(HP);
+		singleTexts.add(weapon);
+		singleTexts.add(lastHit);
+		singleTexts.add(kills);
 		this.x = x;
 		this.y = y;
-		this.showAllways = showAllways;
-		this.info = info;
-
-		HP = new SingleText(0, Constants.STATS_BOX_HEIGHT / 5, 22, "HP: ", Color.black);
-		weapon = new SingleText(0, Constants.STATS_BOX_HEIGHT / 5 * 2, 22, "Weapon: ", Color.black);
-		lastHit = new SingleText(0, Constants.STATS_BOX_HEIGHT / 5 * 3, 22, "Last Hit: ", Color.black);
-		kills = new SingleText(0, Constants.STATS_BOX_HEIGHT / 5 * 4, 22, "Kills: ", Color.black);
 	}
 
-	SingleText HP;
-	SingleText weapon;
-	SingleText lastHit;
-	SingleText kills;
+	private SingleText HP;
+	private SingleText weapon;
+	private SingleText lastHit;
+	private SingleText kills;
 
 	@Override
 	public void updateData() {
+
+		HP.setValue("HP: " + info.getHP());
+		weapon.setValue("WEAPON: " + info.getWeapon());
+		lastHit.setValue("LAST HIT: " + info.getLastHit().toString());
+		kills.setValue("KILLS: " + info.getKills());
 	}
 }

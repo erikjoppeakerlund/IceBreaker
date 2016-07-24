@@ -6,7 +6,7 @@ import org.newdawn.slick.Graphics;
 
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Context.SingleText;
-import se.BaseUlterior.Context.TextInfo;
+import se.BaseUlterior.Context.StatsObserver;
 
 public class Stats extends Component {
 
@@ -16,36 +16,19 @@ public class Stats extends Component {
 	private final static int tabSize = 50;
 	Color colorAlpha = new Color(0.7f, 0.7f, 0.8f, 0.39f);
 
-	TextInfo info;
+	// TextInfo info;
 	SingleText HP;
 	SingleText weapon;
 	SingleText lastHit;
 	SingleText kills;
+	StatsObserver stats;
 
 	public Stats() {
 		super(new float[] { 0, 0, styleWidth, 0, styleWidth, styleHeigth - tabSize, styleWidth - tabSize, styleHeigth,
 				0, styleHeigth });
 		color = colorAlpha;
-		// setForcedHeight(300);
-		// setForcedWidth(600);
-		// initInfo();
+		stats = new StatsObserver(Constants.STATS_BOX_WIDTH / 2, 0);
 	}
-
-	// public void initInfo() {
-	// info = new TextInfo(styleWidth / 2, 0, true);
-	// HP = new SingleText(0, styleHeigth / 5, 22, "HP: ", Color.black);
-	// weapon = new SingleText(0, styleHeigth / 5 * 2, 22, "Weapon: ",
-	// Color.black);
-	// lastHit = new SingleText(0, styleHeigth / 5 * 3, 22, "Last Hit: ",
-	// Color.black);
-	// kills = new SingleText(0, styleHeigth / 5 * 4, 22, "Kills: ",
-	// Color.black);
-	// info.singleTexts.add(HP);
-	// info.singleTexts.add(weapon);
-	// info.singleTexts.add(lastHit);
-	// info.singleTexts.add(kills);
-	// IceBreaker.info.textInfos.add(info);
-	// }
 
 	@Override
 	protected void finalAction() {
@@ -55,7 +38,16 @@ public class Stats extends Component {
 
 	@Override
 	public void update(GameContainer container, int arg) {
-		// TODO Auto-generated method stub
+		// super.update(container, arg);
+		// if (isPaused) {
+		// if (this.getX() < 0) {
+		// setX(getX() + 7f);
+		// }
+		// } else {
+		// if (this.getX() > this.getWidth() / 4) {
+		// setX(getX() - 7f);
+		// }
+		// }
 
 	}
 
@@ -66,5 +58,6 @@ public class Stats extends Component {
 		graphics.setColor(Color.black);
 		graphics.setLineWidth(Constants.LINE_WIDTH);
 		graphics.draw(this);
+		// stats.draw();
 	}
 }

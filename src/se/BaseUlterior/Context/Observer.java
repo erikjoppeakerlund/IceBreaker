@@ -1,7 +1,7 @@
 package se.BaseUlterior.Context;
 
 public abstract class Observer {
-	protected Info info;
+	protected InfoStats info;
 
 	public abstract void updateData();
 }

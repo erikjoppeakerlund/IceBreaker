@@ -45,7 +45,7 @@ public class ToolBox extends Component {
 
 			}
 		});
-		buttons.add(new Button("WEAPONS::SCROLL", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, true) {
+		buttons.add(new Button("WEAPONS::Q", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, true) {
 
 			@Override
 			public void onClick() {
