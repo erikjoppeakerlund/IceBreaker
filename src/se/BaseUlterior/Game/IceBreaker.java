@@ -148,7 +148,7 @@ public class IceBreaker extends BasicGame {
 	}
 
 	public static void main(String[] s) throws SlickException {
-		AppGameContainer appGameContainer = new AppGameContainer(new IceBreaker("ICE:BREAKER"));
+		AppGameContainer appGameContainer = new AppGameContainer(new IceBreaker("ParallaX"));
 		int maxFPS = 60;
 		appGameContainer.setTargetFrameRate(maxFPS);
 		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, false);
@@ -195,8 +195,6 @@ public class IceBreaker extends BasicGame {
 			if (!go.isBackgroundObj) {
 				go.setX(go.getX() - x);
 			}
-		}
-		for (GameObject go : IceBreaker.all) {
 			if (!go.isBackgroundObj) {
 				go.setY(go.getY() - y);
 			}

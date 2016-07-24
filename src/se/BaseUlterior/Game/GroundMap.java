@@ -20,11 +20,11 @@ public class GroundMap {
 	public GroundMap() {
 		levelPieces = new ArrayList<>();
 		try {
-			Image BackgroundStars = new Image("res/img/Stars.png");
-			float backgrounHeight = BackgroundStars.getHeight();
-			float backgrounWidth = BackgroundStars.getWidth();
+			Image Stars = new Image("res/img/Stars.png");
+			float backgrounHeight = Stars.getHeight();
+			float backgrounWidth = Stars.getWidth();
 			float[] edges = { 0, 0, 0, backgrounHeight, backgrounWidth, backgrounHeight, backgrounWidth, 0 };
-			Parallax parallaxStars = new Parallax(edges, BackgroundStars, 0.03f);
+			Parallax parallaxStars = new Parallax(edges, Stars, 0.03f);
 			levelPieces.add(parallaxStars);
 			IceBreaker.parallaxList.add(parallaxStars);
 		} catch (SlickException e) {
@@ -32,13 +32,13 @@ public class GroundMap {
 		}
 
 		try {
-			Image city = new Image("res/img/CityFar.png");
-			float backgrounHeight = city.getHeight();
-			float backgrounWidth = city.getWidth();
+			Image cityFar = new Image("res/img/CityFar.png");
+			float backgrounHeight = cityFar.getHeight();
+			float backgrounWidth = cityFar.getWidth();
 			float[] edges = { 0, 0, 0, backgrounHeight, backgrounWidth, backgrounHeight, backgrounWidth, 0 };
-			Parallax parallaxStars = new Parallax(edges, city, 0.4f);
-			levelPieces.add(parallaxStars);
-			IceBreaker.parallaxList.add(parallaxStars);
+			Parallax parallaxCityFar = new Parallax(edges, cityFar, 0.4f);
+			levelPieces.add(parallaxCityFar);
+			IceBreaker.parallaxList.add(parallaxCityFar);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
@@ -48,9 +48,21 @@ public class GroundMap {
 			float backgrounHeight = city.getHeight();
 			float backgrounWidth = city.getWidth();
 			float[] edges = { 0, 0, 0, backgrounHeight, backgrounWidth, backgrounHeight, backgrounWidth, 0 };
-			Parallax parallaxStars = new Parallax(edges, city, 0.5f);
-			levelPieces.add(parallaxStars);
-			IceBreaker.parallaxList.add(parallaxStars);
+			Parallax parallaxCity = new Parallax(edges, city, 0.5f);
+			levelPieces.add(parallaxCity);
+			IceBreaker.parallaxList.add(parallaxCity);
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			Image clouds = new Image("res/img/Clouds.png");
+			float backgrounHeight = clouds.getHeight();
+			float backgrounWidth = clouds.getWidth();
+			float[] edges = { 0, 0, 0, backgrounHeight, backgrounWidth, backgrounHeight, backgrounWidth, 0 };
+			Parallax parallaxClouds = new Parallax(edges, clouds, 1.8f);
+			levelPieces.add(parallaxClouds);
+			IceBreaker.parallaxList.add(parallaxClouds);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
