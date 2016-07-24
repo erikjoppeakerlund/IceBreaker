@@ -19,7 +19,7 @@ public abstract class AITurret extends AI {
 	protected GameObject target;
 
 	protected Vector2 startAngle;
-	protected final int UPDATE_SPEED = 127;
+	protected final int UPDATE_SPEED = Constants.TURRETS_MAX_UPDATE_SPEED;
 	protected Vector2 aimArm;
 
 	protected int timeSinceLast;
@@ -30,6 +30,7 @@ public abstract class AITurret extends AI {
 
 	private int gunFireFrameWidth;
 	private int gunFireFrameHeight;
+	private final float MAX_SPEE_TURRET = Constants.MAX_SPEE_TURRET;
 
 	public AITurret(float[] points, Vector2 startangle, float height) {
 		super(points, height);
@@ -92,7 +93,13 @@ public abstract class AITurret extends AI {
 				if (distanceTest < distanceToClosestTarget) {
 					distanceToClosestTarget = distanceTest;
 					injectVector.set(xDist, yDist);
-					aim.setAngleToMouse((float) injectVector.getTheta());
+					double diff = (injectVector.getTheta() - aimArm.getTheta());
+					if (diff > 0 && diff > MAX_SPEE_TURRET) {
+						diff = MAX_SPEE_TURRET;
+					} else if (diff < 0 && diff < -MAX_SPEE_TURRET) {
+						diff = -MAX_SPEE_TURRET;
+					}
+					aimArm.add(diff);
 					if (dotProduct > 0) {
 						result = true;
 					}

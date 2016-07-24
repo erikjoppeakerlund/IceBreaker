@@ -35,4 +35,8 @@ public class Constants {
 	public static final int STATS_BOX_HEIGHT = 189;
 	public static final int STATS_BOX_WIDTH = 546;
 
+	public static final float MAX_SPEE_TURRET = 0.39f;
+
+	public final static int TURRETS_MAX_UPDATE_SPEED = 127;
+
 }
