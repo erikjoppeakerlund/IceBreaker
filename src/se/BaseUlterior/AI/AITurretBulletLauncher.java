@@ -29,8 +29,13 @@ public class AITurretBulletLauncher extends AITurret {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
-		aim.render(container, graphics);
 		super.render(container, graphics);
+		if (dHP == HP) {
+			aim.render(container, graphics);
+		} else {
+			aim.renderFlashed(container, graphics);
+			dHP = HP;
+		}
 	}
 
 	@Override

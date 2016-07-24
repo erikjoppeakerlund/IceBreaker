@@ -9,13 +9,15 @@ import se.BaseUlterior.GameObject.MateriaFirm;
 public abstract class AI extends MateriaFirm {
 	protected float height;
 	protected Color HPColor;
+	protected float dHP;
 
 	protected AI(float[] points, float height) {
-		// super(points, false, false, false, false, false, true);
 		super(points);
 		this.height = height;
 		HP = 100f;
+		dHP = HP;
 		HPColor = new Color(0, 1, 0, 0.69f);
+
 	}
 
 	@Override

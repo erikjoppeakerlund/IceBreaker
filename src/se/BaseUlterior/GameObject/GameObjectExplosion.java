@@ -16,7 +16,7 @@ import se.BaseUlterior.Utils.UlteriorUtils;
 
 public class GameObjectExplosion extends GameObject {
 
-	private static final long MAX_TIME = 290;
+	private static final long MAX_TIME = 190;
 	protected long timeSinceCreation;
 	private float power;
 

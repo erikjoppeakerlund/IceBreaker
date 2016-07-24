@@ -123,6 +123,10 @@ public abstract class Aim {
 
 	}
 
+	public void renderFlashed(GameContainer container, Graphics graphics) {
+		render(container, graphics);
+	}
+
 	public void setAngleToMouse(float angleToPoint) {
 		arm.setTheta(angleToPoint);
 	}

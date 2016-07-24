@@ -67,6 +67,9 @@ public abstract class AITurret extends AI {
 		}
 		aim.setPosition(getCenterX(), getCenterY());
 		aim.update(container, arg);
+		if (HP <= 0) {
+			IceBreaker.objsToRemove.add(this);
+		}
 	}
 
 	protected abstract void shoot();

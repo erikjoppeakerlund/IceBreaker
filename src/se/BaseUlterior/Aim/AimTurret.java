@@ -1,6 +1,7 @@
 package se.BaseUlterior.Aim;
 
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
@@ -8,7 +9,7 @@ public class AimTurret extends AimBulletWeapon {
 	private boolean animationsIsDrawn = false;
 
 	public AimTurret(Animation gunFire) {
-		super("res/img/turret.png", IMAGE_SCALE_STANDARD);
+		super("res/img/turret.png", IMAGE_SCALE_STANDARD * 0.91f);
 		this.gunFire = gunFire;
 		gunFireFrameWidth = this.gunFire.getCurrentFrame().getWidth();
 		gunFireFrameHeight = this.gunFire.getCurrentFrame().getHeight();
@@ -66,6 +67,22 @@ public class AimTurret extends AimBulletWeapon {
 			} else {
 				animationsIsDrawn = false;
 			}
+		}
+	}
+
+	@Override
+	public void renderFlashed(GameContainer container, Graphics graphics) {
+		super.renderFlashed(container, graphics);
+		if (isRight) {
+			rifleImageRight.setRotation((float) arm.getTheta());
+			rifleImageRight.draw(spriteX - imageWidth / 2, spriteY - imageHeight / 2, Color.red);
+		} else {
+			rifleImageLeft.setRotation((float) (arm.getTheta()));
+			rifleImageLeft.draw(spriteX - imageWidth / 2, spriteY - imageHeight / 2, Color.red);
+		}
+		if (animationsIsDrawn) {
+			gunFire.getCurrentFrame().setRotation((float) arm.getTheta() + 65);
+			gunFire.draw(gunFireStartAtX - gunFireFrameWidth / 2, gunFireStartAtY - gunFireFrameHeight / 2);
 		}
 	}
 

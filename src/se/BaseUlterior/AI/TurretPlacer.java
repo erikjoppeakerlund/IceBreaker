@@ -33,7 +33,7 @@ public class TurretPlacer {
 					float turretY = points[i + 1] + (turretsDistance * j + beyond) * direction.y;
 
 					AITurretBulletLauncher turretInLoop = new AITurretBulletLauncher(
-							new Circle(turretX, turretY, 140).getPoints(), direction.getPerpendicular());
+							new Circle(turretX, turretY, 40).getPoints(), direction.getPerpendicular());
 					IceBreaker.objsToAdd.add(turretInLoop);
 
 				}
