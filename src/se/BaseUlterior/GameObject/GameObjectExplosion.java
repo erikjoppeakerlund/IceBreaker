@@ -28,8 +28,15 @@ public class GameObjectExplosion extends GameObject {
 	}
 
 	public GameObjectExplosion(float[] nodes, float power, boolean isBackground) {
-		super(nodes, false, true, false, true, false, true);
+		super(nodes, false, true, false, true, false, false);
 		init(power);
+	}
+
+	public GameObjectExplosion(float[] nodes, float power) {
+		super(nodes, false, true, false, true, false, false);
+		this.power = power;
+		this.color = Color.transparent;
+		this.timeSinceCreation = System.currentTimeMillis();
 	}
 
 	private void init(float power) {

@@ -20,6 +20,9 @@ public class ImpactExplosion extends Impact {
 		returnValue = new Vector2();
 		this.power = power;
 		this.size = size;
+		if (other.HP > 0) {
+			other.HP -= power;
+		}
 	}
 
 	@Override

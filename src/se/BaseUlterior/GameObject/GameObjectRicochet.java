@@ -11,6 +11,7 @@ import org.newdawn.slick.geom.Circle;
 import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Physics.Impact;
+import se.BaseUlterior.Utils.UlteriorUtils;
 
 /**
  * Stateful game object which produces
@@ -46,6 +47,7 @@ public class GameObjectRicochet extends GameObject {
 		this.LIFE_SPAN_LIMIT *= weight;
 		startX = getX();
 		startY = getY();
+		UlteriorUtils.removeGroundInvisible(aimAtX, aimAtY, weight * 42f, weight * 7f);
 	}
 
 	@Override

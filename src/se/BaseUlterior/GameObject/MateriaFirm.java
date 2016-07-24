@@ -60,7 +60,7 @@ public abstract class MateriaFirm extends WorldBuilder {
 		}
 	}
 
-	private void checkImpact() {
+	protected void checkImpact() {
 		for (GameObject go : IceBreaker.all) {
 
 			if (go == this || (go.motionLess && this.motionLess) || go.isBackgroundObj) {

@@ -96,9 +96,14 @@ public class UlteriorUtils {
 
 	}
 
-	public static void removeGround(float x, float y, float sizeOfExplostion, GameObject origin) {
-		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion).getPoints(), 0.29f,
+	public static void removeGround(float x, float y, float sizeOfExplostion, float effect) {
+		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion).getPoints(), effect,
 				false);
+		IceBreaker.objsToAdd.add(explotionShape);
+	}
+
+	public static void removeGroundInvisible(float x, float y, float sizeOfExplostion, float effect) {
+		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion).getPoints(), effect);
 		IceBreaker.objsToAdd.add(explotionShape);
 	}
 }

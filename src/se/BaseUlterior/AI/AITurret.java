@@ -13,7 +13,7 @@ import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
-public abstract class AITurret extends GameObject {
+public abstract class AITurret extends AI {
 
 	protected Aim aim;
 	protected GameObject target;
@@ -31,8 +31,8 @@ public abstract class AITurret extends GameObject {
 	private int gunFireFrameWidth;
 	private int gunFireFrameHeight;
 
-	public AITurret(float[] points, Vector2 startangle) {
-		super(points, false, false, false, false, false, true);
+	public AITurret(float[] points, Vector2 startangle, float height) {
+		super(points, height);
 
 		try {
 			gunFire = new SpriteSheet("res/img/GUNFIREsimple.png", 96, 96);
@@ -55,6 +55,7 @@ public abstract class AITurret extends GameObject {
 
 	@Override
 	public void update(GameContainer container, int arg) {
+		super.update(container, arg);
 		itr++;
 		if (lookUpClosestTarget()) {
 			if (itr % UPDATE_SPEED == 0) {
