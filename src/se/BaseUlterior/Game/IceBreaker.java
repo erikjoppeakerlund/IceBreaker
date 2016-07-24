@@ -56,7 +56,9 @@ public class IceBreaker extends BasicGame {
 
 	public static List<GameObject> objsToRemove = null;
 
-	public static List<Parallax> parallaxList = null;
+	public static List<Parallax> parallaxBackground = null;
+
+	public static List<Parallax> parallaxForground = null;
 
 	private ToolBox toolbox;
 
@@ -69,12 +71,17 @@ public class IceBreaker extends BasicGame {
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 
+		for (Parallax goBackground : parallaxBackground) {
+			goBackground.render(container, graphics);
+		}
 		for (GameObject go : IceBreaker.all) {
 			if (UlteriorUtils.isWithinRange(go, wholeSceene) || go.forceRender) {
 				go.render(container, graphics);
 			}
 		}
-
+		for (Parallax goForground : parallaxForground) {
+			goForground.render(container, graphics);
+		}
 	}
 
 	private static GameObject sprite;
@@ -87,18 +94,24 @@ public class IceBreaker extends BasicGame {
 		patternWidth = container.getWidth();
 		patternHeight = container.getHeight();
 
-		parallaxList = new ArrayList<>();
+		parallaxBackground = new ArrayList<>();
+		parallaxForground = new ArrayList<>();
 		IceBreaker.all = new ArrayList<>();
 		IceBreaker.objsToAdd = new ArrayList<>();
 		objsToRemove = new ArrayList<>();
 
-		wholeSceene = new GameObjectEmpty(new float[] { 0, 0, 0, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH,
-				Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0 });
+		wholeSceene = new GameObjectEmpty(new float[] { 0, 0, 0, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0 });
 		IceBreaker.objsToAdd.add(wholeSceene);
 
+		ParallaxHolder parallaxHolderBackground = new ParallaxHolder(0);
+		ParallaxHolder parallaxHolderForground = new ParallaxHolder(1);
+		parallaxBackground.addAll(parallaxHolderBackground.getGameObjects());
+		parallaxForground.addAll(parallaxHolderForground.getGameObjects());
+
 		LevelDummy levelDummy = new LevelDummy();
+
 		GroundMap requiredWallBuilderObjects = new GroundMap();
-		all.addAll(requiredWallBuilderObjects.levelPieces);
+		all.addAll(requiredWallBuilderObjects.getLevelPieces());
 
 		spriteDesktop = new GameObjectSpriteDesktop();
 		spriteMobile = new GameObjectSpriteMobile();
@@ -147,7 +160,7 @@ public class IceBreaker extends BasicGame {
 		AppGameContainer appGameContainer = new AppGameContainer(new IceBreaker("ParallaX"));
 		int maxFPS = 60;
 		appGameContainer.setTargetFrameRate(maxFPS);
-		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, true);
+		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, false);
 		appGameContainer.setAlwaysRender(true);
 		appGameContainer.start();
 
@@ -156,7 +169,7 @@ public class IceBreaker extends BasicGame {
 	public static void moveScreen(float x, float y) {
 		currentX += x;
 		currentY += y;
-		for (Parallax parallax : parallaxList) {
+		for (Parallax parallax : parallaxBackground) {
 			parallax.moveParallax(currentX, currentY);
 		}
 		for (GameObject go : IceBreaker.all) {

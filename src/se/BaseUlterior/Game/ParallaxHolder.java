@@ -1,0 +1,75 @@
+package se.BaseUlterior.Game;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
+public class ParallaxHolder {
+	private List<Parallax> parallaxes;
+
+	public ParallaxHolder(int i) {
+		parallaxes = new ArrayList<>();
+		switch (i) {
+		case 0:
+			try {
+				Image Stars = new Image("res/img/Stars.png");
+				float backgrounHeight = Stars.getHeight();
+				float backgrounWidth = Stars.getWidth();
+				float[] edges = { 0, 0, 0, backgrounHeight, backgrounWidth, backgrounHeight, backgrounWidth, 0 };
+				Parallax parallaxStars = new Parallax(edges, Stars, 0.03f);
+				parallaxes.add(parallaxStars);
+				IceBreaker.parallaxBackground.add(parallaxStars);
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
+
+			try {
+				Image cityFar = new Image("res/img/CityFar.png");
+				float backgrounHeight = cityFar.getHeight();
+				float backgrounWidth = cityFar.getWidth();
+				float[] edges = { 0, 0, 0, backgrounHeight, backgrounWidth, backgrounHeight, backgrounWidth, 0 };
+				Parallax parallaxCityFar = new Parallax(edges, cityFar, 0.4f);
+				parallaxes.add(parallaxCityFar);
+				IceBreaker.parallaxBackground.add(parallaxCityFar);
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
+
+			try {
+				Image city = new Image("res/img/City.png");
+				float backgrounHeight = city.getHeight();
+				float backgrounWidth = city.getWidth();
+				float[] edges = { 0, 0, 0, backgrounHeight, backgrounWidth, backgrounHeight, backgrounWidth, 0 };
+				Parallax parallaxCity = new Parallax(edges, city, 0.5f);
+				parallaxes.add(parallaxCity);
+				IceBreaker.parallaxBackground.add(parallaxCity);
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
+			break;
+
+		case 1:
+			try {
+				Image clouds = new Image("res/img/WhiteClouds.png");
+				float backgrounHeight = clouds.getHeight();
+				float backgrounWidth = clouds.getWidth();
+				float[] edges = { 0, 0, 0, backgrounHeight, backgrounWidth, backgrounHeight, backgrounWidth, 0 };
+				Parallax parallaxClouds = new Parallax(edges, clouds, 1.8f);
+				parallaxes.add(parallaxClouds);
+				IceBreaker.parallaxBackground.add(parallaxClouds);
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
+	public List<Parallax> getGameObjects() {
+		return this.parallaxes;
+	}
+
+}

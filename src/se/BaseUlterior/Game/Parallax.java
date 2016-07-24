@@ -7,6 +7,7 @@ import org.newdawn.slick.Image;
 import se.BaseUlterior.GameObject.GameObject;
 
 public class Parallax extends GameObject {
+	private static final long serialVersionUID = -8657229360844031751L;
 	float parallaxEffect;
 	Image image;
 
@@ -27,7 +28,6 @@ public class Parallax extends GameObject {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
-		image.draw(0, 0, container.getWidth(), container.getHeight(), x, y, x + container.getWidth(),
-				y + container.getHeight());
+		image.draw(0, 0, container.getWidth(), container.getHeight(), x, y, x + container.getWidth(), y + container.getHeight());
 	}
 }
