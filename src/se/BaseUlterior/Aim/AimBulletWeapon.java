@@ -1,11 +1,9 @@
 package se.BaseUlterior.Aim;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Circle;
 
 import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.GameObject.GameObject;
@@ -107,9 +105,10 @@ public abstract class AimBulletWeapon extends Aim {
 		GameObject ricochet = new GameObjectRicochet(pointBlank, gunFireStartAtX, gunFireStartAtY, aimAtX, aimAtY,
 				weight);
 		IceBreaker.objsToAdd.add(ricochet);
-		recoil = new GameObjectExplosion(new Circle(xGrip, yGrip, START_ARM_LENGTH * 1.5f).getPoints(), recoilPower,
-				Color.transparent, true);
-		IceBreaker.objsToAdd.add(recoil);
+		// recoil = new GameObjectExplosion(new Circle(xGrip, yGrip,
+		// START_ARM_LENGTH * 1.5f).getPoints(), recoilPower,
+		// Color.transparent, true);
+		// IceBreaker.objsToAdd.add(recoil);
 	}
 
 	@Override

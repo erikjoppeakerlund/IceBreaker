@@ -1,5 +1,7 @@
 package se.BaseUlterior.GameObject;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -19,6 +21,7 @@ public class GameObjectExplosion extends GameObject {
 	private static final long MAX_TIME = 79;
 	protected long timeSinceCreation;
 	private float power;
+	private ArrayList<GameObject> affectedObjects;
 
 	public GameObjectExplosion(float[] nodes, float power, Color color, boolean isBackground) {
 		super(nodes, false, true, false, true, false, true);
@@ -26,12 +29,14 @@ public class GameObjectExplosion extends GameObject {
 		this.color = color;
 		this.timeSinceCreation = System.currentTimeMillis();
 		piercable = true;
+		affectedObjects = new ArrayList<>();
 	}
 
 	public GameObjectExplosion(float[] nodes, float power, boolean isBackground) {
 		super(nodes, false, true, false, true, false, false);
 		init(power);
 		piercable = true;
+		affectedObjects = new ArrayList<>();
 	}
 
 	public GameObjectExplosion(float[] nodes, float power) {
@@ -40,6 +45,7 @@ public class GameObjectExplosion extends GameObject {
 		this.color = Color.transparent;
 		this.timeSinceCreation = System.currentTimeMillis();
 		piercable = true;
+		affectedObjects = new ArrayList<>();
 	}
 
 	private void init(float power) {
@@ -51,6 +57,7 @@ public class GameObjectExplosion extends GameObject {
 
 	@Override
 	public Impact getImpact(GameObject agileObject) {
+		affectedObjects.add(agileObject);
 		return new ImpactExplosion(this, agileObject, power, getBoundingCircleRadius());
 	}
 
@@ -58,6 +65,9 @@ public class GameObjectExplosion extends GameObject {
 	public void update(GameContainer container, int arg) {
 		if (System.currentTimeMillis() - timeSinceCreation > MAX_TIME) {
 			UlteriorUtils.cleanUpImpactFromWorldBuilderObject(this);
+			for (GameObject go : affectedObjects) {
+				UlteriorUtils.cleanUpImpactFromWorldBuilderObject(go);
+			}
 			IceBreaker.objsToRemove.add(this);
 		}
 	}

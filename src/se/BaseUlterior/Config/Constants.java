@@ -5,7 +5,7 @@ import org.newdawn.slick.Color;
 import se.BaseUlterior.Actions.Action;
 
 public class Constants {
-	public static final float GENERAL_GRAVITY = 0.011f;
+	public static final float GENERAL_GRAVITY = 0.021f;
 	public static final int CANVAS_WIDTH = 1920;
 	public static final int CANVAS_HEIGHT = 1080;
 
