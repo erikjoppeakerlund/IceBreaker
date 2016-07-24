@@ -5,7 +5,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
-import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Context.SingleText;
 import se.BaseUlterior.Context.TextInfo;
 
@@ -30,7 +29,7 @@ public abstract class Button extends Component {
 	}
 
 	private void init(String text) {
-		this.color = Color.white;
+		this.color = new Color(1f, 1f, 1f, 0f);
 		this.text = text;
 		padding = 4;
 	}
@@ -64,15 +63,23 @@ public abstract class Button extends Component {
 				onMouseOut();
 				mouseIsOutside = true;
 			}
+			if (active) {
+				if (mouseIsOutside) {
+					if (color.a > 0.0f)
+						color.a -= 0.02f;
+				} else {
+					if (color.a < 0.4f)
+						color.a += 0.02f;
+				}
+			}
 		}
 	}
 
 	private void onMouseOut() {
 		if (active) {
 			setCenterX(getCenterX() - 10);
-			// buttonText.setX(buttonText.getX() - 10);
-			label.setColor(getIsActiveColor(active));
 			label.setX(label.getX() - 10);
+			label.setColor(getIsActiveColor(active));
 		}
 	}
 
@@ -87,9 +94,7 @@ public abstract class Button extends Component {
 	public void onMouseOver() {
 		if (active) {
 			setCenterX(getCenterX() + 10);
-			// buttonText.setX(buttonText.getX() + 10);
 			label.setX(label.getX() + 10);
-			label.setColor(Constants.THEME_COLOR);
 		}
 		mouseIsOutside = false;
 	}
@@ -104,12 +109,12 @@ public abstract class Button extends Component {
 	}
 
 	public Color getIsActiveColor(boolean active) {
-		return active ? Color.lightGray : Color.lightGray;
+		return active ? Color.lightGray : Color.darkGray;
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
-		// super.render(container, graphics);
+		super.render(container, graphics);
 		// if (!hide) {
 		if (isPaused) {
 			graphics.setLineWidth(3);
