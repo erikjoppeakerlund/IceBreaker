@@ -1,32 +1,100 @@
 package se.BaseUlterior.AI;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 
 import se.BaseUlterior.Aim.Aim;
+import se.BaseUlterior.Aim.AimTurret;
+import se.BaseUlterior.Config.Constants;
+import se.BaseUlterior.Game.IceBreaker;
+import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Geom.Vector2;
+import se.BaseUlterior.Utils.UlteriorUtils;
 
-public class AITurret extends AI {
+public abstract class AITurret extends GameObject {
 
-	public AITurret(float[] points, Aim aim, Vector2 startangle) {
-		super(points, aim, startangle);
+	protected Aim aim;
+	protected GameObject target;
+
+	protected Vector2 startAngle;
+	protected final int UPDATE_SPEED = 127;
+	protected Vector2 aimArm;
+
+	protected int timeSinceLast;
+	private int itr;
+
+	private SpriteSheet gunFire = null;
+	private Animation animationGunfire = null;
+
+	private int gunFireFrameWidth;
+	private int gunFireFrameHeight;
+
+	public AITurret(float[] points, Vector2 startangle) {
+		super(points, false, false, false, false, false, true);
+
+		try {
+			gunFire = new SpriteSheet("res/img/GUNFIREsimple.png", 96, 96);
+			animationGunfire = new Animation(gunFire, 10);
+			animationGunfire.setAutoUpdate(false);
+			gunFireFrameWidth = animationGunfire.getCurrentFrame().getWidth();
+			gunFireFrameHeight = animationGunfire.getCurrentFrame().getHeight();
+			gunFire.setCenterOfRotation(gunFireFrameWidth / 2f, gunFireFrameHeight / 2f);
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+		this.aim = new AimTurret(animationGunfire);
+		this.startAngle = startangle;
+		aim.setPosition(getCenterX(), getCenterY());
+		aimArm = aim.getArm();
+		timeSinceLast = (int) (Math.random() * UPDATE_SPEED);
+		aim.setAngleToMouse((float) startangle.getTheta());
+
 	}
 
 	@Override
-	protected void shoot() {
-		// TODO Auto-generated method stub
-
+	public void update(GameContainer container, int arg) {
+		itr++;
+		if (lookUpClosestTarget()) {
+			if (itr % UPDATE_SPEED == 0) {
+				shoot();
+				itr = 0;
+			}
+		} else {
+			timeSinceLast++;
+		}
+		aim.setPosition(getCenterX(), getCenterY());
+		aim.update(container, arg);
 	}
 
-	@Override
-	protected void aim() {
+	protected abstract void shoot();
 
+	protected abstract void aim();
+
+	protected Vector2 injectVector = new Vector2();
+
+	protected boolean lookUpClosestTarget() {
+		boolean result = false;
+		float distanceToClosestTarget = Constants.CANVAS_WIDTH;
+		for (GameObject go : IceBreaker.all) {
+			float dotProduct = aimArm.dot(startAngle);
+			if (UlteriorUtils.isWithinRange(go, IceBreaker.wholeSceene) && !go.motionLess && !go.isBackgroundObj
+					&& go != this) {
+				float xDist = go.getCenterX() - this.getCenterX();
+				float yDist = go.getCenterY() - this.getCenterY();
+				float distanceTest = (float) Math
+						.sqrt((Math.pow(go.getX() - this.getX(), 2) + Math.pow(go.getY() - this.getY(), 2)));
+				if (distanceTest < distanceToClosestTarget) {
+					distanceToClosestTarget = distanceTest;
+					injectVector.set(xDist, yDist);
+					aim.setAngleToMouse((float) injectVector.getTheta());
+					if (dotProduct > 0) {
+						result = true;
+					}
+				}
+			}
+		}
+		return result;
 	}
-
-	@Override
-	public void render(GameContainer container, Graphics graphics) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

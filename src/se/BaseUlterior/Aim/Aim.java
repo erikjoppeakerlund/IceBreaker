@@ -60,6 +60,11 @@ public abstract class Aim {
 
 	protected Animation gunFire = null;
 
+	public void setAimAt(float x, float y) {
+		aimAtX = x;
+		aimAtY = y;
+	}
+
 	public Aim() {
 		arm = new Vector2(0.0f);
 		START_ARM_LENGTH = Constants.PERFERED_ARM_LENGTH;
@@ -195,4 +200,10 @@ public abstract class Aim {
 			}
 		}
 	}
+
+	public void setPointBlank(GameObject go) {
+		this.pointBlank = go;
+	}
+
+	public abstract void shoot();
 }

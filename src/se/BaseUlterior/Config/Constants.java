@@ -20,11 +20,16 @@ public class Constants {
 	public static final float SPRITE_RADIUS = 44.0f;
 	public static final float PERFERED_ARM_LENGTH = Constants.SPRITE_RADIUS * 3.2f;
 
+	public static final float VECTOR_SHOT_RADIUS = 39f;
+
 	public static final Action START_MODE = Action.ACTION_MODE_DESKTOP;
 
 	public static final float GENERA_FRICTION = 0.999f;
 	public static final float GROUND_FRICTION = 0.8f;
 
 	public static final float GENERA_OBJECT_MAX_SPEED = 1f;
+
+	public static final float VECTOR_SHOOOT_SPEED = 0.5f;
+	public static final float TURRETS_DISTANCE = 3499;
 
 }

@@ -129,4 +129,10 @@ public class AimGrenade extends Aim {
 		}
 	}
 
+	@Override
+	public void shoot() {
+		// TODO Auto-generated method stub
+
+	}
+
 }

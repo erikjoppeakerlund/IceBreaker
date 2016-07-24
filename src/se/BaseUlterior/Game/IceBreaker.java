@@ -10,6 +10,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 
+import se.BaseUlterior.AI.TurretPlacer;
 import se.BaseUlterior.Actions.Action;
 import se.BaseUlterior.Actions.ActionListenable;
 import se.BaseUlterior.Actions.ActionListenablers;
@@ -114,6 +115,14 @@ public class IceBreaker extends BasicGame {
 		sprite = spriteDesktop;
 
 		IceBreaker.objsToAdd.addAll(levelDummy.levelPieces);
+
+		TurretPlacer turretPlacer = new TurretPlacer();
+
+		for (GameObject groundPiece : levelDummy.levelPieces) {
+			if (!groundPiece.piercable) {
+				turretPlacer.placeTurretsOnMe(groundPiece);
+			}
+		}
 		toolbox = new ToolBox(Alignment.LEFT);
 		((Component) toolbox).pack();
 		IceBreaker.objsToAdd.add(info);
@@ -123,7 +132,8 @@ public class IceBreaker extends BasicGame {
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		for (GameObject go : IceBreaker.all) {
-			if (UlteriorUtils.isWithinRange(go, sprite) || go.forceUpdate) {
+			// if (UlteriorUtils.isWithinRange(go, sprite) || go.forceUpdate) {
+			if (UlteriorUtils.isWithinRange(go, wholeSceene) || go.forceUpdate) {
 				go.update(container, delta);
 			}
 		}
