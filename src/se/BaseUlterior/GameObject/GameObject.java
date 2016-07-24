@@ -170,6 +170,11 @@ public abstract class GameObject extends Polygon {
 										* (thatPoints[jNext + 1] + thatDy - thatPoints[j + 1] + thatDy)));
 
 				if (unknownA >= 0 && unknownA <= 1 && unknownB >= 0 && unknownB <= 1) {
+					shape.setX(shape.getX() - shape.motion.x);
+					shape.setY(shape.getY() - shape.motion.y);
+
+					setX(getX() - motion.x);
+					setY(getY() - motion.y);
 
 					Vector2 newestNormal;
 
