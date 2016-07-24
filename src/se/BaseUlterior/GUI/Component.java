@@ -7,7 +7,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Shape;
 
-import se.BaseUlterior.Actions.Action;
 import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Physics.Impact;
@@ -32,6 +31,8 @@ public abstract class Component extends GameObject {
 
 	protected int horizontalFloat;
 	protected int verticalFloat;
+
+	protected boolean isPaused;
 
 	public Component(float width, float height) {
 		super(new float[] { 0, 0, width, 0, width, height, 0, height }, true, true, false, true, false, true);
@@ -153,9 +154,18 @@ public abstract class Component extends GameObject {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
-		if (!hide) {
+		if (isPaused) {
 			graphics.setColor(this.color);
 			graphics.fill(this);
+		}
+
+	}
+
+	@Override
+	public void update(GameContainer container, int arg) {
+
+		if (isPaused != container.isPaused()) {
+			isPaused = container.isPaused();
 		}
 
 	}
@@ -169,19 +179,5 @@ public abstract class Component extends GameObject {
 	@Override
 	public Shape[] subtract(Shape other) {
 		return new Shape[0];
-	}
-
-	@Override
-	public void wasActionStateSet(Action action) {
-		switch (action) {
-		case INSERT_MODE:
-			hide = true;
-			break;
-		case PAUSE:
-			hide = true;
-			break;
-		case ACTION_MODE_DESKTOP:
-			hide = false;
-		}
 	}
 }

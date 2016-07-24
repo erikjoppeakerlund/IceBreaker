@@ -8,7 +8,6 @@ import org.newdawn.slick.Input;
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Context.SingleText;
 import se.BaseUlterior.Context.TextInfo;
-import se.BaseUlterior.Game.IceBreaker;
 
 public abstract class Button extends Component {
 	String text;
@@ -37,37 +36,43 @@ public abstract class Button extends Component {
 	}
 
 	protected void setText(String text) {
-		buttonText = new TextInfo(getX(), getY(), false);
-		label = new SingleText(padding, 0, 20, text, getIsActiveColor(active));
-		buttonText.singleTexts.add(label);
-		IceBreaker.info.textInfos.add(buttonText);
+		// buttonText = new TextInfo((GameInfo) IceBreaker.info, getX(), getY(),
+		// false);
+		label = new SingleText(getX() + padding, getY(), 20, text, getIsActiveColor(active));
+		// buttonText.singleTexts.add(label);
+		// IceBreaker.info.textInfos.add(buttonText);
 	}
 
 	private boolean mouseIsOutside = true;
 
 	@Override
 	public void update(GameContainer container, int arg) {
-		Input in = container.getInput();
-		float mouseX = in.getMouseX();
-		float mouseY = in.getMouseY();
-		if (mouseX > this.getMinX() && mouseX < this.getMaxX() && mouseY > this.getMinY() && mouseY < this.getMaxY()) {
-			if (mouseIsOutside) {
-				onMouseOver();
+		super.update(container, arg);
+		if (isPaused) {
+			Input in = container.getInput();
+			float mouseX = in.getMouseX();
+			float mouseY = in.getMouseY();
+			if (mouseX > this.getMinX() && mouseX < this.getMaxX() && mouseY > this.getMinY()
+					&& mouseY < this.getMaxY()) {
+				if (mouseIsOutside) {
+					onMouseOver();
+				}
+				if (in.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+					onClickImpl();
+				}
+			} else if (!mouseIsOutside) {
+				onMouseOut();
+				mouseIsOutside = true;
 			}
-			if (in.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-				onClickImpl();
-			}
-		} else if (!mouseIsOutside) {
-			onMouseOut();
-			mouseIsOutside = true;
 		}
 	}
 
 	private void onMouseOut() {
 		if (active) {
 			setCenterX(getCenterX() - 10);
-			buttonText.setX(buttonText.getX() - 10);
+			// buttonText.setX(buttonText.getX() - 10);
 			label.setColor(getIsActiveColor(active));
+			label.setX(label.getX() - 10);
 		}
 	}
 
@@ -82,7 +87,8 @@ public abstract class Button extends Component {
 	public void onMouseOver() {
 		if (active) {
 			setCenterX(getCenterX() + 10);
-			buttonText.setX(buttonText.getX() + 10);
+			// buttonText.setX(buttonText.getX() + 10);
+			label.setX(label.getX() + 10);
 			label.setColor(Constants.THEME_COLOR);
 		}
 		mouseIsOutside = false;
@@ -103,11 +109,14 @@ public abstract class Button extends Component {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
-		super.render(container, graphics);
-		if (!hide) {
+		// super.render(container, graphics);
+		// if (!hide) {
+		if (isPaused) {
 			graphics.setLineWidth(3);
 			graphics.setColor(Color.darkGray);
 			graphics.draw(this);
+			label.drawString();
 		}
 	}
+
 }

@@ -32,4 +32,7 @@ public class Constants {
 	public static final float VECTOR_SHOOOT_SPEED = 0.5f;
 	public static final float TURRETS_DISTANCE = 3499;
 
+	public static final int STATS_BOX_HEIGHT = 189;
+	public static final int STATS_BOX_WIDTH = 546;
+
 }

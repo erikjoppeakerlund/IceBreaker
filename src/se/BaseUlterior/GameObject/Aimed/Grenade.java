@@ -47,16 +47,14 @@ public class Grenade extends ImagableObject {
 
 	@Override
 	public void update(GameContainer container, int delta) {
-		if (!IceBreaker.pause) {
-			if (!isReleased) {
-				return;
-			}
-			if (System.currentTimeMillis() - wasReleasedAt > TIME_UNTIL_EXPLOTION) {
-				UlteriorUtils.removeGround(getCenterX(), getCenterY(), sizeOfExplostion, this);
-				IceBreaker.objsToRemove.add(this);
-			} else {
-				super.update(container, delta);
-			}
+		if (!isReleased) {
+			return;
+		}
+		if (System.currentTimeMillis() - wasReleasedAt > TIME_UNTIL_EXPLOTION) {
+			UlteriorUtils.removeGround(getCenterX(), getCenterY(), sizeOfExplostion, this);
+			IceBreaker.objsToRemove.add(this);
+		} else {
+			super.update(container, delta);
 		}
 
 	}

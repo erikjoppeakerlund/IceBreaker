@@ -7,6 +7,14 @@ import org.newdawn.slick.TrueTypeFont;
 
 public class SingleText {
 
+	public void setX(float x) {
+		this.x = x;
+	}
+
+	public void setY(float y) {
+		this.y = y;
+	}
+
 	Color color;
 
 	private String value;
@@ -44,5 +52,9 @@ public class SingleText {
 		font = new Font("monospaced", Font.BOLD, size);
 		trueTypeFont = new TrueTypeFont(font, true);
 		this.color = color;
+	}
+
+	public void drawString() {
+		trueTypeFont.drawString(x, y, value, color);
 	}
 }

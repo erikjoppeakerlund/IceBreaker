@@ -34,9 +34,9 @@ public class WorldCreator implements ActionListenable {
 	@Override
 	public void wasDoubleClicked(int button, int x, int y) {
 		System.out.println();
-		if (!IceBreaker.pause) {
-			return;
-		}
+		// if (!IceBreaker.pause) {
+		// return;
+		// }
 		if (!choosingState) {
 			choosingState = true;
 			return;
@@ -76,9 +76,9 @@ public class WorldCreator implements ActionListenable {
 
 	@Override
 	public void wasSingleClicked(int button, int x, int y) {
-		if (!IceBreaker.pause || choosingState) {
-			return;
-		}
+		// if (!IceBreaker.pause || choosingState) {
+		// return;
+		// }
 		if (button == Input.MOUSE_LEFT_BUTTON) {
 			currentBuilder.addPoint(x, y);
 			System.out.println((int) ((x * Constants.CANVAS_EXTENTION_FACTOR)) + ", "
@@ -88,9 +88,9 @@ public class WorldCreator implements ActionListenable {
 
 	@Override
 	public void wasWasKeyPressed(int button, char c) {
-		if (!IceBreaker.pause) {
-			return;
-		}
+		// if (!IceBreaker.pause) {
+		// return;
+		// }
 		if (!choosingState) {
 			switch (button) {
 			case Input.KEY_1:

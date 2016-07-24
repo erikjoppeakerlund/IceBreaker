@@ -1,7 +1,7 @@
 package se.BaseUlterior.GUI;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 
 public class Panel extends Component {
 	protected Alignment alignmentInContainer = Alignment.LEFT;
@@ -9,14 +9,12 @@ public class Panel extends Component {
 	public Panel(float width, float height, Alignment alignment) {
 		super(width, height);
 		this.alignmentInContainer = alignment;
-		this.color = Color.transparent;
 
 	}
 
 	public Panel(float[] points, Alignment alignment) {
 		super(points);
 		this.alignmentInContainer = alignment;
-		this.color = Color.transparent;
 	}
 
 	@Override
@@ -29,5 +27,9 @@ public class Panel extends Component {
 	protected void finalAction() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void render(GameContainer container, Graphics graphics) {
 	}
 }

@@ -9,7 +9,7 @@ import se.BaseUlterior.Actions.Action;
 import se.BaseUlterior.Aim.Aim;
 import se.BaseUlterior.Game.IceBreaker;
 
-public class ToolBox extends Panel {
+public class ToolBox extends Component {
 
 	private List<Button> buttons = null;
 
@@ -22,8 +22,9 @@ public class ToolBox extends Panel {
 
 	public ToolBox(Alignment alignment) {
 		super(new float[] { 0, 0, styleWidth, 0, styleWidth, styleHeigth - tabSize, styleWidth - tabSize, styleHeigth,
-				0, styleHeigth }, alignment);
-		this.color = Color.transparent;
+				0, styleHeigth });
+		color = colorAlpha;
+		// this.color = Color.transparent;
 
 		buttons = new ArrayList<>();
 		init();
@@ -68,7 +69,7 @@ public class ToolBox extends Panel {
 
 			}
 		});
-		buttons.add(new Button("(CHEET)", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, !IceBreaker.pause) {
+		buttons.add(new Button("(CHEET)", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, false) {
 
 			@Override
 			public void onClick() {
@@ -77,8 +78,8 @@ public class ToolBox extends Panel {
 			}
 		});
 
-		buttons.add(new Button(IceBreaker.MODE_LATEST_ACTION.toString(), Button.PREFERED_WIDTH,
-				Button.PREFERED_HEIGHT, true) {
+		buttons.add(new Button(IceBreaker.MODE_LATEST_ACTION.toString(), Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT,
+				true) {
 
 			@Override
 			public void onClick() {
@@ -120,4 +121,8 @@ public class ToolBox extends Panel {
 		});
 	}
 
+	@Override
+	protected void finalAction() {
+
+	}
 }

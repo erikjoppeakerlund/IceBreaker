@@ -23,7 +23,9 @@ public abstract class MateriaFirm extends WorldBuilder {
 	public void update(GameContainer container, int delta) {
 		checkImpact();
 		if (underImpact) {
-			runImpact(delta);
+			if (!container.isPaused()) {
+				runImpact(delta);
+			}
 		}
 	}
 
