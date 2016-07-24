@@ -16,7 +16,7 @@ import se.BaseUlterior.Utils.UlteriorUtils;
 
 public class GameObjectExplosion extends GameObject {
 
-	private static final long MAX_TIME = 190;
+	private static final long MAX_TIME = 79;
 	protected long timeSinceCreation;
 	private float power;
 
@@ -25,11 +25,13 @@ public class GameObjectExplosion extends GameObject {
 		this.power = power;
 		this.color = color;
 		this.timeSinceCreation = System.currentTimeMillis();
+		piercable = true;
 	}
 
 	public GameObjectExplosion(float[] nodes, float power, boolean isBackground) {
 		super(nodes, false, true, false, true, false, false);
 		init(power);
+		piercable = true;
 	}
 
 	public GameObjectExplosion(float[] nodes, float power) {
@@ -37,6 +39,7 @@ public class GameObjectExplosion extends GameObject {
 		this.power = power;
 		this.color = Color.transparent;
 		this.timeSinceCreation = System.currentTimeMillis();
+		piercable = true;
 	}
 
 	private void init(float power) {

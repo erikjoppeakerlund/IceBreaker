@@ -48,6 +48,7 @@ public class GameObjectRicochet extends GameObject {
 		startX = getX();
 		startY = getY();
 		UlteriorUtils.removeGroundInvisible(aimAtX, aimAtY, weight * 51f, weight * 0.19f);
+		piercable = true;
 	}
 
 	@Override

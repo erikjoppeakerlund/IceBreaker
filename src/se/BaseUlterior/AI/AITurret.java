@@ -84,7 +84,7 @@ public abstract class AITurret extends AI {
 		for (GameObject go : IceBreaker.all) {
 			float dotProduct = aimArm.dot(startAngle);
 			if (UlteriorUtils.isWithinRange(go, IceBreaker.wholeSceene) && !go.motionLess && !go.isBackgroundObj
-					&& go != this) {
+					&& !go.piercable && go != this) {
 				float xDist = go.getCenterX() - this.getCenterX();
 				float yDist = go.getCenterY() - this.getCenterY();
 				float distanceTest = (float) Math
