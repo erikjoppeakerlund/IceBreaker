@@ -51,7 +51,7 @@ public class Grenade extends ImagableObject {
 			return;
 		}
 		if (System.currentTimeMillis() - wasReleasedAt > TIME_UNTIL_EXPLOTION) {
-			UlteriorUtils.removeGround(getCenterX(), getCenterY(), sizeOfExplostion, 50);
+			UlteriorUtils.removeGround(getCenterX(), getCenterY(), sizeOfExplostion, 0.9f);
 			IceBreaker.objsToRemove.add(this);
 		} else {
 			super.update(container, delta);

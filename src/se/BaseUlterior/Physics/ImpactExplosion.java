@@ -21,7 +21,7 @@ public class ImpactExplosion extends Impact {
 		this.power = power;
 		this.size = size;
 		if (other.HP > 0) {
-			other.HP -= power;
+			other.HP -= power * 29;
 		}
 	}
 
@@ -42,8 +42,8 @@ public class ImpactExplosion extends Impact {
 
 		float powerLength = maxImpact - returnValue.length();
 		float powerNormalized = powerLength / maxImpact;
-		if (powerNormalized < 0.2f) {
-			return;
+		if (powerNormalized > 0.5f) {
+			powerNormalized = 0.5f;
 		}
 
 		returnValue.normalise();

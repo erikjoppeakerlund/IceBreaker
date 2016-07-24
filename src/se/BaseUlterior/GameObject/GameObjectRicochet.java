@@ -47,7 +47,7 @@ public class GameObjectRicochet extends GameObject {
 		this.LIFE_SPAN_LIMIT *= weight;
 		startX = getX();
 		startY = getY();
-		UlteriorUtils.removeGroundInvisible(aimAtX, aimAtY, weight * 42f, weight * 7f);
+		UlteriorUtils.removeGroundInvisible(aimAtX, aimAtY, weight * 51f, weight * 0.19f);
 	}
 
 	@Override

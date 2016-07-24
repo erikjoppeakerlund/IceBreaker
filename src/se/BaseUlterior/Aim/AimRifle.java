@@ -20,7 +20,7 @@ public class AimRifle extends AimBulletWeapon {
 		gunFireFrameWidth = this.gunFire.getCurrentFrame().getWidth();
 		gunFireFrameHeight = this.gunFire.getCurrentFrame().getHeight();
 		weight = 5.0f;
-		recoilPower = 1.3f;
+		recoilPower = 0.6f;
 	}
 
 	@Override
