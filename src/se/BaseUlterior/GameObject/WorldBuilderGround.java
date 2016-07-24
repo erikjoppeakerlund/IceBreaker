@@ -18,7 +18,7 @@ public class WorldBuilderGround extends MateriaFirm {
 
 	public WorldBuilderGround(float[] nodes) {
 		super(nodes);
-		this.color = Color.white;
+		this.color = Color.black;
 	}
 
 	public WorldBuilderGround(float[] nodes, float extraBounciness) {
@@ -36,7 +36,7 @@ public class WorldBuilderGround extends MateriaFirm {
 		super.render(container, graphics);
 		if (points.length > 0) {
 			graphics.setLineWidth(Constants.LINE_WIDTH);
-			graphics.setColor(Color.black);
+			graphics.setColor(Color.white);
 			graphics.draw(this);
 			graphics.resetLineWidth();
 		}

@@ -20,7 +20,7 @@ public class GameObjectSplinter extends GameObjectAgile {
 	public GameObjectSplinter(float x, float y, Vector2 motion) {
 		super(new Circle(x, y, 2f + (float) (Math.random() * 3f), 4).getPoints(), 1.0f);
 		this.motion = motion;
-		color = new Color(0.59f, 0.59f, 0.59f);
+		color = new Color(0.0f, 0.0f, 0.0f);
 		isBackgroundObj = true;
 		forceUpdate = true;
 		motionLess = false;
@@ -29,10 +29,10 @@ public class GameObjectSplinter extends GameObjectAgile {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
-		color.a = 1f - (float) lifeSpan / (float) LIFE_SPAN_LIMIT;
+		// color.a = 1f - (float) lifeSpan / (float) LIFE_SPAN_LIMIT;
 		graphics.setColor(color);
 		graphics.fill(this);
-		graphics.setColor(color.black);
+		graphics.setColor(color.white);
 		graphics.resetLineWidth();
 		graphics.draw(this);
 	}

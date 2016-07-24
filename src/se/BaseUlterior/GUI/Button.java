@@ -14,7 +14,6 @@ public abstract class Button extends Component {
 	private boolean active = true;
 	public final static int PREFERED_HEIGHT = 30;
 	public final static int PREFERED_WIDTH = 260;
-	// TextInfo buttonText;
 
 	public Button(String text, float width, float height, boolean active) {
 		super(new float[] { 0, 0, width, 0, width, height - tabSize, width - tabSize, height, 0, height });
@@ -34,11 +33,7 @@ public abstract class Button extends Component {
 	}
 
 	protected void setText(String text) {
-		// buttonText = new TextInfo((GameInfo) IceBreaker.info, getX(), getY(),
-		// false);
 		label = new SingleText(getX() + padding, getY(), 20, text, getIsActiveColor(active));
-		// buttonText.singleTexts.add(label);
-		// IceBreaker.info.textInfos.add(buttonText);
 	}
 
 	private boolean mouseIsOutside = true;
