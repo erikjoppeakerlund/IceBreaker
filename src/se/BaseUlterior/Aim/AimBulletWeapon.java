@@ -72,9 +72,6 @@ public abstract class AimBulletWeapon extends Aim {
 		}
 	}
 
-	// protected float aimAtX;
-	// protected float aimAtY;
-
 	protected final int EXPLOTION_SIZE = 70;
 
 	protected boolean wasJustShoot = false;
@@ -105,10 +102,6 @@ public abstract class AimBulletWeapon extends Aim {
 		GameObject ricochet = new GameObjectRicochet(pointBlank, gunFireStartAtX, gunFireStartAtY, aimAtX, aimAtY,
 				weight);
 		IceBreaker.objsToAdd.add(ricochet);
-		// recoil = new GameObjectExplosion(new Circle(xGrip, yGrip,
-		// START_ARM_LENGTH * 1.5f).getPoints(), recoilPower,
-		// Color.transparent, true);
-		// IceBreaker.objsToAdd.add(recoil);
 	}
 
 	@Override
@@ -134,10 +127,7 @@ public abstract class AimBulletWeapon extends Aim {
 
 		if (wasJustShoot && armLengt < START_ARM_LENGTH) {
 			armLengt += 3f;
-			if (recoil != null) {
-				recoil.setCenterX(xGrip);
-				recoil.setCenterY(yGrip);
-			}
+
 		} else if (wasJustShoot) {
 			wasJustShoot = false;
 		}

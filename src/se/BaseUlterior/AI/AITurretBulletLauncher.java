@@ -4,6 +4,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
+import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Physics.Impact;
@@ -12,13 +13,13 @@ import se.BaseUlterior.Physics.ImpactBounce;
 public class AITurretBulletLauncher extends AITurret {
 
 	public AITurretBulletLauncher(float[] points, Vector2 startangle) {
-		super(points, startangle, 100f);
+		super(points, "res/img/turret.png", IMAGE_SCALE_STANDARD * 0.91f, startangle, 100f,
+				Constants.PERFERED_ARM_LENGTH);
 		this.color = Color.red;
 	}
 
 	@Override
 	protected void shoot() {
-		aim.updateAim();
 		aim.shoot();
 	}
 
@@ -27,15 +28,9 @@ public class AITurretBulletLauncher extends AITurret {
 
 	}
 
-	@Override
 	public void render(GameContainer container, Graphics graphics) {
 		super.render(container, graphics);
-		if (dHP == HP) {
-			aim.render(container, graphics);
-		} else {
-			aim.renderFlashed(container, graphics);
-			dHP = HP;
-		}
+		aim.render(container, graphics);
 	}
 
 	@Override

@@ -1,14 +1,11 @@
 package se.BaseUlterior.Aim;
 
 import org.newdawn.slick.Animation;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.geom.Circle;
 
 import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.GameObjectExplosion;
 import se.BaseUlterior.GameObject.GameObjectRicochet;
 import se.BaseUlterior.Geom.Vector2;
 
@@ -87,9 +84,6 @@ public class AimShotGun extends AimBulletWeapon {
 				}
 			}
 		}
-		recoil = new GameObjectExplosion(new Circle(xGrip, yGrip, START_ARM_LENGTH * 1.5f).getPoints(), recoilPower,
-				Color.transparent, true);
-		IceBreaker.objsToAdd.add(recoil);
 
 	}
 }
