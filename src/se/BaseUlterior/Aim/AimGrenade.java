@@ -7,6 +7,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
 
+import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.GameObject.Aimed.Grenade;
 import se.BaseUlterior.Geom.Vector2;
@@ -34,7 +35,7 @@ public class AimGrenade extends Aim {
 
 	private final int CHARGE_ITERATION = 1;
 
-	private final float TIMES_LESS_ACTUAL_FORCE = 1.0f;
+	private final float THROW_FORCE = Constants.GRENADE_THROW_FORCE;
 
 	private final float FORCE = 0.06f;
 	private final float TIMES_LESS_INITIAL_ROTATION = 2.9f;
@@ -57,8 +58,8 @@ public class AimGrenade extends Aim {
 		if (current == null) {
 			return;
 		}
-		float dX = arm.x * force / TIMES_LESS_ACTUAL_FORCE;
-		float dY = arm.y * force / TIMES_LESS_ACTUAL_FORCE;
+		float dX = arm.x * force * THROW_FORCE;
+		float dY = arm.y * force * THROW_FORCE;
 		current.initMotion(new Vector2(dX, dY));
 		current.rotation = !isRight ? arm.x / TIMES_LESS_INITIAL_ROTATION : -arm.x / TIMES_LESS_INITIAL_ROTATION;
 		currentTime = System.currentTimeMillis();

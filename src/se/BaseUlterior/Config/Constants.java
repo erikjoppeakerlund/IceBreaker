@@ -35,8 +35,15 @@ public class Constants {
 	public static final int STATS_BOX_HEIGHT = 189;
 	public static final int STATS_BOX_WIDTH = 546;
 
-	public static final float MAX_SPEE_TURRET = 0.39f;
+	public static final float MAX_FOLLOW_SPEED_TURRET = 0.39f;
 
-	public final static int TURRETS_MAX_UPDATE_SPEED = 127;
+	public final static int TURRETS_MAX_RELOAD_SPEED = 127;
+
+	public final static float GENERAL_EXPLOSION_HURT_EFFECT = 40;
+	public static final float GRENADE_THROW_FORCE = 1.52f;
+
+	public static final float GRENADE_BOUNCINESS = 0.5f;
+
+	public static final int GRENADE_SIZE_OF_EXPLOSION = 419;
 
 }

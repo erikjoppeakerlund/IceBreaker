@@ -21,7 +21,7 @@ public abstract class AITurret extends AI {
 	protected GameObject target;
 
 	protected Vector2 startAngle;
-	protected final int UPDATE_SPEED = Constants.TURRETS_MAX_UPDATE_SPEED;
+	protected final int UPDATE_SPEED = Constants.TURRETS_MAX_RELOAD_SPEED;
 	protected Vector2 aimArm;
 
 	protected int timeSinceLast;
@@ -32,7 +32,7 @@ public abstract class AITurret extends AI {
 
 	private int gunFireFrameWidth;
 	private int gunFireFrameHeight;
-	private final float MAX_SPEE_TURRET = Constants.MAX_SPEE_TURRET;
+	private final float MAX_SPEE_TURRET = Constants.MAX_FOLLOW_SPEED_TURRET;
 
 	protected Image turretImage = null;
 	protected int imageHeight;

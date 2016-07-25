@@ -21,7 +21,7 @@ public class ImpactExplosion extends Impact {
 		this.power = power;
 		this.size = size;
 		if (other.HP > 0) {
-			other.HP -= power * 29;
+			other.HP -= power * Constants.GENERAL_EXPLOSION_HURT_EFFECT;
 		}
 	}
 

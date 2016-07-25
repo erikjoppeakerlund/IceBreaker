@@ -4,6 +4,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
+import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Geom.Vector2;
@@ -18,17 +19,17 @@ import se.BaseUlterior.Utils.UlteriorUtils;
  */
 public class Grenade extends ImagableObject {
 
-	public static final int GRENADE_SIZE = 64;
+	public static final int GRENADE_SIZE = 60;
 	private boolean isReleased = false;
 
-	private static float BOUNCINESS = 0.5f;
+	private static float BOUNCINESS = Constants.GRENADE_BOUNCINESS;
 	protected long wasReleasedAt;
 
-	protected final long TIME_UNTIL_EXPLOTION = 2500;
+	protected final long TIME_UNTIL_EXPLOTION = 1380;
 
 	protected GameObject explotionShape = null;
 
-	protected int sizeOfExplostion = 319;
+	protected int sizeOfExplostion = Constants.GRENADE_SIZE_OF_EXPLOSION;
 
 	public Grenade(float[] nodes) {
 		super(nodes, BOUNCINESS, "res/img/grenade.png");

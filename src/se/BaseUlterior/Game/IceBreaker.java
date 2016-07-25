@@ -100,7 +100,8 @@ public class IceBreaker extends BasicGame {
 		IceBreaker.objsToAdd = new ArrayList<>();
 		objsToRemove = new ArrayList<>();
 
-		wholeSceene = new GameObjectEmpty(new float[] { 0, 0, 0, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0 });
+		wholeSceene = new GameObjectEmpty(new float[] { 0, 0, 0, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH,
+				Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0 });
 		IceBreaker.objsToAdd.add(wholeSceene);
 
 		ParallaxHolder parallaxHolderBackground = new ParallaxHolder(0);
@@ -160,7 +161,7 @@ public class IceBreaker extends BasicGame {
 		AppGameContainer appGameContainer = new AppGameContainer(new IceBreaker("ParallaX"));
 		int maxFPS = 60;
 		appGameContainer.setTargetFrameRate(maxFPS);
-		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, false);
+		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, true);
 		appGameContainer.setAlwaysRender(true);
 		appGameContainer.start();
 
