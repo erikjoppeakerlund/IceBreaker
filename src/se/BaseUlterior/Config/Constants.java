@@ -46,4 +46,13 @@ public class Constants {
 
 	public static final int GRENADE_SIZE_OF_EXPLOSION = 419;
 
+	/*
+	 * Weapon effect (out of 100)
+	 */
+
+	public static final float WEAPON_EFFECT_RIFLE = 39f;
+	public static final float WEAPON_EFFECT_SHOTGUN = 9f;
+	public static final float WEAPON_EFFECT_UZI = 5f;
+	public static final float WEAPON_EFFECT_GRENADE = 71f;
+
 }

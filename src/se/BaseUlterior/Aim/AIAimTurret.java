@@ -30,6 +30,8 @@ public class AIAimTurret extends AIAim {
 	protected float weight = 1.0f;
 	private Animation gunFire;
 
+	protected float damage = 20;
+
 	public AIAimTurret(Animation gunFire, float armLengt) {
 		super(armLengt);
 		this.gunFire = gunFire;
@@ -75,7 +77,7 @@ public class AIAimTurret extends AIAim {
 	protected void wasShoot() {
 		wasJustShoot = true;
 		GameObject ricochet = new GameObjectRicochet(pointBlank, gunFireStartAtX, gunFireStartAtY, aimAtX, aimAtY,
-				weight);
+				weight, damage);
 		IceBreaker.objsToAdd.add(ricochet);
 	}
 

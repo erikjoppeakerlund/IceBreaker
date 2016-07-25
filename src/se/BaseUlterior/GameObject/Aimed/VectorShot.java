@@ -42,7 +42,7 @@ public class VectorShot extends MateriaFirm {
 	@Override
 	public Impact getImpact(GameObject piece) {
 		// we might have to put an animation right here...
-		return new ImpactExplosion(this, piece, power, sizeOfExplosion);
+		return new ImpactExplosion(this, piece, power, sizeOfExplosion, power);
 	}
 
 }

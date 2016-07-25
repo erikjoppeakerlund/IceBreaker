@@ -5,6 +5,8 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
+import se.BaseUlterior.Config.Constants;
+
 /**
  * Rifle gun Aim
  * 
@@ -21,6 +23,7 @@ public class AimRifle extends AimBulletWeapon {
 		gunFireFrameHeight = this.gunFire.getCurrentFrame().getHeight();
 		weight = 5.0f;
 		recoilPower = 0.6f;
+		damage = Constants.WEAPON_EFFECT_RIFLE;
 	}
 
 	@Override

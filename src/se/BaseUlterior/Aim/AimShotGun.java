@@ -4,6 +4,7 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
+import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.GameObject.GameObjectRicochet;
@@ -23,6 +24,7 @@ public class AimShotGun extends AimBulletWeapon {
 		gunFireFrameWidth = this.gunFire.getCurrentFrame().getWidth();
 		gunFireFrameHeight = this.gunFire.getCurrentFrame().getHeight();
 		recoilPower = 0.2f;
+		damage = Constants.WEAPON_EFFECT_SHOTGUN;
 	}
 
 	@Override
@@ -76,7 +78,7 @@ public class AimShotGun extends AimBulletWeapon {
 				for (GameObject go : IceBreaker.all) {
 					if (go.contains(xTarget, yTarget) && !go.piercable) {
 						GameObject ricochet = new GameObjectRicochet(go, gunFireStartAtX, gunFireStartAtY, xTarget,
-								yTarget, 0.49f);
+								yTarget, 0.49f, damage);
 						IceBreaker.objsToAdd.add(ricochet);
 						notFound = false;
 						break;

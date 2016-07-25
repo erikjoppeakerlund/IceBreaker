@@ -7,7 +7,6 @@ import org.newdawn.slick.Graphics;
 
 import se.BaseUlterior.Actions.Action;
 import se.BaseUlterior.Config.Constants;
-import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Geom.Vector2;
 
@@ -39,15 +38,10 @@ public abstract class Aim {
 	public float spriteY;
 	protected GameObject pointBlank = null;
 
-	public GameObject getPointBlank() {
-		return pointBlank;
-	}
-
 	protected float aimAtX;
 	protected float aimAtY;
 
 	public float angle;
-	protected float dAngle;
 	protected float START_ARM_LENGTH;
 
 	protected float armLengt;
@@ -177,32 +171,6 @@ public abstract class Aim {
 
 	public int getCurrentThete() {
 		return (int) arm.getTheta();
-	}
-
-	public void updateAim() {
-		float xTarget = xGrip;
-		float yTarget = yGrip;
-		boolean notFound = true;
-		int STEP = 8;
-		while (notFound) {
-			xTarget += arm.x * STEP;
-			yTarget += arm.y * STEP;
-			for (GameObject go : IceBreaker.all) {
-				if (go.contains(xTarget, yTarget) && !(go.piercable)) {
-					aimAtX = xTarget;
-					aimAtY = yTarget;
-					notFound = false;
-					if (pointBlank != go) {
-						if (pointBlank != null && !pointBlank.isRotatingObject) {
-							pointBlank.forceUpdate = false;
-						}
-						go.forceUpdate = true;
-					}
-					pointBlank = go;
-					break;
-				}
-			}
-		}
 	}
 
 	public void setPointBlank(GameObject go) {

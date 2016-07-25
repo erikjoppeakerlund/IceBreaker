@@ -33,8 +33,6 @@ public abstract class AimBulletWeapon extends Aim {
 	protected int gunFireFrameWidth;
 	protected int gunFireFrameHeight;
 
-	// protected GameObject pointBlank = null;
-
 	protected int shotRayFrames;
 
 	protected float weight = 1.0f;
@@ -78,6 +76,7 @@ public abstract class AimBulletWeapon extends Aim {
 	protected final float BACK_FIRE = 14f;
 	protected float gunFireStartAtX;
 	protected float gunFireStartAtY;
+	protected float damage = 20;
 
 	@Override
 	public void primaryPushed() {
@@ -100,7 +99,7 @@ public abstract class AimBulletWeapon extends Aim {
 		wasJustShoot = true;
 		armLengt -= BACK_FIRE;
 		GameObject ricochet = new GameObjectRicochet(pointBlank, gunFireStartAtX, gunFireStartAtY, aimAtX, aimAtY,
-				weight);
+				weight, damage);
 		IceBreaker.objsToAdd.add(ricochet);
 	}
 
@@ -145,6 +144,32 @@ public abstract class AimBulletWeapon extends Aim {
 			rifleImageLeft.draw(xGrip - imageWidth / 2, yGrip - imageHeight / 2);
 		}
 
+	}
+
+	protected void updateAim() {
+		float xTarget = xGrip;
+		float yTarget = yGrip;
+		boolean notFound = true;
+		int STEP = 8;
+		while (notFound) {
+			xTarget += arm.x * STEP;
+			yTarget += arm.y * STEP;
+			for (GameObject go : IceBreaker.all) {
+				if (go.contains(xTarget, yTarget) && !(go.piercable)) {
+					aimAtX = xTarget;
+					aimAtY = yTarget;
+					notFound = false;
+					if (pointBlank != go) {
+						if (pointBlank != null && !pointBlank.isRotatingObject) {
+							pointBlank.forceUpdate = false;
+						}
+						go.forceUpdate = true;
+					}
+					pointBlank = go;
+					break;
+				}
+			}
+		}
 	}
 
 }

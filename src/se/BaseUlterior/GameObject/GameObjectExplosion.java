@@ -19,39 +19,32 @@ public class GameObjectExplosion extends GameObject {
 	private static final long MAX_TIME = 79;
 	protected long timeSinceCreation;
 	private float power;
+	private float bumpEffect;
+	private boolean invisible;
 
-	public GameObjectExplosion(float[] nodes, float power, Color color, boolean isBackground) {
-		super(nodes, false, true, false, true, false, true);
-		this.power = power;
-		this.color = color;
-		this.timeSinceCreation = System.currentTimeMillis();
-		piercable = true;
-	}
-
-	public GameObjectExplosion(float[] nodes, float power, boolean isBackground) {
+	public GameObjectExplosion(float[] nodes, float damage, float bumpEffect, boolean invisible) {
 		super(nodes, false, true, false, true, false, false);
-		init(power);
+		init(damage, bumpEffect);
 		piercable = true;
+		this.invisible = invisible;
 	}
 
-	public GameObjectExplosion(float[] nodes, float power) {
+	public GameObjectExplosion(float[] nodes, float damage, float bumpEffect) {
 		super(nodes, false, true, false, true, false, false);
-		this.power = power;
-		this.color = Color.transparent;
-		this.timeSinceCreation = System.currentTimeMillis();
+		init(damage, bumpEffect);
 		piercable = true;
 	}
 
-	private void init(float power) {
+	private void init(float power, float bumpEffect) {
 		this.power = power;
 		this.color = new Color(1, 0, 0, 0.39f);
 		this.timeSinceCreation = System.currentTimeMillis();
-
+		this.bumpEffect = bumpEffect;
 	}
 
 	@Override
 	public Impact getImpact(GameObject agileObject) {
-		return new ImpactExplosion(this, agileObject, power, getBoundingCircleRadius());
+		return new ImpactExplosion(this, agileObject, power, getBoundingCircleRadius(), bumpEffect);
 	}
 
 	@Override
@@ -65,8 +58,10 @@ public class GameObjectExplosion extends GameObject {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
-		graphics.setColor(this.color);
-		graphics.fill(this);
+		if (!invisible) {
+			graphics.setColor(this.color);
+			graphics.fill(this);
+		}
 	}
 
 	@Override

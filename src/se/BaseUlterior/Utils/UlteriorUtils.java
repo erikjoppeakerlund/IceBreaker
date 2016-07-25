@@ -56,7 +56,7 @@ public class UlteriorUtils {
 	 */
 	public static void removeGroundReal(float x, float y, float sizeOfExplostion, GameObject origin) {
 		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion, 8).getPoints(), 0f,
-				false);
+				0.0f);
 		IceBreaker.objsToAdd.add(explotionShape);
 		ArrayList<GameObject> newShapes = new ArrayList<>();
 		boolean wasFound = false;
@@ -77,12 +77,6 @@ public class UlteriorUtils {
 
 						IceBreaker.objsToRemove.add(target);
 						UlteriorUtils.cleanUpImpactFromWorldBuilderObject(target);
-						// for (GameObject anySort : BreakingPoint.all) {
-						// if (anySort.isSolid()) {
-						// // BreakingPoint.addOnTop(anySort);
-						// // BreakingPoint.addOnTop(BreakingPoint.info);
-						// }
-						// }
 					}
 				}
 			}
@@ -96,14 +90,15 @@ public class UlteriorUtils {
 
 	}
 
-	public static void removeGround(float x, float y, float sizeOfExplostion, float effect) {
-		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion).getPoints(), effect,
-				false);
+	public static void removeGround(float x, float y, float damage, float sizeOfExplostion, float bumpEffect) {
+		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion).getPoints(), damage,
+				bumpEffect);
 		IceBreaker.objsToAdd.add(explotionShape);
 	}
 
-	public static void removeGroundInvisible(float x, float y, float sizeOfExplostion, float effect) {
-		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion).getPoints(), effect);
+	public static void removeGroundInvisible(float x, float y, float damage, float sizeOfExplostion, float bumpEffect) {
+		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion).getPoints(), damage,
+				bumpEffect, true);
 		IceBreaker.objsToAdd.add(explotionShape);
 	}
 }

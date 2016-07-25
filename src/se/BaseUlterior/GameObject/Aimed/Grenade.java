@@ -52,7 +52,8 @@ public class Grenade extends ImagableObject {
 			return;
 		}
 		if (System.currentTimeMillis() - wasReleasedAt > TIME_UNTIL_EXPLOTION) {
-			UlteriorUtils.removeGround(getCenterX(), getCenterY(), sizeOfExplostion, 0.9f);
+			UlteriorUtils.removeGround(getCenterX(), getCenterY(), Constants.WEAPON_EFFECT_GRENADE, sizeOfExplostion,
+					0.9f);
 			IceBreaker.objsToRemove.add(this);
 		} else {
 			super.update(container, delta);
@@ -62,10 +63,7 @@ public class Grenade extends ImagableObject {
 
 	@Override
 	public Impact getImpact(GameObject other) {
-		// if (!other.motionLess) {
 		return new ImpactBounce(this, other, bounciness, true);
-		// }
-		// return null;
 	}
 
 	@Override

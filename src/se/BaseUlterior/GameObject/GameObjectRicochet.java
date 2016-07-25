@@ -23,7 +23,7 @@ public class GameObjectRicochet extends GameObject {
 
 	GameObject target = null;
 
-	private int LIFE_SPAN_LIMIT = 40;
+	private int LIFE_SPAN_LIMIT = 32;
 	private int LIFE_SPAN_SPLITS = 9;
 	private int lifeSpan = 0;
 	private float gunFireStartAtX;
@@ -36,7 +36,7 @@ public class GameObjectRicochet extends GameObject {
 	private float startY;
 
 	public GameObjectRicochet(GameObject target, float gunFireStartAtX, float gunFireStartAtY, float aimAtX,
-			float aimAtY, float weight) {
+			float aimAtY, float weight, float damage) {
 		super(new float[] { aimAtX, aimAtY }, false, true, false, true, true, true);
 		this.target = target;
 		this.gunFireStartAtX = gunFireStartAtX;
@@ -47,13 +47,13 @@ public class GameObjectRicochet extends GameObject {
 		this.LIFE_SPAN_LIMIT *= weight;
 		startX = getX();
 		startY = getY();
-		UlteriorUtils.removeGroundInvisible(aimAtX, aimAtY, weight * 51f, weight * 0.19f);
+		UlteriorUtils.removeGroundInvisible(aimAtX, aimAtY, damage, 24f, 0);
 		piercable = true;
 	}
 
 	@Override
 	public void update(GameContainer container, int arg) {
-		if (lifeSpan < LIFE_SPAN_SPLITS && lifeSpan % 2 == 0) {
+		if (lifeSpan < LIFE_SPAN_SPLITS && lifeSpan % 4 == 0) {
 			runEffect();
 		}
 		if (lifeSpan > LIFE_SPAN_LIMIT) {
@@ -78,7 +78,7 @@ public class GameObjectRicochet extends GameObject {
 
 	private void runEffect() {
 
-		normals = target.getMyNormalsAfterHitBy(new GameObjectEmpty(new Circle(x, y, 29f).getPoints()));
+		normals = target.getMyNormalsAfterHitBy(new GameObjectEmpty(new Circle(x, y, 59f).getPoints()));
 		if (normals.isEmpty()) {
 			return;
 		}
@@ -96,8 +96,8 @@ public class GameObjectRicochet extends GameObject {
 		}
 		N.normalise();
 		Vector2 angled = N.copy();
-		N.setTheta(N.getTheta() + Math.random() * 46 - 23);
-		float dot = angled.dot(N) * (2.0f);
+		N.setTheta(N.getTheta() + Math.random() * 60 - 30);
+		float dot = angled.dot(N) * (1.39f);
 
 		N.scale(dot);
 		angled.sub(N);

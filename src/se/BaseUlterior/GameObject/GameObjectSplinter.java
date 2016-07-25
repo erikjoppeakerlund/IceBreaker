@@ -14,24 +14,22 @@ import se.BaseUlterior.Geom.Vector2;
  * @author Johan Akerlund
  */
 public class GameObjectSplinter extends GameObjectAgile {
-	private final int LIFE_SPAN_LIMIT = 32;
-	private int lifeSpan = 0;
+	private final float LIFE_SPAN_LIMIT = 49;
+	private float lifeSpan = 0;
 
 	public GameObjectSplinter(float x, float y, Vector2 motion) {
-		super(new Circle(x, y, 2f + (float) (Math.random() * 3f), 4).getPoints(), 1.0f);
+		super(new Circle(x, y, 2f + (float) (Math.random() * 6f), 3).getPoints(), 1.0f);
 		this.motion = motion;
-		color = new Color(0.0f, 0.0f, 0.0f);
 		forceUpdate = true;
 		piercable = true;
 		motionLess = true;
+		this.color = Color.darkGray;
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
 		graphics.setColor(color);
-		graphics.fill(this);
-		graphics.setColor(color.white);
-		graphics.resetLineWidth();
+		graphics.setLineWidth(4);
 		graphics.draw(this);
 	}
 

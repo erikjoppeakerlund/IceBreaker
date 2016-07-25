@@ -12,17 +12,28 @@ import se.BaseUlterior.Geom.Vector2;
 public class ImpactExplosion extends Impact {
 
 	private Vector2 returnValue;
-	private float power;
 	private float size;
+	private float bumpEffect;
 
-	public ImpactExplosion(GameObject origin, GameObject other, float power, float size) {
+	// public ImpactExplosion(GameObject origin, GameObject other, float power,
+	// float size) {
+	// super(origin, other);
+	// returnValue = new Vector2();
+	// this.power = power;
+	// this.size = size;
+	// if (other.HP > 0) {
+	// other.HP -= power;
+	// }
+	// }
+
+	public ImpactExplosion(GameObject origin, GameObject other, float damage, float size, float bumpEffect) {
 		super(origin, other);
 		returnValue = new Vector2();
-		this.power = power;
 		this.size = size;
 		if (other.HP > 0) {
-			other.HP -= power * Constants.GENERAL_EXPLOSION_HURT_EFFECT;
+			other.HP -= damage;
 		}
+		this.bumpEffect = bumpEffect;
 	}
 
 	@Override
@@ -48,7 +59,7 @@ public class ImpactExplosion extends Impact {
 
 		returnValue.normalise();
 		if (affectedPiece.length() < Constants.GENERA_OBJECT_MAX_SPEED) {
-			affectedPiece.add(returnValue.scale(powerNormalized * this.power));
+			affectedPiece.add(returnValue.scale(powerNormalized * bumpEffect));
 		}
 
 	}
