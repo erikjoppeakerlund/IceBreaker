@@ -15,7 +15,7 @@ import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
-public abstract class AITurret extends AI {
+public abstract class AITurret extends AIMotionLess {
 
 	protected AIAim aim;
 	protected GameObject target;
@@ -65,6 +65,7 @@ public abstract class AITurret extends AI {
 		this.imageScale = imageScale;
 
 		init(pathToImage);
+		isRotatingObject = true;
 	}
 
 	private void init(String pathToImage) {
@@ -115,8 +116,7 @@ public abstract class AITurret extends AI {
 					&& !go.piercable && go != this) {
 				float xDist = go.getCenterX() - this.getCenterX();
 				float yDist = go.getCenterY() - this.getCenterY();
-				float distanceTest = (float) Math
-						.sqrt((Math.pow(go.getX() - this.getX(), 2) + Math.pow(go.getY() - this.getY(), 2)));
+				float distanceTest = (float) Math.sqrt((Math.pow(xDist, 2) + Math.pow(yDist, 2)));
 				if (distanceTest < distanceToClosestTarget) {
 					distanceToClosestTarget = distanceTest;
 					injectVector.set(xDist, yDist);

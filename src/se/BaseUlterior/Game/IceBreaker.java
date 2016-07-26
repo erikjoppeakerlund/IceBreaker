@@ -11,6 +11,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 
+import se.BaseUlterior.AI.AIBot;
 import se.BaseUlterior.AI.TurretPlacer;
 import se.BaseUlterior.Actions.Action;
 import se.BaseUlterior.Actions.ActionListenablers;
@@ -127,6 +128,8 @@ public class IceBreaker extends BasicGame {
 				turretPlacer.placeTurretsOnMe(groundPiece);
 			}
 		}
+		AIBot bot = new AIBot(41f);
+		IceBreaker.objsToAdd.add(bot);
 		toolbox = new ToolBox(Alignment.LEFT);
 		toolbox.pack();
 		Stats stats = new Stats();

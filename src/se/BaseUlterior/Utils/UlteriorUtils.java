@@ -45,6 +45,10 @@ public class UlteriorUtils {
 		return (int) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 	}
 
+	public static int distance(float x1, float y1, float x2, float y2) {
+		return (int) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+	}
+
 	public static void cleanUpImpactFromWorldBuilderObject(GameObject clearWhichBelongToThis) {
 		for (GameObject go : IceBreaker.all) {
 			go.removeCurrentImpactsWhichBelingTo(clearWhichBelongToThis);

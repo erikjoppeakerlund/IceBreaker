@@ -6,12 +6,12 @@ import org.newdawn.slick.Graphics;
 
 import se.BaseUlterior.GameObject.MateriaFirm;
 
-public abstract class AI extends MateriaFirm {
+public abstract class AIMotionLess extends MateriaFirm {
 	protected float height;
 	protected Color HPColor;
 	protected float dHP;
 
-	protected AI(float[] points, float height) {
+	protected AIMotionLess(float[] points, float height) {
 		super(points);
 		this.height = height;
 		HP = 100f;

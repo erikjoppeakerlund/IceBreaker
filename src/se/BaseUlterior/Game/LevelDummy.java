@@ -18,7 +18,7 @@ public class LevelDummy {
 		levelPieces = new ArrayList<>();
 
 		levelPieces.add(new WorldBuilderForce(new float[] { 10477, 2579, 5049, 77, 10477, 66, },
-				Constants.GENERAL_GRAVITY, 0f));
+				Constants.GENERAL_GRAVITY / 4f, 0f));
 		levelPieces.add(new WorldBuilderLiquid(new float[] { 5747, 3608, 6066, 4000, 5000, 4867, 4081, 4933, 3162, 4697,
 				2579, 4334, 2255, 3844, 1952, 3487, 1650, 3157, 1655, 3047,
 
