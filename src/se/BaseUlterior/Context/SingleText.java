@@ -45,11 +45,11 @@ public class SingleText {
 	public Font font;
 	public TrueTypeFont trueTypeFont;
 
-	public SingleText(float x, float y, int size, String value, Color color) {
+	public SingleText(float x, float y, int size, String value, Color color, String style) {
 		this.x = x;
 		this.y = y;
 		this.value = value;
-		font = new Font("plain", Font.BOLD, size);
+		font = new Font(style, Font.BOLD, size);
 		trueTypeFont = new TrueTypeFont(font, true);
 		this.color = color;
 	}

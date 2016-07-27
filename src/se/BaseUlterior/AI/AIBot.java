@@ -70,8 +70,7 @@ public class AIBot extends AISprite {
 		boolean result = false;
 		float distanceToClosestTarget = Constants.CANVAS_WIDTH;
 		for (GameObject go : IceBreaker.all) {
-			if (UlteriorUtils.isWithinRange(go, IceBreaker.wholeSceene) && !go.motionLess && !go.isBackgroundObj
-					&& !go.piercable && go != this) {
+			if (!go.motionLess && !go.isBackgroundObj && !go.piercable && go != this) {
 				float xDist = go.getCenterX() - this.getCenterX();
 				float yDist = go.getCenterY() - this.getCenterY();
 				float distanceTest = (float) Math.sqrt((Math.pow(xDist, 2) + Math.pow(yDist, 2)));

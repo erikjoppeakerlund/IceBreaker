@@ -48,11 +48,12 @@ public class StatsObserver extends Observer {
 
 	public StatsObserver(float x, float y) {
 		this.info = IceBreaker.gameInfo;
+		Color fontColor = Color.lightGray;
 
-		HP = new SingleText(0, Constants.STATS_BOX_HEIGHT / 5 - 25, 22, "HP: ", Color.black);
-		weapon = new SingleText(0, Constants.STATS_BOX_HEIGHT / 5 * 2 - 25, 22, "WEAPON: ", Color.black);
-		lastHit = new SingleText(0, Constants.STATS_BOX_HEIGHT / 5 * 3 - 25, 22, "LAST HIT: ", Color.black);
-		kills = new SingleText(0, Constants.STATS_BOX_HEIGHT / 5 * 4 - 25, 22, "KILLS: ", Color.black);
+		HP = new SingleText(0, Constants.STATS_BOX_HEIGHT / 5 - 25, 19, "HP: ", fontColor, "SANS_SERIF");
+		weapon = new SingleText(0, Constants.STATS_BOX_HEIGHT / 5 * 2 - 25, 19, "WEAPON: ", fontColor, "SANS_SERIF");
+		lastHit = new SingleText(0, Constants.STATS_BOX_HEIGHT / 5 * 3 - 25, 19, "LAST HIT: ", fontColor, "SANS_SERIF");
+		kills = new SingleText(0, Constants.STATS_BOX_HEIGHT / 5 * 4 - 25, 19, "KILLS: ", fontColor, "SANS_SERIF");
 		singleTexts.add(HP);
 		singleTexts.add(weapon);
 		singleTexts.add(lastHit);

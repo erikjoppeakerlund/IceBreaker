@@ -55,7 +55,10 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 		super(new Circle(Constants.CANVAS_WIDTH / 4, Constants.CANVAS_HEIGHT / 2, Constants.SPRITE_RADIUS).getPoints(),
 				0f);
 		this.setCenterX(Constants.CANVAS_WIDTH / 4);
-		this.setCenterY(Constants.CANVAS_HEIGHT / 2);
+		this.setCenterY(Constants.CANVAS_HEIGHT / 4);
+
+		// this.setCenterX(Constants.CANVAS_WIDTH / 2);
+		// this.setCenterY(Constants.CANVAS_HEIGHT / 4);
 		color = Color.transparent;
 		try {
 			sprite = new SpriteSheet("res/img/spriteSheet.png", SPRITE_IMAGE_SIZE, SPRITE_IMAGE_SIZE);

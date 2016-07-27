@@ -14,7 +14,7 @@ public class Label extends Component {
 
 		super(width, height);
 
-		label = new SingleText(getX() + padding, getY(), 20, value, Color.black);
+		label = new SingleText(getX() + padding, getY(), 20, value, Color.black, "plain");
 		this.label = label;
 	}
 

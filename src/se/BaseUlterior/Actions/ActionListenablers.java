@@ -6,13 +6,13 @@ public class ActionListenablers {
 
 	private ArrayList<ActionListenable> listeners;
 	private GeneralInputHandler input = null;
-	// WorldCreator worldCreator = new WorldCreator();
+	WorldCreator worldCreator = new WorldCreator();
 
 	public ActionListenablers() {
 		listeners = new ArrayList<>();
 		input = new GeneralInputHandler();
-		// worldCreator = new WorldCreator();
-		// listeners.add(worldCreator);
+		worldCreator = new WorldCreator();
+		listeners.add(worldCreator);
 		listeners.add(input);
 	}
 

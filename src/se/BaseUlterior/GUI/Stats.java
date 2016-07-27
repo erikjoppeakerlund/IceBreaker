@@ -15,7 +15,7 @@ public class Stats extends Component {
 	private static final int styleWidth = Constants.STATS_BOX_WIDTH;
 
 	private final static int tabSize = 50;
-	Color colorAlpha = new Color(0.7f, 0.7f, 0.8f, 0.39f);
+	Color colorAlpha = new Color(0.7f, 1f, 0.7f, 0.19f);
 
 	SingleText HP;
 	SingleText weapon;
@@ -39,6 +39,7 @@ public class Stats extends Component {
 
 	@Override
 	public void update(GameContainer container, int arg) {
+		super.update(container, arg);
 		// super.update(container, arg);
 		// if (isPaused) {
 		// if (this.getX() < 0) {
@@ -54,11 +55,14 @@ public class Stats extends Component {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
-		graphics.setColor(color);
-		graphics.fill(this);
-		graphics.setColor(Color.black);
-		graphics.setLineWidth(Constants.LINE_WIDTH);
-		graphics.draw(this);
-		stats.draw();
+		if (!isPaused) {
+			graphics.setColor(color);
+			graphics.fill(this);
+			graphics.setColor(Color.black);
+			graphics.resetLineWidth();
+			// graphics.setLineWidth(Constants.LINE_WIDTH);
+			graphics.draw(this);
+			stats.draw();
+		}
 	}
 }

@@ -33,7 +33,7 @@ public abstract class Button extends Component {
 	}
 
 	protected void setText(String text) {
-		label = new SingleText(getX() + padding, getY(), 20, text, getIsActiveColor(active));
+		label = new SingleText(getX() + padding, getY(), 20, text, getIsActiveColor(active), "monospaced");
 	}
 
 	private boolean mouseIsOutside = true;

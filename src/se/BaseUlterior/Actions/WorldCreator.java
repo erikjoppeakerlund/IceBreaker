@@ -34,15 +34,15 @@ public class WorldCreator implements ActionListenable {
 	@Override
 	public void wasDoubleClicked(int button, int x, int y) {
 		System.out.println();
-		// if (!IceBreaker.pause) {
+		// // if (!IceBreaker.pause) {
+		// // return;
+		// // }
+		// if (!choosingState) {
+		// choosingState = true;
 		// return;
 		// }
-		if (!choosingState) {
-			choosingState = true;
-			return;
-		}
 		betweenCreationHandler();
-		choosingState = false;
+		// choosingState = false;
 	}
 
 	private void betweenCreationHandler() {
