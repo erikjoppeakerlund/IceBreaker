@@ -47,6 +47,10 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 	private int gunFireFrameWidth;
 	private int gunFireFrameHeight;
 
+	private float HPCompare;
+
+	private final int SPRITE_IMAGE_SIZE = 88;
+
 	protected GameObjectSprite() {
 		super(new Circle(Constants.CANVAS_WIDTH / 4, Constants.CANVAS_HEIGHT / 2, Constants.SPRITE_RADIUS).getPoints(),
 				0f);
@@ -54,7 +58,8 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 		this.setCenterY(Constants.CANVAS_HEIGHT / 2);
 		color = Color.transparent;
 		try {
-			sprite = new SpriteSheet("res/img/spriteSheet.png", 88, 88);
+			sprite = new SpriteSheet("res/img/spriteSheet.png", SPRITE_IMAGE_SIZE, SPRITE_IMAGE_SIZE);
+
 			animationMoveRight = new Animation(false);
 			animationMoveLeft = new Animation(false);
 			for (int i = 0; i < 4; i++) {
@@ -79,7 +84,8 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 		}
 		initAims();
 		motionLess = false;
-		HP = 100;
+		HP = 1000;
+		HPCompare = HP;
 	}
 
 	private void initAims() {
@@ -151,9 +157,19 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 	public void render(GameContainer container, Graphics graphics) {
 		super.render(container, graphics);
 		if (directionIsRight) {
-			animationMoveRight.draw(getX(), getY());
+			if (HP != HPCompare) {
+				animationMoveRight.drawFlash(getX(), getY(), SPRITE_IMAGE_SIZE, SPRITE_IMAGE_SIZE);
+				HPCompare = HP;
+			} else {
+				animationMoveRight.draw(getX(), getY());
+			}
 		} else {
-			animationMoveLeft.draw(getX(), getY());
+			if (HP != HPCompare) {
+				animationMoveLeft.drawFlash(getX(), getY(), SPRITE_IMAGE_SIZE, SPRITE_IMAGE_SIZE);
+				HPCompare = HP;
+			} else {
+				animationMoveLeft.draw(getX(), getY());
+			}
 		}
 		// graphics.fill(this);
 		aim.render(container, graphics);

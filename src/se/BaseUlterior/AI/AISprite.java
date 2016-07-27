@@ -11,10 +11,13 @@ public class AISprite extends GameObjectSprite {
 	protected Color HPColor;
 	protected float dHP;
 
+	private float START_HP;
+
 	protected AISprite(float height) {
 		super();
 		this.height = height;
-		HP = 100f;
+		HP = 300f;
+		START_HP = HP;
 		dHP = HP;
 		HPColor = new Color(0, 1, 0, 0.69f);
 
@@ -26,7 +29,7 @@ public class AISprite extends GameObjectSprite {
 		HPColor.r = 1f - HP / 100f;
 		HPColor.g = HP / 100f;
 		graphics.setColor(HPColor);
-		graphics.fillRect(getCenterX() - 43f, getCenterY() + height, 96f * HP / 100f, 12f);
+		graphics.fillRect(getCenterX() - 43f, getCenterY() + height, 96f * HP / START_HP, 12f);
 		graphics.setColor(Color.black);
 		graphics.resetLineWidth();
 		graphics.drawRect(getCenterX() - 43f, getCenterY() + height, 96f, 12f);
