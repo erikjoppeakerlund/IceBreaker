@@ -47,7 +47,7 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 	private int gunFireFrameWidth;
 	private int gunFireFrameHeight;
 
-	private float HPCompare;
+	protected float HPCompare;
 
 	private final int SPRITE_IMAGE_SIZE = 88;
 
@@ -84,8 +84,7 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 		}
 		initAims();
 		motionLess = false;
-		HP = 1000;
-		HPCompare = HP;
+
 	}
 
 	private void initAims() {

@@ -46,6 +46,7 @@ public class AimGrenade extends Aim {
 		grenades.add(startGrenade);
 		IceBreaker.objsToAdd.add(startGrenade);
 		current = startGrenade;
+		slug = "Grenade";
 	}
 
 	@Override

@@ -16,9 +16,8 @@ public class AISprite extends GameObjectSprite {
 	protected AISprite(float height) {
 		super();
 		this.height = height;
-		HP = 300f;
-		START_HP = HP;
-		dHP = HP;
+		START_HP = 300;
+		HP = START_HP;
 		HPColor = new Color(0, 1, 0, 0.69f);
 
 	}

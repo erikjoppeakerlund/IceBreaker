@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -83,6 +84,7 @@ public class IceBreaker extends BasicGame {
 		for (Parallax goForground : parallaxForground) {
 			goForground.render(container, graphics);
 		}
+		graphics.setBackground(Color.darkGray);
 	}
 
 	private static GameObject sprite;
@@ -115,10 +117,6 @@ public class IceBreaker extends BasicGame {
 		GroundMap requiredWallBuilderObjects = new GroundMap();
 		all.addAll(requiredWallBuilderObjects.getLevelPieces());
 
-		spriteDesktop = new GameObjectSpriteDesktop();
-		spriteMobile = new GameObjectSpriteMobile();
-		sprite = spriteDesktop;
-
 		IceBreaker.objsToAdd.addAll(levelDummy.levelPieces);
 
 		TurretPlacer turretPlacer = new TurretPlacer();
@@ -134,6 +132,9 @@ public class IceBreaker extends BasicGame {
 		toolbox.pack();
 		Stats stats = new Stats();
 		IceBreaker.objsToAdd.add(stats);
+		spriteDesktop = new GameObjectSpriteDesktop();
+		spriteMobile = new GameObjectSpriteMobile();
+		sprite = spriteDesktop;
 		IceBreaker.objsToAdd.add(sprite);
 		// actions = new ActionListenablers();
 

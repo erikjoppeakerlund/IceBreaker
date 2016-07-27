@@ -22,6 +22,7 @@ public class AimMachineGun extends AimTriggerHoldable {
 		gunFireFrameHeight = this.gunFire.getCurrentFrame().getHeight();
 		recoilPower = 0.05f;
 		damage = Constants.WEAPON_EFFECT_UZI;
+		slug = "UZI";
 	}
 
 	@Override

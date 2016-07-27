@@ -53,6 +53,11 @@ public abstract class Aim {
 	public static boolean mobile = Constants.START_MODE == Action.ACTION_MODE_CELL;
 
 	protected Animation gunFire = null;
+	protected String slug;
+
+	public String getSlug() {
+		return slug;
+	}
 
 	public void setAimAt(float x, float y) {
 		aimAtX = x;

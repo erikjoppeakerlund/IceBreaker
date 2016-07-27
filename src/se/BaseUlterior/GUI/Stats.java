@@ -7,6 +7,7 @@ import org.newdawn.slick.Graphics;
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Context.SingleText;
 import se.BaseUlterior.Context.StatsObserver;
+import se.BaseUlterior.Game.IceBreaker;
 
 public class Stats extends Component {
 
@@ -16,7 +17,6 @@ public class Stats extends Component {
 	private final static int tabSize = 50;
 	Color colorAlpha = new Color(0.7f, 0.7f, 0.8f, 0.39f);
 
-	// TextInfo info;
 	SingleText HP;
 	SingleText weapon;
 	SingleText lastHit;
@@ -28,6 +28,7 @@ public class Stats extends Component {
 				0, styleHeigth });
 		color = colorAlpha;
 		stats = new StatsObserver(Constants.STATS_BOX_WIDTH / 2, 0);
+		IceBreaker.gameInfo.addObserver(stats);
 	}
 
 	@Override
@@ -58,6 +59,6 @@ public class Stats extends Component {
 		graphics.setColor(Color.black);
 		graphics.setLineWidth(Constants.LINE_WIDTH);
 		graphics.draw(this);
-		// stats.draw();
+		stats.draw();
 	}
 }

@@ -25,6 +25,7 @@ public class AimShotGun extends AimBulletWeapon {
 		gunFireFrameHeight = this.gunFire.getCurrentFrame().getHeight();
 		recoilPower = 0.2f;
 		damage = Constants.WEAPON_EFFECT_SHOTGUN;
+		slug = "Shot Gun";
 	}
 
 	@Override

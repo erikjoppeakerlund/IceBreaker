@@ -63,8 +63,6 @@ public class AIBot extends AISprite {
 		{
 			heartBeat++;
 		}
-		// motion.add(helperVector.getX(),
-		// helperVector.getY()).normalise().scale(SPEED / 2f);
 
 	}
 

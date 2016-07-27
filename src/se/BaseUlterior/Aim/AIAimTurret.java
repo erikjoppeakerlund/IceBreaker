@@ -1,6 +1,7 @@
 package se.BaseUlterior.Aim;
 
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
@@ -43,7 +44,7 @@ public class AIAimTurret extends AIAim {
 	public void render(GameContainer container, Graphics graphics) {
 		if (animationsIsDrawn) {
 			gunFire.getCurrentFrame().setRotation((float) arm.getTheta() + 65);
-			gunFire.draw(gunFireStartAtX - gunFireFrameWidth / 2, gunFireStartAtY - gunFireFrameHeight / 2);
+			gunFire.draw(gunFireStartAtX - gunFireFrameWidth / 2, gunFireStartAtY - gunFireFrameHeight / 2, Color.red);
 		}
 
 	}

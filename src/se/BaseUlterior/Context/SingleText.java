@@ -49,7 +49,7 @@ public class SingleText {
 		this.x = x;
 		this.y = y;
 		this.value = value;
-		font = new Font("monospaced", Font.BOLD, size);
+		font = new Font("plain", Font.BOLD, size);
 		trueTypeFont = new TrueTypeFont(font, true);
 		this.color = color;
 	}

@@ -39,6 +39,7 @@ public abstract class GameObject extends Polygon {
 	public boolean motionLess = true;
 	public float rotation;
 	public float HP = 0;
+	public float START_HP;
 
 	public Vector2 getMotion() {
 		return motion;

@@ -13,22 +13,15 @@ public class InfoStats {
 	public void update(GameContainer container, int arg) {
 	}
 
-	// @Override
-	// public void render(GameContainer container, Graphics graphics) {
-	// for (Observer infos : textInfos) {
-	// infos.draw();
-	// }
-	// }
-
 	public void notifyObservers() {
 		for (Observer text : textInfos) {
 			text.updateData();
 		}
 	}
 
-	private int HP;
+	private float HP;
 	private int kills;
-	private HIT lastHit;
+	private HIT lastHit = HIT.STRAIGH;
 	private String weapon;
 	private Action gameState;
 
@@ -40,16 +33,11 @@ public class InfoStats {
 		this.gameState = gameState;
 	}
 
-	// @Override
-	// public Impact getImpact(GameObject agileObject) {
-	// return null;
-	// }
-
-	public int getHP() {
+	public float getHP() {
 		return HP;
 	}
 
-	public void setHP(int hP) {
+	public void setHP(float hP) {
 		HP = hP;
 		notifyObservers();
 	}
@@ -79,6 +67,10 @@ public class InfoStats {
 	public void setWeapon(String weapon) {
 		this.weapon = weapon;
 		notifyObservers();
+	}
+
+	public void addObserver(Observer observer) {
+		this.textInfos.add(observer);
 	}
 
 }

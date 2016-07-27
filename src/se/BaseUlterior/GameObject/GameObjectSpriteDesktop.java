@@ -3,6 +3,7 @@ package se.BaseUlterior.GameObject;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 
+import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
 /**
@@ -12,6 +13,15 @@ import se.BaseUlterior.Utils.UlteriorUtils;
  * @author Johan Akerlund
  */
 public class GameObjectSpriteDesktop extends GameObjectSprite {
+
+	public GameObjectSpriteDesktop() {
+		super();
+		START_HP = 1000;
+		HP = START_HP;
+		HPCompare = HP;
+		IceBreaker.gameInfo.setWeapon(aim.getSlug());
+		IceBreaker.gameInfo.setHP(HP);
+	}
 
 	@Override
 	public void update(GameContainer container, int delta) {
@@ -57,10 +67,12 @@ public class GameObjectSpriteDesktop extends GameObjectSprite {
 			aim.primaryReleased();
 		}
 		if (in.isKeyPressed(Input.KEY_Q)) {
+
 			int i = aims.indexOf(aim);
 			aim.cleanUp();
 			aim = i == aims.size() - 1 ? aims.get(0) : aims.get(i + 1);
 			aim.onThisWasChoosen();
+			IceBreaker.gameInfo.setWeapon(aim.getSlug());
 
 		}
 		float centerX = getCenterX();

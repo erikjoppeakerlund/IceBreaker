@@ -24,6 +24,7 @@ public class AimRifle extends AimBulletWeapon {
 		weight = 5.0f;
 		recoilPower = 0.6f;
 		damage = Constants.WEAPON_EFFECT_RIFLE;
+		slug = "AVP";
 	}
 
 	@Override

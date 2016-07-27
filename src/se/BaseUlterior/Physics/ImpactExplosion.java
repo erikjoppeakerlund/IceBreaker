@@ -1,6 +1,7 @@
 package se.BaseUlterior.Physics;
 
 import se.BaseUlterior.Config.Constants;
+import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Geom.Vector2;
 
@@ -15,17 +16,6 @@ public class ImpactExplosion extends Impact {
 	private float size;
 	private float bumpEffect;
 
-	// public ImpactExplosion(GameObject origin, GameObject other, float power,
-	// float size) {
-	// super(origin, other);
-	// returnValue = new Vector2();
-	// this.power = power;
-	// this.size = size;
-	// if (other.HP > 0) {
-	// other.HP -= power;
-	// }
-	// }
-
 	public ImpactExplosion(GameObject origin, GameObject other, float damage, float size, float bumpEffect) {
 		super(origin, other);
 		returnValue = new Vector2();
@@ -34,6 +24,10 @@ public class ImpactExplosion extends Impact {
 			other.HP -= damage;
 		}
 		this.bumpEffect = bumpEffect;
+		if (other.START_HP > 999) {
+			IceBreaker.gameInfo.setHP(other.HP);
+		}
+
 	}
 
 	@Override
