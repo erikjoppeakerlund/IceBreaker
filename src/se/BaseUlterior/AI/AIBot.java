@@ -13,14 +13,17 @@ public class AIBot extends AISprite {
 	protected Vector2 aimArm;
 	private GameObject target;
 	private int heartBeat = 0;
-	private final int HEART_RATE = 30;
-	private final float SPEED = 0.7f;
+	private final int HEART_RATE = 15;
+	private final float SPEED = 0.58f;
 	private Vector2 helperVector;
 
 	protected float[] getBackToSpot;
 
 	protected float[] currentSpot;
 	protected final int WAIT_FOR_BEFORE_TURN = 1;
+
+	private boolean hasSpot = false;
+	private float[] spot;
 
 	public AIBot(float height) {
 		super(height);
@@ -36,20 +39,32 @@ public class AIBot extends AISprite {
 		super.update(container, delta);
 		if (heartBeat >= HEART_RATE) {
 			lookUpClosestTarget();
-			if (!clearSpot(getCenter())) {
+			boolean clearSpot = clearSpot(getCenter());
+
+			if (!clearSpot && !hasSpot) {
 				helperVector.setTheta(findClosestWayAroundTheta(UlteriorUtils.angleToPoint(getCenterX(), getCenterY(),
 						target.getCenterX(), target.getCenterY())));
-			} else {
+				hasSpot = true;
+			} else if (clearSpot && !hasSpot) {
 				helperVector.setTheta(UlteriorUtils.angleToPoint(getCenterX(), getCenterY(), target.getCenterX(),
 						target.getCenterY()));
+				// hasSpot = false;
+			} else if (hasSpot) {
+				if (clearSpot) {
+					hasSpot = false;
+				}
+				helperVector.setTheta(UlteriorUtils.angleToPoint(getCenterX(), getCenterY(), spot[0], spot[1]));
 			}
 			heartBeat = 0;
 			motion.normalise().scale(SPEED).setTheta(helperVector.getTheta());
+
 		} else
 
 		{
 			heartBeat++;
 		}
+		// motion.add(helperVector.getX(),
+		// helperVector.getY()).normalise().scale(SPEED / 2f);
 
 	}
 
@@ -145,7 +160,7 @@ public class AIBot extends AISprite {
 		return false;
 	}
 
-	private GameObject gameObjectInTheWay;
+	private float START_CONSIDERED_WALL = 500f;
 
 	private float findWayAroundAtTurningAngle(float angle) {
 		Vector2 theta = new Vector2(angle);
@@ -158,15 +173,12 @@ public class AIBot extends AISprite {
 		Vector2 helperVect = theta.copy();
 		float distance2 = 0;
 
-		boolean lastLap1 = false;
-		boolean lastLap2 = false;
-
 		while (stepsRun < 360 / THETA_STEP) {
 
 			float[] projection = clearSpot((float) theta.getTheta());
 			float[] projection2 = clearSpot((float) helperVect.getTheta());
 
-			float TEST = 500f;
+			float TEST = START_CONSIDERED_WALL;
 
 			float tempDistance1 = UlteriorUtils.distance(getCenterX(), getCenterY(), projection[0], projection[1]);
 			float tempDistance2 = UlteriorUtils.distance(getCenterX(), getCenterY(), projection2[0], projection2[1]);
@@ -176,20 +188,17 @@ public class AIBot extends AISprite {
 				distance2 = tempDistance2;
 
 			}
-
-			if (Math.abs(distance - tempDistance1) > TEST) {
-
-				// if (lastLap1) {
-				return (float) theta.add(THETA_STEP * 4).getTheta();
-				// }
-				// lastLap1 = true;
+			// wrong is returned... sometimes
+			if (Math.abs(tempDistance1 - distance) > TEST) {
+				hasSpot = true;
+				spot = projection;
+				return (float) theta.add(THETA_STEP * 8).getTheta();
 
 			}
-			if (Math.abs(distance2 - tempDistance2) > TEST) {
-				// if (lastLap2) {
-				return (float) helperVect.sub(THETA_STEP * 4).getTheta();
-				// }
-				// lastLap2 = true;
+			if (Math.abs(tempDistance2 - distance2) > TEST) {
+				spot = projection2;
+				hasSpot = true;
+				return (float) helperVect.sub(THETA_STEP * 8).getTheta();
 			}
 			distance = tempDistance1;
 			distance2 = tempDistance2;
@@ -197,13 +206,10 @@ public class AIBot extends AISprite {
 			theta.add(thetaStep);
 			helperVect.sub(thetaStep);
 
-			// if (lastLap1 || lastLap2) {
-			// theta.add(thetaStep * 10f);
-			// helperVect.sub(thetaStep * 10f);
-			// }
-
 			stepsRun++;
 		}
+		// findWayAroundAtTurningAngle(angle);
+
 		return angle;
 	}
 

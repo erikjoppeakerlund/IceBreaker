@@ -49,11 +49,16 @@ public class GameObjectRicochet extends GameObject {
 		startY = getY();
 		UlteriorUtils.removeGroundInvisible(aimAtX, aimAtY, damage, 24f, 0);
 		piercable = true;
+		if (!target.motionLess) {
+			rate = 2;
+		}
 	}
+
+	private int rate = 5;
 
 	@Override
 	public void update(GameContainer container, int arg) {
-		if (lifeSpan < LIFE_SPAN_SPLITS && lifeSpan % 4 == 0) {
+		if (lifeSpan < LIFE_SPAN_SPLITS && lifeSpan % rate == 0) {
 			runEffect();
 		}
 		if (lifeSpan > LIFE_SPAN_LIMIT) {
@@ -101,9 +106,14 @@ public class GameObjectRicochet extends GameObject {
 
 		N.scale(dot);
 		angled.sub(N);
-
-		GameObjectSplinter random = new GameObjectSplinter(this.getCenterX(), this.getCenterY(), angled);
-		IceBreaker.objsToAdd.add(random);
+		angled.scale(2f);
+		if (!target.motionLess) {
+			GameObjectSplinter random = new GameObjectSplinter(this.getCenterX(), this.getCenterY(), angled, true);
+			IceBreaker.objsToAdd.add(random);
+		} else {
+			GameObjectSplinter random = new GameObjectSplinter(this.getCenterX(), this.getCenterY(), angled, false);
+			IceBreaker.objsToAdd.add(random);
+		}
 
 	}
 
