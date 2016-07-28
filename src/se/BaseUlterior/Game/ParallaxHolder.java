@@ -3,13 +3,19 @@ package se.BaseUlterior.Game;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class ParallaxHolder {
+import se.BaseUlterior.GameObject.GameObject;
+
+public class ParallaxHolder extends GameObject {
 	private List<Parallax> parallaxes;
+	protected Parallax startCity;
 
 	public ParallaxHolder(int i) {
+		super(new float[0], false, false, false, false, false, true);
 		parallaxes = new ArrayList<>();
 		switch (i) {
 		case 0:
@@ -70,6 +76,19 @@ public class ParallaxHolder {
 
 	public List<Parallax> getGameObjects() {
 		return this.parallaxes;
+	}
+
+	@Override
+	public void update(GameContainer container, int arg) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void render(GameContainer container, Graphics graphics) {
+		for (Parallax parallax : parallaxes) {
+			parallax.render(container, graphics);
+		}
 	}
 
 }

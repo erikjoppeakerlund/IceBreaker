@@ -28,6 +28,11 @@ public class Parallax extends GameObject {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
-		image.draw(0, 0, container.getWidth(), container.getHeight(), x, y, x + container.getWidth(), y + container.getHeight());
+		image.draw(0, 0, container.getWidth(), container.getHeight(), x, y, x + container.getWidth(),
+				y + container.getHeight());
+	}
+
+	public void setParallaxEffect(float effect) {
+		parallaxEffect = effect;
 	}
 }

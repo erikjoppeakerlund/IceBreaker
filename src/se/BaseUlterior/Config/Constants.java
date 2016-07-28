@@ -14,7 +14,7 @@ public class Constants {
 	public static final int CANVAS_WIDTH_FULL = CANVAS_WIDTH * CANVAS_EXTENTION_FACTOR;
 	public static final int CANVAS_HEIGHT_FULL = CANVAS_HEIGHT * CANVAS_EXTENTION_FACTOR;
 
-	public static final int LINE_WIDTH = 7;
+	public static final int LINE_WIDTH = 5;
 	public static final Color THEME_COLOR = new Color(0.2f, 0.3f, 0.2f);
 
 	public static final float SPRITE_RADIUS = 44.0f;
@@ -45,6 +45,8 @@ public class Constants {
 	public static final float GRENADE_BOUNCINESS = 0.5f;
 
 	public static final int GRENADE_SIZE_OF_EXPLOSION = 419;
+
+	public static final int MAIN_CHARACTER_START_LIFE = 1000;
 
 	/*
 	 * Weapon effect (out of 100)

@@ -24,7 +24,7 @@ public class ImpactExplosion extends Impact {
 			other.HP -= damage;
 		}
 		this.bumpEffect = bumpEffect;
-		if (other.START_HP > 999) {
+		if (other.START_HP == Constants.MAIN_CHARACTER_START_LIFE) {
 			IceBreaker.gameInfo.setHP(other.HP);
 		}
 

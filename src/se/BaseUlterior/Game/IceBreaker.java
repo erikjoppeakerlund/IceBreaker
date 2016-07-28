@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -69,21 +68,19 @@ public class IceBreaker extends BasicGame {
 	public static float currentY = 0;
 	public static GameObject wholeSceene = null;
 
+	ParallaxHolder parallaxHolderBackground;
+	ParallaxHolder parallaxHolderForground;
+
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 
-		for (Parallax goBackground : parallaxBackground) {
-			goBackground.render(container, graphics);
-		}
+		parallaxHolderBackground.render(container, graphics);
 		for (GameObject go : IceBreaker.all) {
 			if (UlteriorUtils.isWithinRange(go, wholeSceene) || go.forceRender) {
 				go.render(container, graphics);
 			}
 		}
-		for (Parallax goForground : parallaxForground) {
-			goForground.render(container, graphics);
-		}
-		graphics.setBackground(Color.darkGray);
+		parallaxHolderForground.render(container, graphics);
 	}
 
 	private static GameObject sprite;
@@ -106,10 +103,8 @@ public class IceBreaker extends BasicGame {
 				Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0 });
 		IceBreaker.objsToAdd.add(wholeSceene);
 
-		ParallaxHolder parallaxHolderBackground = new ParallaxHolder(0);
-		ParallaxHolder parallaxHolderForground = new ParallaxHolder(1);
-		parallaxBackground.addAll(parallaxHolderBackground.getGameObjects());
-		parallaxForground.addAll(parallaxHolderForground.getGameObjects());
+		parallaxHolderBackground = new ParallaxHolder(0);
+		parallaxHolderForground = new ParallaxHolder(1);
 
 		LevelDummy levelDummy = new LevelDummy();
 
@@ -119,7 +114,7 @@ public class IceBreaker extends BasicGame {
 		IceBreaker.objsToAdd.addAll(levelDummy.levelPieces);
 
 		TurretPlacer turretPlacer = new TurretPlacer();
-
+		//
 		for (GameObject groundPiece : levelDummy.levelPieces) {
 			if (!groundPiece.piercable) {
 				turretPlacer.placeTurretsOnMe(groundPiece);

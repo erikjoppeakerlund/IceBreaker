@@ -152,4 +152,13 @@ public class LevelDummy {
 				9350, 200, 8920, 145, 8585, 110, }));
 
 	}
+
+	public void level3() {
+		int WATER_DEPTH = 2000;
+		levelPieces.add(new WorldBuilderLiquid(new float[] { 0, Constants.CANVAS_HEIGHT_FULL,
+				Constants.CANVAS_WIDTH_FULL, Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL,
+				Constants.CANVAS_HEIGHT_FULL - WATER_DEPTH, 0, Constants.CANVAS_HEIGHT_FULL - WATER_DEPTH
+
+		}, Density.WATER));
+	}
 }
