@@ -46,7 +46,6 @@ public abstract class GameObject extends Polygon {
 	}
 
 	private void init() {
-		// why set on anything but falling pieces?
 		currentImpacts = new ArrayList<>();
 		motion = new Vector2();
 		maxRadiusStart = (int) getBoundingCircleRadius();
@@ -119,8 +118,6 @@ public abstract class GameObject extends Polygon {
 		double unknownA;
 		double unknownB;
 
-		Vector2 lastNormal = null;
-
 		if (!closed()) {
 			length -= 2;
 		}
@@ -185,7 +182,6 @@ public abstract class GameObject extends Polygon {
 
 					if (i != 0) {
 						normals.add(newestNormal);
-						lastNormal = newestNormal;
 
 					}
 

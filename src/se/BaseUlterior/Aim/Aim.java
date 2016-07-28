@@ -11,7 +11,7 @@ import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Geom.Vector2;
 
 /**
- * Sprites aim
+ * Sprite aim
  * 
  * @author Johan Akerlund
  */

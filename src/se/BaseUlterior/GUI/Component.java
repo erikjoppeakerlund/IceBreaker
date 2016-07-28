@@ -11,6 +11,10 @@ import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Physics.Impact;
 
+/**
+ * @author Johan Akerlund
+ */
+
 public abstract class Component extends GameObject {
 
 	protected boolean hide = false;

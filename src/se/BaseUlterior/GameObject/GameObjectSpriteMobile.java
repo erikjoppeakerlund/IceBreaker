@@ -3,6 +3,8 @@ package se.BaseUlterior.GameObject;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 
+import se.BaseUlterior.Game.IceBreaker;
+
 /**
  * Concrete game sprite which can be controlled both keyboard and mouse input.
  * 
@@ -10,6 +12,16 @@ import org.newdawn.slick.Input;
  */
 
 public class GameObjectSpriteMobile extends GameObjectSprite {
+
+	public GameObjectSpriteMobile() {
+		super();
+		START_HP = 1000;
+		HP = START_HP;
+		HPCompare = HP;
+		IceBreaker.gameInfo.setWeapon(aim.getSlug());
+		IceBreaker.gameInfo.setHP(HP);
+	}
+
 	@Override
 	public void update(GameContainer container, int delta) {
 		Input in = container.getInput();

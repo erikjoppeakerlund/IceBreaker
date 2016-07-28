@@ -8,12 +8,16 @@ import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
+/**
+ * @author Johan Akerlund
+ */
+
 public class AIBot extends AISprite {
 
 	protected Vector2 aimArm;
 	private GameObject target;
 	private int heartBeat = 0;
-	private final int HEART_RATE = 15;
+	private final int HEART_RATE = 30;
 	private final float SPEED = 0.58f;
 	private Vector2 helperVector;
 
@@ -48,7 +52,6 @@ public class AIBot extends AISprite {
 			} else if (clearSpot && !hasSpot) {
 				helperVector.setTheta(UlteriorUtils.angleToPoint(getCenterX(), getCenterY(), target.getCenterX(),
 						target.getCenterY()));
-				// hasSpot = false;
 			} else if (hasSpot) {
 				if (clearSpot) {
 					hasSpot = false;
@@ -58,9 +61,7 @@ public class AIBot extends AISprite {
 			heartBeat = 0;
 			motion.normalise().scale(SPEED).setTheta(helperVector.getTheta());
 
-		} else
-
-		{
+		} else {
 			heartBeat++;
 		}
 
@@ -82,12 +83,6 @@ public class AIBot extends AISprite {
 			}
 		}
 		return result;
-	}
-
-	private float lookUpCurrentThetaGoal(float targetX, float targetY) {
-
-		float angle = UlteriorUtils.angleToPoint(getCenterX(), getCenterY(), targetX, targetY);
-		return angle;
 	}
 
 	protected GameObject whichIsTheTarget(float startX, float startY, float angle) {
@@ -126,7 +121,6 @@ public class AIBot extends AISprite {
 				if (go.contains(xTarget, yTarget) && !(go.piercable) && go != this) {
 					return new float[] { xTarget, yTarget };
 				}
-
 			}
 		}
 		return null;
@@ -183,9 +177,7 @@ public class AIBot extends AISprite {
 			if (stepsRun == 0) {
 				distance = tempDistance1;
 				distance2 = tempDistance2;
-
 			}
-			// wrong is returned... sometimes
 			if (Math.abs(tempDistance1 - distance) > TEST) {
 				hasSpot = true;
 				spot = projection;
@@ -205,9 +197,6 @@ public class AIBot extends AISprite {
 
 			stepsRun++;
 		}
-		// findWayAroundAtTurningAngle(angle);
-
 		return angle;
 	}
-
 }

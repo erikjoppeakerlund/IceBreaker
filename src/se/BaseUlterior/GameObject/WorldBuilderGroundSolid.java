@@ -5,12 +5,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Shape;
 
-/*
- * FIXME: Used as outer border, but currently as frame, should
- * be user as pillars instead in class se.BaseUlterior.Game.GroundMap,
- * to avoid unnecessary impact-check.
- */
-
 public class WorldBuilderGroundSolid extends WorldBuilderGround {
 
 	public WorldBuilderGroundSolid(float[] nodes) {

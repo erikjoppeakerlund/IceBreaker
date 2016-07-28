@@ -7,6 +7,10 @@ import org.newdawn.slick.Input;
 
 import se.BaseUlterior.Context.SingleText;
 
+/**
+ * @author Johan Akerlund
+ */
+
 public abstract class Button extends Component {
 	String text;
 	private final static int tabSize = 14;
@@ -103,18 +107,18 @@ public abstract class Button extends Component {
 	}
 
 	public Color getIsActiveColor(boolean active) {
-		return active ? Color.lightGray : Color.darkGray;
+		return active ? Color.lightGray : Color.lightGray;
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
 		super.render(container, graphics);
-		// if (!hide) {
 		if (isPaused) {
-			graphics.setLineWidth(3);
-			graphics.setColor(Color.darkGray);
+			graphics.setLineWidth(1);
+			graphics.setColor(Color.black);
 			graphics.draw(this);
 			label.drawString();
+			graphics.resetLineWidth();
 		}
 	}
 

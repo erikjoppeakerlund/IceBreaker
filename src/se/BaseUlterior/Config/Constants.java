@@ -14,7 +14,7 @@ public class Constants {
 	public static final int CANVAS_WIDTH_FULL = CANVAS_WIDTH * CANVAS_EXTENTION_FACTOR;
 	public static final int CANVAS_HEIGHT_FULL = CANVAS_HEIGHT * CANVAS_EXTENTION_FACTOR;
 
-	public static final int LINE_WIDTH = 5;
+	public static final int LINE_WIDTH = 1;
 	public static final Color THEME_COLOR = new Color(0.2f, 0.3f, 0.2f);
 
 	public static final float SPRITE_RADIUS = 44.0f;
@@ -32,8 +32,8 @@ public class Constants {
 	public static final float VECTOR_SHOOOT_SPEED = 0.5f;
 	public static final float TURRETS_DISTANCE = 3499;
 
-	public static final int STATS_BOX_HEIGHT = 159;
-	public static final int STATS_BOX_WIDTH = 546;
+	public static final int STATS_BOX_HEIGHT = 199;
+	public static final int STATS_BOX_WIDTH = 346;
 
 	public static final float MAX_FOLLOW_SPEED_TURRET = 0.39f;
 

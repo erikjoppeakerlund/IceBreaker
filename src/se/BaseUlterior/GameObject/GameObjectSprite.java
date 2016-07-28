@@ -57,8 +57,6 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 		this.setCenterX(Constants.CANVAS_WIDTH / 4);
 		this.setCenterY(Constants.CANVAS_HEIGHT / 4);
 
-		// this.setCenterX(Constants.CANVAS_WIDTH / 2);
-		// this.setCenterY(Constants.CANVAS_HEIGHT / 4);
 		color = Color.transparent;
 		try {
 			sprite = new SpriteSheet("res/img/spriteSheet.png", SPRITE_IMAGE_SIZE, SPRITE_IMAGE_SIZE);
@@ -173,7 +171,6 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 				animationMoveLeft.draw(getX(), getY());
 			}
 		}
-		// graphics.fill(this);
 		aim.render(container, graphics);
 	}
 

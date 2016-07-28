@@ -69,6 +69,20 @@ public class ParallaxHolder extends GameObject {
 				e.printStackTrace();
 			}
 			break;
+
+		case 2:
+			try {
+				Image clouds = new Image("res/img/backgroundTexture.jpg");
+				float backgrounHeight = clouds.getHeight();
+				float backgrounWidth = clouds.getWidth();
+				float[] edges = { 0, 0, 0, backgrounHeight, backgrounWidth, backgrounHeight, backgrounWidth, 0 };
+				Parallax parallaxClouds = new Parallax(edges, clouds, 0.3f);
+				parallaxes.add(parallaxClouds);
+				IceBreaker.parallaxBackground.add(parallaxClouds);
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
+			break;
 		default:
 			break;
 		}

@@ -9,6 +9,10 @@ import se.BaseUlterior.Actions.Action;
 import se.BaseUlterior.Aim.Aim;
 import se.BaseUlterior.Game.IceBreaker;
 
+/**
+ * @author Johan Akerlund
+ */
+
 public class ToolBox extends Component {
 
 	private List<Button> buttons = null;
@@ -24,7 +28,6 @@ public class ToolBox extends Component {
 		super(new float[] { 0, 0, styleWidth, 0, styleWidth, styleHeigth - tabSize, styleWidth - tabSize, styleHeigth,
 				0, styleHeigth });
 		color = colorAlpha;
-		// this.color = Color.transparent;
 
 		buttons = new ArrayList<>();
 		init();
@@ -53,12 +56,11 @@ public class ToolBox extends Component {
 
 			}
 		});
-		buttons.add(new Button("SETTINGS", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, true) {
+		buttons.add(new Button("EXIT", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, true) {
 
 			@Override
 			public void onClick() {
-				// TODO Auto-generated method stub
-
+				System.exit(0);
 			}
 		});
 		buttons.add(new Button("MAP SELECT", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, true) {

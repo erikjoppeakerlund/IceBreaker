@@ -7,8 +7,7 @@ import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
 /**
- * Concrete game sprite which can be controlled all by keyboard. FIXME: enable
- * mobile touch input.
+ * Concrete game sprite which can be controlled all by keyboard
  * 
  * @author Johan Akerlund
  */

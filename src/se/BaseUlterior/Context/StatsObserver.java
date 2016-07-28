@@ -35,7 +35,6 @@ public class StatsObserver extends Observer {
 	}
 
 	public void draw() {
-		// if (show || showAllways) {
 		float trueX;
 		float trueY;
 		for (SingleText st : singleTexts) {
@@ -43,36 +42,39 @@ public class StatsObserver extends Observer {
 			trueY = st.getY();
 			st.trueTypeFont.drawString(x + trueX, y + trueY, st.getValue(), st.color);
 		}
-		// }
 	}
 
 	public StatsObserver(float x, float y) {
 		this.info = IceBreaker.gameInfo;
-		Color fontColor = Color.lightGray;
+		Color fontColor = Color.green;
 
-		HP = new SingleText(0, Constants.STATS_BOX_HEIGHT / 5 - 25, 19, "HP: ", fontColor, "SANS_SERIF");
-		weapon = new SingleText(0, Constants.STATS_BOX_HEIGHT / 5 * 2 - 25, 19, "WEAPON: ", fontColor, "SANS_SERIF");
-		lastHit = new SingleText(0, Constants.STATS_BOX_HEIGHT / 5 * 3 - 25, 19, "LAST HIT: ", fontColor, "SANS_SERIF");
-		kills = new SingleText(0, Constants.STATS_BOX_HEIGHT / 5 * 4 - 25, 19, "KILLS: ", fontColor, "SANS_SERIF");
+		HP = new SingleText(Constants.CANVAS_WIDTH - 200, 50, 24, "HP: ", fontColor, "SANS_SERIF");
+		weapon = new SingleText(Constants.CANVAS_WIDTH - 450, 50, 24, "WEAPON: ", fontColor, "SANS_SERIF");
+		kills = new SingleText(Constants.CANVAS_WIDTH - 700, 50, 24, "KILLS: ", fontColor, "SANS_SERIF");
+		sec = new SingleText(Constants.CANVAS_WIDTH - 850, 50, 24, "SEC: ", fontColor, "SANS_SERIF");
 		singleTexts.add(HP);
 		singleTexts.add(weapon);
-		singleTexts.add(lastHit);
 		singleTexts.add(kills);
+		singleTexts.add(sec);
 		this.x = x;
 		this.y = y;
+	}
+
+	public void setTime(int sec) {
+		this.sec.setValue("SEC: " + sec);
 	}
 
 	private SingleText HP;
 	private SingleText weapon;
 	private SingleText lastHit;
 	private SingleText kills;
+	private SingleText sec;
 
 	@Override
 	public void updateData() {
 
 		HP.setValue("HP: " + info.getHP());
 		weapon.setValue("WEAPON: " + info.getWeapon());
-		lastHit.setValue("LAST HIT: " + info.getLastHit().toString());
-		kills.setValue("KILLS: " + info.getKills());
+		kills.setValue("KILLS: " + info.getKills() + "/" + IceBreaker.nrOfTurrets);
 	}
 }

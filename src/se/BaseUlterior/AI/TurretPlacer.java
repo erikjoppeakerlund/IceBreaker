@@ -7,14 +7,19 @@ import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Geom.Vector2;
 
+/**
+ * @author Johan Akerlund
+ */
+
 public class TurretPlacer {
 
 	float turretsDistance;
 
 	public TurretPlacer() {
 		turretsDistance = Constants.TURRETS_DISTANCE;
-
 	}
+
+	int nrOfTurrets = 0;
 
 	public void placeTurretsOnMe(GameObject groundPiece) {
 
@@ -35,12 +40,13 @@ public class TurretPlacer {
 					AITurretBulletLauncher turretInLoop = new AITurretBulletLauncher(
 							new Circle(turretX, turretY, 60).getPoints(), direction.getPerpendicular());
 					IceBreaker.objsToAdd.add(turretInLoop);
-
+					nrOfTurrets++;
 				}
 				beyond = turretsDistance - fullLength % turretsDistance;
 			} else {
 				beyond -= fullLength;
 			}
 		}
+		IceBreaker.nrOfTurrets = nrOfTurrets;
 	}
 }

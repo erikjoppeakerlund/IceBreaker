@@ -51,7 +51,6 @@ public class AimShotGun extends AimBulletWeapon {
 			gunFire.getCurrentFrame().setRotation((float) arm.getTheta() + 65);
 			gunFire.draw(gunFireStartAtX - gunFireFrameWidth / 2, gunFireStartAtY - gunFireFrameHeight / 2);
 		}
-
 	}
 
 	@Override
@@ -87,6 +86,5 @@ public class AimShotGun extends AimBulletWeapon {
 				}
 			}
 		}
-
 	}
 }

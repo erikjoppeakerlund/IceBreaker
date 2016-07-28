@@ -36,7 +36,6 @@ public class AimRifle extends AimBulletWeapon {
 			gunFire.getCurrentFrame().setRotation((float) arm.getTheta() + 65);
 			gunFire.draw(gunFireStartAtX - gunFireFrameWidth / 2, gunFireStartAtY - gunFireFrameHeight / 2);
 		}
-
 	}
 
 	@Override
@@ -60,5 +59,4 @@ public class AimRifle extends AimBulletWeapon {
 	public void primaryPushed() {
 		wasShoot();
 	}
-
 }

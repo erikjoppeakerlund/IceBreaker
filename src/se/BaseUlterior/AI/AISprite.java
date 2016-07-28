@@ -6,12 +6,14 @@ import org.newdawn.slick.Graphics;
 
 import se.BaseUlterior.GameObject.GameObjectSprite;
 
+/**
+ * @author Johan Akerlund
+ */
+
 public class AISprite extends GameObjectSprite {
 	protected float height;
 	protected Color HPColor;
 	protected float dHP;
-
-	private float START_HP;
 
 	protected AISprite(float height) {
 		super();

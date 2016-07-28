@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -64,6 +65,8 @@ public class IceBreaker extends BasicGame {
 
 	public static InfoStats gameInfo = new InfoStats();
 
+	private Stats stats;
+
 	public static float currentX = 0;
 	public static float currentY = 0;
 	public static GameObject wholeSceene = null;
@@ -81,11 +84,15 @@ public class IceBreaker extends BasicGame {
 			}
 		}
 		parallaxHolderForground.render(container, graphics);
+		graphics.setBackground(Color.darkGray);
 	}
 
 	private static GameObject sprite;
 	private static GameObject spriteMobile;
 	private static GameObject spriteDesktop;
+
+	public static int nrOfTurrets;
+	private int startTime = 0;
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
@@ -103,7 +110,7 @@ public class IceBreaker extends BasicGame {
 				Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0 });
 		IceBreaker.objsToAdd.add(wholeSceene);
 
-		parallaxHolderBackground = new ParallaxHolder(0);
+		parallaxHolderBackground = new ParallaxHolder(2);
 		parallaxHolderForground = new ParallaxHolder(1);
 
 		LevelDummy levelDummy = new LevelDummy();
@@ -124,7 +131,7 @@ public class IceBreaker extends BasicGame {
 		// IceBreaker.objsToAdd.add(bot);
 		toolbox = new ToolBox(Alignment.LEFT);
 		toolbox.pack();
-		Stats stats = new Stats();
+		stats = new Stats();
 		IceBreaker.objsToAdd.add(stats);
 		spriteDesktop = new GameObjectSpriteDesktop();
 		spriteMobile = new GameObjectSpriteMobile();
@@ -136,6 +143,10 @@ public class IceBreaker extends BasicGame {
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
+		if (!container.isPaused()) {
+			startTime += delta;
+			stats.setTime(startTime / 1000);
+		}
 		if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
 			container.setPaused(!container.isPaused());
 		}

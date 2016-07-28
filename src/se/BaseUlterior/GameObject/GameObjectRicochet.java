@@ -71,11 +71,12 @@ public class GameObjectRicochet extends GameObject {
 	public void render(GameContainer container, Graphics graphics) {
 		rayColor.a = 1f - (float) lifeSpan / (float) LIFE_SPAN_LIMIT;
 		graphics.setColor(rayColor);
-		graphics.setLineWidth(weight * 2f);
+		// graphics.setLineWidth(weight * 2f);
 		float newX = getX();
 		float newY = getY();
 		graphics.drawLine(gunFireStartAtX + newX - startX, gunFireStartAtY + newY - startY, aimAtX + newX - startX,
 				aimAtY + newY - startY);
+		graphics.resetLineWidth();
 
 	}
 
@@ -119,7 +120,6 @@ public class GameObjectRicochet extends GameObject {
 
 	@Override
 	public Impact getImpact(GameObject agileObject) {
-		// return new ImpactRicochet(target, this);
 		return null;
 	}
 

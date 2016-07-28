@@ -10,6 +10,10 @@ import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactBounce;
 
+/**
+ * @author Johan Akerlund
+ */
+
 public class AITurretBulletLauncher extends AITurret {
 
 	public AITurretBulletLauncher(float[] points, Vector2 startangle) {

@@ -15,6 +15,10 @@ import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
+/**
+ * @author Johan Akerlund
+ */
+
 public abstract class AITurret extends AIMotionLess {
 
 	protected AIAim aim;
@@ -46,6 +50,7 @@ public abstract class AITurret extends AIMotionLess {
 
 		try {
 			gunFire = new SpriteSheet("res/img/GUNFIREsimple.png", 96, 96);
+			gunFire.bind();
 			animationGunfire = new Animation(gunFire, 10);
 			animationGunfire.setAutoUpdate(false);
 			gunFireFrameWidth = animationGunfire.getCurrentFrame().getWidth();
@@ -97,6 +102,7 @@ public abstract class AITurret extends AIMotionLess {
 		aim.setPosition(getCenterX(), getCenterY());
 		aim.update(container, arg);
 		if (HP <= 0) {
+			IceBreaker.gameInfo.setKills(IceBreaker.gameInfo.getKills() + 1);
 			IceBreaker.objsToRemove.add(this);
 		}
 	}

@@ -6,7 +6,7 @@ import se.BaseUlterior.GameObject.GameObject;
 import se.BaseUlterior.Geom.Vector2;
 
 /**
- * Affect the other game objects' motion vector as a 'punch'. Class not used!
+ * Affect the other game objects' motion vector as a 'punch'.
  * 
  * @author Johan Akerlund
  */

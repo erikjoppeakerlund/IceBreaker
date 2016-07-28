@@ -15,6 +15,7 @@ public class Parallax extends GameObject {
 		super(edges, true, true, true, false, false, true);
 		this.image = image;
 		this.parallaxEffect = parallaxEffect;
+		image.bind();
 	}
 
 	public void moveParallax(float xParam, float yParam) {

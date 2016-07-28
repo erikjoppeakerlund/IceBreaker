@@ -7,7 +7,7 @@ import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactBounce;
 
 /**
- * Bouncable, gravitation dependend game object. During statefulness searching
+ * Bouncable, gravitation dependent game object. During statefulness searching
  * for applicable impact
  * 
  * @author Johan Akerlund

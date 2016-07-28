@@ -9,13 +9,17 @@ import se.BaseUlterior.Context.SingleText;
 import se.BaseUlterior.Context.StatsObserver;
 import se.BaseUlterior.Game.IceBreaker;
 
+/**
+ * @author Johan Akerlund
+ */
+
 public class Stats extends Component {
 
 	private static final int styleHeigth = Constants.STATS_BOX_HEIGHT;
 	private static final int styleWidth = Constants.STATS_BOX_WIDTH;
 
 	private final static int tabSize = 50;
-	Color colorAlpha = new Color(0.7f, 1f, 0.7f, 0.19f);
+	Color colorAlpha = new Color(1f, 1f, 1.0f, 0.19f);
 
 	SingleText HP;
 	SingleText weapon;
@@ -24,11 +28,18 @@ public class Stats extends Component {
 	StatsObserver stats;
 
 	public Stats() {
-		super(new float[] { 0, 0, styleWidth, 0, styleWidth, styleHeigth - tabSize, styleWidth - tabSize, styleHeigth,
-				0, styleHeigth });
+		super(styleWidth, styleHeigth);
+		// super(new float[] { 0, 0, styleWidth, 0, styleWidth, styleHeigth -
+		// tabSize, styleWidth - tabSize, styleHeigth,
+		// 0, styleHeigth });
+		padding = 29;
 		color = colorAlpha;
-		stats = new StatsObserver(Constants.STATS_BOX_WIDTH / 2, 0);
+		stats = new StatsObserver(padding, 0);
 		IceBreaker.gameInfo.addObserver(stats);
+	}
+
+	public void setTime(int sec) {
+		stats.setTime(sec);
 	}
 
 	@Override
@@ -39,7 +50,7 @@ public class Stats extends Component {
 
 	@Override
 	public void update(GameContainer container, int arg) {
-		super.update(container, arg);
+		// super.update(container, arg);
 		// super.update(container, arg);
 		// if (isPaused) {
 		// if (this.getX() < 0) {
@@ -56,12 +67,12 @@ public class Stats extends Component {
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
 		if (!isPaused) {
-			graphics.setColor(color);
-			graphics.fill(this);
-			graphics.setColor(Color.black);
-			graphics.resetLineWidth();
-			// graphics.setLineWidth(Constants.LINE_WIDTH);
-			graphics.draw(this);
+			// graphics.setColor(color);
+			// graphics.fill(this);
+			// graphics.setColor(Color.black);
+			// graphics.resetLineWidth();
+			// // graphics.setLineWidth(Constants.LINE_WIDTH);
+			// graphics.draw(this);
 			stats.draw();
 		}
 	}

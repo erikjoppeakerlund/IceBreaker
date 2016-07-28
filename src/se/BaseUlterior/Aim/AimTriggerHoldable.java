@@ -45,7 +45,5 @@ public abstract class AimTriggerHoldable extends AimBulletWeapon {
 			}
 			iterator++;
 		}
-
 	}
-
 }
