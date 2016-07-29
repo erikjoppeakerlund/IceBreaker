@@ -22,7 +22,7 @@ public abstract class AimBulletWeapon extends Aim {
 	protected Image rifleImageLeft = null;
 	protected int imageHeight;
 	protected int imageWidth;
-	protected static final float IMAGE_SCALE_STANDARD = 0.26f;
+	public static final float IMAGE_SCALE_STANDARD = 0.26f;
 
 	protected float startShotX;
 	protected float startShotY;
@@ -56,14 +56,14 @@ public abstract class AimBulletWeapon extends Aim {
 		xGrip = -60;
 		yGrip = -60;
 		try {
-			rifleImageRight = new Image(pathToImage);
-			rifleImageLeft = new Image(pathToImage, true);
-			imageHeight = (int) (rifleImageRight.getHeight() * imageScale);
-			imageWidth = (int) (rifleImageRight.getWidth() * imageScale);
-			rifleImageLeft = rifleImageLeft.getScaledCopy(imageScale).getFlippedCopy(false, true);
-			rifleImageRight = rifleImageRight.getScaledCopy(imageScale);
+			rifleImageRight = new Image(pathToImage).getScaledCopy(imageScale);
+			rifleImageLeft = new Image(pathToImage, true).getScaledCopy(imageScale).getFlippedCopy(false, true);
+			imageHeight = (int) (rifleImageRight.getHeight());
+			imageWidth = (int) (rifleImageRight.getWidth());
 			rifleImageRight.setCenterOfRotation((imageWidth / 2), (imageHeight / 2));
 			rifleImageLeft.setCenterOfRotation((imageWidth / 2), (imageHeight / 2));
+			rifleImageRight.bind();
+			rifleImageLeft.bind();
 
 		} catch (SlickException e) {
 			e.printStackTrace();

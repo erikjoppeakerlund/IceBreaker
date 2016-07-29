@@ -60,6 +60,7 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 		color = Color.transparent;
 		try {
 			sprite = new SpriteSheet("res/img/spriteSheet.png", SPRITE_IMAGE_SIZE, SPRITE_IMAGE_SIZE);
+			sprite.bind();
 
 			animationMoveRight = new Animation(false);
 			animationMoveLeft = new Animation(false);
@@ -75,6 +76,7 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 
 		try {
 			gunFire = new SpriteSheet("res/img/GUNFIREsimple.png", 96, 96);
+			gunFire.bind();
 			animationGunfire = new Animation(gunFire, 10);
 			animationGunfire.setAutoUpdate(false);
 			gunFireFrameWidth = animationGunfire.getCurrentFrame().getWidth();

@@ -1,7 +1,11 @@
 package se.BaseUlterior.AI;
 
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Circle;
 
+import se.BaseUlterior.Aim.AimBulletWeapon;
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.GameObject.GameObject;
@@ -23,6 +27,17 @@ public class TurretPlacer {
 
 	public void placeTurretsOnMe(GameObject groundPiece) {
 
+		SpriteSheet gunFire = null;
+		Image turretImage = null;
+		try {
+			gunFire = new SpriteSheet("res/img/GUNFIREsimple.png", 96, 96);
+			turretImage = new Image("res/img/turret.png").getScaledCopy(AimBulletWeapon.IMAGE_SCALE_STANDARD * 0.91f);
+			gunFire.bind();
+			turretImage.bind();
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+
 		float[] points = groundPiece.getPoints();
 		Vector2 direction = new Vector2();
 		float beyond = 0;
@@ -38,7 +53,8 @@ public class TurretPlacer {
 					float turretY = points[i + 1] + (turretsDistance * j + beyond) * direction.y;
 
 					AITurretBulletLauncher turretInLoop = new AITurretBulletLauncher(
-							new Circle(turretX, turretY, 60).getPoints(), direction.getPerpendicular());
+							new Circle(turretX, turretY, 60).getPoints(), direction.getPerpendicular(), gunFire,
+							turretImage);
 					IceBreaker.objsToAdd.add(turretInLoop);
 					nrOfTurrets++;
 				}

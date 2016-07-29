@@ -31,6 +31,7 @@ public abstract class ImagableObject extends GameObjectAgile {
 	private void init(String pathToImage) {
 		try {
 			rifleImageRight = new Image(pathToImage);
+			// rifleImageRight.bind();
 			imageHeight = (int) (rifleImageRight.getHeight());
 			imageWidth = (int) (rifleImageRight.getWidth());
 			rifleImageRight.setCenterOfRotation((imageWidth / 2), (imageHeight / 2));

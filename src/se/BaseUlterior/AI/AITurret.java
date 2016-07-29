@@ -4,7 +4,6 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 import se.BaseUlterior.Aim.AIAim;
@@ -42,23 +41,18 @@ public abstract class AITurret extends AIMotionLess {
 	protected int imageHeight;
 	protected int imageWidth;
 	protected static final float IMAGE_SCALE_STANDARD = 0.26f;
-	private float imageScale;
 
 	public AITurret(float[] points, String pathToImage, float imageScale, Vector2 startangle, float height,
-			float armLength) {
+			float armLength, SpriteSheet gunFire, Image turretImage) {
 		super(points, height);
 
-		try {
-			gunFire = new SpriteSheet("res/img/GUNFIREsimple.png", 96, 96);
-			gunFire.bind();
-			animationGunfire = new Animation(gunFire, 10);
-			animationGunfire.setAutoUpdate(false);
-			gunFireFrameWidth = animationGunfire.getCurrentFrame().getWidth();
-			gunFireFrameHeight = animationGunfire.getCurrentFrame().getHeight();
-			gunFire.setCenterOfRotation(gunFireFrameWidth / 2f, gunFireFrameHeight / 2f);
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}
+		this.turretImage = turretImage;
+		animationGunfire = new Animation(gunFire, 10);
+		animationGunfire.setAutoUpdate(false);
+		gunFireFrameWidth = animationGunfire.getCurrentFrame().getWidth();
+		gunFireFrameHeight = animationGunfire.getCurrentFrame().getHeight();
+		gunFire.setCenterOfRotation(gunFireFrameWidth / 2f, gunFireFrameHeight / 2f);
+
 		this.aim = new AIAimTurret(animationGunfire, armLength);
 		this.startAngle = startangle;
 		aim.setPosition(getCenterX(), getCenterY());
@@ -67,24 +61,15 @@ public abstract class AITurret extends AIMotionLess {
 		aimArm.setTheta(startangle.getTheta());
 		timeSinceLast = (int) (Math.random() * UPDATE_SPEED);
 
-		this.imageScale = imageScale;
-
 		init(pathToImage);
 		isRotatingObject = true;
 	}
 
 	private void init(String pathToImage) {
 
-		try {
-			turretImage = new Image(pathToImage);
-			imageHeight = (int) (turretImage.getHeight() * imageScale);
-			imageWidth = (int) (turretImage.getWidth() * imageScale);
-			turretImage = turretImage.getScaledCopy(imageScale);
-			turretImage.setCenterOfRotation((imageWidth / 2), (imageHeight / 2));
-
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}
+		imageHeight = (int) (turretImage.getHeight());
+		imageWidth = (int) (turretImage.getWidth());
+		turretImage.setCenterOfRotation((imageWidth / 2), (imageHeight / 2));
 	}
 
 	@Override
