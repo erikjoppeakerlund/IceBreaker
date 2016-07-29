@@ -1,11 +1,11 @@
-package se.BaseUlterior.Aim;
+package se.BaseUlterior.Aim.Processed;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
-import se.BaseUlterior.Game.IceBreaker;
-import se.BaseUlterior.GameObject.GameObject;
+import se.BaseUlterior.Entity.Entity;
 import se.BaseUlterior.Geom.Vector2;
+import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 
 public abstract class AIAim {
 
@@ -14,7 +14,7 @@ public abstract class AIAim {
 	protected float yAim;
 	public float spriteX;
 	public float spriteY;
-	protected GameObject pointBlank = null;
+	protected Entity pointBlank = null;
 
 	protected float xGrip;
 	protected float yGrip;
@@ -41,7 +41,7 @@ public abstract class AIAim {
 		while (notFound) {
 			xTarget += arm.x * STEP;
 			yTarget += arm.y * STEP;
-			for (GameObject go : IceBreaker.all) {
+			for (Entity go : ParallaxPhysicsEngine.all) {
 				if (go.contains(xTarget, yTarget) && !(go.piercable)) {
 					aimAtX = xTarget;
 					aimAtY = yTarget;

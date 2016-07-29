@@ -1,4 +1,4 @@
-package se.BaseUlterior.GameObject.Aimed;
+package se.BaseUlterior.Entity.Processed;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -6,13 +6,13 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
 
 import se.BaseUlterior.Config.Constants;
-import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.MateriaFirm;
+import se.BaseUlterior.Entity.Entity;
+import se.BaseUlterior.Entity.Materia;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactExplosion;
 
-public class VectorShot extends MateriaFirm {
+public class VectorShot extends Materia {
 
 	private final float power = 10f;
 	private final float sizeOfExplosion = 50f;
@@ -40,7 +40,7 @@ public class VectorShot extends MateriaFirm {
 	}
 
 	@Override
-	public Impact getImpact(GameObject piece) {
+	public Impact getImpact(Entity piece) {
 		// we might have to put an animation right here...
 		return new ImpactExplosion(this, piece, power, sizeOfExplosion, power);
 	}

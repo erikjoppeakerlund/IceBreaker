@@ -4,13 +4,13 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
-import se.BaseUlterior.GameObject.GameObjectSprite;
+import se.BaseUlterior.Entity.EntitySpriteControlled;
 
 /**
  * @author Johan Akerlund
  */
 
-public class AISprite extends GameObjectSprite {
+public class AISprite extends EntitySpriteControlled {
 	protected float height;
 	protected Color HPColor;
 	protected float dHP;

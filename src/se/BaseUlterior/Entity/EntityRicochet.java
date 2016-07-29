@@ -1,4 +1,4 @@
-package se.BaseUlterior.GameObject;
+package se.BaseUlterior.Entity;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -8,8 +8,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
 
-import se.BaseUlterior.Game.IceBreaker;
 import se.BaseUlterior.Geom.Vector2;
+import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
@@ -19,9 +19,9 @@ import se.BaseUlterior.Utils.UlteriorUtils;
  * 
  * @author Johan Akerlund
  */
-public class GameObjectRicochet extends GameObject {
+public class EntityRicochet extends Entity {
 
-	GameObject target = null;
+	Entity target = null;
 
 	private int LIFE_SPAN_LIMIT = 32;
 	private int LIFE_SPAN_SPLITS = 9;
@@ -35,7 +35,7 @@ public class GameObjectRicochet extends GameObject {
 	private float startX;
 	private float startY;
 
-	public GameObjectRicochet(GameObject target, float gunFireStartAtX, float gunFireStartAtY, float aimAtX,
+	public EntityRicochet(Entity target, float gunFireStartAtX, float gunFireStartAtY, float aimAtX,
 			float aimAtY, float weight, float damage) {
 		super(new float[] { aimAtX, aimAtY }, false, true, false, true, true, true);
 		this.target = target;
@@ -62,7 +62,7 @@ public class GameObjectRicochet extends GameObject {
 			runEffect();
 		}
 		if (lifeSpan > LIFE_SPAN_LIMIT) {
-			IceBreaker.objsToRemove.add(this);
+			ParallaxPhysicsEngine.objsToRemove.add(this);
 		}
 		lifeSpan++;
 	}
@@ -84,7 +84,7 @@ public class GameObjectRicochet extends GameObject {
 
 	private void runEffect() {
 
-		normals = target.getMyNormalsAfterHitBy(new GameObjectEmpty(new Circle(x, y, 59f).getPoints()));
+		normals = target.getMyNormalsAfterHitBy(new EntityEmpty(new Circle(x, y, 59f).getPoints()));
 		if (normals.isEmpty()) {
 			return;
 		}
@@ -109,17 +109,17 @@ public class GameObjectRicochet extends GameObject {
 		angled.sub(N);
 		angled.scale(2f);
 		if (!target.motionLess) {
-			GameObjectSplinter random = new GameObjectSplinter(this.getCenterX(), this.getCenterY(), angled, true);
-			IceBreaker.objsToAdd.add(random);
+			EntitySplinter random = new EntitySplinter(this.getCenterX(), this.getCenterY(), angled, true);
+			ParallaxPhysicsEngine.objsToAdd.add(random);
 		} else {
-			GameObjectSplinter random = new GameObjectSplinter(this.getCenterX(), this.getCenterY(), angled, false);
-			IceBreaker.objsToAdd.add(random);
+			EntitySplinter random = new EntitySplinter(this.getCenterX(), this.getCenterY(), angled, false);
+			ParallaxPhysicsEngine.objsToAdd.add(random);
 		}
 
 	}
 
 	@Override
-	public Impact getImpact(GameObject agileObject) {
+	public Impact getImpact(Entity agileObject) {
 		return null;
 	}
 

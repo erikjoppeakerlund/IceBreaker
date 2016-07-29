@@ -5,10 +5,10 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
 import se.BaseUlterior.Config.Constants;
-import se.BaseUlterior.Game.IceBreaker;
-import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.GameObjectRicochet;
+import se.BaseUlterior.Entity.Entity;
+import se.BaseUlterior.Entity.EntityRicochet;
 import se.BaseUlterior.Geom.Vector2;
+import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 
 /**
  * Shotgun Aim
@@ -25,7 +25,7 @@ public class AimShotGun extends AimBulletWeapon {
 		gunFireFrameHeight = this.gunFire.getCurrentFrame().getHeight();
 		recoilPower = 0.2f;
 		damage = Constants.WEAPON_EFFECT_SHOTGUN;
-		slug = "Shot Gun";
+		slug = "SHOT GUN";
 	}
 
 	@Override
@@ -75,11 +75,11 @@ public class AimShotGun extends AimBulletWeapon {
 			while (notFound) {
 				xTarget += randomAngle.x * STEP;
 				yTarget += randomAngle.y * STEP;
-				for (GameObject go : IceBreaker.all) {
+				for (Entity go : ParallaxPhysicsEngine.all) {
 					if (go.contains(xTarget, yTarget) && !go.piercable) {
-						GameObject ricochet = new GameObjectRicochet(go, gunFireStartAtX, gunFireStartAtY, xTarget,
-								yTarget, 0.49f, damage);
-						IceBreaker.objsToAdd.add(ricochet);
+						Entity ricochet = new EntityRicochet(go, gunFireStartAtX, gunFireStartAtY, xTarget, yTarget,
+								0.49f, damage);
+						ParallaxPhysicsEngine.objsToAdd.add(ricochet);
 						notFound = false;
 						break;
 					}

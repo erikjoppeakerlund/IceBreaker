@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.Color;
 
 import se.BaseUlterior.Config.Constants;
-import se.BaseUlterior.Game.IceBreaker;
+import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 
 public class StatsObserver extends Observer {
 
@@ -45,7 +45,7 @@ public class StatsObserver extends Observer {
 	}
 
 	public StatsObserver(float x, float y) {
-		this.info = IceBreaker.gameInfo;
+		this.info = ParallaxPhysicsEngine.gameInfo;
 		Color fontColor = Color.green;
 
 		HP = new SingleText(Constants.CANVAS_WIDTH - 200, 50, 24, "HP: ", fontColor, "SANS_SERIF");
@@ -66,7 +66,6 @@ public class StatsObserver extends Observer {
 
 	private SingleText HP;
 	private SingleText weapon;
-	private SingleText lastHit;
 	private SingleText kills;
 	private SingleText sec;
 
@@ -75,6 +74,6 @@ public class StatsObserver extends Observer {
 
 		HP.setValue("HP: " + info.getHP());
 		weapon.setValue("WEAPON: " + info.getWeapon());
-		kills.setValue("KILLS: " + info.getKills() + "/" + IceBreaker.nrOfTurrets);
+		kills.setValue("KILLS: " + info.getKills() + "/" + ParallaxPhysicsEngine.nrOfTurrets);
 	}
 }

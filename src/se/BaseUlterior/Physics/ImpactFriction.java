@@ -1,6 +1,6 @@
 package se.BaseUlterior.Physics;
 
-import se.BaseUlterior.GameObject.GameObject;
+import se.BaseUlterior.Entity.Entity;
 
 /**
  * Scale other game objects motion vector
@@ -12,7 +12,7 @@ public class ImpactFriction extends Impact {
 	protected float effect;
 	protected boolean contains = false;
 
-	public ImpactFriction(GameObject origin, GameObject other, float effect) {
+	public ImpactFriction(Entity origin, Entity other, float effect) {
 		super(origin, other);
 		this.effect = effect;
 	}

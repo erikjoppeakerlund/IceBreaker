@@ -7,8 +7,9 @@ import org.newdawn.slick.Graphics;
 
 import se.BaseUlterior.Actions.Action;
 import se.BaseUlterior.Config.Constants;
-import se.BaseUlterior.GameObject.GameObject;
+import se.BaseUlterior.Entity.Entity;
 import se.BaseUlterior.Geom.Vector2;
+import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 
 /**
  * Sprite aim
@@ -36,7 +37,7 @@ public abstract class Aim {
 	protected float yAim;
 	public float spriteX;
 	public float spriteY;
-	protected GameObject pointBlank = null;
+	protected Entity pointBlank = null;
 
 	protected float aimAtX;
 	protected float aimAtY;
@@ -45,7 +46,7 @@ public abstract class Aim {
 	protected float START_ARM_LENGTH;
 
 	protected float armLengt;
-	private int turningSpeed = 3;
+	private final int TURNING_SPEED = 3;
 
 	protected boolean isRight = true;
 	protected boolean wasJustSwitched = false;
@@ -131,7 +132,7 @@ public abstract class Aim {
 	}
 
 	public void cleanUp() {
-
+		primaryReleased();
 	}
 
 	public void onThisWasChoosen() {
@@ -149,20 +150,20 @@ public abstract class Aim {
 	public void angleUp() {
 		if (!isRight) {
 			if (arm.getTheta() < 260)
-				arm.add(turningSpeed);
+				arm.add(TURNING_SPEED);
 		} else {
 			if (arm.getTheta() > 280 || arm.getTheta() < 90)
-				arm.sub(turningSpeed);
+				arm.sub(TURNING_SPEED);
 		}
 	}
 
 	public void angleDown() {
 		if (isRight) {
 			if (arm.getTheta() > 270 || arm.getTheta() < 80)
-				arm.add(turningSpeed);
+				arm.add(TURNING_SPEED);
 		} else {
 			if (arm.getTheta() > 100)
-				arm.sub(turningSpeed);
+				arm.sub(TURNING_SPEED);
 		}
 
 	}
@@ -178,8 +179,34 @@ public abstract class Aim {
 		return (int) arm.getTheta();
 	}
 
-	public void setPointBlank(GameObject go) {
+	public void setPointBlank(Entity go) {
 		this.pointBlank = go;
+	}
+
+	protected void updateAim() {
+		float xTarget = xGrip;
+		float yTarget = yGrip;
+		boolean notFound = true;
+		int STEP = 8;
+		while (notFound) {
+			xTarget += arm.x * STEP;
+			yTarget += arm.y * STEP;
+			for (Entity go : ParallaxPhysicsEngine.all) {
+				if (go.contains(xTarget, yTarget) && !(go.piercable)) {
+					aimAtX = xTarget;
+					aimAtY = yTarget;
+					notFound = false;
+					if (pointBlank != go) {
+						if (pointBlank != null && !pointBlank.isRotatingObject) {
+							pointBlank.forceUpdate = false;
+						}
+						go.forceUpdate = true;
+					}
+					pointBlank = go;
+					break;
+				}
+			}
+		}
 	}
 
 	public abstract void shoot();

@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import se.BaseUlterior.Config.Constants;
-import se.BaseUlterior.GameObject.GameObject;
+import se.BaseUlterior.Entity.Entity;
 import se.BaseUlterior.Geom.Vector2;
 
 /**
@@ -20,7 +20,7 @@ public class ImpactBounce extends Impact {
 	protected float bounciness;
 	protected boolean self;
 
-	public ImpactBounce(GameObject origin, GameObject go, float bounciness, boolean self) {
+	public ImpactBounce(Entity origin, Entity go, float bounciness, boolean self) {
 		super(origin, go);
 		if (self) {
 			affectedPiece = origin.getMotion();

@@ -1,4 +1,4 @@
-package se.BaseUlterior.GameObject;
+package se.BaseUlterior.Entity;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -14,23 +14,23 @@ import se.BaseUlterior.Physics.ImpactBounce;
  * 
  * @author Johan Akerlund
  */
-public class WorldBuilderGround extends MateriaFirm {
+public class PartSolid extends Materia {
 
 	GradientFill fill;
 
-	public WorldBuilderGround(float[] nodes) {
+	public PartSolid(float[] nodes) {
 		super(nodes);
 		this.color = new Color(0.6f, 0.6f, 0.6f, 0.8f);
 		fill = new GradientFill(getCenterX(), getMinY(), Color.gray, getCenterX(), getMaxY(), Color.white, false);
 	}
 
-	public WorldBuilderGround(float[] nodes, float extraBounciness) {
+	public PartSolid(float[] nodes, float extraBounciness) {
 		super(nodes);
 		this.color = Color.darkGray;
 	}
 
 	@Override
-	public Impact getImpact(GameObject piece) {
+	public Impact getImpact(Entity piece) {
 		return new ImpactBounce(this, piece, piece.bounciness, false);
 	}
 

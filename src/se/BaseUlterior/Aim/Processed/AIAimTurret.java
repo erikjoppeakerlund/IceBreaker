@@ -1,13 +1,13 @@
-package se.BaseUlterior.Aim;
+package se.BaseUlterior.Aim.Processed;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
-import se.BaseUlterior.Game.IceBreaker;
-import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.GameObjectRicochet;
+import se.BaseUlterior.Entity.Entity;
+import se.BaseUlterior.Entity.EntityRicochet;
+import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 
 public class AIAimTurret extends AIAim {
 	private boolean animationsIsDrawn = false;
@@ -77,9 +77,9 @@ public class AIAimTurret extends AIAim {
 
 	protected void wasShoot() {
 		wasJustShoot = true;
-		GameObject ricochet = new GameObjectRicochet(pointBlank, gunFireStartAtX, gunFireStartAtY, aimAtX, aimAtY,
-				weight, damage);
-		IceBreaker.objsToAdd.add(ricochet);
+		Entity ricochet = new EntityRicochet(pointBlank, gunFireStartAtX, gunFireStartAtY, aimAtX, aimAtY, weight,
+				damage);
+		ParallaxPhysicsEngine.objsToAdd.add(ricochet);
 	}
 
 	@Override

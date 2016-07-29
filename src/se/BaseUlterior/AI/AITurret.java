@@ -6,12 +6,12 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
-import se.BaseUlterior.Aim.AIAim;
-import se.BaseUlterior.Aim.AIAimTurret;
+import se.BaseUlterior.Aim.Processed.AIAim;
+import se.BaseUlterior.Aim.Processed.AIAimTurret;
 import se.BaseUlterior.Config.Constants;
-import se.BaseUlterior.Game.IceBreaker;
-import se.BaseUlterior.GameObject.GameObject;
+import se.BaseUlterior.Entity.Entity;
 import se.BaseUlterior.Geom.Vector2;
+import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
 /**
@@ -21,7 +21,7 @@ import se.BaseUlterior.Utils.UlteriorUtils;
 public abstract class AITurret extends AIMotionLess {
 
 	protected AIAim aim;
-	protected GameObject target;
+	protected Entity target;
 
 	protected Vector2 startAngle;
 	protected final int UPDATE_SPEED = Constants.TURRETS_MAX_RELOAD_SPEED;
@@ -87,8 +87,8 @@ public abstract class AITurret extends AIMotionLess {
 		aim.setPosition(getCenterX(), getCenterY());
 		aim.update(container, arg);
 		if (HP <= 0) {
-			IceBreaker.gameInfo.setKills(IceBreaker.gameInfo.getKills() + 1);
-			IceBreaker.objsToRemove.add(this);
+			ParallaxPhysicsEngine.gameInfo.setKills(ParallaxPhysicsEngine.gameInfo.getKills() + 1);
+			ParallaxPhysicsEngine.objsToRemove.add(this);
 		}
 	}
 
@@ -101,9 +101,9 @@ public abstract class AITurret extends AIMotionLess {
 	protected boolean lookUpClosestTarget() {
 		boolean result = false;
 		float distanceToClosestTarget = Constants.CANVAS_WIDTH;
-		for (GameObject go : IceBreaker.all) {
+		for (Entity go : ParallaxPhysicsEngine.all) {
 			float dotProduct = aimArm.dot(startAngle);
-			if (UlteriorUtils.isWithinRange(go, IceBreaker.wholeSceene) && !go.motionLess && !go.isBackgroundObj
+			if (UlteriorUtils.isWithinRange(go, ParallaxPhysicsEngine.wholeSceene) && !go.motionLess && !go.isBackgroundObj
 					&& !go.piercable && go != this) {
 				float xDist = go.getCenterX() - this.getCenterX();
 				float yDist = go.getCenterY() - this.getCenterY();

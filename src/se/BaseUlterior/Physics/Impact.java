@@ -1,6 +1,6 @@
 package se.BaseUlterior.Physics;
 
-import se.BaseUlterior.GameObject.GameObject;
+import se.BaseUlterior.Entity.Entity;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
@@ -11,20 +11,20 @@ import se.BaseUlterior.Utils.UlteriorUtils;
  */
 public abstract class Impact {
 
-	protected GameObject origin;
-	protected GameObject other;
+	protected Entity origin;
+	protected Entity other;
 	protected Vector2 affectedPiece;
 
 	protected int diff;
 
-	public Impact(GameObject origin, GameObject other) {
+	public Impact(Entity origin, Entity other) {
 		this.origin = origin;
 		this.other = other;
 		affectedPiece = other.getMotion();
 		diff = UlteriorUtils.distance(origin, other);
 	}
 
-	public GameObject getTrigger() {
+	public Entity getTrigger() {
 		return origin;
 	}
 
@@ -35,7 +35,7 @@ public abstract class Impact {
 		calculateImpact(delta);
 	}
 
-	public GameObject getAffected() {
+	public Entity getAffected() {
 		return other;
 	}
 

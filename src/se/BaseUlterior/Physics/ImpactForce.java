@@ -1,6 +1,6 @@
 package se.BaseUlterior.Physics;
 
-import se.BaseUlterior.GameObject.GameObject;
+import se.BaseUlterior.Entity.Entity;
 
 /**
  * Adds values to a game objects motion vector
@@ -22,7 +22,7 @@ public class ImpactForce extends Impact {
 		return gravityX;
 	}
 
-	public ImpactForce(GameObject origin, GameObject other, float gravityX, float gravityY) {
+	public ImpactForce(Entity origin, Entity other, float gravityX, float gravityY) {
 		super(origin, other);
 		this.gravityX = gravityX;
 		this.gravityY = gravityY;

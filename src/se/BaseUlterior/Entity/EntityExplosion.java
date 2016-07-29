@@ -1,11 +1,11 @@
-package se.BaseUlterior.GameObject;
+package se.BaseUlterior.Entity;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Shape;
 
-import se.BaseUlterior.Game.IceBreaker;
+import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactExplosion;
 import se.BaseUlterior.Utils.UlteriorUtils;
@@ -14,7 +14,7 @@ import se.BaseUlterior.Utils.UlteriorUtils;
  * Class not used.
  */
 
-public class GameObjectExplosion extends GameObject {
+public class EntityExplosion extends Entity {
 
 	private static final long MAX_TIME = 79;
 	protected long timeSinceCreation;
@@ -22,14 +22,14 @@ public class GameObjectExplosion extends GameObject {
 	private float bumpEffect;
 	private boolean invisible;
 
-	public GameObjectExplosion(float[] nodes, float damage, float bumpEffect, boolean invisible) {
+	public EntityExplosion(float[] nodes, float damage, float bumpEffect, boolean invisible) {
 		super(nodes, false, true, false, true, false, false);
 		init(damage, bumpEffect);
 		piercable = true;
 		this.invisible = invisible;
 	}
 
-	public GameObjectExplosion(float[] nodes, float damage, float bumpEffect) {
+	public EntityExplosion(float[] nodes, float damage, float bumpEffect) {
 		super(nodes, false, true, false, true, false, false);
 		init(damage, bumpEffect);
 		piercable = true;
@@ -43,7 +43,7 @@ public class GameObjectExplosion extends GameObject {
 	}
 
 	@Override
-	public Impact getImpact(GameObject agileObject) {
+	public Impact getImpact(Entity agileObject) {
 		return new ImpactExplosion(this, agileObject, power, getBoundingCircleRadius(), bumpEffect);
 	}
 
@@ -52,7 +52,7 @@ public class GameObjectExplosion extends GameObject {
 		if (System.currentTimeMillis() - timeSinceCreation > MAX_TIME) {
 			UlteriorUtils.cleanUpImpactFromWorldBuilderObject(this);
 
-			IceBreaker.objsToRemove.add(this);
+			ParallaxPhysicsEngine.objsToRemove.add(this);
 		}
 	}
 

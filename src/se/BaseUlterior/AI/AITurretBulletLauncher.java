@@ -7,7 +7,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
 import se.BaseUlterior.Config.Constants;
-import se.BaseUlterior.GameObject.GameObject;
+import se.BaseUlterior.Entity.Entity;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactBounce;
@@ -40,7 +40,7 @@ public class AITurretBulletLauncher extends AITurret {
 	}
 
 	@Override
-	public Impact getImpact(GameObject other) {
+	public Impact getImpact(Entity other) {
 		return new ImpactBounce(this, other, 1.0f, true);
 	}
 

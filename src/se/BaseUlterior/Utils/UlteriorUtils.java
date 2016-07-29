@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Shape;
 
-import se.BaseUlterior.Game.IceBreaker;
-import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.GameObjectExplosion;
-import se.BaseUlterior.GameObject.WorldBuilderGround;
+import se.BaseUlterior.Entity.Entity;
+import se.BaseUlterior.Entity.EntityExplosion;
+import se.BaseUlterior.Entity.PartSolid;
+import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 
 /**
  * Any logic which does not require instantiation
@@ -16,7 +16,7 @@ import se.BaseUlterior.GameObject.WorldBuilderGround;
  * @author Johan Akerlund
  */
 public class UlteriorUtils {
-	public static boolean isWithinRange(GameObject go1, GameObject go2) {
+	public static boolean isWithinRange(Entity go1, Entity go2) {
 		float x1 = go1.getCenterX();
 		float x2 = go2.getCenterX();
 
@@ -35,7 +35,7 @@ public class UlteriorUtils {
 		return (float) Math.toDegrees(Math.atan2(y2 - y1, x2 - x1));
 	}
 
-	public static int distance(GameObject go1, GameObject go2) {
+	public static int distance(Entity go1, Entity go2) {
 		float x1 = go1.getCenterX();
 		float x2 = go2.getCenterX();
 
@@ -49,8 +49,8 @@ public class UlteriorUtils {
 		return (int) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 	}
 
-	public static void cleanUpImpactFromWorldBuilderObject(GameObject clearWhichBelongToThis) {
-		for (GameObject go : IceBreaker.all) {
+	public static void cleanUpImpactFromWorldBuilderObject(Entity clearWhichBelongToThis) {
+		for (Entity go : ParallaxPhysicsEngine.all) {
 			go.removeCurrentImpactsWhichBelingTo(clearWhichBelongToThis);
 		}
 	}
@@ -58,13 +58,13 @@ public class UlteriorUtils {
 	/*
 	 * Not current used, due to game play decision.
 	 */
-	public static void removeGroundReal(float x, float y, float sizeOfExplostion, GameObject origin) {
-		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion, 8).getPoints(), 0f,
+	public static void removeGroundReal(float x, float y, float sizeOfExplostion, Entity origin) {
+		Entity explotionShape = new EntityExplosion(new Circle(x, y, sizeOfExplostion, 8).getPoints(), 0f,
 				0.0f);
-		IceBreaker.objsToAdd.add(explotionShape);
-		ArrayList<GameObject> newShapes = new ArrayList<>();
+		ParallaxPhysicsEngine.objsToAdd.add(explotionShape);
+		ArrayList<Entity> newShapes = new ArrayList<>();
 		boolean wasFound = false;
-		for (GameObject target : IceBreaker.all) {
+		for (Entity target : ParallaxPhysicsEngine.all) {
 			if (target == origin || target == origin) {
 				continue;
 			}
@@ -74,12 +74,12 @@ public class UlteriorUtils {
 					if (result.length > 0) {
 						for (int i = 0; i < result.length; i++) {
 							Shape go = result[i];
-							GameObject gog = new WorldBuilderGround(go.getPoints());
+							Entity gog = new PartSolid(go.getPoints());
 							newShapes.add(gog);
 							wasFound = true;
 						}
 
-						IceBreaker.objsToRemove.add(target);
+						ParallaxPhysicsEngine.objsToRemove.add(target);
 						UlteriorUtils.cleanUpImpactFromWorldBuilderObject(target);
 					}
 				}
@@ -88,21 +88,21 @@ public class UlteriorUtils {
 				break;
 			}
 		}
-		for (GameObject go : newShapes) {
-			IceBreaker.objsToAdd.add(go);
+		for (Entity go : newShapes) {
+			ParallaxPhysicsEngine.objsToAdd.add(go);
 		}
 
 	}
 
 	public static void removeGround(float x, float y, float damage, float sizeOfExplostion, float bumpEffect) {
-		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion).getPoints(), damage,
+		Entity explotionShape = new EntityExplosion(new Circle(x, y, sizeOfExplostion).getPoints(), damage,
 				bumpEffect);
-		IceBreaker.objsToAdd.add(explotionShape);
+		ParallaxPhysicsEngine.objsToAdd.add(explotionShape);
 	}
 
 	public static void removeGroundInvisible(float x, float y, float damage, float sizeOfExplostion, float bumpEffect) {
-		GameObject explotionShape = new GameObjectExplosion(new Circle(x, y, sizeOfExplostion).getPoints(), damage,
+		Entity explotionShape = new EntityExplosion(new Circle(x, y, sizeOfExplostion).getPoints(), damage,
 				bumpEffect, true);
-		IceBreaker.objsToAdd.add(explotionShape);
+		ParallaxPhysicsEngine.objsToAdd.add(explotionShape);
 	}
 }

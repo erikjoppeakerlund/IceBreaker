@@ -12,7 +12,7 @@ public abstract class AimTriggerHoldable extends AimBulletWeapon {
 
 	private int TIME_BETWEEN_FIRES = 10;
 	protected boolean isTriggerDown = false;
-	protected int iterator = 0;
+	private int iterator = 0;
 
 	public AimTriggerHoldable(String pathToImage) {
 		super(pathToImage, IMAGE_SCALE_STANDARD);

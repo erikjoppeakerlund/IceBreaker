@@ -1,9 +1,9 @@
-package se.BaseUlterior.GameObject;
+package se.BaseUlterior.Entity;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
-public class GameObjectEmpty extends GameObject {
+public class EntityEmpty extends Entity {
 
 	@Override
 	public void update(GameContainer container, int arg) {
@@ -11,7 +11,7 @@ public class GameObjectEmpty extends GameObject {
 
 	}
 
-	public GameObjectEmpty(float[] points) {
+	public EntityEmpty(float[] points) {
 		super(points, true, true, false, false, false, true);
 	}
 

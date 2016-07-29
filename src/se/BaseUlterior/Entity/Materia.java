@@ -1,8 +1,8 @@
-package se.BaseUlterior.GameObject;
+package se.BaseUlterior.Entity;
 
 import org.newdawn.slick.GameContainer;
 
-import se.BaseUlterior.Game.IceBreaker;
+import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
@@ -11,11 +11,11 @@ import se.BaseUlterior.Utils.UlteriorUtils;
  * 
  * @author Johan Akerlund
  */
-public abstract class MateriaFirm extends WorldBuilder {
+public abstract class Materia extends Part {
 
 	protected boolean underImpact;
 
-	public MateriaFirm(float[] nodes) {
+	public Materia(float[] nodes) {
 		super(nodes, false, false, false, false, false, true);
 	}
 
@@ -61,7 +61,7 @@ public abstract class MateriaFirm extends WorldBuilder {
 	}
 
 	protected void checkImpact() {
-		for (GameObject go : IceBreaker.all) {
+		for (Entity go : ParallaxPhysicsEngine.all) {
 
 			if (go == this || (go.motionLess && this.motionLess) || go.isBackgroundObj) {
 				continue;

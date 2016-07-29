@@ -1,9 +1,9 @@
-package se.BaseUlterior.GameObject;
+package se.BaseUlterior.Entity;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 
-import se.BaseUlterior.Game.IceBreaker;
+import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
 /**
@@ -11,15 +11,15 @@ import se.BaseUlterior.Utils.UlteriorUtils;
  * 
  * @author Johan Akerlund
  */
-public class GameObjectSpriteDesktop extends GameObjectSprite {
+public class EntitySpriteControlledDesktop extends EntitySpriteControlled {
 
-	public GameObjectSpriteDesktop() {
+	public EntitySpriteControlledDesktop() {
 		super();
 		START_HP = 1000;
 		HP = START_HP;
 		HPCompare = HP;
-		IceBreaker.gameInfo.setWeapon(aim.getSlug());
-		IceBreaker.gameInfo.setHP(HP);
+		ParallaxPhysicsEngine.gameInfo.setWeapon(aim.getSlug());
+		ParallaxPhysicsEngine.gameInfo.setHP(HP);
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class GameObjectSpriteDesktop extends GameObjectSprite {
 			aim.cleanUp();
 			aim = i == aims.size() - 1 ? aims.get(0) : aims.get(i + 1);
 			aim.onThisWasChoosen();
-			IceBreaker.gameInfo.setWeapon(aim.getSlug());
+			ParallaxPhysicsEngine.gameInfo.setWeapon(aim.getSlug());
 
 		}
 		float centerX = getCenterX();

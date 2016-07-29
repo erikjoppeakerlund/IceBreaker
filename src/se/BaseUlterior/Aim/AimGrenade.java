@@ -8,9 +8,9 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
 
 import se.BaseUlterior.Config.Constants;
-import se.BaseUlterior.Game.IceBreaker;
-import se.BaseUlterior.GameObject.Aimed.Grenade;
+import se.BaseUlterior.Entity.Processed.Grenade;
 import se.BaseUlterior.Geom.Vector2;
+import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 
 /**
  * se.BaseUlterior.GameObjectMateriaFirm producing class which produces a and
@@ -23,7 +23,7 @@ public class AimGrenade extends Aim {
 	List<Grenade> grenades = null;
 	Grenade current;
 
-	long currentTime;
+	private long currentTime;
 
 	private final long TIME_BETWEEN = 500;
 
@@ -44,7 +44,7 @@ public class AimGrenade extends Aim {
 		grenades = new ArrayList<>();
 		Grenade startGrenade = new Grenade(new Circle(-60, -60, Grenade.GRENADE_SIZE).getPoints());
 		grenades.add(startGrenade);
-		IceBreaker.objsToAdd.add(startGrenade);
+		ParallaxPhysicsEngine.objsToAdd.add(startGrenade);
 		current = startGrenade;
 		slug = "Grenade";
 	}
@@ -95,7 +95,7 @@ public class AimGrenade extends Aim {
 				Grenade newCurrent = new Grenade(new Circle(-60, -60, Grenade.GRENADE_SIZE).getPoints());
 				grenades.add(newCurrent);
 				current = newCurrent;
-				IceBreaker.objsToAdd.add(newCurrent);
+				ParallaxPhysicsEngine.objsToAdd.add(newCurrent);
 				canMakeNew = false;
 			}
 		}
@@ -116,7 +116,7 @@ public class AimGrenade extends Aim {
 	@Override
 	public void cleanUp() {
 		if (current != null) {
-			IceBreaker.objsToRemove.add(current);
+			ParallaxPhysicsEngine.objsToRemove.add(current);
 		}
 	}
 
@@ -124,8 +124,8 @@ public class AimGrenade extends Aim {
 	public void onThisWasChoosen() {
 		super.onThisWasChoosen();
 		if (current != null) {
-			IceBreaker.objsToRemove.add(current);
-			IceBreaker.objsToAdd.add(current);
+			ParallaxPhysicsEngine.objsToRemove.add(current);
+			ParallaxPhysicsEngine.objsToAdd.add(current);
 		} else {
 
 		}

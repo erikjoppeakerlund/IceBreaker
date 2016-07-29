@@ -1,4 +1,4 @@
-package se.BaseUlterior.GameObject;
+package se.BaseUlterior.Entity;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.geom.Shape;
@@ -13,10 +13,11 @@ import se.BaseUlterior.Physics.ImpactBounce;
  * @author Johan Akerlund
  */
 
-public abstract class GameObjectAgile extends MateriaFirm {
+public abstract class EntityAgile extends Materia {
+	private static final long serialVersionUID = 1L;
 	protected boolean underImpact = false;
 
-	public GameObjectAgile(float[] nodes, float bounciness) {
+	public EntityAgile(float[] nodes, float bounciness) {
 		super(nodes);
 		this.bounciness = bounciness;
 		forceUpdate = true;
@@ -30,7 +31,7 @@ public abstract class GameObjectAgile extends MateriaFirm {
 	}
 
 	@Override
-	public Impact getImpact(GameObject other) {
+	public Impact getImpact(Entity other) {
 		return new ImpactBounce(this, other, bounciness, true);
 	}
 

@@ -4,13 +4,13 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
-import se.BaseUlterior.GameObject.MateriaFirm;
+import se.BaseUlterior.Entity.Materia;
 
 /**
  * @author Johan Akerlund
  */
 
-public abstract class AIMotionLess extends MateriaFirm {
+public abstract class AIMotionLess extends Materia {
 	protected float height;
 	protected Color HPColor;
 	protected float dHP;

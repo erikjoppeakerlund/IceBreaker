@@ -1,4 +1,4 @@
-package se.BaseUlterior.GameObject;
+package se.BaseUlterior.Entity;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.geom.Shape;
@@ -14,26 +14,26 @@ import se.BaseUlterior.Physics.ImpactFriction;
  * 
  * @author Johan Akerlund
  */
-public class WorldBuilderLiquid extends WorldBuilder {
+public class PartFriction extends Part {
 
 	Density density;
 
 	protected float frictionAmount;
 
-	public WorldBuilderLiquid(float[] nodes) {
+	public PartFriction(float[] nodes) {
 		super(nodes, false, true, false, false, false, true);
 		this.density = Density.WATER;
 		piercable = true;
 	}
 
-	public WorldBuilderLiquid(float[] nodes, Density density) {
+	public PartFriction(float[] nodes, Density density) {
 		super(nodes, false, true, false, false, false, true);
 		this.density = density;
 		init();
 		piercable = true;
 	}
 
-	public WorldBuilderLiquid(float[] nodes, Density density, boolean isBackground) {
+	public PartFriction(float[] nodes, Density density, boolean isBackground) {
 		super(nodes, false, true, false, false, false, true);
 		this.density = density;
 		init();
@@ -69,7 +69,7 @@ public class WorldBuilderLiquid extends WorldBuilder {
 	}
 
 	@Override
-	public Impact getImpact(GameObject piece) {
+	public Impact getImpact(Entity piece) {
 		return new ImpactFriction(this, piece, frictionAmount);
 	}
 

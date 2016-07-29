@@ -7,7 +7,7 @@ import org.newdawn.slick.Color;
 
 import se.BaseUlterior.Actions.Action;
 import se.BaseUlterior.Aim.Aim;
-import se.BaseUlterior.Game.IceBreaker;
+import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 
 /**
  * @author Johan Akerlund
@@ -80,21 +80,21 @@ public class ToolBox extends Component {
 			}
 		});
 
-		buttons.add(new Button(IceBreaker.MODE_LATEST_ACTION.toString(), Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT,
+		buttons.add(new Button(ParallaxPhysicsEngine.MODE_LATEST_ACTION.toString(), Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT,
 				true) {
 
 			@Override
 			public void onClick() {
-				if (IceBreaker.MODE_LATEST_ACTION == Action.ACTION_MODE_DESKTOP) {
-					IceBreaker.setSprite(Action.ACTION_MODE_CELL);
-					IceBreaker.MODE_LATEST_ACTION = Action.ACTION_MODE_CELL;
+				if (ParallaxPhysicsEngine.MODE_LATEST_ACTION == Action.ACTION_MODE_DESKTOP) {
+					ParallaxPhysicsEngine.setSprite(Action.ACTION_MODE_CELL);
+					ParallaxPhysicsEngine.MODE_LATEST_ACTION = Action.ACTION_MODE_CELL;
 					Aim.mobile = true;
-				} else if (IceBreaker.MODE_LATEST_ACTION == Action.ACTION_MODE_CELL) {
-					IceBreaker.setSprite(Action.ACTION_MODE_DESKTOP);
-					IceBreaker.MODE_LATEST_ACTION = Action.ACTION_MODE_DESKTOP;
+				} else if (ParallaxPhysicsEngine.MODE_LATEST_ACTION == Action.ACTION_MODE_CELL) {
+					ParallaxPhysicsEngine.setSprite(Action.ACTION_MODE_DESKTOP);
+					ParallaxPhysicsEngine.MODE_LATEST_ACTION = Action.ACTION_MODE_DESKTOP;
 					Aim.mobile = false;
 				}
-				updateText(IceBreaker.MODE_LATEST_ACTION.toString());
+				updateText(ParallaxPhysicsEngine.MODE_LATEST_ACTION.toString());
 			}
 		});
 		buttons.add(new Button("ABOUT", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, true) {

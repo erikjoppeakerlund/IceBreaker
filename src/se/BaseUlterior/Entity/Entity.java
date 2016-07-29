@@ -1,4 +1,4 @@
-package se.BaseUlterior.GameObject;
+package se.BaseUlterior.Entity;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -23,7 +23,7 @@ import se.BaseUlterior.Physics.Impact;
  * 
  */
 
-public abstract class GameObject extends Polygon {
+public abstract class Entity extends Polygon {
 
 	protected List<Impact> currentImpacts = null;
 	protected List<Impact> impactsToRemove = new ArrayList<>();
@@ -51,7 +51,7 @@ public abstract class GameObject extends Polygon {
 		maxRadiusStart = (int) getBoundingCircleRadius();
 	}
 
-	protected GameObject(float[] points, boolean isBackgroundObj, boolean invisible, boolean isRotatingObject,
+	protected Entity(float[] points, boolean isBackgroundObj, boolean invisible, boolean isRotatingObject,
 			boolean forceUpdate, boolean forceRender, boolean isSolid) {
 		super(points);
 		init();
@@ -93,7 +93,7 @@ public abstract class GameObject extends Polygon {
 	 *            The shape to check if it intersects with this one.
 	 * @return True if the shapes do intersect, false otherwise.
 	 */
-	public Set<Vector2> getMyNormalsAfterHitBy(GameObject shape) {
+	public Set<Vector2> getMyNormalsAfterHitBy(Entity shape) {
 
 		Set<Vector2> normals = new HashSet<>();
 		/*
@@ -195,7 +195,7 @@ public abstract class GameObject extends Polygon {
 
 	public abstract void render(GameContainer container, Graphics graphics);
 
-	public Impact getImpact(GameObject agileObject) {
+	public Impact getImpact(Entity agileObject) {
 		return null;
 	}
 
@@ -205,7 +205,7 @@ public abstract class GameObject extends Polygon {
 	public void animateHit(float aimAtX, float aimAtY) {
 	}
 
-	public void removeCurrentImpactsWhichBelingTo(GameObject go) {
+	public void removeCurrentImpactsWhichBelingTo(Entity go) {
 		for (Impact im : currentImpacts) {
 			if (im.getTrigger() == go || im.getAffected() == go) {
 				removeImpact(im);

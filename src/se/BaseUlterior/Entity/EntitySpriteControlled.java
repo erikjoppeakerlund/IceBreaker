@@ -1,4 +1,4 @@
-package se.BaseUlterior.GameObject;
+package se.BaseUlterior.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,14 +17,14 @@ import se.BaseUlterior.Aim.AimMachineGun;
 import se.BaseUlterior.Aim.AimRifle;
 import se.BaseUlterior.Aim.AimShotGun;
 import se.BaseUlterior.Config.Constants;
-import se.BaseUlterior.Game.IceBreaker;
+import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 
 /**
  * Game objects which update method contains user input handling
  * 
  * @author Johan Akerlund
  */
-public abstract class GameObjectSprite extends GameObjectAgile {
+public abstract class EntitySpriteControlled extends EntityAgile {
 
 	protected Aim aim = null;
 	protected List<Aim> aims = null;
@@ -51,7 +51,7 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 
 	private final int SPRITE_IMAGE_SIZE = 88;
 
-	protected GameObjectSprite() {
+	protected EntitySpriteControlled() {
 		super(new Circle(Constants.CANVAS_WIDTH / 4, Constants.CANVAS_HEIGHT / 2, Constants.SPRITE_RADIUS).getPoints(),
 				0f);
 		this.setCenterX(Constants.CANVAS_WIDTH / 4);
@@ -106,21 +106,21 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 		float moveScreenX = centerX - Constants.CANVAS_WIDTH / 2f;
 		float moveScreenY = centerY - Constants.CANVAS_HEIGHT / 2f;
 
-		if (motion.x <= 0 && IceBreaker.currentX <= 0
-				|| motion.x >= 0 && IceBreaker.currentX + Constants.CANVAS_WIDTH >= Constants.CANVAS_WIDTH_FULL
+		if (motion.x <= 0 && ParallaxPhysicsEngine.currentX <= 0
+				|| motion.x >= 0 && ParallaxPhysicsEngine.currentX + Constants.CANVAS_WIDTH >= Constants.CANVAS_WIDTH_FULL
 				|| motion.x > 0 && centerX < Constants.CANVAS_WIDTH / 2 || motion.x < 0
-						&& centerX + IceBreaker.currentX > Constants.CANVAS_WIDTH_FULL - Constants.CANVAS_WIDTH / 2) {
+						&& centerX + ParallaxPhysicsEngine.currentX > Constants.CANVAS_WIDTH_FULL - Constants.CANVAS_WIDTH / 2) {
 			moveScreenX = 0;
 		}
 
-		if (motion.y <= 0 && IceBreaker.currentY <= 0
-				|| motion.y >= 0 && IceBreaker.currentY + Constants.CANVAS_HEIGHT >= Constants.CANVAS_HEIGHT_FULL
+		if (motion.y <= 0 && ParallaxPhysicsEngine.currentY <= 0
+				|| motion.y >= 0 && ParallaxPhysicsEngine.currentY + Constants.CANVAS_HEIGHT >= Constants.CANVAS_HEIGHT_FULL
 				|| motion.y > 0 && centerY < Constants.CANVAS_HEIGHT / 2 || motion.y < 0
-						&& centerY + IceBreaker.currentY > Constants.CANVAS_HEIGHT_FULL - Constants.CANVAS_HEIGHT / 2) {
+						&& centerY + ParallaxPhysicsEngine.currentY > Constants.CANVAS_HEIGHT_FULL - Constants.CANVAS_HEIGHT / 2) {
 			moveScreenY = 0;
 		}
 
-		IceBreaker.moveScreen(moveScreenX, moveScreenY);
+		ParallaxPhysicsEngine.moveScreen(moveScreenX, moveScreenY);
 
 	}
 
@@ -132,8 +132,8 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 		float centerY = getCenterY();
 
 		if (!(centerX > Constants.CANVAS_WIDTH
-				&& IceBreaker.currentX >= Constants.CANVAS_WIDTH_FULL - Constants.CANVAS_WIDTH
-				|| centerX < 0 && IceBreaker.currentX <= 0)) {
+				&& ParallaxPhysicsEngine.currentX >= Constants.CANVAS_WIDTH_FULL - Constants.CANVAS_WIDTH
+				|| centerX < 0 && ParallaxPhysicsEngine.currentX <= 0)) {
 			if (centerX > Constants.CANVAS_WIDTH) {
 				moveScreenX = Constants.CANVAS_WIDTH;
 			} else if (centerX < 0) {
@@ -142,8 +142,8 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 		}
 
 		if (!(centerY > Constants.CANVAS_HEIGHT
-				&& IceBreaker.currentY >= Constants.CANVAS_HEIGHT_FULL - Constants.CANVAS_HEIGHT
-				|| centerY < 0 && IceBreaker.currentY <= 0)) {
+				&& ParallaxPhysicsEngine.currentY >= Constants.CANVAS_HEIGHT_FULL - Constants.CANVAS_HEIGHT
+				|| centerY < 0 && ParallaxPhysicsEngine.currentY <= 0)) {
 			if (centerY > Constants.CANVAS_HEIGHT) {
 				moveScreenY = Constants.CANVAS_HEIGHT;
 			} else if (centerY < 0) {
@@ -151,7 +151,7 @@ public abstract class GameObjectSprite extends GameObjectAgile {
 			}
 		}
 
-		IceBreaker.moveScreen(moveScreenX, moveScreenY);
+		ParallaxPhysicsEngine.moveScreen(moveScreenX, moveScreenY);
 
 	}
 

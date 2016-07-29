@@ -1,11 +1,11 @@
-package se.BaseUlterior.GameObject.Aimed;
+package se.BaseUlterior.Entity.Processed;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-import se.BaseUlterior.GameObject.GameObjectAgile;
+import se.BaseUlterior.Entity.EntityAgile;
 import se.BaseUlterior.Geom.Vector2;
 
 /**
@@ -14,7 +14,7 @@ import se.BaseUlterior.Geom.Vector2;
  * @author Johan Akerlund
  */
 
-public abstract class ImagableObject extends GameObjectAgile {
+public abstract class ImagableObject extends EntityAgile {
 	protected Image rifleImageRight = null;
 	protected Image rifleImageLeft = null;
 	protected int imageHeight;

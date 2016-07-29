@@ -1,4 +1,4 @@
-package se.BaseUlterior.GameObject;
+package se.BaseUlterior.Entity;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -14,24 +14,19 @@ import se.BaseUlterior.Physics.ImpactForce;
  * 
  * @author Johan Akerlund
  */
-public class WorldBuilderForce extends WorldBuilder {
+public class PartForce extends Part {
 
 	protected float gravityY;
 	protected float gravityX;
 
-	public WorldBuilderForce(float[] nodes) {
-		super(nodes, false, true, false, false, false, true);
-		this.color = new Color(0, 1, 0, 0.19f);
-	}
-
-	public WorldBuilderForce(float[] nodes, float gravityX, float gravityY) {
+	public PartForce(float[] nodes, float gravityX, float gravityY) {
 		super(nodes, false, true, false, false, false, true);
 		this.gravityX = gravityX;
 		this.gravityY = gravityY;
 		this.color = new Color(0, 1, 0, 0.19f);
 	}
 
-	public WorldBuilderForce(float[] nodes, float gravityX, float gravityY, Color color) {
+	public PartForce(float[] nodes, float gravityX, float gravityY, Color color) {
 		super(nodes, false, true, false, false, false, true);
 		this.gravityX = gravityX;
 		this.gravityY = gravityY;
@@ -39,7 +34,7 @@ public class WorldBuilderForce extends WorldBuilder {
 	}
 
 	@Override
-	public Impact getImpact(GameObject piece) {
+	public Impact getImpact(Entity piece) {
 		return new ImpactForce(this, piece, gravityX, gravityY);
 	}
 

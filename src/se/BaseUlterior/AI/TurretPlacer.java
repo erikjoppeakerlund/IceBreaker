@@ -7,9 +7,9 @@ import org.newdawn.slick.geom.Circle;
 
 import se.BaseUlterior.Aim.AimBulletWeapon;
 import se.BaseUlterior.Config.Constants;
-import se.BaseUlterior.Game.IceBreaker;
-import se.BaseUlterior.GameObject.GameObject;
+import se.BaseUlterior.Entity.Entity;
 import se.BaseUlterior.Geom.Vector2;
+import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 
 /**
  * @author Johan Akerlund
@@ -25,7 +25,7 @@ public class TurretPlacer {
 
 	int nrOfTurrets = 0;
 
-	public void placeTurretsOnMe(GameObject groundPiece) {
+	public void placeTurretsOnMe(Entity groundPiece) {
 
 		SpriteSheet gunFire = null;
 		Image turretImage = null;
@@ -55,7 +55,7 @@ public class TurretPlacer {
 					AITurretBulletLauncher turretInLoop = new AITurretBulletLauncher(
 							new Circle(turretX, turretY, 60).getPoints(), direction.getPerpendicular(), gunFire,
 							turretImage);
-					IceBreaker.objsToAdd.add(turretInLoop);
+					ParallaxPhysicsEngine.objsToAdd.add(turretInLoop);
 					nrOfTurrets++;
 				}
 				beyond = turretsDistance - fullLength % turretsDistance;
@@ -63,6 +63,6 @@ public class TurretPlacer {
 				beyond -= fullLength;
 			}
 		}
-		IceBreaker.nrOfTurrets = nrOfTurrets;
+		ParallaxPhysicsEngine.nrOfTurrets = nrOfTurrets;
 	}
 }

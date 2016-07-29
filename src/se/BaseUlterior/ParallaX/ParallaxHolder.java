@@ -1,4 +1,4 @@
-package se.BaseUlterior.Game;
+package se.BaseUlterior.ParallaX;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +8,9 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-import se.BaseUlterior.GameObject.GameObject;
+import se.BaseUlterior.Entity.Entity;
 
-public class ParallaxHolder extends GameObject {
+public class ParallaxHolder extends Entity {
 	private List<Parallax> parallaxes;
 	protected Parallax startCity;
 
@@ -26,7 +26,7 @@ public class ParallaxHolder extends GameObject {
 				float[] edges = { 0, 0, 0, backgrounHeight, backgrounWidth, backgrounHeight, backgrounWidth, 0 };
 				Parallax parallaxStars = new Parallax(edges, Stars, 0.03f);
 				parallaxes.add(parallaxStars);
-				IceBreaker.parallaxBackground.add(parallaxStars);
+				ParallaxPhysicsEngine.parallaxBackground.add(parallaxStars);
 			} catch (SlickException e) {
 				e.printStackTrace();
 			}
@@ -38,7 +38,7 @@ public class ParallaxHolder extends GameObject {
 				float[] edges = { 0, 0, 0, backgrounHeight, backgrounWidth, backgrounHeight, backgrounWidth, 0 };
 				Parallax parallaxCityFar = new Parallax(edges, cityFar, 0.4f);
 				parallaxes.add(parallaxCityFar);
-				IceBreaker.parallaxBackground.add(parallaxCityFar);
+				ParallaxPhysicsEngine.parallaxBackground.add(parallaxCityFar);
 			} catch (SlickException e) {
 				e.printStackTrace();
 			}
@@ -50,7 +50,7 @@ public class ParallaxHolder extends GameObject {
 				float[] edges = { 0, 0, 0, backgrounHeight, backgrounWidth, backgrounHeight, backgrounWidth, 0 };
 				Parallax parallaxCity = new Parallax(edges, city, 0.5f);
 				parallaxes.add(parallaxCity);
-				IceBreaker.parallaxBackground.add(parallaxCity);
+				ParallaxPhysicsEngine.parallaxBackground.add(parallaxCity);
 			} catch (SlickException e) {
 				e.printStackTrace();
 			}
@@ -64,7 +64,7 @@ public class ParallaxHolder extends GameObject {
 				float[] edges = { 0, 0, 0, backgrounHeight, backgrounWidth, backgrounHeight, backgrounWidth, 0 };
 				Parallax parallaxClouds = new Parallax(edges, clouds, 1.8f);
 				parallaxes.add(parallaxClouds);
-				IceBreaker.parallaxBackground.add(parallaxClouds);
+				ParallaxPhysicsEngine.parallaxBackground.add(parallaxClouds);
 			} catch (SlickException e) {
 				e.printStackTrace();
 			}
@@ -78,7 +78,7 @@ public class ParallaxHolder extends GameObject {
 				float[] edges = { 0, 0, 0, backgrounHeight, backgrounWidth, backgrounHeight, backgrounWidth, 0 };
 				Parallax parallaxClouds = new Parallax(edges, clouds, 0.3f);
 				parallaxes.add(parallaxClouds);
-				IceBreaker.parallaxBackground.add(parallaxClouds);
+				ParallaxPhysicsEngine.parallaxBackground.add(parallaxClouds);
 			} catch (SlickException e) {
 				e.printStackTrace();
 			}

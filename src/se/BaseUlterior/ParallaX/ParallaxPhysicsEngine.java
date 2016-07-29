@@ -1,4 +1,4 @@
-package se.BaseUlterior.Game;
+package se.BaseUlterior.ParallaX;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +17,13 @@ import se.BaseUlterior.Actions.Action;
 import se.BaseUlterior.Actions.ActionListenablers;
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Context.InfoStats;
+import se.BaseUlterior.Entity.Entity;
+import se.BaseUlterior.Entity.EntityEmpty;
+import se.BaseUlterior.Entity.EntitySpriteControlledDesktop;
+import se.BaseUlterior.Entity.EntitySpriteControlledResponsive;
 import se.BaseUlterior.GUI.Alignment;
 import se.BaseUlterior.GUI.Stats;
 import se.BaseUlterior.GUI.ToolBox;
-import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.GameObjectEmpty;
-import se.BaseUlterior.GameObject.GameObjectSpriteDesktop;
-import se.BaseUlterior.GameObject.GameObjectSpriteMobile;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
 /**
@@ -31,7 +31,7 @@ import se.BaseUlterior.Utils.UlteriorUtils;
  * 
  * @author Johan Akerlund, but credibility to author of Slick2d
  */
-public class IceBreaker extends BasicGame {
+public class ParallaxPhysicsEngine extends BasicGame {
 
 	ActionListenablers actions = null;
 
@@ -39,7 +39,7 @@ public class IceBreaker extends BasicGame {
 
 	public static Action MODE_LATEST_ACTION = Action.ACTION_MODE_DESKTOP;
 
-	public IceBreaker(String title) {
+	public ParallaxPhysicsEngine(String title) {
 		super(title);
 
 	}
@@ -51,11 +51,11 @@ public class IceBreaker extends BasicGame {
 	public float patternWidth;
 	public float patternHeight;
 
-	public static List<GameObject> all = null;
+	public static List<Entity> all = null;
 
-	public static List<GameObject> objsToAdd = null;
+	public static List<Entity> objsToAdd = null;
 
-	public static List<GameObject> objsToRemove = null;
+	public static List<Entity> objsToRemove = null;
 
 	public static List<Parallax> parallaxBackground = null;
 
@@ -63,13 +63,13 @@ public class IceBreaker extends BasicGame {
 
 	private ToolBox toolbox;
 
-	public static InfoStats gameInfo = new InfoStats();
+	public static InfoStats gameInfo;
 
 	private Stats stats;
 
 	public static float currentX = 0;
 	public static float currentY = 0;
-	public static GameObject wholeSceene = null;
+	public static Entity wholeSceene = null;
 
 	ParallaxHolder parallaxHolderBackground;
 	ParallaxHolder parallaxHolderForground;
@@ -78,7 +78,7 @@ public class IceBreaker extends BasicGame {
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 
 		parallaxHolderBackground.render(container, graphics);
-		for (GameObject go : IceBreaker.all) {
+		for (Entity go : ParallaxPhysicsEngine.all) {
 			if (UlteriorUtils.isWithinRange(go, wholeSceene) || go.forceRender) {
 				go.render(container, graphics);
 			}
@@ -87,9 +87,9 @@ public class IceBreaker extends BasicGame {
 		graphics.setBackground(Color.darkGray);
 	}
 
-	private static GameObject sprite;
-	private static GameObject spriteMobile;
-	private static GameObject spriteDesktop;
+	private static Entity sprite;
+	private static Entity spriteMobile;
+	private static Entity spriteDesktop;
 
 	public static int nrOfTurrets;
 	private int startTime = 0;
@@ -102,27 +102,29 @@ public class IceBreaker extends BasicGame {
 
 		parallaxBackground = new ArrayList<>();
 		parallaxForground = new ArrayList<>();
-		IceBreaker.all = new ArrayList<>();
-		IceBreaker.objsToAdd = new ArrayList<>();
+		ParallaxPhysicsEngine.all = new ArrayList<>();
+		ParallaxPhysicsEngine.objsToAdd = new ArrayList<>();
 		objsToRemove = new ArrayList<>();
 
-		wholeSceene = new GameObjectEmpty(new float[] { 0, 0, 0, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH,
+		wholeSceene = new EntityEmpty(new float[] { 0, 0, 0, Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH,
 				Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0 });
-		IceBreaker.objsToAdd.add(wholeSceene);
+		ParallaxPhysicsEngine.objsToAdd.add(wholeSceene);
 
 		parallaxHolderBackground = new ParallaxHolder(2);
 		parallaxHolderForground = new ParallaxHolder(1);
 
+		gameInfo = new InfoStats();
+
 		LevelDummy levelDummy = new LevelDummy();
 
-		GroundMap requiredWallBuilderObjects = new GroundMap();
+		MapEssentials requiredWallBuilderObjects = new MapEssentials();
 		all.addAll(requiredWallBuilderObjects.getLevelPieces());
 
-		IceBreaker.objsToAdd.addAll(levelDummy.levelPieces);
+		ParallaxPhysicsEngine.objsToAdd.addAll(levelDummy.levelPieces);
 
 		TurretPlacer turretPlacer = new TurretPlacer();
 		//
-		for (GameObject groundPiece : levelDummy.levelPieces) {
+		for (Entity groundPiece : levelDummy.levelPieces) {
 			if (!groundPiece.piercable) {
 				turretPlacer.placeTurretsOnMe(groundPiece);
 			}
@@ -132,11 +134,11 @@ public class IceBreaker extends BasicGame {
 		toolbox = new ToolBox(Alignment.LEFT);
 		toolbox.pack();
 		stats = new Stats();
-		IceBreaker.objsToAdd.add(stats);
-		spriteDesktop = new GameObjectSpriteDesktop();
-		spriteMobile = new GameObjectSpriteMobile();
+		ParallaxPhysicsEngine.objsToAdd.add(stats);
+		spriteDesktop = new EntitySpriteControlledDesktop();
+		spriteMobile = new EntitySpriteControlledResponsive();
 		sprite = spriteDesktop;
-		IceBreaker.objsToAdd.add(sprite);
+		ParallaxPhysicsEngine.objsToAdd.add(sprite);
 		// actions = new ActionListenablers();
 
 	}
@@ -150,7 +152,7 @@ public class IceBreaker extends BasicGame {
 		if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
 			container.setPaused(!container.isPaused());
 		}
-		for (GameObject go : IceBreaker.all) {
+		for (Entity go : ParallaxPhysicsEngine.all) {
 			// if (UlteriorUtils.isWithinRange(go, sprite) || go.forceUpdate) {
 			if (UlteriorUtils.isWithinRange(go, wholeSceene) || go.forceUpdate) {
 				go.update(container, delta);
@@ -167,7 +169,7 @@ public class IceBreaker extends BasicGame {
 	}
 
 	public static void main(String[] s) throws SlickException {
-		AppGameContainer appGameContainer = new AppGameContainer(new IceBreaker("ParallaX"));
+		AppGameContainer appGameContainer = new AppGameContainer(new ParallaxPhysicsEngine("ParallaX"));
 		int maxFPS = 60;
 		appGameContainer.setTargetFrameRate(maxFPS);
 		appGameContainer.setDisplayMode((int) Constants.CANVAS_WIDTH, (int) Constants.CANVAS_HEIGHT, true);
@@ -182,7 +184,7 @@ public class IceBreaker extends BasicGame {
 		for (Parallax parallax : parallaxBackground) {
 			parallax.moveParallax(currentX, currentY);
 		}
-		for (GameObject go : IceBreaker.all) {
+		for (Entity go : ParallaxPhysicsEngine.all) {
 			if (!go.isBackgroundObj) {
 				go.setX(go.getX() - x);
 			}

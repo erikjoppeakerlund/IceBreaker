@@ -7,15 +7,15 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Shape;
 
-import se.BaseUlterior.Game.IceBreaker;
-import se.BaseUlterior.GameObject.GameObject;
+import se.BaseUlterior.Entity.Entity;
+import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 import se.BaseUlterior.Physics.Impact;
 
 /**
  * @author Johan Akerlund
  */
 
-public abstract class Component extends GameObject {
+public abstract class Component extends Entity {
 
 	protected boolean hide = false;
 
@@ -58,7 +58,7 @@ public abstract class Component extends GameObject {
 	public void add(Component component) {
 		this.subs.add(component);
 		this.stack();
-		IceBreaker.objsToAdd.add(component);
+		ParallaxPhysicsEngine.objsToAdd.add(component);
 	}
 
 	private void checkStacking() {
@@ -175,7 +175,7 @@ public abstract class Component extends GameObject {
 	}
 
 	@Override
-	public Impact getImpact(GameObject agileObject) {
+	public Impact getImpact(Entity agileObject) {
 		// TODO Auto-generated method stub
 		return null;
 	}

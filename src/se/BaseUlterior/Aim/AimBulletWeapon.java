@@ -5,10 +5,9 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-import se.BaseUlterior.Game.IceBreaker;
-import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.GameObjectExplosion;
-import se.BaseUlterior.GameObject.GameObjectRicochet;
+import se.BaseUlterior.Entity.Entity;
+import se.BaseUlterior.Entity.EntityRicochet;
+import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 
 /**
  * Abstract aim class which handles all sub aim classes which do not produce any
@@ -18,26 +17,20 @@ import se.BaseUlterior.GameObject.GameObjectRicochet;
  */
 public abstract class AimBulletWeapon extends Aim {
 
-	protected Image rifleImageRight = null;
-	protected Image rifleImageLeft = null;
-	protected int imageHeight;
-	protected int imageWidth;
+	private Image rifleImageRight = null;
+	private Image rifleImageLeft = null;
+	private int imageHeight;
+	private int imageWidth;
 	public static final float IMAGE_SCALE_STANDARD = 0.26f;
 
 	protected float startShotX;
 	protected float startShotY;
 
-	protected float startGunFireImageAtX;
-	protected float startGunFireImageAtY;
-
 	protected int gunFireFrameWidth;
 	protected int gunFireFrameHeight;
 
-	protected int shotRayFrames;
-
 	protected float weight = 1.0f;
 	private float imageScale;
-	protected GameObjectExplosion recoil;
 
 	protected float recoilPower = 0;
 
@@ -98,9 +91,9 @@ public abstract class AimBulletWeapon extends Aim {
 	protected void wasShoot() {
 		wasJustShoot = true;
 		armLengt -= BACK_FIRE;
-		GameObject ricochet = new GameObjectRicochet(pointBlank, gunFireStartAtX, gunFireStartAtY, aimAtX, aimAtY,
-				weight, damage);
-		IceBreaker.objsToAdd.add(ricochet);
+		Entity ricochet = new EntityRicochet(pointBlank, gunFireStartAtX, gunFireStartAtY, aimAtX, aimAtY, weight,
+				damage);
+		ParallaxPhysicsEngine.objsToAdd.add(ricochet);
 	}
 
 	@Override
@@ -144,32 +137,6 @@ public abstract class AimBulletWeapon extends Aim {
 			rifleImageLeft.draw(xGrip - imageWidth / 2, yGrip - imageHeight / 2);
 		}
 
-	}
-
-	protected void updateAim() {
-		float xTarget = xGrip;
-		float yTarget = yGrip;
-		boolean notFound = true;
-		int STEP = 8;
-		while (notFound) {
-			xTarget += arm.x * STEP;
-			yTarget += arm.y * STEP;
-			for (GameObject go : IceBreaker.all) {
-				if (go.contains(xTarget, yTarget) && !(go.piercable)) {
-					aimAtX = xTarget;
-					aimAtY = yTarget;
-					notFound = false;
-					if (pointBlank != go) {
-						if (pointBlank != null && !pointBlank.isRotatingObject) {
-							pointBlank.forceUpdate = false;
-						}
-						go.forceUpdate = true;
-					}
-					pointBlank = go;
-					break;
-				}
-			}
-		}
 	}
 
 }

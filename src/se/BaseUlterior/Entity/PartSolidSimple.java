@@ -1,13 +1,13 @@
-package se.BaseUlterior.GameObject;
+package se.BaseUlterior.Entity;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Shape;
 
-public class WorldBuilderGroundSolid extends WorldBuilderGround {
+public class PartSolidSimple extends PartSolid {
 
-	public WorldBuilderGroundSolid(float[] nodes) {
+	public PartSolidSimple(float[] nodes) {
 		super(nodes, 2.3f);
 		this.color = Color.transparent;
 		motionLess = true;

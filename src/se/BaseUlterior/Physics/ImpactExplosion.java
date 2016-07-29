@@ -1,9 +1,9 @@
 package se.BaseUlterior.Physics;
 
 import se.BaseUlterior.Config.Constants;
-import se.BaseUlterior.Game.IceBreaker;
-import se.BaseUlterior.GameObject.GameObject;
+import se.BaseUlterior.Entity.Entity;
 import se.BaseUlterior.Geom.Vector2;
+import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 
 /**
  * Affect the other game objects' motion vector as a 'punch'.
@@ -16,7 +16,7 @@ public class ImpactExplosion extends Impact {
 	private float size;
 	private float bumpEffect;
 
-	public ImpactExplosion(GameObject origin, GameObject other, float damage, float size, float bumpEffect) {
+	public ImpactExplosion(Entity origin, Entity other, float damage, float size, float bumpEffect) {
 		super(origin, other);
 		returnValue = new Vector2();
 		this.size = size;
@@ -25,7 +25,7 @@ public class ImpactExplosion extends Impact {
 		}
 		this.bumpEffect = bumpEffect;
 		if (other.START_HP == Constants.MAIN_CHARACTER_START_LIFE) {
-			IceBreaker.gameInfo.setHP(other.HP);
+			ParallaxPhysicsEngine.gameInfo.setHP(other.HP);
 		}
 
 	}

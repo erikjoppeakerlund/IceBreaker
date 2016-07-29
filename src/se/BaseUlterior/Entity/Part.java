@@ -1,4 +1,4 @@
-package se.BaseUlterior.GameObject;
+package se.BaseUlterior.Entity;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -11,9 +11,9 @@ import se.BaseUlterior.Physics.Impact;
  * 
  * @author Johan Akerlund
  */
-public abstract class WorldBuilder extends GameObject {
+public abstract class Part extends Entity {
 
-	protected WorldBuilder(float[] points, boolean isBackgroundObj, boolean invisible, boolean isRotatingObject,
+	protected Part(float[] points, boolean isBackgroundObj, boolean invisible, boolean isRotatingObject,
 			boolean forceUpdate, boolean forceRender, boolean isSolid) {
 		super(points, isBackgroundObj, invisible, isRotatingObject, forceUpdate, forceRender, isSolid);
 		// TODO Auto-generated constructor stub
@@ -30,5 +30,5 @@ public abstract class WorldBuilder extends GameObject {
 	}
 
 	@Override
-	public abstract Impact getImpact(GameObject piece);
+	public abstract Impact getImpact(Entity piece);
 }

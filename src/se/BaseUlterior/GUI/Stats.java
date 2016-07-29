@@ -7,7 +7,7 @@ import org.newdawn.slick.Graphics;
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Context.SingleText;
 import se.BaseUlterior.Context.StatsObserver;
-import se.BaseUlterior.Game.IceBreaker;
+import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 
 /**
  * @author Johan Akerlund
@@ -35,7 +35,7 @@ public class Stats extends Component {
 		padding = 29;
 		color = colorAlpha;
 		stats = new StatsObserver(padding, 0);
-		IceBreaker.gameInfo.addObserver(stats);
+		ParallaxPhysicsEngine.gameInfo.addObserver(stats);
 	}
 
 	public void setTime(int sec) {

@@ -1,12 +1,12 @@
-package se.BaseUlterior.Game;
+package se.BaseUlterior.ParallaX;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-import se.BaseUlterior.GameObject.GameObject;
+import se.BaseUlterior.Entity.Entity;
 
-public class Parallax extends GameObject {
+public class Parallax extends Entity {
 	private static final long serialVersionUID = -8657229360844031751L;
 	float parallaxEffect;
 	Image image;

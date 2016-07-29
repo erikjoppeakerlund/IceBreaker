@@ -1,13 +1,13 @@
-package se.BaseUlterior.GameObject.Aimed;
+package se.BaseUlterior.Entity.Processed;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
 import se.BaseUlterior.Config.Constants;
-import se.BaseUlterior.Game.IceBreaker;
-import se.BaseUlterior.GameObject.GameObject;
+import se.BaseUlterior.Entity.Entity;
 import se.BaseUlterior.Geom.Vector2;
+import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactBounce;
 import se.BaseUlterior.Utils.UlteriorUtils;
@@ -27,7 +27,7 @@ public class Grenade extends ImagableObject {
 
 	protected final long TIME_UNTIL_EXPLOTION = 1380;
 
-	protected GameObject explotionShape = null;
+	protected Entity explotionShape = null;
 
 	protected int sizeOfExplostion = Constants.GRENADE_SIZE_OF_EXPLOSION;
 
@@ -54,7 +54,7 @@ public class Grenade extends ImagableObject {
 		if (System.currentTimeMillis() - wasReleasedAt > TIME_UNTIL_EXPLOTION) {
 			UlteriorUtils.removeGround(getCenterX(), getCenterY(), Constants.WEAPON_EFFECT_GRENADE, sizeOfExplostion,
 					0.9f);
-			IceBreaker.objsToRemove.add(this);
+			ParallaxPhysicsEngine.objsToRemove.add(this);
 		} else {
 			super.update(container, delta);
 		}
@@ -62,7 +62,7 @@ public class Grenade extends ImagableObject {
 	}
 
 	@Override
-	public Impact getImpact(GameObject other) {
+	public Impact getImpact(Entity other) {
 		return new ImpactBounce(this, other, bounciness, true);
 	}
 

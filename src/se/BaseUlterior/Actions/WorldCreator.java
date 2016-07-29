@@ -5,29 +5,29 @@ import java.lang.reflect.InvocationTargetException;
 import org.newdawn.slick.Input;
 
 import se.BaseUlterior.Config.Constants;
-import se.BaseUlterior.Game.IceBreaker;
-import se.BaseUlterior.GameObject.GameObject;
-import se.BaseUlterior.GameObject.WorldBuilderForce;
-import se.BaseUlterior.GameObject.WorldBuilderGround;
-import se.BaseUlterior.GameObject.WorldBuilderLiquid;
+import se.BaseUlterior.Entity.Entity;
+import se.BaseUlterior.Entity.PartForce;
+import se.BaseUlterior.Entity.PartFriction;
+import se.BaseUlterior.Entity.PartSolid;
+import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 import se.BaseUlterior.Physics.Density;
 
 public class WorldCreator implements ActionListenable {
 
 	private boolean choosingState = false;
 
-	private GameObject wb = null;
-	private GameObject wbl = null;
-	private GameObject wbf = null;
+	private Entity wb = null;
+	private Entity wbl = null;
+	private Entity wbf = null;
 
-	GameObject currentBuilder = null;
+	Entity currentBuilder = null;
 
 	public WorldCreator() {
-		wb = new WorldBuilderGround(new float[0]);
-		wbl = new WorldBuilderLiquid(new float[0], Density.WATER);
-		wbf = new WorldBuilderForce(new float[0], 0.0f, 0.0f);
+		wb = new PartSolid(new float[0]);
+		wbl = new PartFriction(new float[0], Density.WATER);
+		wbf = new PartForce(new float[0], 0.0f, 0.0f);
 		currentBuilder = wb;
-		IceBreaker.objsToAdd.add(currentBuilder);
+		ParallaxPhysicsEngine.objsToAdd.add(currentBuilder);
 
 	}
 
@@ -44,8 +44,8 @@ public class WorldCreator implements ActionListenable {
 
 	private void betweenCreationHandler() {
 
-		Class<? extends GameObject> currentInstance = currentBuilder.getClass();
-		GameObject newCurrentInstance = null;
+		Class<? extends Entity> currentInstance = currentBuilder.getClass();
+		Entity newCurrentInstance = null;
 		try {
 			newCurrentInstance = currentInstance.getDeclaredConstructor(float[].class).newInstance(new float[0]);
 		} catch (InstantiationException e) {
@@ -67,7 +67,7 @@ public class WorldCreator implements ActionListenable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		IceBreaker.objsToAdd.add(newCurrentInstance);
+		ParallaxPhysicsEngine.objsToAdd.add(newCurrentInstance);
 		currentBuilder = newCurrentInstance;
 	}
 
@@ -89,31 +89,31 @@ public class WorldCreator implements ActionListenable {
 			switch (button) {
 			case Input.KEY_1:
 				currentBuilder = wb;
-				IceBreaker.objsToAdd.add(currentBuilder);
+				ParallaxPhysicsEngine.objsToAdd.add(currentBuilder);
 				break;
 			case Input.KEY_2:
 				currentBuilder = wbl;
-				IceBreaker.objsToAdd.add(currentBuilder);
+				ParallaxPhysicsEngine.objsToAdd.add(currentBuilder);
 				break;
 			case Input.KEY_3:
 				currentBuilder = wbf;
-				IceBreaker.objsToAdd.add(currentBuilder);
+				ParallaxPhysicsEngine.objsToAdd.add(currentBuilder);
 				break;
 			}
 		} else {
-			if (currentBuilder instanceof WorldBuilderLiquid) {
+			if (currentBuilder instanceof PartFriction) {
 				switch (button) {
 				case Input.KEY_1:
-					((WorldBuilderLiquid) currentBuilder).setDensity(Density.WATER);
+					((PartFriction) currentBuilder).setDensity(Density.WATER);
 					break;
 				case Input.KEY_2:
-					((WorldBuilderLiquid) currentBuilder).setDensity(Density.GREECE);
+					((PartFriction) currentBuilder).setDensity(Density.GREECE);
 					break;
 				case Input.KEY_3:
-					((WorldBuilderLiquid) currentBuilder).setDensity(Density.SOIL);
+					((PartFriction) currentBuilder).setDensity(Density.SOIL);
 					break;
 				case Input.KEY_4:
-					((WorldBuilderLiquid) currentBuilder).setDensity(Density.MUDD);
+					((PartFriction) currentBuilder).setDensity(Density.MUDD);
 					break;
 				}
 			}
