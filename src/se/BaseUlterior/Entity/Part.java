@@ -16,7 +16,6 @@ public abstract class Part extends Entity {
 	protected Part(float[] points, boolean isBackgroundObj, boolean invisible, boolean isRotatingObject,
 			boolean forceUpdate, boolean forceRender, boolean isSolid) {
 		super(points, isBackgroundObj, invisible, isRotatingObject, forceUpdate, forceRender, isSolid);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package se.BaseUlterior.Entity;
 
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.geom.Shape;
 
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactBounce;
@@ -26,8 +25,8 @@ public abstract class EntityAgile extends Materia {
 	@Override
 	public void update(GameContainer container, int delta) {
 		super.update(container, delta);
-		setCenterX(getCenterX() + this.motion.getX() * delta);
-		setCenterY(getCenterY() + this.motion.getY() * delta);
+		setX(getX() + this.motion.x * delta);
+		setY(getY() + this.motion.y * delta);
 	}
 
 	@Override
@@ -41,11 +40,6 @@ public abstract class EntityAgile extends Materia {
 
 	public void addImpact(Impact im) {
 		currentImpacts.add(im);
-	}
-
-	@Override
-	public Shape[] subtract(Shape other) {
-		return new Shape[0];
 	}
 
 }

@@ -107,7 +107,7 @@ public abstract class Button extends Component {
 	}
 
 	public Color getIsActiveColor(boolean active) {
-		return active ? Color.lightGray : Color.lightGray;
+		return active ? Color.white : Color.lightGray;
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public abstract class Button extends Component {
 		super.render(container, graphics);
 		if (isPaused) {
 			graphics.setLineWidth(1);
-			graphics.setColor(Color.black);
+			graphics.setColor(Color.white);
 			graphics.draw(this);
 			label.drawString();
 			graphics.resetLineWidth();

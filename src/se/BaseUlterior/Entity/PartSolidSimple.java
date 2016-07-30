@@ -3,7 +3,6 @@ package se.BaseUlterior.Entity;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.geom.Shape;
 
 public class PartSolidSimple extends PartSolid {
 
@@ -11,11 +10,6 @@ public class PartSolidSimple extends PartSolid {
 		super(nodes, 2.3f);
 		this.color = Color.transparent;
 		motionLess = true;
-	}
-
-	@Override
-	public Shape[] subtract(Shape other) {
-		return new Shape[0];
 	}
 
 	@Override

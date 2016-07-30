@@ -10,7 +10,6 @@ import org.newdawn.slick.geom.Circle;
 
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
-import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
 /**
@@ -31,23 +30,22 @@ public class EntityRicochet extends Entity {
 	private float aimAtX;
 	private float aimAtY;
 	private Color rayColor = new Color(0.61f, 0.61f, 0.61f);
-	private float weight;
 	private float startX;
 	private float startY;
+	private final float SIZE_OF_EXPLOSION = 24f;
 
-	public EntityRicochet(Entity target, float gunFireStartAtX, float gunFireStartAtY, float aimAtX,
-			float aimAtY, float weight, float damage) {
+	public EntityRicochet(Entity target, float gunFireStartAtX, float gunFireStartAtY, float aimAtX, float aimAtY,
+			float weight, float damage) {
 		super(new float[] { aimAtX, aimAtY }, false, true, false, true, true, true);
 		this.target = target;
 		this.gunFireStartAtX = gunFireStartAtX;
 		this.gunFireStartAtY = gunFireStartAtY;
 		this.aimAtX = aimAtX;
 		this.aimAtY = aimAtY;
-		this.weight = weight;
 		this.LIFE_SPAN_LIMIT *= weight;
 		startX = getX();
 		startY = getY();
-		UlteriorUtils.removeGroundInvisible(aimAtX, aimAtY, damage, 24f, 0);
+		UlteriorUtils.removeGroundInvisible(aimAtX, aimAtY, damage, SIZE_OF_EXPLOSION, 0);
 		piercable = true;
 		if (!target.motionLess) {
 			rate = 2;
@@ -70,10 +68,10 @@ public class EntityRicochet extends Entity {
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
 		rayColor.a = 1f - (float) lifeSpan / (float) LIFE_SPAN_LIMIT;
-		graphics.setColor(rayColor);
-		// graphics.setLineWidth(weight * 2f);
 		float newX = getX();
 		float newY = getY();
+		graphics.setColor(rayColor);
+		// graphics.setLineWidth(weight * 2f);
 		graphics.drawLine(gunFireStartAtX + newX - startX, gunFireStartAtY + newY - startY, aimAtX + newX - startX,
 				aimAtY + newY - startY);
 		graphics.resetLineWidth();
@@ -108,19 +106,12 @@ public class EntityRicochet extends Entity {
 		N.scale(dot);
 		angled.sub(N);
 		angled.scale(2f);
-		if (!target.motionLess) {
-			EntitySplinter random = new EntitySplinter(this.getCenterX(), this.getCenterY(), angled, true);
-			ParallaxPhysicsEngine.objsToAdd.add(random);
-		} else {
-			EntitySplinter random = new EntitySplinter(this.getCenterX(), this.getCenterY(), angled, false);
-			ParallaxPhysicsEngine.objsToAdd.add(random);
-		}
 
-	}
+		boolean blood = target.motionLess || target.isRotatingObject ? false : true;
 
-	@Override
-	public Impact getImpact(Entity agileObject) {
-		return null;
+		EntitySplinter random = new EntitySplinter(this.getCenterX(), this.getCenterY(), angled, blood);
+		ParallaxPhysicsEngine.objsToAdd.add(random);
+
 	}
 
 }

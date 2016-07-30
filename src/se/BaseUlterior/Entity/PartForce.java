@@ -14,7 +14,7 @@ import se.BaseUlterior.Physics.ImpactForce;
  * 
  * @author Johan Akerlund
  */
-public class PartForce extends Part {
+public class PartForce extends Entity {
 
 	protected float gravityY;
 	protected float gravityX;

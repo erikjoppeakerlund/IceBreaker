@@ -1,7 +1,8 @@
 package se.BaseUlterior.Entity;
 
 import org.newdawn.slick.Color;
-import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 
 import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Physics.Density;
@@ -14,7 +15,7 @@ import se.BaseUlterior.Physics.ImpactFriction;
  * 
  * @author Johan Akerlund
  */
-public class PartFriction extends Part {
+public class PartFriction extends Entity {
 
 	Density density;
 
@@ -36,6 +37,7 @@ public class PartFriction extends Part {
 	public PartFriction(float[] nodes, Density density, boolean isBackground) {
 		super(nodes, false, true, false, false, false, true);
 		this.density = density;
+		piercable = true;
 		init();
 	}
 
@@ -69,18 +71,23 @@ public class PartFriction extends Part {
 	}
 
 	@Override
-	public Impact getImpact(Entity piece) {
-		return new ImpactFriction(this, piece, frictionAmount);
+	public void render(GameContainer container, Graphics graphics) {
+		graphics.setColor(this.color);
+		graphics.fill(this);
 	}
 
 	@Override
-	public Shape[] subtract(Shape other) {
-		return new Shape[0];
+	public Impact getImpact(Entity piece) {
+		return new ImpactFriction(this, piece, frictionAmount);
 	}
 
 	public void setDensity(Density density) {
 		this.density = density;
 		init();
+	}
+
+	@Override
+	public void update(GameContainer container, int arg) {
 	}
 
 }

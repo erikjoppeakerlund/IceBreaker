@@ -31,6 +31,8 @@ public class Grenade extends ImagableObject {
 
 	protected int sizeOfExplostion = Constants.GRENADE_SIZE_OF_EXPLOSION;
 
+	private final float GRENADE_BUMP_EFFECT = 0.9f;
+
 	public Grenade(float[] nodes) {
 		super(nodes, BOUNCINESS, "res/img/grenade.png");
 		color = Color.darkGray;
@@ -53,7 +55,7 @@ public class Grenade extends ImagableObject {
 		}
 		if (System.currentTimeMillis() - wasReleasedAt > TIME_UNTIL_EXPLOTION) {
 			UlteriorUtils.removeGround(getCenterX(), getCenterY(), Constants.WEAPON_EFFECT_GRENADE, sizeOfExplostion,
-					0.9f);
+					GRENADE_BUMP_EFFECT);
 			ParallaxPhysicsEngine.objsToRemove.add(this);
 		} else {
 			super.update(container, delta);

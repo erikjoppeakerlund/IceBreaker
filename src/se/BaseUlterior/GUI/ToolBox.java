@@ -17,12 +17,13 @@ public class ToolBox extends Component {
 
 	private List<Button> buttons = null;
 
-	private static final int styleHeigth = 200;
+	private static final int styleHeigth = 149;
 	private static final int styleWidth = 550;
 
 	private final static int tabSize = 50;
 
-	Color colorAlpha = new Color(0.7f, 0.7f, 0.8f, 0.39f);
+	// Color colorAlpha = new Color(0.7f, 0.7f, 0.8f, 0.39f);
+	Color colorAlpha = new Color(0.0f, 0.0f, 0.0f, 0.59f);
 
 	public ToolBox(Alignment alignment) {
 		super(new float[] { 0, 0, styleWidth, 0, styleWidth, styleHeigth - tabSize, styleWidth - tabSize, styleHeigth,
@@ -71,17 +72,9 @@ public class ToolBox extends Component {
 
 			}
 		});
-		buttons.add(new Button("(CHEET)", Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT, false) {
 
-			@Override
-			public void onClick() {
-				// TODO Auto-generated method stub
-
-			}
-		});
-
-		buttons.add(new Button(ParallaxPhysicsEngine.MODE_LATEST_ACTION.toString(), Button.PREFERED_WIDTH, Button.PREFERED_HEIGHT,
-				true) {
+		buttons.add(new Button(ParallaxPhysicsEngine.MODE_LATEST_ACTION.toString(), Button.PREFERED_WIDTH,
+				Button.PREFERED_HEIGHT, true) {
 
 			@Override
 			public void onClick() {

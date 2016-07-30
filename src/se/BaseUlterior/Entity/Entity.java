@@ -25,8 +25,8 @@ import se.BaseUlterior.Physics.Impact;
 
 public abstract class Entity extends Polygon {
 
-	protected List<Impact> currentImpacts = null;
-	protected List<Impact> impactsToRemove = new ArrayList<>();
+	protected List<Impact> currentImpacts;
+	protected List<Impact> impactsToRemove;
 	protected Color color;
 	protected Vector2 motion = null;
 	public int maxRadiusStart;
@@ -47,6 +47,7 @@ public abstract class Entity extends Polygon {
 
 	private void init() {
 		currentImpacts = new ArrayList<>();
+		impactsToRemove = new ArrayList<>();
 		motion = new Vector2();
 		maxRadiusStart = (int) getBoundingCircleRadius();
 	}

@@ -132,6 +132,7 @@ public class ParallaxPhysicsEngine extends BasicGame {
 		// AIBot bot = new AIBot(41f);
 		// IceBreaker.objsToAdd.add(bot);
 		toolbox = new ToolBox(Alignment.LEFT);
+		ParallaxPhysicsEngine.objsToAdd.add(toolbox);
 		toolbox.pack();
 		stats = new Stats();
 		ParallaxPhysicsEngine.objsToAdd.add(stats);
@@ -145,6 +146,7 @@ public class ParallaxPhysicsEngine extends BasicGame {
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
+		container.setShowFPS(false);
 		if (!container.isPaused()) {
 			startTime += delta;
 			stats.setTime(startTime / 1000);

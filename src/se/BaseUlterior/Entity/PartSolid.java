@@ -37,13 +37,6 @@ public class PartSolid extends Materia {
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
 		super.render(container, graphics);
-		// graphics.fill(this, fill);
-		// if (points.length > 0) {
-		// graphics.setLineWidth(Constants.LINE_WIDTH);
-		// graphics.setColor(Color.white);
-		// graphics.draw(this);
-		// graphics.resetLineWidth();
-		// }
 	}
 
 }

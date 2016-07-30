@@ -63,7 +63,7 @@ public abstract class Materia extends Part {
 	protected void checkImpact() {
 		for (Entity go : ParallaxPhysicsEngine.all) {
 
-			if (go == this || (go.motionLess && this.motionLess) || go.isBackgroundObj) {
+			if (go == this || (go.motionLess && this.motionLess) || go.isBackgroundObj || isBackgroundObj) {
 				continue;
 			}
 

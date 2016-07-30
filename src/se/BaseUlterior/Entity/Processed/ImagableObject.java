@@ -15,8 +15,7 @@ import se.BaseUlterior.Geom.Vector2;
  */
 
 public abstract class ImagableObject extends EntityAgile {
-	protected Image rifleImageRight = null;
-	protected Image rifleImageLeft = null;
+	protected Image grenadeImage = null;
 	protected int imageHeight;
 	protected int imageWidth;
 	protected float drawX;
@@ -30,11 +29,11 @@ public abstract class ImagableObject extends EntityAgile {
 
 	private void init(String pathToImage) {
 		try {
-			rifleImageRight = new Image(pathToImage);
-			// rifleImageRight.bind();
-			imageHeight = (int) (rifleImageRight.getHeight());
-			imageWidth = (int) (rifleImageRight.getWidth());
-			rifleImageRight.setCenterOfRotation((imageWidth / 2), (imageHeight / 2));
+			grenadeImage = new Image(pathToImage);
+			grenadeImage.bind();
+			imageHeight = (int) (grenadeImage.getHeight());
+			imageWidth = (int) (grenadeImage.getWidth());
+			grenadeImage.setCenterOfRotation((imageWidth / 2), (imageHeight / 2));
 
 		} catch (SlickException e) {
 			e.printStackTrace();
@@ -55,8 +54,8 @@ public abstract class ImagableObject extends EntityAgile {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
-		rifleImageRight.setRotation((float) angle.getTheta());
-		rifleImageRight.draw(getCenterX() - imageWidth / 2, y);
+		grenadeImage.setRotation((float) angle.getTheta());
+		grenadeImage.draw(getCenterX() - imageWidth / 2, y);
 	}
 
 }

@@ -3,7 +3,6 @@ package se.BaseUlterior.Entity;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.geom.Shape;
 
 import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 import se.BaseUlterior.Physics.Impact;
@@ -44,7 +43,7 @@ public class EntityExplosion extends Entity {
 
 	@Override
 	public Impact getImpact(Entity agileObject) {
-		return new ImpactExplosion(this, agileObject, power, getBoundingCircleRadius(), bumpEffect);
+		return new ImpactExplosion(this, agileObject, power, maxRadiusStart, bumpEffect);
 	}
 
 	@Override
@@ -62,11 +61,6 @@ public class EntityExplosion extends Entity {
 			graphics.setColor(this.color);
 			graphics.fill(this);
 		}
-	}
-
-	@Override
-	public Shape[] subtract(Shape other) {
-		return new Shape[0];
 	}
 
 }
