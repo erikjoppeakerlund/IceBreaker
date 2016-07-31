@@ -26,6 +26,7 @@ public class AimShotGun extends AimBulletWeapon {
 		recoilPower = 0.2f;
 		damage = Constants.WEAPON_EFFECT_SHOTGUN;
 		slug = "SHOT GUN";
+		initFireVectors();
 	}
 
 	@Override
@@ -48,8 +49,9 @@ public class AimShotGun extends AimBulletWeapon {
 	public void render(GameContainer container, Graphics graphics) {
 		super.render(container, graphics);
 		if (animationsIsDrawn) {
-			gunFire.getCurrentFrame().setRotation((float) arm.getTheta() + 65);
-			gunFire.draw(gunFireStartAtX - gunFireFrameWidth / 2, gunFireStartAtY - gunFireFrameHeight / 2);
+			gunFire.getCurrentFrame().setRotation((float) theta + 65);
+			gunFire.draw((spriteX + gunFireStartAt.x) - gunFireFrameWidth / 2,
+					(spriteY + gunFireStartAt.y) - gunFireFrameHeight / 2);
 		}
 	}
 
@@ -68,17 +70,17 @@ public class AimShotGun extends AimBulletWeapon {
 		boolean notFound = true;
 		for (int i = 0; i < nrOfShots; i++) {
 			Vector2 randomAngle = arm.copy();
-			randomAngle.setTheta(arm.getTheta() + (Math.random() * 28f - 14f));
-			float xTarget = xGrip;
-			float yTarget = yGrip;
+			randomAngle.setTheta(theta + (Math.random() * 28f - 14f));
+			float xTarget = spriteX + grip.x;
+			float yTarget = spriteY + grip.y;
 			notFound = true;
 			while (notFound) {
 				xTarget += randomAngle.x * STEP;
 				yTarget += randomAngle.y * STEP;
 				for (Entity go : ParallaxPhysicsEngine.all) {
 					if (go.contains(xTarget, yTarget) && !go.piercable) {
-						Entity ricochet = new EntityRicochet(go, gunFireStartAtX, gunFireStartAtY, xTarget, yTarget,
-								0.49f, damage);
+						Entity ricochet = new EntityRicochet(go, spriteX + gunFireStartAt.x, spriteY + gunFireStartAt.y,
+								xTarget, yTarget, 0.49f, damage);
 						ParallaxPhysicsEngine.objsToAdd.add(ricochet);
 						notFound = false;
 						break;

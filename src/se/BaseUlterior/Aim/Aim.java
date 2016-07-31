@@ -31,10 +31,9 @@ public abstract class Aim {
 		return arm;
 	}
 
-	protected float xGrip;
-	protected float yGrip;
-	protected float xAim;
-	protected float yAim;
+	protected Vector2 grip;
+	protected Vector2 aimStart;
+
 	public float spriteX;
 	public float spriteY;
 	protected Entity pointBlank = null;
@@ -55,6 +54,9 @@ public abstract class Aim {
 
 	protected Animation gunFire = null;
 	protected String slug;
+	protected double theta;
+
+	protected float armLengthQuote = 1f;
 
 	public String getSlug() {
 		return slug;
@@ -66,20 +68,27 @@ public abstract class Aim {
 	}
 
 	public Aim() {
-		arm = new Vector2(0.0f);
 		START_ARM_LENGTH = Constants.PERFERED_ARM_LENGTH;
 		armLengt = START_ARM_LENGTH;
-		xAim = -105;
-		yAim = -105;
+		init();
 	}
 
 	public Aim(float startArmLength) {
-		arm = new Vector2(0.0f);
 		START_ARM_LENGTH = startArmLength;
 		armLengt = startArmLength;
-		xAim = -105;
-		yAim = -105;
+		init();
+
 	}
+
+	private void init() {
+		arm = new Vector2(0f);
+		grip = new Vector2(0f).scale(armLengt);
+		aimStartLengt = START_ARM_LENGTH * 3;
+		aimStart = new Vector2(0f).scale(aimStartLengt);
+		theta = arm.getTheta();
+	}
+
+	protected float aimStartLengt;
 
 	public void setPosition(float x, float y) {
 		spriteX = x;
@@ -88,11 +97,10 @@ public abstract class Aim {
 
 	public void update(GameContainer container, int arg) {
 
-		xGrip = getXAimFromDistanceAt(armLengt);
-		yGrip = getYAimFromDistanceAt(armLengt);
+		theta = arm.getTheta();
 
-		xAim = getXAimFromDistanceAt(armLengt * 3);
-		yAim = getYAimFromDistanceAt(armLengt * 3);
+		grip.setTheta(theta);
+		aimStart.setTheta(theta);
 
 		if (!mobile) {
 			updateWasJustSwitched();
@@ -100,7 +108,7 @@ public abstract class Aim {
 	}
 
 	private void updateWasJustSwitched() {
-		if ((arm.getTheta() >= 0 && (arm.getTheta()) < 90) || (arm.getTheta() > 270)) {
+		if ((theta >= 0 && (theta) < 90) || (theta > 270)) {
 			if (!isRight) {
 				wasJustSwitched = true;
 			}
@@ -118,7 +126,7 @@ public abstract class Aim {
 	public void render(GameContainer container, Graphics graphics) {
 		graphics.setColor(Color.red);
 		graphics.setLineWidth(4);
-		graphics.drawRect(xAim, yAim, 9, 9);
+		graphics.drawRect(spriteX + aimStart.x, spriteY + aimStart.y, 9, 9);
 		graphics.resetLineWidth();
 
 	}
@@ -139,30 +147,22 @@ public abstract class Aim {
 		updateWasJustSwitched();
 	}
 
-	protected float getXAimFromDistanceAt(float distance) {
-		return spriteX + arm.x * distance;
-	}
-
-	protected float getYAimFromDistanceAt(float distance) {
-		return spriteY + arm.y * distance;
-	}
-
 	public void angleUp() {
 		if (!isRight) {
-			if (arm.getTheta() < 260)
+			if (theta < 260)
 				arm.add(TURNING_SPEED);
 		} else {
-			if (arm.getTheta() > 280 || arm.getTheta() < 90)
+			if (theta > 280 || theta < 90)
 				arm.sub(TURNING_SPEED);
 		}
 	}
 
 	public void angleDown() {
 		if (isRight) {
-			if (arm.getTheta() > 270 || arm.getTheta() < 80)
+			if (theta > 270 || theta < 80)
 				arm.add(TURNING_SPEED);
 		} else {
-			if (arm.getTheta() > 100)
+			if (theta > 100)
 				arm.sub(TURNING_SPEED);
 		}
 
@@ -176,7 +176,7 @@ public abstract class Aim {
 	}
 
 	public int getCurrentThete() {
-		return (int) arm.getTheta();
+		return (int) theta;
 	}
 
 	public void setPointBlank(Entity go) {
@@ -184,8 +184,9 @@ public abstract class Aim {
 	}
 
 	protected void updateAim() {
-		float xTarget = xGrip;
-		float yTarget = yGrip;
+
+		float xTarget = spriteX + grip.x;
+		float yTarget = spriteY + grip.y;
 		boolean notFound = true;
 		int STEP = 8;
 		while (notFound) {

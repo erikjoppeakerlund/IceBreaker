@@ -10,14 +10,13 @@ import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 public abstract class AIAim {
 
 	protected float armLengt;
-	protected float xAim;
-	protected float yAim;
 	public float spriteX;
 	public float spriteY;
-	protected Entity pointBlank = null;
 
-	protected float xGrip;
-	protected float yGrip;
+	protected Vector2 grip;
+	protected Vector2 aimStart;
+
+	protected Entity pointBlank = null;
 
 	protected Vector2 arm;
 
@@ -28,14 +27,19 @@ public abstract class AIAim {
 	public AIAim(float armLengt) {
 		this.armLengt = armLengt;
 		arm = new Vector2(0.0f);
+		grip = new Vector2(0f).scale(armLengt);
 	}
+
+	protected double theta;
 
 	protected float aimAtX;
 	protected float aimAtY;
 
 	protected void updateAim() {
-		float xTarget = xGrip;
-		float yTarget = yGrip;
+
+		float xTarget = spriteX + grip.x;
+		float yTarget = spriteY + grip.y;
+
 		boolean notFound = true;
 		int STEP = 8;
 		while (notFound) {
@@ -67,16 +71,9 @@ public abstract class AIAim {
 	public abstract void render(GameContainer container, Graphics graphics);
 
 	public void update(GameContainer container, int arg) {
-		xGrip = getXAimFromDistanceAt(armLengt);
-		yGrip = getYAimFromDistanceAt(armLengt);
-	}
+		theta = arm.getTheta();
+		grip.setTheta(theta);
 
-	protected float getXAimFromDistanceAt(float distance) {
-		return spriteX + arm.x * distance;
-	}
-
-	protected float getYAimFromDistanceAt(float distance) {
-		return spriteY + arm.y * distance;
 	}
 
 	public abstract void shoot();

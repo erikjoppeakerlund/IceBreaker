@@ -84,7 +84,7 @@ public abstract class AITurret extends AIMotionLess {
 		} else {
 			timeSinceLast++;
 		}
-		aim.setPosition(getCenterX(), getCenterY());
+		aim.setPosition(getX() + maxRadiusStart, getY() + maxRadiusStart);
 		aim.update(container, arg);
 		if (HP <= 0) {
 			ParallaxPhysicsEngine.gameInfo.setKills(ParallaxPhysicsEngine.gameInfo.getKills() + 1);
@@ -103,8 +103,8 @@ public abstract class AITurret extends AIMotionLess {
 		float distanceToClosestTarget = Constants.CANVAS_WIDTH;
 		for (Entity go : ParallaxPhysicsEngine.all) {
 			float dotProduct = aimArm.dot(startAngle);
-			if (UlteriorUtils.isWithinRange(go, ParallaxPhysicsEngine.wholeSceene) && !go.motionLess && !go.isBackgroundObj
-					&& !go.piercable && go != this) {
+			if (UlteriorUtils.isWithinRange(go, ParallaxPhysicsEngine.wholeSceene) && !go.motionLess
+					&& !go.isBackgroundObj && !go.piercable && go != this) {
 				float xDist = go.getCenterX() - this.getCenterX();
 				float yDist = go.getCenterY() - this.getCenterY();
 				float distanceTest = (float) Math.sqrt((Math.pow(xDist, 2) + Math.pow(yDist, 2)));

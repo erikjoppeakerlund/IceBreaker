@@ -27,7 +27,7 @@ public class Constants {
 	public static final float GENERA_FRICTION = 0.999f;
 	public static final float GROUND_FRICTION = 0.8f;
 
-	public static final float SPLINTER_FRICTION = 1f;
+	public static final float SPLINTER_FRICTION = 0.798f;
 
 	public static final float GENERA_OBJECT_MAX_SPEED = 1f;
 
@@ -47,6 +47,8 @@ public class Constants {
 	public static final float GRENADE_BOUNCINESS = 0.5f;
 
 	public static final int GRENADE_SIZE_OF_EXPLOSION = 419;
+
+	public static final float FAKE_START_COORDINATES = -450f;
 
 	public static final int MAIN_CHARACTER_START_LIFE = 1000;
 

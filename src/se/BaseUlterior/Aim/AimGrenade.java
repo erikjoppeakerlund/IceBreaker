@@ -42,11 +42,13 @@ public class AimGrenade extends Aim {
 
 	public AimGrenade() {
 		grenades = new ArrayList<>();
-		Grenade startGrenade = new Grenade(new Circle(-60, -60, Grenade.GRENADE_SIZE).getPoints());
+		Grenade startGrenade = new Grenade(
+				new Circle(Constants.FAKE_START_COORDINATES, Constants.FAKE_START_COORDINATES, Grenade.GRENADE_SIZE)
+						.getPoints());
 		grenades.add(startGrenade);
 		ParallaxPhysicsEngine.objsToAdd.add(startGrenade);
 		current = startGrenade;
-		slug = "Grenade";
+		slug = "GRENADE";
 	}
 
 	@Override
@@ -87,12 +89,15 @@ public class AimGrenade extends Aim {
 	public void update(GameContainer container, int arg) {
 		super.update(container, arg);
 		if (current != null) {
-			current.setCenterX(xGrip);
-			current.setCenterY(yGrip);
+			current.setCenterX(spriteX + grip.x);
+			current.setCenterY(spriteY + grip.y);
 		}
 		if (canMakeNew) {
 			if (System.currentTimeMillis() - currentTime > TIME_BETWEEN) {
-				Grenade newCurrent = new Grenade(new Circle(-60, -60, Grenade.GRENADE_SIZE).getPoints());
+				grip.normalise().scale(armLengt);
+				aimStart.normalise().scale(aimStartLengt);
+				Grenade newCurrent = new Grenade(new Circle(Constants.FAKE_START_COORDINATES,
+						Constants.FAKE_START_COORDINATES, Grenade.GRENADE_SIZE).getPoints());
 				grenades.add(newCurrent);
 				current = newCurrent;
 				ParallaxPhysicsEngine.objsToAdd.add(newCurrent);
@@ -101,8 +106,15 @@ public class AimGrenade extends Aim {
 		}
 		if (charge) {
 			if (force < CHARGE_SPEED * CHARGE_ITERATION) {
+
 				force += CHARGE_SPEED * FORCE;
 				armLengt -= CHARGE_SPEED;
+
+				armLengthQuote = armLengt / START_ARM_LENGTH;
+
+				aimStart.normalise().scale(armLengthQuote * aimStartLengt);
+
+				grip.normalise().scale(armLengthQuote * armLengt);
 			}
 		}
 	}

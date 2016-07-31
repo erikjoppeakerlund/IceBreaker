@@ -23,14 +23,17 @@ public class AimMachineGun extends AimTriggerHoldable {
 		recoilPower = 0.05f;
 		damage = Constants.WEAPON_EFFECT_UZI;
 		slug = "UZI";
+		initFireVectors();
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
 		super.render(container, graphics);
 		if (animationsIsDrawn) {
-			gunFire.getCurrentFrame().setRotation((float) arm.getTheta() + 65);
-			gunFire.draw(gunFireStartAtX - gunFireFrameWidth / 2, gunFireStartAtY - gunFireFrameHeight / 2);
+			gunFire.getCurrentFrame().setRotation((float) theta + 65);
+
+			gunFire.draw((spriteX + gunFireStartAt.x) - gunFireFrameWidth / 2,
+					(spriteY + gunFireStartAt.y) - gunFireFrameHeight / 2);
 		}
 	}
 

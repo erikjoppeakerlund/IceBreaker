@@ -7,6 +7,7 @@ import org.newdawn.slick.SlickException;
 
 import se.BaseUlterior.Entity.Entity;
 import se.BaseUlterior.Entity.EntityRicochet;
+import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 
 /**
@@ -23,8 +24,7 @@ public abstract class AimBulletWeapon extends Aim {
 	private int imageWidth;
 	public static final float IMAGE_SCALE_STANDARD = 0.26f;
 
-	protected float startShotX;
-	protected float startShotY;
+	protected Vector2 startShot;
 
 	protected int gunFireFrameWidth;
 	protected int gunFireFrameHeight;
@@ -33,6 +33,7 @@ public abstract class AimBulletWeapon extends Aim {
 	private float imageScale;
 
 	protected float recoilPower = 0;
+	private float RECOIL_RETURN_FACTOR = 3f;
 
 	public AimBulletWeapon(String pathToImage, float imageScale) {
 		this.imageScale = imageScale;
@@ -46,8 +47,6 @@ public abstract class AimBulletWeapon extends Aim {
 	}
 
 	private void init(String pathToImage) {
-		xGrip = -60;
-		yGrip = -60;
 		try {
 			rifleImageRight = new Image(pathToImage).getScaledCopy(imageScale);
 			rifleImageLeft = new Image(pathToImage, true).getScaledCopy(imageScale).getFlippedCopy(false, true);
@@ -61,14 +60,26 @@ public abstract class AimBulletWeapon extends Aim {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
+
 	}
+
+	protected void initFireVectors() {
+		startShotLength = START_ARM_LENGTH + imageWidth / 2;
+		gunFireStartAtLength = START_ARM_LENGTH - BACK_FIRE + gunFireFrameWidth / 2 + imageWidth / 2;
+
+		startShot = new Vector2(0f).scale(startShotLength);
+		gunFireStartAt = new Vector2(0f).scale(gunFireStartAtLength);
+	}
+
+	private float startShotLength;
+	protected float gunFireStartAtLength;
 
 	protected final int EXPLOTION_SIZE = 70;
 
 	protected boolean wasJustShoot = false;
 	protected final float BACK_FIRE = 14f;
-	protected float gunFireStartAtX;
-	protected float gunFireStartAtY;
+
+	protected Vector2 gunFireStartAt;
 	protected float damage = 20;
 
 	@Override
@@ -91,8 +102,11 @@ public abstract class AimBulletWeapon extends Aim {
 	protected void wasShoot() {
 		wasJustShoot = true;
 		armLengt -= BACK_FIRE;
-		Entity ricochet = new EntityRicochet(pointBlank, gunFireStartAtX, gunFireStartAtY, aimAtX, aimAtY, weight,
-				damage);
+
+		armLengthQuote = armLengt / START_ARM_LENGTH;
+
+		Entity ricochet = new EntityRicochet(pointBlank, spriteX + gunFireStartAt.x, spriteY + gunFireStartAt.y, aimAtX,
+				aimAtY, weight, damage);
 		ParallaxPhysicsEngine.objsToAdd.add(ricochet);
 	}
 
@@ -111,17 +125,23 @@ public abstract class AimBulletWeapon extends Aim {
 	@Override
 	public void update(GameContainer container, int arg) {
 		super.update(container, arg);
-		startShotX = getXAimFromDistanceAt(armLengt + imageWidth / 2);
-		startShotY = getYAimFromDistanceAt(armLengt + imageWidth / 2);
 
-		gunFireStartAtX = getXAimFromDistanceAt(armLengt + gunFireFrameWidth / 2 + imageWidth / 2);
-		gunFireStartAtY = getYAimFromDistanceAt(armLengt + gunFireFrameWidth / 2 + imageWidth / 2);
-
+		startShot.setTheta(theta);
+		gunFireStartAt.setTheta(theta);
 		if (wasJustShoot && armLengt < START_ARM_LENGTH) {
-			armLengt += 3f;
+
+			armLengt += RECOIL_RETURN_FACTOR;
+
+			armLengthQuote = armLengt / START_ARM_LENGTH;
+
+			aimStart.normalise().scale(armLengthQuote * aimStartLengt);
+			grip.normalise().scale(armLengthQuote * armLengt);
+			gunFireStartAt.normalise().scale(armLengthQuote * gunFireStartAtLength);
+			startShot.normalise().scale(armLengthQuote * startShotLength);
 
 		} else if (wasJustShoot) {
 			wasJustShoot = false;
+
 		}
 
 	}
@@ -130,11 +150,15 @@ public abstract class AimBulletWeapon extends Aim {
 	public void render(GameContainer container, Graphics graphics) {
 		super.render(container, graphics);
 		if (isRight) {
-			rifleImageRight.setRotation((float) arm.getTheta());
-			rifleImageRight.draw(xGrip - imageWidth / 2, yGrip - imageHeight / 2);
+			rifleImageRight.setRotation((float) theta);
+			// rifleImageRight.draw(xGrip - imageWidth / 2, yGrip - imageHeight
+			// / 2);
+			rifleImageRight.draw((spriteX + grip.x) - imageWidth / 2, (spriteY + grip.y) - imageHeight / 2);
 		} else {
-			rifleImageLeft.setRotation((float) (arm.getTheta()));
-			rifleImageLeft.draw(xGrip - imageWidth / 2, yGrip - imageHeight / 2);
+			rifleImageLeft.setRotation((float) (theta));
+			// rifleImageLeft.draw(xGrip - imageWidth / 2, yGrip - imageHeight /
+			// 2);
+			rifleImageLeft.draw((spriteX + grip.x) - imageWidth / 2, (spriteY + grip.y) - imageHeight / 2);
 		}
 
 	}

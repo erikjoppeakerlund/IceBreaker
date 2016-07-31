@@ -7,16 +7,11 @@ import org.newdawn.slick.Graphics;
 
 import se.BaseUlterior.Entity.Entity;
 import se.BaseUlterior.Entity.EntityRicochet;
+import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 
 public class AIAimTurret extends AIAim {
 	private boolean animationsIsDrawn = false;
-
-	protected float startShotX;
-	protected float startShotY;
-
-	protected float startGunFireImageAtX;
-	protected float startGunFireImageAtY;
 
 	protected int gunFireFrameWidth;
 	protected int gunFireFrameHeight;
@@ -25,8 +20,6 @@ public class AIAimTurret extends AIAim {
 
 	protected boolean wasJustShoot = false;
 	protected final float BACK_FIRE = 14f;
-	protected float gunFireStartAtX;
-	protected float gunFireStartAtY;
 
 	protected float weight = 1.0f;
 	private Animation gunFire;
@@ -38,24 +31,34 @@ public class AIAimTurret extends AIAim {
 		this.gunFire = gunFire;
 		gunFireFrameWidth = this.gunFire.getCurrentFrame().getWidth();
 		gunFireFrameHeight = this.gunFire.getCurrentFrame().getHeight();
+		initFireVectors();
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
 		if (animationsIsDrawn) {
-			gunFire.getCurrentFrame().setRotation((float) arm.getTheta() + 65);
-			gunFire.draw(gunFireStartAtX - gunFireFrameWidth / 2, gunFireStartAtY - gunFireFrameHeight / 2, Color.red);
+			gunFire.getCurrentFrame().setRotation((float) theta + 65);
+			gunFire.draw((spriteX + gunFireStartAt.x) - gunFireFrameWidth / 2,
+					(spriteY + gunFireStartAt.y) - gunFireFrameHeight / 2, Color.red);
 		}
 
+	}
+
+	private Vector2 gunFireStartAt;
+	private float gunFireStartAtLength;
+
+	protected void initFireVectors() {
+		gunFireStartAtLength = armLengt + gunFireFrameWidth / 2;
+
+		gunFireStartAt = new Vector2(0f).scale(gunFireStartAtLength);
 	}
 
 	@Override
 	public void update(GameContainer container, int arg) {
 
-		xGrip = getXAimFromDistanceAt(armLengt);
-		yGrip = getYAimFromDistanceAt(armLengt);
-		gunFireStartAtX = getXAimFromDistanceAt(armLengt + gunFireFrameWidth / 2);
-		gunFireStartAtY = getYAimFromDistanceAt(armLengt + gunFireFrameWidth / 2);
+		super.update(container, arg);
+
+		gunFireStartAt.setTheta(theta);
 
 		if (wasJustShoot) {
 			gunFire.setCurrentFrame(0);
@@ -77,8 +80,8 @@ public class AIAimTurret extends AIAim {
 
 	protected void wasShoot() {
 		wasJustShoot = true;
-		Entity ricochet = new EntityRicochet(pointBlank, gunFireStartAtX, gunFireStartAtY, aimAtX, aimAtY, weight,
-				damage);
+		Entity ricochet = new EntityRicochet(pointBlank, (spriteX + gunFireStartAt.x), (spriteY + gunFireStartAt.y),
+				aimAtX, aimAtY, weight, damage);
 		ParallaxPhysicsEngine.objsToAdd.add(ricochet);
 	}
 

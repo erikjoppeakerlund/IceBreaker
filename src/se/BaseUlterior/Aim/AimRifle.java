@@ -25,16 +25,19 @@ public class AimRifle extends AimBulletWeapon {
 		recoilPower = 0.6f;
 		damage = Constants.WEAPON_EFFECT_RIFLE;
 		slug = "AVP";
+		initFireVectors();
+
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
 		super.render(container, graphics);
 		graphics.setColor(Color.red);
-		graphics.drawLine(startShotX, startShotY, aimAtX, aimAtY);
+		graphics.drawLine(spriteX + startShot.x, spriteY + startShot.y, aimAtX, aimAtY);
 		if (animationsIsDrawn) {
-			gunFire.getCurrentFrame().setRotation((float) arm.getTheta() + 65);
-			gunFire.draw(gunFireStartAtX - gunFireFrameWidth / 2, gunFireStartAtY - gunFireFrameHeight / 2);
+			gunFire.getCurrentFrame().setRotation((float) theta + 65);
+			gunFire.draw((spriteX + gunFireStartAt.x) - gunFireFrameWidth / 2,
+					(spriteY + gunFireStartAt.y) - gunFireFrameHeight / 2);
 		}
 	}
 
