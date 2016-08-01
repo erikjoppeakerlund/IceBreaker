@@ -27,7 +27,7 @@ public class Constants {
 	public static final float GENERA_FRICTION = 0.999f;
 	public static final float GROUND_FRICTION = 0.8f;
 
-	public static final float SPLINTER_FRICTION = 0.798f;
+	public static final float SPLINTER_FRICTION = 0.198f;
 
 	public static final float GENERA_OBJECT_MAX_SPEED = 1f;
 
@@ -51,6 +51,8 @@ public class Constants {
 	public static final float FAKE_START_COORDINATES = -450f;
 
 	public static final int MAIN_CHARACTER_START_LIFE = 1000;
+
+	public static final int HIT_LENGTH_FRAMES = 7;
 
 	/*
 	 * Weapon effect (out of 100)

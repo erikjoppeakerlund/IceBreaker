@@ -8,8 +8,11 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
 
+import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
+import se.BaseUlterior.Physics.Impact;
+import se.BaseUlterior.Physics.ImpactFriction;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
 /**
@@ -22,8 +25,7 @@ public class EntityRicochet extends Entity {
 
 	Entity target = null;
 
-	private int LIFE_SPAN_LIMIT = 32;
-	private int LIFE_SPAN_SPLITS = 9;
+	private int LIFE_SPAN_LIMIT = Constants.HIT_LENGTH_FRAMES;
 	private int lifeSpan = 0;
 	private float gunFireStartAtX;
 	private float gunFireStartAtY;
@@ -34,10 +36,11 @@ public class EntityRicochet extends Entity {
 	private float startY;
 	private final float SIZE_OF_EXPLOSION = 24f;
 	private float weight;
+	// private final float EXP = 1.39f;
 
 	public EntityRicochet(Entity target, float gunFireStartAtX, float gunFireStartAtY, float aimAtX, float aimAtY,
 			float weight, float damage) {
-		super(new float[] { aimAtX, aimAtY }, false, true, false, true, true, true);
+		super(new Circle(aimAtX, aimAtY, Constants.SPRITE_RADIUS).getPoints(), false, true, false, true, true, true);
 		this.target = target;
 		this.gunFireStartAtX = gunFireStartAtX;
 		this.gunFireStartAtY = gunFireStartAtY;
@@ -50,7 +53,7 @@ public class EntityRicochet extends Entity {
 		UlteriorUtils.removeGroundInvisible(aimAtX, aimAtY, damage, SIZE_OF_EXPLOSION, 0);
 		piercable = true;
 		if (!target.motionLess) {
-			rate = 2;
+			rate = 1;
 		}
 	}
 
@@ -58,10 +61,11 @@ public class EntityRicochet extends Entity {
 
 	@Override
 	public void update(GameContainer container, int arg) {
-		if (lifeSpan < LIFE_SPAN_SPLITS && lifeSpan % rate == 0) {
+		if (lifeSpan % rate == 0) {
 			runEffect();
 		}
 		if (lifeSpan > LIFE_SPAN_LIMIT) {
+			UlteriorUtils.cleanUpImpactFromWorldBuilderObject(this);
 			ParallaxPhysicsEngine.objsToRemove.add(this);
 		}
 		lifeSpan++;
@@ -69,6 +73,7 @@ public class EntityRicochet extends Entity {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
+		// graphics.fill(this);
 		rayColor.a = 1f - (float) lifeSpan / (float) LIFE_SPAN_LIMIT;
 		float newX = getX();
 		float newY = getY();
@@ -84,7 +89,9 @@ public class EntityRicochet extends Entity {
 
 	private void runEffect() {
 
-		normals = target.getMyNormalsAfterHitBy(new EntityEmpty(new Circle(x, y, 59f).getPoints()));
+		// normals = target.getMyNormalsAfterHitBy(new EntityEmpty(new Circle(x,
+		// y, Constants.SPRITE_RADIUS).getPoints()));
+		normals = target.getMyNormalsAfterHitBy(this);
 		if (normals.isEmpty()) {
 			return;
 		}
@@ -114,6 +121,11 @@ public class EntityRicochet extends Entity {
 		EntitySplinter random = new EntitySplinter(this.getCenterX(), this.getCenterY(), angled, blood);
 		ParallaxPhysicsEngine.objsToAdd.add(random);
 
+	}
+
+	@Override
+	public Impact getImpact(Entity agileObject) {
+		return new ImpactFriction(this, agileObject, Constants.SPLINTER_FRICTION);
 	}
 
 }

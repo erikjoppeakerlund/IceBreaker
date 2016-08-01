@@ -17,8 +17,9 @@ public class AIBot extends AISprite {
 	protected Vector2 aimArm;
 	private Entity target;
 	private int heartBeat = 0;
-	private final int HEART_RATE = 30;
-	private final float SPEED = 0.58f;
+	private int HEART_RATE = 0;
+	private final int MAX_HEART_RATE = 49;
+	private final float SPEED = 0.89f;
 	private Vector2 helperVector;
 
 	protected float[] getBackToSpot;
@@ -26,12 +27,8 @@ public class AIBot extends AISprite {
 	protected float[] currentSpot;
 	protected final int WAIT_FOR_BEFORE_TURN = 1;
 
-	private boolean hasSpot = false;
-	private float[] spot;
-
 	public AIBot(float height) {
 		super(height);
-		aimArm = aim.getArm();
 		setCenterX(Constants.CANVAS_WIDTH * 0.75f);
 		setCenterY(Constants.CANVAS_HEIGHT / 2f);
 		helperVector = new Vector2(1f, 1f);
@@ -41,29 +38,22 @@ public class AIBot extends AISprite {
 	@Override
 	public void update(GameContainer container, int delta) {
 		super.update(container, delta);
-		if (heartBeat >= HEART_RATE) {
+		if (heartBeat >= MAX_HEART_RATE) {
 			lookUpClosestTarget();
 			boolean clearSpot = clearSpot(getCenter());
 
-			if (!clearSpot && !hasSpot) {
-				helperVector.setTheta(findClosestWayAroundTheta(UlteriorUtils.angleToPoint(getCenterX(), getCenterY(),
-						target.getCenterX(), target.getCenterY())));
-				hasSpot = true;
-			} else if (clearSpot && !hasSpot) {
-				helperVector.setTheta(UlteriorUtils.angleToPoint(getCenterX(), getCenterY(), target.getCenterX(),
-						target.getCenterY()));
-			} else if (hasSpot) {
-				if (clearSpot) {
-					hasSpot = false;
-				}
-				helperVector.setTheta(UlteriorUtils.angleToPoint(getCenterX(), getCenterY(), spot[0], spot[1]));
+			if (clearSpot) {
+				helperVector.setTheta(thetaWhereTargetIsHeading());
+				// motion.setTheta(helperVector.getTheta());
 			}
 			heartBeat = 0;
-			motion.normalise().scale(SPEED).setTheta(helperVector.getTheta());
+			HEART_RATE = (int) (Math.random() * MAX_HEART_RATE);
 
+			motion.add(helperVector.x, helperVector.y).normalise().scale(SPEED);
 		} else {
 			heartBeat++;
 		}
+		// motion.normalise().scale(SPEED);
 
 	}
 
@@ -85,48 +75,7 @@ public class AIBot extends AISprite {
 		return result;
 	}
 
-	protected Entity whichIsTheTarget(float startX, float startY, float angle) {
-		float xTarget = startX;
-		float yTarget = startY;
-		boolean notFound = true;
-		int STEP = 8;
-		Vector2 theta = new Vector2(angle);
-		while (notFound) {
-			xTarget += theta.x * STEP;
-			yTarget += theta.y * STEP;
-			for (Entity go : ParallaxPhysicsEngine.all) {
-				if (go.contains(xTarget, yTarget) && !(go.piercable) && go != this) {
-					return go;
-				}
-			}
-		}
-		return null;
-	}
-
-	private float findClosestWayAroundTheta(float angle) {
-		return findWayAroundAtTurningAngle(angle);
-
-	}
-
-	protected float[] clearSpot(float angle) {
-		float xTarget = getCenterX();
-		float yTarget = getCenterY();
-		boolean notFound = true;
-		int STEP = 8;
-		Vector2 theta = new Vector2(angle);
-		while (notFound) {
-			xTarget += theta.x * STEP;
-			yTarget += theta.y * STEP;
-			for (Entity go : ParallaxPhysicsEngine.all) {
-				if (go.contains(xTarget, yTarget) && !(go.piercable) && go != this) {
-					return new float[] { xTarget, yTarget };
-				}
-			}
-		}
-		return null;
-	}
-
-	protected boolean clearSpot(float[] coordinates) {
+	private boolean clearSpot(float[] coordinates) {
 		float xTarget = coordinates[0];
 		float yTarget = coordinates[1];
 		boolean notFound = true;
@@ -151,52 +100,43 @@ public class AIBot extends AISprite {
 		return false;
 	}
 
-	private float START_CONSIDERED_WALL = 500f;
+	private float thetaWhereTargetIsHeading() {
+		float aX = target.getCenterX();
+		float aY = target.getCenterY();
 
-	private float findWayAroundAtTurningAngle(float angle) {
-		Vector2 theta = new Vector2(angle);
-		float THETA_STEP = 6f;
+		Vector2 b = target.getMotion().copy();
+		float targetSpeed = b.length();
 
-		float thetaStep = THETA_STEP;
+		Vector2 imagenedPath = motion.copy();
 
-		int stepsRun = 0;
-		float distance = 0;
-		Vector2 helperVect = theta.copy();
-		float distance2 = 0;
+		float centerX = getCenterX();
+		float centerY = getCenterY();
 
-		while (stepsRun < 360 / THETA_STEP) {
+		Vector2 correctDirectionCheck = new Vector2();
 
-			float[] projection = clearSpot((float) theta.getTheta());
-			float[] projection2 = clearSpot((float) helperVect.getTheta());
+		float i = 1;
+		while (i < 10000) {
 
-			float TEST = START_CONSIDERED_WALL;
+			b.normalise().scale(targetSpeed * (float) i);
 
-			float tempDistance1 = UlteriorUtils.distance(getCenterX(), getCenterY(), projection[0], projection[1]);
-			float tempDistance2 = UlteriorUtils.distance(getCenterX(), getCenterY(), projection2[0], projection2[1]);
+			float bX = aX + b.x;
+			float bY = aY + b.y;
 
-			if (stepsRun == 0) {
-				distance = tempDistance1;
-				distance2 = tempDistance2;
+			imagenedPath.setTheta(UlteriorUtils.angleToPoint(centerX, centerY, bX, bY));
+
+			imagenedPath.normalise().scale(SPEED * (float) i);
+
+			float cX = centerX + imagenedPath.x * i;
+			float cY = centerY + imagenedPath.y * i;
+
+			correctDirectionCheck.set(imagenedPath.x - aX, imagenedPath.y - aY);
+
+			if (((bX - aX) * (cY - aY) - (bY - aY) * (cX - aX)) > 0 && b.dot(correctDirectionCheck) < 0) {
+				return (float) imagenedPath.getTheta();
 			}
-			if (Math.abs(tempDistance1 - distance) > TEST) {
-				hasSpot = true;
-				spot = projection;
-				return (float) theta.add(THETA_STEP * 8).getTheta();
-
-			}
-			if (Math.abs(tempDistance2 - distance2) > TEST) {
-				spot = projection2;
-				hasSpot = true;
-				return (float) helperVect.sub(THETA_STEP * 8).getTheta();
-			}
-			distance = tempDistance1;
-			distance2 = tempDistance2;
-
-			theta.add(thetaStep);
-			helperVect.sub(thetaStep);
-
-			stepsRun++;
+			i += 1.0f;
 		}
-		return angle;
+		return UlteriorUtils.angleToPoint(centerX, centerY, aX, aY);
 	}
+
 }

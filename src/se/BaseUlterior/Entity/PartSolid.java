@@ -17,7 +17,8 @@ public class PartSolid extends Materia {
 
 	public PartSolid(float[] nodes) {
 		super(nodes);
-		this.color = new Color(0.2f, 0.2f, 0.2f, 0.93f);
+		// this.color = new Color(0.2f, 0.2f, 0.2f, 0.93f);
+		this.color = new Color(0.6f, 0.6f, 0.6f, 0.8f);
 	}
 
 	public PartSolid(float[] nodes, float extraBounciness) {
@@ -32,7 +33,7 @@ public class PartSolid extends Materia {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
-		graphics.setColor(Color.darkGray);
+		graphics.setColor(color);
 		graphics.fill(this);
 	}
 

@@ -10,6 +10,7 @@ import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactFriction;
+import se.BaseUlterior.Utils.UlteriorUtils;
 
 /**
  * GamObject which should represent a splinter from a ricochet
@@ -35,7 +36,7 @@ public class EntitySplinter extends Entity {
 			motion.scale(RESCALE);
 			color = new Color((float) (Math.random() * 0.7f), 0f, 0f);
 		} else {
-			color = Color.darkGray;
+			color = Color.gray;
 		}
 	}
 
@@ -52,6 +53,7 @@ public class EntitySplinter extends Entity {
 		setY(getY() + this.motion.y * delta);
 		// super.update(container, delta);
 		if (lifeSpan > LIFE_SPAN_LIMIT) {
+			UlteriorUtils.cleanUpImpactFromWorldBuilderObject(this);
 			ParallaxPhysicsEngine.objsToRemove.add(this);
 		}
 		lifeSpan++;
