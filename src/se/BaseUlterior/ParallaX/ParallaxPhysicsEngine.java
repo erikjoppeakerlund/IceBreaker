@@ -57,9 +57,9 @@ public class ParallaxPhysicsEngine extends BasicGame {
 
 	public static List<Entity> objsToRemove = null;
 
-	public static List<Parallax> parallaxBackground = null;
+	public static List<ParallaxDefault> parallaxBackground = null;
 
-	public static List<Parallax> parallaxForground = null;
+	public static List<ParallaxDefault> parallaxForground = null;
 
 	private ToolBox toolbox;
 
@@ -74,6 +74,8 @@ public class ParallaxPhysicsEngine extends BasicGame {
 	ParallaxHolder parallaxHolderBackground;
 	ParallaxHolder parallaxHolderForground;
 
+	private static final Color backgroundBackup = new Color(0.52f, 0.52f, 0.52f);
+
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 
@@ -84,7 +86,7 @@ public class ParallaxPhysicsEngine extends BasicGame {
 			}
 		}
 		parallaxHolderForground.render(container, graphics);
-		graphics.setBackground(Color.darkGray);
+		graphics.setBackground(backgroundBackup);
 	}
 
 	private static Entity sprite;
@@ -110,7 +112,7 @@ public class ParallaxPhysicsEngine extends BasicGame {
 				Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0 });
 		ParallaxPhysicsEngine.objsToAdd.add(wholeSceene);
 
-		parallaxHolderBackground = new ParallaxHolder(2);
+		parallaxHolderBackground = new ParallaxHolder(3);
 		parallaxHolderForground = new ParallaxHolder(1);
 
 		gameInfo = new InfoStats();
@@ -183,7 +185,7 @@ public class ParallaxPhysicsEngine extends BasicGame {
 	public static void moveScreen(float x, float y) {
 		currentX += x;
 		currentY += y;
-		for (Parallax parallax : parallaxBackground) {
+		for (ParallaxDefault parallax : parallaxBackground) {
 			parallax.moveParallax(currentX, currentY);
 		}
 		for (Entity go : ParallaxPhysicsEngine.all) {

@@ -35,7 +35,7 @@ public class EntitySplinter extends Entity {
 			motion.scale(RESCALE);
 			color = new Color((float) (Math.random() * 0.7f), 0f, 0f);
 		} else {
-			color = Color.gray;
+			color = Color.darkGray;
 		}
 	}
 

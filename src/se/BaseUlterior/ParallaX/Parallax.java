@@ -4,9 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-import se.BaseUlterior.Entity.Entity;
-
-public class Parallax extends Entity {
+public class Parallax extends ParallaxDefault {
 	private static final long serialVersionUID = -8657229360844031751L;
 	float parallaxEffect;
 	Image image;

@@ -3,7 +3,6 @@ package se.BaseUlterior.Entity;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.fills.GradientFill;
 
 import se.BaseUlterior.Physics.Impact;
 import se.BaseUlterior.Physics.ImpactBounce;
@@ -16,12 +15,9 @@ import se.BaseUlterior.Physics.ImpactBounce;
  */
 public class PartSolid extends Materia {
 
-	GradientFill fill;
-
 	public PartSolid(float[] nodes) {
 		super(nodes);
-		this.color = new Color(0.6f, 0.6f, 0.6f, 0.8f);
-		fill = new GradientFill(getCenterX(), getMinY(), Color.gray, getCenterX(), getMaxY(), Color.white, false);
+		this.color = new Color(0.2f, 0.2f, 0.2f, 0.93f);
 	}
 
 	public PartSolid(float[] nodes, float extraBounciness) {
@@ -36,7 +32,8 @@ public class PartSolid extends Materia {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
-		super.render(container, graphics);
+		graphics.setColor(Color.darkGray);
+		graphics.fill(this);
 	}
 
 }

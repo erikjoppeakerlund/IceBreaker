@@ -33,6 +33,7 @@ public class EntityRicochet extends Entity {
 	private float startX;
 	private float startY;
 	private final float SIZE_OF_EXPLOSION = 24f;
+	private float weight;
 
 	public EntityRicochet(Entity target, float gunFireStartAtX, float gunFireStartAtY, float aimAtX, float aimAtY,
 			float weight, float damage) {
@@ -43,6 +44,7 @@ public class EntityRicochet extends Entity {
 		this.aimAtX = aimAtX;
 		this.aimAtY = aimAtY;
 		this.LIFE_SPAN_LIMIT *= weight;
+		this.weight = weight;
 		startX = getX();
 		startY = getY();
 		UlteriorUtils.removeGroundInvisible(aimAtX, aimAtY, damage, SIZE_OF_EXPLOSION, 0);
@@ -71,7 +73,7 @@ public class EntityRicochet extends Entity {
 		float newX = getX();
 		float newY = getY();
 		graphics.setColor(rayColor);
-		// graphics.setLineWidth(weight * 2f);
+		graphics.setLineWidth(weight * 2f);
 		graphics.drawLine(gunFireStartAtX + newX - startX, gunFireStartAtY + newY - startY, aimAtX + newX - startX,
 				aimAtY + newY - startY);
 		graphics.resetLineWidth();

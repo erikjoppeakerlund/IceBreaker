@@ -15,6 +15,8 @@ public abstract class AIMotionLess extends Materia {
 	protected Color HPColor;
 	protected float dHP;
 
+	private final float LIFE_AMOUNT_LINE_WIDTH = 4;
+
 	protected AIMotionLess(float[] points, float height) {
 		super(points);
 		START_HP = 100f;
@@ -32,8 +34,9 @@ public abstract class AIMotionLess extends Materia {
 		graphics.setColor(HPColor);
 		graphics.fillRect(getCenterX() - 60f, getCenterY() + height, 180f * HP / START_HP, 12f);
 		graphics.setColor(Color.black);
-		graphics.resetLineWidth();
+		graphics.setLineWidth(LIFE_AMOUNT_LINE_WIDTH);
 		graphics.drawRect(getCenterX() - 60f, getCenterY() + height, 180f, 12f);
+		graphics.resetLineWidth();
 	}
 
 }

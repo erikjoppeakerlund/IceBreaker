@@ -36,8 +36,8 @@ public class Grenade extends ImagableObject {
 	public Grenade(float[] nodes) {
 		super(nodes, BOUNCINESS, "res/img/grenade.png");
 		color = Color.darkGray;
-		setX(-270f);
-		setY(-270f);
+		setX(Constants.FAKE_START_COORDINATES);
+		setY(Constants.FAKE_START_COORDINATES);
 		isRotatingObject = true;
 		motionLess = false;
 	}

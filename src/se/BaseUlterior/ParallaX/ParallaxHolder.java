@@ -8,10 +8,11 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Entity.Entity;
 
 public class ParallaxHolder extends Entity {
-	private List<Parallax> parallaxes;
+	private List<ParallaxDefault> parallaxes;
 	protected Parallax startCity;
 
 	public ParallaxHolder(int i) {
@@ -83,12 +84,35 @@ public class ParallaxHolder extends Entity {
 				e.printStackTrace();
 			}
 			break;
+		case 3:
+			float[] edges = { 0, 0, 0, Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL,
+					Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL, 0 };
+			ParallaxSquares parallaxSquares = new ParallaxSquares(edges, 0.2f);
+			parallaxes.add(parallaxSquares);
+			ParallaxPhysicsEngine.parallaxBackground.add(parallaxSquares);
+			float[] edges2 = { 0, 0, 0, Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL,
+					Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL, 0 };
+			ParallaxSquares parallaxSquares2 = new ParallaxSquares(edges2, 0.3f);
+			parallaxes.add(parallaxSquares2);
+			ParallaxPhysicsEngine.parallaxBackground.add(parallaxSquares2);
+			float[] edges3 = { 0, 0, 0, Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL,
+					Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL, 0 };
+			ParallaxSquares parallaxSquares3 = new ParallaxSquares(edges3, 0.4f);
+			parallaxes.add(parallaxSquares3);
+			ParallaxPhysicsEngine.parallaxBackground.add(parallaxSquares3);
+			float[] edges4 = { 0, 0, 0, Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL,
+					Constants.CANVAS_HEIGHT_FULL, Constants.CANVAS_WIDTH_FULL, 0 };
+			ParallaxSquares parallaxSquares4 = new ParallaxSquares(edges4, 0.5f);
+			parallaxes.add(parallaxSquares4);
+			ParallaxPhysicsEngine.parallaxBackground.add(parallaxSquares4);
+			break;
 		default:
 			break;
+
 		}
 	}
 
-	public List<Parallax> getGameObjects() {
+	public List<ParallaxDefault> getGameObjects() {
 		return this.parallaxes;
 	}
 
@@ -100,7 +124,7 @@ public class ParallaxHolder extends Entity {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
-		for (Parallax parallax : parallaxes) {
+		for (ParallaxDefault parallax : parallaxes) {
 			parallax.render(container, graphics);
 		}
 	}
