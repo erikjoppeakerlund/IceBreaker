@@ -25,7 +25,7 @@ public class Grenade extends ImagableObject {
 	private static float BOUNCINESS = Constants.GRENADE_BOUNCINESS;
 	protected long wasReleasedAt;
 
-	protected final long TIME_UNTIL_EXPLOTION = 1380;
+	protected final long TIME_UNTIL_EXPLOTION = 3280;
 
 	protected Entity explotionShape = null;
 
@@ -65,7 +65,8 @@ public class Grenade extends ImagableObject {
 
 	@Override
 	public Impact getImpact(Entity other) {
-		return new ImpactBounce(this, other, bounciness, true);
+		boolean selfImpact = other.motionLess ? true : false;
+		return new ImpactBounce(this, other, bounciness, selfImpact);
 	}
 
 	@Override

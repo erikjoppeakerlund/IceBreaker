@@ -1,5 +1,8 @@
 package se.BaseUlterior.AI;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.newdawn.slick.GameContainer;
 
 import se.BaseUlterior.Config.Constants;
@@ -16,10 +19,9 @@ public class AIBot extends AISprite {
 
 	protected Vector2 aimArm;
 	private Entity target;
-	private int heartBeat = 0;
-	private int HEART_RATE = 0;
-	private final int MAX_HEART_RATE = 49;
-	private final float SPEED = 0.89f;
+	private final int MAX_HEART_RATE = 9;
+	private int heartBeat = MAX_HEART_RATE;
+	private final float SPEED = 0.49f;
 	private Vector2 helperVector;
 
 	protected float[] getBackToSpot;
@@ -27,13 +29,25 @@ public class AIBot extends AISprite {
 	protected float[] currentSpot;
 	protected final int WAIT_FOR_BEFORE_TURN = 1;
 
+	private final int CONTINUE_WITH_TRACK = 4;
+
+	private List<float[]> track;
+
 	public AIBot(float height) {
 		super(height);
 		setCenterX(Constants.CANVAS_WIDTH * 0.75f);
 		setCenterY(Constants.CANVAS_HEIGHT / 2f);
 		helperVector = new Vector2(1f, 1f);
 		forceUpdate = true;
+		track = new ArrayList<>();
 	}
+
+	private boolean upToDate = true;
+	private int trackingIterator = 0;
+
+	private float[] toAdd;
+
+	private int seenAlLong = CONTINUE_WITH_TRACK;
 
 	@Override
 	public void update(GameContainer container, int delta) {
@@ -42,19 +56,56 @@ public class AIBot extends AISprite {
 			lookUpClosestTarget();
 			boolean clearSpot = clearSpot(getCenter());
 
+			if (clearSpot && seenAlLong < CONTINUE_WITH_TRACK) {
+				seenAlLong++;
+			}
 			if (clearSpot) {
-				helperVector.setTheta(thetaWhereTargetIsHeading());
-				// motion.setTheta(helperVector.getTheta());
+				trackingIterator = 0;
+				if (!track.isEmpty()) {
+					track.clear();
+				}
+				if (seenAlLong >= CONTINUE_WITH_TRACK) {
+					helperVector.setTheta(thetaWhereTargetIsHeading());
+				}
+				if (!upToDate) {
+					upToDate = true;
+				}
+				toAdd = new float[] { target.getCenterX() + ParallaxPhysicsEngine.currentX,
+						target.getCenterY() + ParallaxPhysicsEngine.currentY };
+			} else {
+				seenAlLong = 0;
+				if (upToDate) {
+					track.add(toAdd);
+				}
+				int itr = trackingIterator;
+				helperVector.setTheta(UlteriorUtils.angleToPoint(getCenterX() + ParallaxPhysicsEngine.currentX,
+						getCenterY() + ParallaxPhysicsEngine.currentY, track.get(itr)[0], track.get(itr)[1]));
+				upToDate = false;
 			}
 			heartBeat = 0;
-			HEART_RATE = (int) (Math.random() * MAX_HEART_RATE);
 
-			motion.add(helperVector.x, helperVector.y).normalise().scale(SPEED);
-		} else {
+			if (!upToDate) {
+
+				track.add(new float[] { target.getCenterX() + ParallaxPhysicsEngine.currentX,
+						target.getCenterY() + ParallaxPhysicsEngine.currentY });
+			}
+		} else
+
+		{
 			heartBeat++;
 		}
-		// motion.normalise().scale(SPEED);
-
+		if (!upToDate) {
+			if (UlteriorUtils.distance(getCenterX() + ParallaxPhysicsEngine.currentX,
+					getCenterY() + ParallaxPhysicsEngine.currentY, track.get(trackingIterator)[0],
+					track.get(trackingIterator)[1]) < maxRadiusStart * 2.1) {
+				trackingIterator++;
+			}
+		}
+		motion.add(helperVector.x, helperVector.y).normalise().scale(SPEED);
+		if (HP <= 0) {
+			UlteriorUtils.cleanUpImpactFromWorldBuilderObject(this);
+			ParallaxPhysicsEngine.objsToRemove.add(this);
+		}
 	}
 
 	private boolean lookUpClosestTarget() {

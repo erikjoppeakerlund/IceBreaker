@@ -77,7 +77,9 @@ public class ImpactBounce extends Impact {
 		float dot = affectedPiece.dot(N) * (1.0f + bounciness);
 
 		N.scale(dot);
-		affectedPiece.scale(Constants.GROUND_FRICTION);
+		if (!other.isRotatingObject) {
+			affectedPiece.scale(Constants.GROUND_FRICTION);
+		}
 		affectedPiece.sub(N);
 	}
 

@@ -18,9 +18,9 @@ public class AISprite extends EntityAgile {
 	protected float dHP;
 	private boolean underHit;
 
-	private int hitItr = 0;
+	private final float LIFE_AMOUNT_LINE_WIDTH = 4;
 
-	private Color hitColor;
+	private int hitItr = 0;
 
 	protected AISprite(float height) {
 		super(new Circle(Constants.CANVAS_WIDTH / 4, Constants.CANVAS_HEIGHT / 2, Constants.SPRITE_RADIUS * 0.7f)
@@ -32,7 +32,7 @@ public class AISprite extends EntityAgile {
 		HPColor = new Color(0, 1, 0, 0.69f);
 		motionLess = false;
 		color = Color.black;
-		hitColor = new Color(0, 0, 0, 0.3f);
+		forceUpdate = true;
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class AISprite extends EntityAgile {
 		graphics.setColor(HPColor);
 		graphics.fillRect(getCenterX() - 43f, getCenterY() + height, 96f * HP / START_HP, 12f);
 		graphics.setColor(Color.black);
-		graphics.resetLineWidth();
+		graphics.setLineWidth(LIFE_AMOUNT_LINE_WIDTH);
 		graphics.drawRect(getCenterX() - 43f, getCenterY() + height, 96f, 12f);
 	}
 
