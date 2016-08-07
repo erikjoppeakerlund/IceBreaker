@@ -1,3 +1,7 @@
+I'm using images of game objects created by MillionthVector, all credabillity to MillionthVector.
+
+I'm also using images created by Korba from the community Open Game Art, complete credabillity to Korba.
+
 # ParallaX Physics Engine
 
 ParallaX is a 2D game/2D game engine, written in Java. It is generically built for scalabillity. The idéa was to se how far I could go with as little help from libraries as possible. For rendering I'm using the Slick 2D library, all credabillity to the author of that library, and the critical intersect-algoritm is also vastly inspired by the one found i Slick2D.
