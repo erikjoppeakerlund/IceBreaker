@@ -10,7 +10,7 @@ public class Parallax extends ParallaxDefault {
 	Image image;
 
 	public Parallax(float[] edges, Image image, float parallaxEffect) {
-		super(edges, true, true, true, false, false, true);
+		super(edges, true, true, true, false, false, true, true);
 		this.image = image;
 		this.parallaxEffect = parallaxEffect;
 		image.bind();

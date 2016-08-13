@@ -39,12 +39,12 @@ public abstract class Component extends Entity {
 	protected boolean isPaused;
 
 	public Component(float width, float height) {
-		super(new float[] { 0, 0, width, 0, width, height, 0, height }, true, true, false, true, false, true);
+		super(new float[] { 0, 0, width, 0, width, height, 0, height }, true, true, false, true, false, true, false);
 		init();
 	}
 
 	public Component(float[] points) {
-		super(points, true, true, false, true, false, true);
+		super(points, true, true, false, true, false, true, false);
 		init();
 	}
 

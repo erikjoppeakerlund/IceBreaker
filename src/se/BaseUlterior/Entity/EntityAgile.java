@@ -16,8 +16,8 @@ public abstract class EntityAgile extends Materia {
 	private static final long serialVersionUID = 1L;
 	protected boolean underImpact = false;
 
-	public EntityAgile(float[] nodes, float bounciness) {
-		super(nodes);
+	public EntityAgile(float[] nodes, float bounciness, boolean noImpact) {
+		super(nodes, noImpact);
 		this.bounciness = bounciness;
 		forceUpdate = true;
 	}

@@ -20,7 +20,7 @@ public class VectorShot extends Materia {
 	private final float SPEED = Constants.VECTOR_SHOOOT_SPEED;
 
 	public VectorShot(float x, float y, Vector2 angleVector) {
-		super(new Circle(x, y, Constants.VECTOR_SHOT_RADIUS, 10).getPoints());
+		super(new Circle(x, y, Constants.VECTOR_SHOT_RADIUS, 10).getPoints(), false);
 		forcedMotionVector = angleVector.copy().normalise().scale(SPEED);
 		this.color = Color.red;
 	}

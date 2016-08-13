@@ -53,7 +53,7 @@ public abstract class EntitySpriteControlled extends EntityAgile {
 
 	protected EntitySpriteControlled() {
 		super(new Circle(Constants.CANVAS_WIDTH / 4, Constants.CANVAS_HEIGHT / 2, Constants.SPRITE_RADIUS).getPoints(),
-				0f);
+				0f, false);
 		this.setCenterX(Constants.CANVAS_WIDTH / 4);
 		this.setCenterY(Constants.CANVAS_HEIGHT / 4);
 
@@ -107,16 +107,18 @@ public abstract class EntitySpriteControlled extends EntityAgile {
 		float moveScreenY = centerY - Constants.CANVAS_HEIGHT / 2f;
 
 		if (motion.x <= 0 && ParallaxPhysicsEngine.currentX <= 0
-				|| motion.x >= 0 && ParallaxPhysicsEngine.currentX + Constants.CANVAS_WIDTH >= Constants.CANVAS_WIDTH_FULL
-				|| motion.x > 0 && centerX < Constants.CANVAS_WIDTH / 2 || motion.x < 0
-						&& centerX + ParallaxPhysicsEngine.currentX > Constants.CANVAS_WIDTH_FULL - Constants.CANVAS_WIDTH / 2) {
+				|| motion.x >= 0
+						&& ParallaxPhysicsEngine.currentX + Constants.CANVAS_WIDTH >= Constants.CANVAS_WIDTH_FULL
+				|| motion.x > 0 && centerX < Constants.CANVAS_WIDTH / 2 || motion.x < 0 && centerX
+						+ ParallaxPhysicsEngine.currentX > Constants.CANVAS_WIDTH_FULL - Constants.CANVAS_WIDTH / 2) {
 			moveScreenX = 0;
 		}
 
 		if (motion.y <= 0 && ParallaxPhysicsEngine.currentY <= 0
-				|| motion.y >= 0 && ParallaxPhysicsEngine.currentY + Constants.CANVAS_HEIGHT >= Constants.CANVAS_HEIGHT_FULL
-				|| motion.y > 0 && centerY < Constants.CANVAS_HEIGHT / 2 || motion.y < 0
-						&& centerY + ParallaxPhysicsEngine.currentY > Constants.CANVAS_HEIGHT_FULL - Constants.CANVAS_HEIGHT / 2) {
+				|| motion.y >= 0
+						&& ParallaxPhysicsEngine.currentY + Constants.CANVAS_HEIGHT >= Constants.CANVAS_HEIGHT_FULL
+				|| motion.y > 0 && centerY < Constants.CANVAS_HEIGHT / 2 || motion.y < 0 && centerY
+						+ ParallaxPhysicsEngine.currentY > Constants.CANVAS_HEIGHT_FULL - Constants.CANVAS_HEIGHT / 2) {
 			moveScreenY = 0;
 		}
 

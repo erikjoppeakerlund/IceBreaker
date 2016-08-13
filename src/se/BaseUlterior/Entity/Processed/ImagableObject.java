@@ -22,8 +22,8 @@ public abstract class ImagableObject extends EntityAgile {
 
 	protected Vector2 angle;
 
-	public ImagableObject(float[] nodes, float bounciness, String pathToImage) {
-		super(nodes, bounciness);
+	public ImagableObject(float[] nodes, float bounciness, String pathToImage, boolean noImpact) {
+		super(nodes, bounciness, noImpact);
 		init(pathToImage);
 	}
 

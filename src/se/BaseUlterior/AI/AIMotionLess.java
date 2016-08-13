@@ -18,7 +18,7 @@ public abstract class AIMotionLess extends Materia {
 	private final float LIFE_AMOUNT_LINE_WIDTH = 4;
 
 	protected AIMotionLess(float[] points, float height) {
-		super(points);
+		super(points, false);
 		START_HP = 100f;
 		this.height = height;
 		HP = START_HP;

@@ -20,14 +20,14 @@ public class PartForce extends Entity {
 	protected float gravityX;
 
 	public PartForce(float[] nodes, float gravityX, float gravityY) {
-		super(nodes, false, true, false, false, false, true);
+		super(nodes, false, true, false, false, false, true, false);
 		this.gravityX = gravityX;
 		this.gravityY = gravityY;
 		this.color = new Color(0, 0, 1, 0.19f);
 	}
 
 	public PartForce(float[] nodes, float gravityX, float gravityY, Color color) {
-		super(nodes, false, true, false, false, false, true);
+		super(nodes, false, true, false, false, false, true, false);
 		this.gravityX = gravityX;
 		this.gravityY = gravityY;
 		this.color = color;

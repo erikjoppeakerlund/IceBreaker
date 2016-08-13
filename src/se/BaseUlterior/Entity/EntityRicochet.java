@@ -12,7 +12,6 @@ import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 import se.BaseUlterior.Physics.Impact;
-import se.BaseUlterior.Physics.ImpactFriction;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
 /**
@@ -40,7 +39,8 @@ public class EntityRicochet extends Entity {
 
 	public EntityRicochet(Entity target, float gunFireStartAtX, float gunFireStartAtY, float aimAtX, float aimAtY,
 			float weight, float damage) {
-		super(new Circle(aimAtX, aimAtY, Constants.SPRITE_RADIUS).getPoints(), false, true, false, true, true, true);
+		super(new Circle(aimAtX, aimAtY, Constants.SPRITE_RADIUS).getPoints(), false, true, false, true, true, true,
+				true);
 		this.target = target;
 		this.gunFireStartAtX = gunFireStartAtX;
 		this.gunFireStartAtY = gunFireStartAtY;
@@ -88,9 +88,6 @@ public class EntityRicochet extends Entity {
 	private Set<Vector2> normals = null;
 
 	private void runEffect() {
-
-		// normals = target.getMyNormalsAfterHitBy(new EntityEmpty(new Circle(x,
-		// y, Constants.SPRITE_RADIUS).getPoints()));
 		normals = target.getMyNormalsAfterHitBy(this);
 		if (normals.isEmpty()) {
 			return;
@@ -125,7 +122,8 @@ public class EntityRicochet extends Entity {
 
 	@Override
 	public Impact getImpact(Entity agileObject) {
-		return new ImpactFriction(this, agileObject, Constants.SPLINTER_FRICTION);
+		System.out.println("From EntityRicochet, this shouldn't appear :/");
+		return super.getImpact(agileObject);
 	}
 
 }

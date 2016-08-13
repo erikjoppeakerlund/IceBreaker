@@ -5,11 +5,9 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
 
-import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 import se.BaseUlterior.Physics.Impact;
-import se.BaseUlterior.Physics.ImpactFriction;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
 /**
@@ -23,11 +21,8 @@ public class EntitySplinter extends Entity {
 	private final float RESCALE = 0.2f;
 
 	public EntitySplinter(float x, float y, Vector2 motion, boolean blood) {
-		// super(new Circle(x, y, 2f + (float) (Math.random() *
-		// 6f)).getPoints(), 1.0f);
-
-		super(new Circle(x, y, 2f + (float) (Math.random() * 6f)).getPoints(), false, false, false, false, false, true);
-
+		super(new Circle(x, y, 2f + (float) (Math.random() * 4f)).getPoints(), false, false, false, false, false, true,
+				true);
 		this.motion = motion;
 		forceUpdate = true;
 		piercable = true;
@@ -36,7 +31,7 @@ public class EntitySplinter extends Entity {
 			motion.scale(RESCALE);
 			color = new Color((float) (Math.random() * 0.7f), 0f, 0f);
 		} else {
-			color = Color.gray;
+			color = Color.black;
 		}
 	}
 
@@ -51,7 +46,6 @@ public class EntitySplinter extends Entity {
 
 		setX(getX() + this.motion.x * delta);
 		setY(getY() + this.motion.y * delta);
-		// super.update(container, delta);
 		if (lifeSpan > LIFE_SPAN_LIMIT) {
 			UlteriorUtils.cleanUpImpactFromWorldBuilderObject(this);
 			ParallaxPhysicsEngine.objsToRemove.add(this);
@@ -61,6 +55,7 @@ public class EntitySplinter extends Entity {
 
 	@Override
 	public Impact getImpact(Entity other) {
-		return new ImpactFriction(this, other, Constants.SPLINTER_FRICTION);
+		System.out.println("From EntitySplinter, this shouldn't appear :/");
+		return super.getImpact(other);
 	}
 }

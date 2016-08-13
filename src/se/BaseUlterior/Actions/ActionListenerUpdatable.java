@@ -8,7 +8,7 @@ import se.BaseUlterior.Entity.Entity;
 public class ActionListenerUpdatable extends Entity {
 
 	public ActionListenerUpdatable() {
-		super(new float[0], false, false, false, false, false, true);
+		super(new float[0], false, false, false, false, false, true, true);
 	}
 
 	@Override

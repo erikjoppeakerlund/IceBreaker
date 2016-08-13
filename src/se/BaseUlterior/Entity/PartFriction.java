@@ -22,20 +22,20 @@ public class PartFriction extends Entity {
 	protected float frictionAmount;
 
 	public PartFriction(float[] nodes) {
-		super(nodes, false, true, false, false, false, true);
+		super(nodes, false, true, false, false, false, true, false);
 		this.density = Density.WATER;
 		piercable = true;
 	}
 
 	public PartFriction(float[] nodes, Density density) {
-		super(nodes, false, true, false, false, false, true);
+		super(nodes, false, true, false, false, false, true, false);
 		this.density = density;
 		init();
 		piercable = true;
 	}
 
 	public PartFriction(float[] nodes, Density density, boolean isBackground) {
-		super(nodes, false, true, false, false, false, true);
+		super(nodes, false, true, false, false, false, true, false);
 		this.density = density;
 		piercable = true;
 		init();
