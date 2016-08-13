@@ -27,7 +27,6 @@ public abstract class AITurret extends AIMotionLess {
 	protected final int UPDATE_SPEED = Constants.TURRETS_MAX_RELOAD_SPEED;
 	protected Vector2 aimArm;
 
-	protected int timeSinceLast;
 	private int itr;
 
 	private SpriteSheet gunFire = null;
@@ -59,7 +58,6 @@ public abstract class AITurret extends AIMotionLess {
 
 		aimArm = aim.getArm();
 		aimArm.setTheta(startangle.getTheta());
-		timeSinceLast = (int) (Math.random() * UPDATE_SPEED);
 
 		init(pathToImage);
 		isRotatingObject = true;
@@ -76,13 +74,10 @@ public abstract class AITurret extends AIMotionLess {
 	public void update(GameContainer container, int arg) {
 		super.update(container, arg);
 		itr++;
-		if (lookUpClosestTarget()) {
-			if (itr % UPDATE_SPEED == 0) {
-				shoot();
-				itr = 0;
-			}
-		} else {
-			timeSinceLast++;
+		lookUpClosestTarget();
+		if (itr % UPDATE_SPEED == 0) {
+			shoot();
+			itr = 0;
 		}
 		aim.setPosition(getX() + maxRadiusStart, getY() + maxRadiusStart);
 		aim.update(container, arg);
@@ -98,11 +93,9 @@ public abstract class AITurret extends AIMotionLess {
 
 	protected Vector2 injectVector = new Vector2();
 
-	protected boolean lookUpClosestTarget() {
-		boolean result = false;
+	protected void lookUpClosestTarget() {
 		float distanceToClosestTarget = Constants.CANVAS_WIDTH;
 		for (Entity go : ParallaxPhysicsEngine.all) {
-			float dotProduct = aimArm.dot(startAngle);
 			if (UlteriorUtils.isWithinRange(go, ParallaxPhysicsEngine.wholeSceene) && !go.motionLess
 					&& !go.isBackgroundObj && !go.piercable && go != this) {
 				float xDist = go.getCenterX() - this.getCenterX();
@@ -111,20 +104,18 @@ public abstract class AITurret extends AIMotionLess {
 				if (distanceTest < distanceToClosestTarget) {
 					distanceToClosestTarget = distanceTest;
 					injectVector.set(xDist, yDist);
-					double diff = (injectVector.getTheta() - aimArm.getTheta());
-					if (diff > 0 && diff > MAX_SPEE_TURRET) {
-						diff = MAX_SPEE_TURRET;
-					} else if (diff < 0 && diff < -MAX_SPEE_TURRET) {
-						diff = -MAX_SPEE_TURRET;
+
+					// closest way algorithm
+
+					if (injectVector.x * aimArm.y - injectVector.y * aimArm.x < 0) {
+						aimArm.add(MAX_SPEE_TURRET);
+					} else {
+						aimArm.add(-MAX_SPEE_TURRET);
 					}
-					aimArm.add(diff);
-					if (dotProduct > 0) {
-						result = true;
-					}
+
 				}
 			}
 		}
-		return result;
 	}
 
 	@Override
