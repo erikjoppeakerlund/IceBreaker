@@ -12,7 +12,7 @@ public class EntityEmpty extends Entity {
 	}
 
 	public EntityEmpty(float[] points) {
-		super(points, true, true, false, false, false, true);
+		super(points, true, true, false, false, false, true, true);
 	}
 
 	@Override

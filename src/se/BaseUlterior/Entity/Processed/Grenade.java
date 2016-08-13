@@ -34,7 +34,7 @@ public class Grenade extends ImagableObject {
 	private final float GRENADE_BUMP_EFFECT = 0.9f;
 
 	public Grenade(float[] nodes) {
-		super(nodes, BOUNCINESS, "res/img/grenade.png");
+		super(nodes, BOUNCINESS, "res/img/grenade.png", false);
 		color = Color.darkGray;
 		setX(Constants.FAKE_START_COORDINATES);
 		setY(Constants.FAKE_START_COORDINATES);

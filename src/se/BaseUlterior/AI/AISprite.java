@@ -24,7 +24,7 @@ public class AISprite extends EntityAgile {
 
 	protected AISprite(float height) {
 		super(new Circle(Constants.CANVAS_WIDTH / 4, Constants.CANVAS_HEIGHT / 2, Constants.SPRITE_RADIUS * 0.7f)
-				.getPoints(), 0f);
+				.getPoints(), 0f, false);
 		this.height = height;
 		START_HP = 300;
 		HP = START_HP;

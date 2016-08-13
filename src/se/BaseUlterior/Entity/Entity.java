@@ -37,6 +37,7 @@ public abstract class Entity extends Polygon {
 	public boolean forceRender = false;
 	public boolean forceUpdate = false;
 	public boolean motionLess = true;
+	public boolean noImpact = true;
 	public float rotation;
 	public float HP = 0;
 	public float START_HP;
@@ -53,7 +54,7 @@ public abstract class Entity extends Polygon {
 	}
 
 	protected Entity(float[] points, boolean isBackgroundObj, boolean invisible, boolean isRotatingObject,
-			boolean forceUpdate, boolean forceRender, boolean isSolid) {
+			boolean forceUpdate, boolean forceRender, boolean isSolid, boolean noImpact) {
 		super(points);
 		init();
 		this.isBackgroundObj = isBackgroundObj;
@@ -62,7 +63,7 @@ public abstract class Entity extends Polygon {
 		this.forceRender = forceRender;
 		this.forceUpdate = forceUpdate;
 		this.motionLess = isSolid;
-
+		this.noImpact = noImpact;
 	};
 
 	/**

@@ -24,7 +24,7 @@ public class ParallaxSquares extends ParallaxDefault {
 	private Color[] colors;
 
 	public ParallaxSquares(float[] edges, float parallaxEffect) {
-		super(edges, true, true, true, false, false, true);
+		super(edges, true, true, true, false, false, true, true);
 		this.parallaxEffect = parallaxEffect;
 		width = getWidth();
 		height = getHeight();

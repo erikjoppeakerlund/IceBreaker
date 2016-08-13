@@ -113,7 +113,7 @@ public class ParallaxPhysicsEngine extends BasicGame {
 				Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0 });
 		ParallaxPhysicsEngine.objsToAdd.add(wholeSceene);
 
-		parallaxHolderBackground = new ParallaxHolder(2);
+		parallaxHolderBackground = new ParallaxHolder(1);
 		parallaxHolderForground = new ParallaxHolder(1);
 
 		gameInfo = new InfoStats();
@@ -132,8 +132,8 @@ public class ParallaxPhysicsEngine extends BasicGame {
 				turretPlacer.placeTurretsOnMe(groundPiece);
 			}
 		}
-		AIBot bot = new AIBot(66f);
-		ParallaxPhysicsEngine.objsToAdd.add(bot);
+		// AIBot bot = new AIBot(66f);
+		// ParallaxPhysicsEngine.objsToAdd.add(bot);
 		toolbox = new ToolBox(Alignment.LEFT);
 		ParallaxPhysicsEngine.objsToAdd.add(toolbox);
 		toolbox.pack();

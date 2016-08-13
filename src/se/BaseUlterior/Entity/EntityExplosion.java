@@ -22,16 +22,14 @@ public class EntityExplosion extends Entity {
 	private boolean invisible;
 
 	public EntityExplosion(float[] nodes, float damage, float bumpEffect, boolean invisible) {
-		super(nodes, false, true, false, true, false, false);
+		super(nodes, false, invisible, false, true, false, false, false);
 		init(damage, bumpEffect);
-		piercable = true;
 		this.invisible = invisible;
 	}
 
 	public EntityExplosion(float[] nodes, float damage, float bumpEffect) {
-		super(nodes, false, true, false, true, false, false);
+		super(nodes, false, true, false, true, false, false, false);
 		init(damage, bumpEffect);
-		piercable = true;
 	}
 
 	private void init(float power, float bumpEffect) {

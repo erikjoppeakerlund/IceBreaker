@@ -15,8 +15,8 @@ public abstract class Materia extends Part {
 
 	protected boolean underImpact;
 
-	public Materia(float[] nodes) {
-		super(nodes, false, false, false, false, false, true);
+	public Materia(float[] nodes, boolean noImpact) {
+		super(nodes, false, false, false, false, false, true, noImpact);
 	}
 
 	@Override
@@ -63,7 +63,8 @@ public abstract class Materia extends Part {
 	protected void checkImpact() {
 		for (Entity go : ParallaxPhysicsEngine.all) {
 
-			if (go == this || (go.motionLess && this.motionLess) || go.isBackgroundObj || isBackgroundObj) {
+			if (go == this || (go.motionLess && this.motionLess) || go.isBackgroundObj || isBackgroundObj || noImpact
+					|| go.noImpact) {
 				continue;
 			}
 

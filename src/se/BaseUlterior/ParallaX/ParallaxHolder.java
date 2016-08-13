@@ -16,7 +16,7 @@ public class ParallaxHolder extends Entity {
 	protected Parallax startCity;
 
 	public ParallaxHolder(int i) {
-		super(new float[0], false, false, false, false, false, true);
+		super(new float[0], false, false, false, false, false, true, true);
 		parallaxes = new ArrayList<>();
 		switch (i) {
 		case 0:
