@@ -60,7 +60,7 @@ public class PartFriction extends Entity {
 			this.frictionAmount = 0.86f;
 			break;
 		case LAVA:
-			this.color = new Color(1, 0, 0, 0.4f);
+			this.color = new Color(0.4f, 0.5f, 0, 0.78f);
 			this.frictionAmount = 0.86f;
 			break;
 		case AIR:

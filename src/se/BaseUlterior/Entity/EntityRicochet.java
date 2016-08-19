@@ -12,6 +12,7 @@ import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Geom.Vector2;
 import se.BaseUlterior.ParallaX.ParallaxPhysicsEngine;
 import se.BaseUlterior.Physics.Impact;
+import se.BaseUlterior.Physics.ImpactBulletBounce;
 import se.BaseUlterior.Utils.UlteriorUtils;
 
 /**
@@ -35,12 +36,13 @@ public class EntityRicochet extends Entity {
 	private float startY;
 	private final float SIZE_OF_EXPLOSION = 24f;
 	private float weight;
+	private final float RESCALE_WEIGHT_BOUNCE = 0.1f;
 	// private final float EXP = 1.39f;
 
 	public EntityRicochet(Entity target, float gunFireStartAtX, float gunFireStartAtY, float aimAtX, float aimAtY,
 			float weight, float damage) {
 		super(new Circle(aimAtX, aimAtY, Constants.SPRITE_RADIUS).getPoints(), false, true, false, true, true, true,
-				true);
+				false);
 		this.target = target;
 		this.gunFireStartAtX = gunFireStartAtX;
 		this.gunFireStartAtY = gunFireStartAtY;
@@ -55,6 +57,7 @@ public class EntityRicochet extends Entity {
 		if (!target.motionLess) {
 			rate = 1;
 		}
+		color = new Color(1, 0, 0, 0.28f);
 	}
 
 	private int rate = 5;
@@ -73,7 +76,6 @@ public class EntityRicochet extends Entity {
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
-		// graphics.fill(this);
 		rayColor.a = 1f - (float) lifeSpan / (float) LIFE_SPAN_LIMIT;
 		float newX = getX();
 		float newY = getY();
@@ -82,6 +84,10 @@ public class EntityRicochet extends Entity {
 		graphics.drawLine(gunFireStartAtX + newX - startX, gunFireStartAtY + newY - startY, aimAtX + newX - startX,
 				aimAtY + newY - startY);
 		graphics.resetLineWidth();
+		graphics.setColor(color);
+		graphics.fill(this);
+		graphics.setColor(Color.red);
+		graphics.draw(this);
 
 	}
 
@@ -114,16 +120,19 @@ public class EntityRicochet extends Entity {
 		angled.scale(2f);
 
 		boolean blood = target.motionLess || target.isRotatingObject ? false : true;
-
-		EntitySplinter random = new EntitySplinter(this.getCenterX(), this.getCenterY(), angled, blood);
-		ParallaxPhysicsEngine.objsToAdd.add(random);
+		if (blood) {
+			EntitySplinter random = new EntitySplinter(this.getCenterX(), this.getCenterY(), angled, blood);
+			ParallaxPhysicsEngine.objsToAdd.add(random);
+		}
 
 	}
 
 	@Override
 	public Impact getImpact(Entity agileObject) {
-		System.out.println("From EntityRicochet, this shouldn't appear :/");
-		return super.getImpact(agileObject);
+		return new ImpactBulletBounce(this, agileObject,
+				new Vector2((aimAtX + getX() - startX) - (gunFireStartAtX + getX() - startX),
+						(aimAtY + getY() - startY) - (gunFireStartAtY + getY() - startY)).normalise()
+								.scale(weight * RESCALE_WEIGHT_BOUNCE));
 	}
 
 }

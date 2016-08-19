@@ -48,8 +48,9 @@ public class ParallaxSquares extends ParallaxDefault {
 			squares[i][2] = squareWidth;
 			squares[i][3] = squareHeight;
 
-			colors[i] = new Color((float) Math.random(), 0.21f, 0.21f, 0.1f + (float) (Math.random() * 0.9f) * 0.71f);
-
+			// colors[i] = new Color((float) Math.random(), 0.21f, 0.21f, 0.1f +
+			// (float) (Math.random() * 0.9f) * 0.71f);
+			colors[i] = new Color(0, 0.3f, 0, 0.6f);
 		}
 	}
 
@@ -76,7 +77,7 @@ public class ParallaxSquares extends ParallaxDefault {
 					&& y + sq[1] < Constants.CANVAS_HEIGHT) {
 				// graphics.setColor(colorSquare);
 				graphics.setColor(colors[i]);
-				graphics.drawRect(x + sq[0], y + sq[1], sq[2], sq[3]);
+				graphics.fillRect(x + sq[0], y + sq[1], sq[2], sq[3]);
 			}
 			i++;
 		}
