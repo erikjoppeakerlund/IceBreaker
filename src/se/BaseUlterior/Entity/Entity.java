@@ -170,11 +170,11 @@ public abstract class Entity extends Polygon {
 										* (thatPoints[jNext + 1] + thatDy - thatPoints[j + 1] + thatDy)));
 
 				if (unknownA >= 0 && unknownA <= 1 && unknownB >= 0 && unknownB <= 1) {
-					shape.setX(shape.getX() - shape.motion.x);
-					shape.setY(shape.getY() - shape.motion.y);
+					shape.setX(shape.x - shape.motion.x);
+					shape.setY(shape.y - shape.motion.y);
 
-					setX(getX() - motion.x);
-					setY(getY() - motion.y);
+					setX(x - motion.x);
+					setY(y - motion.y);
 
 					Vector2 newestNormal;
 
@@ -213,5 +213,24 @@ public abstract class Entity extends Polygon {
 				removeImpact(im);
 			}
 		}
+	}
+
+	public void rotate(float diff) {
+		float[] centerCoor = getCenter();
+		float[] nodes = getPoints();
+		Vector2 helperVect = new Vector2();
+
+		float[] newPoints = new float[nodes.length];
+
+		for (int i = 0; i < nodes.length - 1; i += 2) {
+			helperVect.set(nodes[i] - centerCoor[0], nodes[i + 1] - centerCoor[1]);
+			helperVect.add(diff);
+			newPoints[i] = centerCoor[0] + helperVect.x;
+			newPoints[i + 1] = centerCoor[1] + helperVect.y;
+		}
+		points = newPoints;
+		// for (int i = 0; i < points.length; i++) {
+		// points[i] = newPoints[i];
+		// }
 	}
 }

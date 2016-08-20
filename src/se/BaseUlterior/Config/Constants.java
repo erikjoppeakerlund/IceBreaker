@@ -52,7 +52,7 @@ public class Constants {
 
 	public static final int MAIN_CHARACTER_START_LIFE = 1000;
 
-	public static final int HIT_LENGTH_FRAMES = 7;
+	public static final int HIT_LENGTH_FRAMES = 3;
 
 	/*
 	 * Weapon effect (out of 100)

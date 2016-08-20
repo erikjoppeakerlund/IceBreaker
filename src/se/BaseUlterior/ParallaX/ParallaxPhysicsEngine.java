@@ -74,7 +74,7 @@ public class ParallaxPhysicsEngine extends BasicGame {
 	ParallaxHolder parallaxHolderBackground;
 	ParallaxHolder parallaxHolderForground;
 
-	private static final Color backgroundBackup = new Color(0.52f, 0.52f, 0.52f);
+	private static final Color backgroundBackup = new Color(0.0f, 0.0991f, 0.0f);
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
@@ -112,7 +112,7 @@ public class ParallaxPhysicsEngine extends BasicGame {
 				Constants.CANVAS_HEIGHT, Constants.CANVAS_WIDTH, 0 });
 		ParallaxPhysicsEngine.objsToAdd.add(wholeSceene);
 
-		parallaxHolderBackground = new ParallaxHolder(0);
+		parallaxHolderBackground = new ParallaxHolder(3);
 		parallaxHolderForground = new ParallaxHolder(1);
 
 		gameInfo = new InfoStats();

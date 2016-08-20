@@ -96,8 +96,10 @@ public class AimGrenade extends Aim {
 			if (System.currentTimeMillis() - currentTime > TIME_BETWEEN) {
 				grip.normalise().scale(armLengt);
 				aimStart.normalise().scale(aimStartLengt);
-				Grenade newCurrent = new Grenade(new Circle(Constants.FAKE_START_COORDINATES,
-						Constants.FAKE_START_COORDINATES, Grenade.GRENADE_SIZE).getPoints());
+				Grenade newCurrent = new Grenade(
+
+						new Circle(Constants.FAKE_START_COORDINATES, Constants.FAKE_START_COORDINATES,
+								Grenade.GRENADE_SIZE).getPoints());
 				grenades.add(newCurrent);
 				current = newCurrent;
 				ParallaxPhysicsEngine.objsToAdd.add(newCurrent);
