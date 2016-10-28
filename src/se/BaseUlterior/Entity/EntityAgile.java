@@ -31,7 +31,7 @@ public abstract class EntityAgile extends Materia {
 
 	@Override
 	public Impact getImpact(Entity other) {
-		return new ImpactBounce(this, other, bounciness, true);
+		return new ImpactBounce(this, other, bounciness, false);
 	}
 
 	public float getBounciness() {

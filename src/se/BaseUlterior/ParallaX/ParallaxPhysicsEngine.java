@@ -11,6 +11,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
+import org.newdawn.slick.geom.Rectangle;
 
 import se.BaseUlterior.AI.TurretPlacer;
 import se.BaseUlterior.Actions.Action;
@@ -21,6 +22,7 @@ import se.BaseUlterior.Entity.Entity;
 import se.BaseUlterior.Entity.EntityEmpty;
 import se.BaseUlterior.Entity.EntitySpriteControlledDesktop;
 import se.BaseUlterior.Entity.EntitySpriteControlledResponsive;
+import se.BaseUlterior.Entity.Processed.RandomEdgedObject;
 import se.BaseUlterior.GUI.Alignment;
 import se.BaseUlterior.GUI.Stats;
 import se.BaseUlterior.GUI.ToolBox;
@@ -143,6 +145,7 @@ public class ParallaxPhysicsEngine extends BasicGame {
 		sprite = spriteDesktop;
 		ParallaxPhysicsEngine.objsToAdd.add(sprite);
 		// actions = new ActionListenablers();
+		objsToAdd.add(new RandomEdgedObject(new Rectangle(1020, 300, 181, 181).getPoints(), "box.jpg"));
 
 	}
 

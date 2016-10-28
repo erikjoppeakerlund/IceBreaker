@@ -22,7 +22,7 @@ public class ImpactBounce extends Impact {
 
 	public ImpactBounce(Entity origin, Entity go, float bounciness, boolean self) {
 		super(origin, go);
-		if (self) {
+		if (self && origin.isRotatingObject) {
 			affectedPiece = origin.getMotion();
 		}
 		this.self = self;
@@ -32,9 +32,6 @@ public class ImpactBounce extends Impact {
 
 	@Override
 	public void calculateImpact(int delta) {
-		if (!origin.intersects(other)) {
-			return;
-		}
 		if (self) {
 			normalsTester = origin.getMyNormalsAfterHitBy(other);
 		} else {
@@ -62,7 +59,7 @@ public class ImpactBounce extends Impact {
 
 		N.normalise();
 		if (other.isRotatingObject) {
-			other.rotation = N.dot(other.getMotion());
+			other.rotation = N.dot(affectedPiece);
 		}
 		if (N.dot(affectedPiece) < 0) {
 			return;
@@ -81,6 +78,16 @@ public class ImpactBounce extends Impact {
 			affectedPiece.scale(Constants.GROUND_FRICTION);
 		}
 		affectedPiece.sub(N);
+	}
+
+	@Override
+	public void checkCalculate(int delta) {
+		if (mightQuitMethod()) {
+			return;
+		}
+		if (origin.intersects(other)) {
+			calculateImpact(delta);
+		}
 	}
 
 }

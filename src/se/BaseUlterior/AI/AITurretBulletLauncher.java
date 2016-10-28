@@ -41,7 +41,7 @@ public class AITurretBulletLauncher extends AITurret {
 
 	@Override
 	public Impact getImpact(Entity other) {
-		return new ImpactBounce(this, other, 1.0f, true);
+		return new ImpactBounce(this, other, 1.0f, false);
 	}
 
 }
