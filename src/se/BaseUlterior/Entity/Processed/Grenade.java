@@ -65,8 +65,7 @@ public class Grenade extends ImagableObject {
 
 	@Override
 	public Impact getImpact(Entity other) {
-		boolean selfImpact = other.motionLess ? true : false;
-		return new ImpactBounce(this, other, bounciness, selfImpact);
+		return new ImpactBounce(this, other, bounciness);
 	}
 
 	@Override

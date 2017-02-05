@@ -3,7 +3,6 @@ package se.BaseUlterior.Entity;
 import org.newdawn.slick.GameContainer;
 
 import se.BaseUlterior.Physics.Impact;
-import se.BaseUlterior.Physics.ImpactBounce;
 
 /**
  * Bouncable, gravitation dependent game object. During statefulness searching
@@ -31,7 +30,8 @@ public abstract class EntityAgile extends Materia {
 
 	@Override
 	public Impact getImpact(Entity other) {
-		return new ImpactBounce(this, other, bounciness, false);
+		return null;
+		// return new ImpactBounce(this, other, bounciness, false);
 	}
 
 	public float getBounciness() {

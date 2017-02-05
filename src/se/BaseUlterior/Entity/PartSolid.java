@@ -28,8 +28,7 @@ public class PartSolid extends Materia {
 
 	@Override
 	public Impact getImpact(Entity piece) {
-		boolean selfImpact = piece.isRotatingObject ? true : false;
-		return new ImpactBounce(this, piece, piece.bounciness, selfImpact);
+		return new ImpactBounce(this, piece, piece.bounciness);
 	}
 
 	@Override
