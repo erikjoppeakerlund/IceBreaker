@@ -20,7 +20,7 @@ public class ImpactBulletBounce extends Impact {
 		if (other.isRotatingObject && !hasSetRotation) {
 			Vector2 fromHitSpot = new Vector2(origin.getCenterX() - other.getCenterX(),
 					origin.getCenterY() - other.getCenterY());
-			other.rotation = -(fromHitSpot.x * direction.y - fromHitSpot.y * direction.x) * 0.399f;
+			other.rotation = -(fromHitSpot.x * direction.y - fromHitSpot.y * direction.x) * 0.099f;
 			hasSetRotation = true;
 		}
 	}

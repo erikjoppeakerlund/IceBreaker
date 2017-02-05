@@ -3,7 +3,6 @@ package se.BaseUlterior.Physics;
 import java.util.Iterator;
 import java.util.Set;
 
-import se.BaseUlterior.Config.Constants;
 import se.BaseUlterior.Entity.Entity;
 import se.BaseUlterior.Geom.Vector2;
 
@@ -19,35 +18,24 @@ public class ImpactBounce extends Impact {
 	protected Set<Vector2> normalsTester = null;
 	protected float bounciness;
 	protected boolean self;
+	protected Vector2 temp;
 
-	public ImpactBounce(Entity origin, Entity go, float bounciness, boolean self) {
+	// protected boolean restart = false;
+
+	public ImpactBounce(Entity origin, Entity go, float bounciness) {
 		super(origin, go);
-		if (self) {
-			affectedPiece = origin.getMotion();
-		}
-		this.self = self;
-		normals = origin.getMyNormalsAfterHitBy(other);
+		normals = other.getMyNormalsAfterHitBy(origin);
+
 		this.bounciness = bounciness;
 	}
 
 	@Override
 	public void calculateImpact(int delta) {
-		if (!origin.intersects(other)) {
+		normalsTester = other.getMyNormalsAfterHitBy(origin);
+		if (normalsTester.isEmpty()) {
 			return;
 		}
-		if (self) {
-			normalsTester = origin.getMyNormalsAfterHitBy(other);
-		} else {
-			normalsTester = other.getMyNormalsAfterHitBy(origin);
-		}
-
-		if ((!normalsTester.isEmpty())) {
-			normals = normalsTester;
-		}
-		if (normals.isEmpty()) {
-			return;
-		}
-		Iterator<Vector2> ni = normals.iterator();
+		Iterator<Vector2> ni = normalsTester.iterator();
 		Vector2 N = null;
 		int i = 0;
 		while (ni.hasNext()) {
@@ -62,10 +50,11 @@ public class ImpactBounce extends Impact {
 
 		N.normalise();
 		if (other.isRotatingObject) {
-			other.rotation = N.dot(other.getMotion());
+			other.rotation = N.dot(affectedPiece);
 		}
+		boolean invert = false;
 		if (N.dot(affectedPiece) < 0) {
-			return;
+			invert = true;
 		}
 
 		/*
@@ -77,10 +66,21 @@ public class ImpactBounce extends Impact {
 		float dot = affectedPiece.dot(N) * (1.0f + bounciness);
 
 		N.scale(dot);
-		if (!other.isRotatingObject) {
-			affectedPiece.scale(Constants.GROUND_FRICTION);
+		if (invert) {
+			affectedPiece.add(N);
+		} else {
+			affectedPiece.sub(N);
 		}
-		affectedPiece.sub(N);
+	}
+
+	@Override
+	public void checkCalculate(int delta) {
+		if (mightQuitMethod()) {
+			return;
+		}
+		if (origin.intersects(other)) {
+			calculateImpact(delta);
+		}
 	}
 
 }

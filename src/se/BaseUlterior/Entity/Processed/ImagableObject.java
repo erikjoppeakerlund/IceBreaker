@@ -47,10 +47,10 @@ public abstract class ImagableObject extends EntityAgile {
 		super.update(container, delta);
 		if (motion.x <= 0) {
 			angle.add(rotation * 11.1);
-			// rotate(rotation);
+			rotate(rotation * 11.1f);
 		} else {
 			angle.sub(rotation * 11.1);
-			// rotate(-rotation);
+			rotate(-rotation * 11.1f);
 		}
 
 	}
