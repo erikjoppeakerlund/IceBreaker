@@ -74,7 +74,9 @@ public class ParallaxPhysicsEngine extends BasicGame {
 	ParallaxHolder parallaxHolderBackground;
 	ParallaxHolder parallaxHolderForground;
 
-	private static final Color backgroundBackup = new Color(0.0f, 0.0991f, 0.0f);
+	// private static final Color backgroundBackup = new Color(0.0f, 0.0991f,
+	// 0.0f);
+	private static final Color backgroundBackup = new Color(0.71f, 0.71f, 0.71f);
 
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {

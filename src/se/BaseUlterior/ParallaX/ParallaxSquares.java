@@ -50,7 +50,8 @@ public class ParallaxSquares extends ParallaxDefault {
 
 			// colors[i] = new Color((float) Math.random(), 0.21f, 0.21f, 0.1f +
 			// (float) (Math.random() * 0.9f) * 0.71f);
-			colors[i] = new Color(0, 0.3f, 0, 0.6f);
+			// colors[i] = new Color(0, 0.3f, 0, 0.6f);
+			colors[i] = new Color(0, 0, 0.3f, 0.3f);
 		}
 	}
 

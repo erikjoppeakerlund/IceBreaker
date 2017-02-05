@@ -55,7 +55,6 @@ public class ImpactBounce extends Impact {
 		boolean invert = false;
 		if (N.dot(affectedPiece) < 0) {
 			invert = true;
-			return;
 		}
 
 		/*
@@ -66,9 +65,7 @@ public class ImpactBounce extends Impact {
 		 */
 		float dot = affectedPiece.dot(N) * (1.0f + bounciness);
 
-		if (!invert || other.motionLess) {
-			N.scale(dot);
-		}
+		N.scale(dot);
 		if (invert) {
 			affectedPiece.add(N);
 		} else {
